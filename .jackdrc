@@ -1,0 +1,1 @@
+/usr/bin/jackd -r -d alsa -d hw:1

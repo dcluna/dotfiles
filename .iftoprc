@@ -1,0 +1,8 @@
+interface: wlan0
+dns-resolution: yes
+port-resolution: yes
+show-bars: yes
+promiscuous: yes
+use-bytes: yes
+show-totals: yes
+log-scale: yes
