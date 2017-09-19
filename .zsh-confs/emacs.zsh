@@ -3,3 +3,6 @@ if [ -n "$EMACS" ]; then
 fi
 
 export PATH="$HOME/.evm/bin:$PATH"
+
+export EDITOR='emacsclient -s dcl -a "" -nw'
+export VISUAL='emacsclient -s dcl -a ""'

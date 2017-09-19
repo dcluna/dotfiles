@@ -15,6 +15,8 @@ else
     ZSH_THEME="duellj"
 fi
 
+# funny color schemes
+wal -r &
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -74,8 +76,6 @@ source ~/.zsh-confs/python.zsh
 #   export EDITOR='mvim'
 # fi
 # export EDITOR='emacsclient -a "" -nw'
-export EDITOR='emacsclient -a "" -nw'
-export VISUAL='emacsclient -a ""'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -219,4 +219,3 @@ nvm_auto_switch
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
-# eval "$(direnv hook zsh)" # direnv

@@ -10,3 +10,6 @@ function cdvenv {
 
 # sets the current virtualenv as the right prompt
 RPROMPT=$RPROMPT:[%{$fg_no_bold[yellow]%}$(current_venv)%{$reset_color%}]
+
+# pywal
+PATH="${PATH}:${HOME}/.local/bin/"
