@@ -16,7 +16,10 @@ else
 fi
 
 # funny color schemes
-wal -r &
+if [ -n "$EMACS" ]; then
+else
+    ( wal -t -r & )
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -64,7 +67,10 @@ plugins=(git ruby rails rake rake-fast rvm node nvm npm nvm-auto nvm-auto)
 
 source $ZSH/oh-my-zsh.sh
 
-source ~/.zsh-confs/python.zsh
+for file in `ls ~/.zsh-confs/*.zsh`; do
+    echo "Loading $file"
+    source $file
+done
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -94,11 +100,6 @@ source ~/.zsh-confs/python.zsh
 
 export GYB_HOME="$HOME/code/got-your-back"
 
-source ~/.zsh-confs/aliases.zsh
-source ~/.zsh-confs/android.zsh
-
-source ~/.zsh-confs/keybindings.zsh
-
 export CLING_HOME="$HOME/code/inst" # cpp interpreter
 export PATH="$PATH:$CLING_HOME/bin"
 export PATH="$HOME/code/git:$PATH"
@@ -110,46 +111,20 @@ export CHROMEDRIVER="/opt/google/chrome-beta/google-chrome-beta"
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
-source ~/.zsh-confs/ruby.zsh
-
-source ~/.zsh-confs/emacs.zsh
-
 export INFOPATH="$HOME/Downloads:$HOME/code/python-info/build:$HOME/code/guix/doc:/usr/local/share/info:/usr/share/info"
-
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-# [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# export SOURCES_DIR="$HOME/.zsh-confs/sources.d"
-
-# for file in $SOURCES_DIR/*; do
-#     echo "Loading $file"
-#     source $file
-# done
-
 export PATH="$HOME/bin/elixir-1.1.1/bin:$PATH"
 
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-
-PATH="$HOME/perl5/bin${PATH+:}${PATH}"; export PATH;
-PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
-
-# source `which aws_zsh_completer.sh`
 
 source "$HOME/code/zsh-autoenv/autoenv.zsh"
 
 export JAVA_HOME="$HOME/bin/jdk1.8.0_144"
 
 export PATH="$JAVA_HOME/bin:$PATH"
-
-# AWS settings
-# The exit status of a pipeline is the exit status of the last command in the pipeline, unless the pipefail option is enabled (see The Set Builtin). If pipefail is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully.
-# set -o pipefail
 
 export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/"
 
@@ -199,23 +174,16 @@ source $HOME/.cargo/env
 
 export AMDAPPSDKROOT="/mnt/lmde/home/dcluna/AMDAPPSDK-3.0"
 
-export DTK_PROGRAM=espeak
-export EMACSPEAK_DIR="$HOME/code/emacspeak"
-export PATH="$HOME/bin/mbrola:$PATH"
 export PATH="$HOME/code/lastpass-cli:$PATH"
 
 export WINEARCH="win32"
 
-export REMACS_DIR="$HOME/code/remacs"
-export THEGUARANTORS_DIR="$HOME/client-code/theguarantors.com"
-# alias remacs="RUST_BACKTRACE=1 $REMACS_DIR/src/remacs"
-
 if [ -n "$EMACS" ]; then
 else
+    # VOICE='-v mb-us1'
     # 'welcome screen' with ponies
-    text=`fortune | iconv -t 'ASCII' 2>>/dev/null`; ponysay "$text"; if [ `shuf -i 1-100 -n 1` -lt 10 ]; then espeak -v mb-us1 "$text" &; fi
+    text=`fortune | iconv -t 'ASCII' 2>>/dev/null`; ponysay "$text"; if [ `shuf -i 1-100 -n 1` -lt 10 ]; then ( espeak $VOICE "$text" & ); fi
 fi
 nvm_auto_switch
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-
