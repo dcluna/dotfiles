@@ -1,0 +1,20 @@
+* Custom functions
+  #+BEGIN_SRC emacs-lisp
+    (defun dcl/toggle-ts-and-js-file (filename)
+      (interactive (list (buffer-file-name)))
+      (let* ((extension (file-name-extension filename))
+             (newfilename (concat
+                           (file-name-sans-extension filename)
+                           "."
+                           (cond
+                            ((equal extension '"ts") "js")
+                            ((equal extension '"js") "ts")
+                            (t (error "unknown extension: %s" extension))))))
+        (find-file newfilename)))
+  #+END_SRC
+* Keybindings
+
+  #+BEGIN_SRC emacs-lisp
+  (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "ots" 'dcl/toggle-ts-and-js-file)
+  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ots" 'dcl/toggle-ts-and-js-file)
+  #+END_SRC

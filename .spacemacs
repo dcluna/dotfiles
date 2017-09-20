@@ -414,6 +414,7 @@ user code."
 layers configuration. You are free to put any user code."
   ;; (require 'borg)
   ;; (borg-initialize)
+  (org-babel-load-file "~/dotfiles/spacemacs.org" t)
   (evil-global-set-key 'normal (kbd "K") 'newline-and-indent)
   (evil-global-set-key 'normal (kbd "g b") 'browse-url-at-point)
   (add-hook 'anaconda-mode-hook (lambda ()
