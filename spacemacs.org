@@ -21,19 +21,54 @@
   :END:
 ** Typescript/JavaScript
    #+BEGIN_SRC emacs-lisp
+     (defun dcl/get-js-or-src-file (filename)
+       (let* ((curline (line-number-at-pos))
+              (extension (file-name-extension filename)))
+         (concat
+          (file-name-sans-extension filename)
+          "."
+          (cond
+           ((equal extension '"ts") "js")
+           ((equal extension '"js") "ts")
+           (t (error "unknown extension: %s" extension))))))
+
+     (defvar smap-cli-location "~/code-examples/smapcli.js" "Location of the smapcli.js script.")
+
      (defun dcl/toggle-ts-and-js-file (filename)
-            (interactive (list (buffer-file-name)))
-            (let* ((curline (line-number-at-pos))
-                   (extension (file-name-extension filename))
-                   (newfilename (concat
-                                 (file-name-sans-extension filename)
-                                 "."
-                                 (cond
-                                  ((equal extension '"ts") "js")
-                                  ((equal extension '"js") "ts")
-                                  (t (error "unknown extension: %s" extension))))))
-              (find-file newfilename)
-              (goto-line curline)))
+       (interactive (list (buffer-file-name)))
+       (let ((curline (line-number-at-pos))
+             (curcol (current-column))
+             (newfilename (dcl/get-js-or-src-file filename)))
+         (find-file newfilename)
+         (if (and (equal "js" (file-name-extension newfilename))
+                  (or (executable-find smap-cli-location)
+                      (file-exists-p smap-cli-location)))
+             (progn
+               (destructuring-bind (file line col) (s-split " " (shell-command-to-string
+                                                                 (format "%s fromSource -l %s -c %s --sm %s" smap-cli-location curline curcol (concat newfilename ".map"))))
+                 (goto-line (string-to-number line))
+                 (move-to-column (string-to-number col))))
+           (goto-line curline))))
+
+     (defun dcl/run-in-generated-js (fn)
+       "Runs FN in the corresponding generated JS file, then restores the buffer."
+       (let ((curbuf (current-buffer)))
+         (dcl/toggle-ts-and-js-file (buffer-file-name))
+         (funcall fn)
+         (switch-to-buffer curbuf)))
+
+     (defun ts-mocha-test-at-point ()
+       (interactive)
+       (dcl/run-in-generated-js (lambda () (mocha-test-at-point))))
+
+     (defun ts-mocha-test-file ()
+       (interactive)
+       (dcl/run-in-generated-js (lambda () (mocha-test-file))))
+
+     (defun dcl/run-nightwatch-test ()
+       (interactive)
+       (let ((compilation-read-command t))
+         (call-interactively 'compile nil (vector (format "NODE_ENV=test PORT=3001 yarn run test-e2e -- --test ")))))
 
      (defun skewer-eval-region (beg end &optional prefix)
        (interactive "r\nP")
@@ -774,6 +809,11 @@
     #+BEGIN_SRC emacs-lisp
   (add-hook 'minibuffer-setup-hook 'dcl/minibuffer-setup)
     #+END_SRC
+*** Evil-embrace issue (which-key)
+    See [[https://github.com/justbur/emacs-which-key/issues/146#issuecomment-252030746][this]].
+    #+BEGIN_SRC emacs-lisp
+      (defalias 'display-buffer-in-major-side-window 'window--make-major-side-window)
+    #+END_SRC
 ** Zeal/Dash docsets
    #+BEGIN_SRC emacs-lisp
  (let ((helm-dash-mode-alist
@@ -952,6 +992,8 @@
      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "otf" 'mocha-test-file)
      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "odp" 'mocha-debug-at-point)
      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "odf" 'mocha-debug-file)
+     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otn" 'dcl/run-nightwatch-test)
+     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otp" 'ts-mocha-test-at-point)
 
      (evil-leader/set-key-for-mode 'js2-mode "msr" 'skewer-eval-region)
 
