@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+export ZSH_CUSTOM="$ZSH/custom"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -12,7 +13,46 @@ if [ -n "$EMACS" ]; then
     export TERM=xterm-256color
     ZSH_THEME="duellj"
 else
-    ZSH_THEME="duellj"
+    # ZSH_THEME="agnoster"
+    # ZSH_THEME="dogenpunk"
+    # ZSH_THEME="hyperzsh"
+    SPACESHIP_KUBECONTEXT_SHOW=false
+    export SPACESHIP_PROMPT_ORDER=(
+        time          # Time stampts section
+        user          # Username section
+        host          # Hostname section
+        dir           # Current directory section
+        git           # Git section (git_branch + git_status)
+        hg            # Mercurial section (hg_branch  + hg_status)
+        package       # Package version
+        node          # Node.js section
+        ruby          # Ruby section
+        elixir        # Elixir section
+        xcode         # Xcode section
+        swift         # Swift section
+        golang        # Go section
+        php           # PHP section
+        rust          # Rust section
+        haskell       # Haskell Stack section
+        julia         # Julia section
+        docker        # Docker section
+        aws           # Amazon Web Services section
+        venv          # virtualenv section
+        conda         # conda virtualenv section
+        pyenv         # Pyenv section
+        dotnet        # .NET section
+        ember         # Ember.js section
+        # kubecontext   # Kubectl context section
+        exec_time     # Execution time
+        line_sep      # Line break
+        battery       # Battery level and status
+        vi_mode       # Vi-mode indicator
+        jobs          # Backgound jobs indicator
+        exit_code     # Exit code section
+        char          # Prompt character
+    )
+    ZSH_THEME="spaceship"
+    # source "$ZSH/custom/themes/spaceship.zsh-theme"
 fi
 
 # funny color schemes
@@ -61,7 +101,7 @@ fi
 # Add wi2gold:$HOME/bin/android-ndk-r10d:$HOME/bin/jdk1.8.0_31/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-plugins=(git ruby rails rake rake-fast rbenv node nvm npm nvm-auto nvm-auto yarn rust)
+plugins=(tmate git ruby rails rake rake-fast rbenv node nvm npm nvm-auto yarn rust)
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 

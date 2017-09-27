@@ -145,6 +145,9 @@ values."
                                       (mocha :location (recipe :fetcher file :path "/home/dancluna/code/mocha.el"))
                                       howdoi
                                       ascii
+                                      multi-compile
+                                      dumb-jump
+                                      tldr
                                       rainbow-mode
                                       paredit
                                       ruby-refactor

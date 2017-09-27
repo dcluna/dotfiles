@@ -37,7 +37,7 @@ dcl-kill-process (){
     LBUFFER+="kill "
     zle menu-expand-or-complete
 }; zle -N dcl-kill-process
-bindkey -M vicmd "\ek" dcl-kill-process
+# bindkey -M vicmd "\ek" dcl-kill-process
 
 autoload -U dclemacsclient
 zle -N dclemacsclient

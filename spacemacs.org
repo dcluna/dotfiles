@@ -981,7 +981,8 @@
      (evil-leader/set-key (kbd "o l !") 'dcl/evil-ex-run-current-line)
      (evil-leader/set-key (kbd "o n c") '0xc-convert)
      (evil-leader/set-key (kbd "o a") 'ascii-display)
-     (evil-leader/set-key (kbd "o h H") 'howdoi-query)
+     (evil-leader/set-key (kbd "o h h") 'howdoi-query)
+     (evil-leader/set-key (kbd "o h t") 'tldr)
 
      (spacemacs/set-leader-keys-for-major-mode 'python-mode "sp" 'python-shell-print-line-or-region)
      (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "sl" 'ruby-eval-line)
