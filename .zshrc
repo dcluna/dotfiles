@@ -172,12 +172,6 @@ export PATH="$HOME/.cask/bin:$PATH"
 
 export PATH="$HOME/code-examples:$PATH"
 
-export GOROOT_BOOTSTRAP="$HOME/bin/go"
-
-export GOPATH="$HOME/go"
-
-export PATH="$GOPATH:$PATH"
-
 export CODE_DIR="$HOME/code"
 
 export PATH="$PATH:$CODE_DIR/no-more-secrets/bin"
