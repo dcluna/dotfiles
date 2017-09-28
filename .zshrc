@@ -16,7 +16,8 @@ else
     # ZSH_THEME="agnoster"
     # ZSH_THEME="dogenpunk"
     # ZSH_THEME="hyperzsh"
-    SPACESHIP_KUBECONTEXT_SHOW=false
+    SPACESHIP_EXIT_CODE_SHOW=true
+    SPACESHIP_TIME_SHOW=true
     export SPACESHIP_PROMPT_ORDER=(
         time          # Time stampts section
         user          # Username section
@@ -42,7 +43,7 @@ else
         pyenv         # Pyenv section
         dotnet        # .NET section
         ember         # Ember.js section
-        # kubecontext   # Kubectl context section
+        kubecontext   # Kubectl context section
         exec_time     # Execution time
         line_sep      # Line break
         battery       # Battery level and status
@@ -101,14 +102,13 @@ fi
 # Add wi2gold:$HOME/bin/android-ndk-r10d:$HOME/bin/jdk1.8.0_31/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-plugins=(tmate git ruby rails rake rake-fast rbenv node nvm npm nvm-auto yarn rust)
+plugins=(tmate git ruby rails rake rake-fast rbenv node nvm npm nvm-auto yarn rust vi-mode)
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 
 source $ZSH/oh-my-zsh.sh
 
 for file in `ls ~/.zsh-confs/*.zsh`; do
-    echo "Loading $file"
     source $file
 done
 
