@@ -97,7 +97,38 @@
                 if filename
                 return filename))
    #+END_SRC
+*** smapcli.js
+    This file looks kinda like this:
 
+    #+BEGIN_SRC javascript :tangle ~/code-examples/smapcli.js :shebang "#!/usr/bin/env node"
+      // generated from ~/dotfiles/spacemacs.org
+      const sourceMap = require("source-map");
+      const fs = require("fs");
+      const argv = require("yargs")
+            .alias( 's', 'source')
+            .describe('source', 'Original source file for generated JS')
+            .alias('l', 'line')
+            .number('l')
+            .describe('line', 'Line number in original file')
+            .alias('c', 'column')
+            .number('c')
+            .describe('column', 'Column number in original file')
+            .alias('sm', 'sourceMap')
+            .describe('sourceMap', 'Source map file for generated JS')
+            .command('fromSource', 'print generated position', {}, (argv) => {
+              console.log(generatedFromSource(argv.sourceMap, argv.source, argv.line, argv.column));
+            })
+            // .usage("$0 -l 15 -c 28 -s sourceFile.ts -sm sourceFile.js.map")
+            .argv;
+
+      function generatedFromSource(sourceMapFile, sourceFile, line, column){
+        const srcMap = JSON.parse( fs.readFileSync(sourceMapFile) );
+        const consumer = new sourceMap.SourceMapConsumer(srcMap);
+        const source = sourceFile || srcMap.sources[0];
+        const generatedInfo = consumer.generatedPositionFor({ source: source, line: line, column: column });
+        return source + " " + generatedInfo.line + " " + generatedInfo.column;
+      }
+    #+END_SRC
 ** Ruby
    #+BEGIN_SRC emacs-lisp
      (define-derived-mode ruby-trace-mode grep-mode "RbTrace"
@@ -744,6 +775,14 @@
        (find-file-other-window "/home/dancluna/code/perl1line.txt/perl1line.txt")
        (read-only-mode 1))
    #+END_SRC
+** Projectile
+   #+BEGIN_SRC emacs-lisp
+(defun dcl/project-relative-path ()
+  (interactive)
+  (let ((filename buffer-file-name)
+        (root (projectile-project-root)))
+    (kill-new (message (replace-regexp-in-string root "" filename)))))
+   #+END_SRC
 * Auto modes
   :PROPERTIES:
   :header-args: :noweb-ref auto-modes :tangle no
@@ -983,6 +1022,8 @@
      (evil-leader/set-key (kbd "o a") 'ascii-display)
      (evil-leader/set-key (kbd "o h h") 'howdoi-query)
      (evil-leader/set-key (kbd "o h t") 'tldr)
+     (evil-leader/set-key (kbd "o s") 'embrace-commander)
+     (evil-leader/set-key (kbd "o p y") 'dcl/project-relative-path)
 
      (spacemacs/set-leader-keys-for-major-mode 'python-mode "sp" 'python-shell-print-line-or-region)
      (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "sl" 'ruby-eval-line)
@@ -995,6 +1036,7 @@
      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "odf" 'mocha-debug-file)
      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otn" 'dcl/run-nightwatch-test)
      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otp" 'ts-mocha-test-at-point)
+     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otf" 'ts-mocha-test-file)
 
      (evil-leader/set-key-for-mode 'js2-mode "msr" 'skewer-eval-region)
 
