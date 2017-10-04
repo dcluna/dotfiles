@@ -18,7 +18,9 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
-   '(rust
+   '(
+     helm
+     rust
      windows-scripts
      (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
      ;; (elfeed :variables rmh-elfeed-org-files (list "~/.elfeed-list.org"))
