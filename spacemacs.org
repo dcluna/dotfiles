@@ -3,17 +3,67 @@
 #+PROPERTY: noweb yes
 * Initialization
   #+BEGIN_SRC emacs-lisp :tangle yes :noweb yes
-;; function and macro definitions
-<<functions>>
+    ;; Borg.el
+    <<borg>>
+    ;; function and macro definitions
+    <<functions>>
 
-;;auto-modes
-<<auto-modes>>
+    ;;auto-modes
+    <<auto-modes>>
 
-;; keybindings
-<<keybindings>>
+    ;; keybindings
+    <<keybindings>>
 
-;; configuration
-<<configuration>>
+    ;; configuration
+    <<configuration>>
+  #+END_SRC
+* Borg.el (package manager)
+  :PROPERTIES:
+  :header-args: :noweb-ref borg :tangle no
+  :END:
+  #+BEGIN_SRC emacs-lisp
+    (setq borg-drone-directory (expand-file-name "~/dotfiles/collective/lib"))
+
+    (dolist (dir (f-directories borg-drone-directory))
+      (add-to-list 'load-path dir))
+
+    ;; (add-to-list 'load-path (expand-file-name "~/code/borg"))
+    (require 'borg)
+    (borg-initialize)
+  #+END_SRC
+  
+  Configuring the returned epkg:
+  
+  #+BEGIN_SRC emacs-lisp
+    ;; (add-to-list 'load-path (expand-file-name "emacsql" borg-drone-directory))
+    ;; (add-to-list 'load-path (expand-file-name "emacsql" borg-drone-directory))
+    ;; (add-to-list 'load-path (expand-file-name "closql" borg-drone-directory))
+    ;; (add-to-list 'load-path (expand-file-name "epkg" borg-drone-directory))
+
+    (use-package epkg
+      :defer t
+      :init (setq epkg-repository
+                  (expand-file-name "var/epkgs/" borg-drone-directory)))
+  #+END_SRC
+  
+  A few conveniences for magit:
+
+  #+BEGIN_SRC emacs-lisp
+     (magit-add-section-hook 'magit-status-sections-hook
+                             'magit-insert-modules-unpulled-from-upstream
+                             'magit-insert-unpulled-from-upstream)
+     (magit-add-section-hook 'magit-status-sections-hook
+                             'magit-insert-modules-unpulled-from-pushremote
+                             'magit-insert-unpulled-from-upstream)
+     (magit-add-section-hook 'magit-status-sections-hook
+                             'magit-insert-modules-unpushed-to-upstream
+                             'magit-insert-unpulled-from-upstream)
+     (magit-add-section-hook 'magit-status-sections-hook
+                             'magit-insert-modules-unpushed-to-pushremote
+                             'magit-insert-unpulled-from-upstream)
+     (magit-add-section-hook 'magit-status-sections-hook
+                             'magit-insert-submodules
+                             'magit-insert-unpulled-from-upstream)
   #+END_SRC
 * Custom functions
   :PROPERTIES:
@@ -65,6 +115,14 @@
        (interactive)
        (dcl/run-in-generated-js (lambda () (mocha-test-file))))
 
+     (defun ts-mocha-debug-at-point ()
+       (interactive)
+       (dcl/run-in-generated-js (lambda () (mocha-debug-at-point))))
+
+     (defun ts-mocha-debug-file ()
+       (interactive)
+       (dcl/run-in-generated-js (lambda () (mocha-debug-file))))
+
      (defun dcl/run-nightwatch-test ()
        (interactive)
        (let ((compilation-read-command t))
@@ -98,6 +156,9 @@
                 return filename))
    #+END_SRC
 *** smapcli.js
+    :PROPERTIES:
+    :header-args: :noweb-ref smap-cli :tangle ~/code-examples/smapcli.js
+    :END:
     This file looks kinda like this:
 
     #+BEGIN_SRC javascript :tangle ~/code-examples/smapcli.js :shebang "#!/usr/bin/env node"
@@ -1037,6 +1098,8 @@
      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otn" 'dcl/run-nightwatch-test)
      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otp" 'ts-mocha-test-at-point)
      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otf" 'ts-mocha-test-file)
+     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "odp" 'ts-mocha-debug-at-point)
+     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "odf" 'ts-mocha-debug-file)
 
      (evil-leader/set-key-for-mode 'js2-mode "msr" 'skewer-eval-region)
 
