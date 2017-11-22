@@ -1,6 +1,7 @@
 alias acs='apt-cache search'
 alias acsh='apt-cache show'
 alias suagi='sudo apt-get install'
+alias suagiy='sudo apt-get install -y'
 alias sagu='sudo apt-get update'
 alias grepi='grep -i'
 alias ec='emacsclient -nw'
@@ -78,3 +79,14 @@ alias reddit='rtv'
 alias aslr_on='cat /proc/sys/kernel/randomize_va_space | grep 2 >> /dev/null && echo "on" || echo "off"'
 alias bers='bundle exec rails server'
 alias berrs='bundle exec rescue rails server'
+
+function vecho(){
+    echo "$1" | espeak &
+}
+
+CHROME_WINDOW_SIZE="890,900"
+CHROME_SCREENSHOT_NAME="chromescreenshot.png"
+
+function chromess(){
+    google-chrome --headless --disable-gpu --window-size=$CHROME_WINDOW_SIZE --screenshot=$CHROME_SCREENSHOT_NAME $1
+}

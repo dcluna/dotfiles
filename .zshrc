@@ -11,11 +11,8 @@ if [ -n "$EMACS" ]; then
     export LANG=en_US.UTF-8
     export LC_ALL=en_US.UTF-8
     export TERM=xterm-256color
-    ZSH_THEME="duellj"
+    ZSH_THEME="dogenpunk"
 else
-    # ZSH_THEME="agnoster"
-    # ZSH_THEME="dogenpunk"
-    # ZSH_THEME="hyperzsh"
     SPACESHIP_EXIT_CODE_SHOW=true
     SPACESHIP_TIME_SHOW=true
     export SPACESHIP_PROMPT_ORDER=(
