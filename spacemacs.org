@@ -27,18 +27,23 @@
     (dolist (dir (f-directories borg-drone-directory))
       (add-to-list 'load-path dir))
 
-    ;; (add-to-list 'load-path (expand-file-name "~/code/borg"))
+    <<borg-config>>
+
+    (add-to-list 'load-path (expand-file-name "~/code/borg"))
     (require 'borg)
     (borg-initialize)
   #+END_SRC
   
   Configuring the returned epkg:
   
-  #+BEGIN_SRC emacs-lisp
-    ;; (add-to-list 'load-path (expand-file-name "emacsql" borg-drone-directory))
-    ;; (add-to-list 'load-path (expand-file-name "emacsql" borg-drone-directory))
-    ;; (add-to-list 'load-path (expand-file-name "closql" borg-drone-directory))
-    ;; (add-to-list 'load-path (expand-file-name "epkg" borg-drone-directory))
+  #+BEGIN_SRC emacs-lisp :noweb-ref borg-config :tangle no
+    (add-to-list 'load-path (expand-file-name "packed" borg-drone-directory))
+    (add-to-list 'load-path (expand-file-name "auto-compile" borg-drone-directory))
+    (add-to-list 'load-path (expand-file-name "emacsql" borg-drone-directory))
+    (add-to-list 'load-path (expand-file-name "closql" borg-drone-directory))
+    (add-to-list 'load-path (expand-file-name "epkg" borg-drone-directory))
+
+    (use-package auto-compile :defer t :config (progn (auto-compile-on-save-mode)))
 
     (use-package epkg
       :defer t
@@ -999,8 +1004,9 @@
      #+END_SRC
 *** Javascript
     #+BEGIN_SRC emacs-lisp
-  (require 'indium)
-  (add-hook 'js2-mode-hook #'indium-interaction-mode)
+      (require 'indium)
+      (add-hook 'js2-mode-hook #'indium-interaction-mode)
+      (require 'yarn)
     #+END_SRC
 *** nov.el
     #+BEGIN_SRC emacs-lisp
@@ -1095,11 +1101,7 @@
      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "otf" 'mocha-test-file)
      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "odp" 'mocha-debug-at-point)
      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "odf" 'mocha-debug-file)
-     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otn" 'dcl/run-nightwatch-test)
-     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otp" 'ts-mocha-test-at-point)
-     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otf" 'ts-mocha-test-file)
-     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "odp" 'ts-mocha-debug-at-point)
-     (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "odf" 'ts-mocha-debug-file)
+
 
      (evil-leader/set-key-for-mode 'js2-mode "msr" 'skewer-eval-region)
 
@@ -1112,3 +1114,27 @@
 
      (add-to-list 'evil-emacs-state-modes 'indium-debugger-mode)
    #+END_SRC
+*** Typescript mode map
+
+    #+BEGIN_SRC emacs-lisp
+      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otn" 'dcl/run-nightwatch-test)
+      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otp" 'ts-mocha-test-at-point)
+      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "otf" 'ts-mocha-test-file)
+      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "odp" 'ts-mocha-debug-at-point)
+      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "odf" 'ts-mocha-debug-file)
+      ;; yarn
+      (let ((yarn-keymap (make-sparse-keymap)))
+        (define-key yarn-keymap "a" 'yarn-add)
+        (define-key yarn-keymap "D" 'yarn-add-dev)
+        (define-key yarn-keymap "r" 'yarn-remove)
+        (define-key yarn-keymap "l" 'yarn-ls)
+        (define-key yarn-keymap "L" 'yarn-link)
+        (define-key yarn-keymap "p" 'yarn-link-package)
+        (define-key yarn-keymap "n" 'yarn-unlink)
+        (define-key yarn-keymap "i" 'yarn-install)
+        (define-key yarn-keymap "I" 'yarn-info)
+        (define-key yarn-keymap "u" 'yarn-upgrade)
+        (define-key yarn-keymap "w" 'yarn-why)
+        (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "oy" yarn-keymap)
+        (spacemacs/declare-prefix-for-mode 'typescript-mode "moy" "yarn"))
+    #+END_SRC

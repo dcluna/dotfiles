@@ -19,6 +19,9 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     emoji
+     ( parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
+     nlinum
      helm
      rust
      windows-scripts
@@ -118,6 +121,11 @@ values."
                                       ;; epkg
                                       ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                       ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                      sx
+                                      org2blog
+                                      ts-comint
+                                      vagrant-tramp
+                                      ob-typescript
                                       labburn-theme
                                       evil-rails
                                       evil-easymotion
@@ -145,7 +153,11 @@ values."
                                       sage-shell-mode
                                       intero
                                       (mocha :location (recipe :fetcher file :path "/home/dancluna/code/mocha.el"))
-                                      howdoi
+                                      (howdoi :location (recipe
+                                                         :repo "dcluna/emacs-howdoi"
+                                                         :fetcher github
+                                                         :branch "html2text-emacs26")
+                                              :upgrade 't)
                                       ascii
                                       multi-compile
                                       dumb-jump
@@ -412,6 +424,7 @@ It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   (setq-default ruby-version-manager 'rvm)
   (setq-default ruby-enable-ruby-on-rails-support t)
+  (setq spacemacs--custom-file (expand-file-name ".custom-settings" "~/dotfiles/"))
   )
 
 (defun dotspacemacs/user-config ()
