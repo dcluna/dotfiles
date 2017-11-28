@@ -90,3 +90,5 @@ CHROME_SCREENSHOT_NAME="chromescreenshot.png"
 function chromess(){
     google-chrome --headless --disable-gpu --window-size=$CHROME_WINDOW_SIZE --screenshot=$CHROME_SCREENSHOT_NAME $1
 }
+
+alias mitmp="mitmproxy --palette solarized_dark"
