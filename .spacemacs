@@ -121,6 +121,8 @@ values."
                                       ;; epkg
                                       ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                       ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                      flymake-solidity
+                                      solidity-mode
                                       sx
                                       org2blog
                                       ts-comint
