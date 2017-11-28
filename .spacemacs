@@ -144,11 +144,11 @@ values."
                                       suggest
                                       tramp-term
                                       dark-mint-theme
-                                      (meme
-                                       :location (recipe :repo "larsmagne/meme"
-                                                         :fetcher github
-                                                         :files ("*"))
-                                       :upgrade 't)
+                                      ;; (meme
+                                      ;;  :location (recipe :repo "larsmagne/meme"
+                                      ;;                    :fetcher github
+                                      ;;                    :files ("*"))
+                                      ;;  :upgrade 't)
                                       yagist
                                       sage-shell-mode
                                       intero
