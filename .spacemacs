@@ -121,6 +121,13 @@ values."
                                       ;; epkg
                                       ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                       ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                      doom-themes
+                                      creamsody-theme
+                                      borland-blue-theme
+                                      atom-one-dark-theme
+                                      atom-dark-theme
+                                      abyss-theme
+                                      easy-jekyll
                                       flymake-solidity
                                       solidity-mode
                                       sx
@@ -292,6 +299,10 @@ values."
                                           brin
                                           bubbleberry
                                           cherry-blossom
+                                          atom-dark
+                                          atom-one-dark
+                                          creamsody
+                                          borland-blue
                                           cyberpunk
                                           clues
                                           darkmine
