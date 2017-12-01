@@ -75,7 +75,7 @@ alias be="bundle exec"
 function generate-pw(){
     pwgen -1 -s $1 | shuf -n 1
 }
-alias reddit='rtv'
+alias reddit='rtv --enable-media'
 alias aslr_on='cat /proc/sys/kernel/randomize_va_space | grep 2 >> /dev/null && echo "on" || echo "off"'
 alias bers='bundle exec rails server'
 alias berrs='bundle exec rescue rails server'
