@@ -1033,6 +1033,21 @@
     #+BEGIN_SRC emacs-lisp
   (helm-mode 1) ;; for some reason, all the describe-* goodness is not working with Spacemacs v.0.103.2 unless I add this line
     #+END_SRC
+
+** Coin-ticker
+   Configs for [[https://github.com/eklitzke/coin-ticker-mode][coin-ticker-mode]].
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'coin-ticker)
+
+     (setq coin-ticker-syms '("BTC" "ETH" "LTC" "MIOTA"))
+
+     (setq coin-ticker-price-convert "USD")
+
+     (setq coin-ticker-price-symbol "$")
+
+     (coin-ticker-mode 1)
+   #+END_SRC
 ** Auto-insert
     #+BEGIN_SRC emacs-lisp
       (use-package autoinsert

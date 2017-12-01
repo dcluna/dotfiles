@@ -213,7 +213,7 @@ if [ -n "$EMACS" ]; then
 else
     # VOICE='-v mb-us1'
     # 'welcome screen' with ponies
-    text=`fortune | iconv -t 'ASCII' 2>>/dev/null`; ponysay "$text"; if [ `shuf -i 1-100 -n 1` -lt 10 ]; then ( espeak $VOICE "$text" & ); fi
+    text=`fortune | iconv -t 'ASCII' 2>>/dev/null`; ( ponysay "$text" &; coinmon & ); if [ `shuf -i 1-100 -n 1` -lt 10 ]; then ( espeak $VOICE "$text" & ); fi
 fi
 nvm_auto_switch
 

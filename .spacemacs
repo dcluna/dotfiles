@@ -121,6 +121,7 @@ values."
                                       ;; epkg
                                       ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                       ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                      coin-ticker
                                       doom-themes
                                       creamsody-theme
                                       borland-blue-theme
