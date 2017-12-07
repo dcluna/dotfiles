@@ -3,19 +3,501 @@
 #+PROPERTY: noweb yes
 * Initialization
   #+BEGIN_SRC emacs-lisp :tangle yes :noweb yes
-    ;; Borg.el
-    <<borg>>
-    ;; function and macro definitions
-    <<functions>>
+    ;; spacemacs initialization routines
+    <<spacemacs-prelude>>
 
-    ;;auto-modes
-    <<auto-modes>>
+    <<spacemacs-layers>>
 
-    ;; keybindings
-    <<keybindings>>
+    <<spacemacs-init>>
 
-    ;; configuration
-    <<configuration>>
+    <<spacemacs-user-init>>
+
+    (defun dotspacemacs/user-config ()
+      ;; Borg.el
+      <<borg>>
+      ;; function and macro definitions
+      <<functions>>
+
+      ;;auto-modes
+      <<auto-modes>>
+
+      ;; keybindings
+      <<keybindings>>
+
+      ;; configuration
+      <<configuration>>)
+  #+END_SRC
+* Spacemacs-specific
+** Layers
+  :PROPERTIES:
+  :header-args: :noweb-ref spacemacs-layers :tangle no
+  :END:
+  
+  #+BEGIN_SRC emacs-lisp
+  (defun dotspacemacs/layers ()
+  "Configuration Layers declaration.
+You should not put any user code in this function besides modifying the variable
+values."
+  (setq-default
+   dotspacemacs-scratch-mode 'emacs-lisp-mode
+   ;; Base distribution to use. This is a layer contained in the directory
+   ;; `+distribution'. For now available distributions are `spacemacs-base'
+   ;; or `spacemacs'. (default 'spacemacs)
+   dotspacemacs-distribution 'spacemacs
+   ;; List of additional paths where to look for configuration layers.
+   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
+   dotspacemacs-configuration-layer-path '()
+   ;; List of configuration layers to load. If it is the symbol `all' instead
+   ;; of a list then all discovered layers will be installed.
+   dotspacemacs-configuration-layers
+   '(
+     emoji
+     ( parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
+     nlinum
+     helm
+     rust
+     windows-scripts
+     (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
+     ;; (elfeed :variables rmh-elfeed-org-files (list "~/.elfeed-list.org"))
+     slack
+     (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
+     ;; pdf-tools
+     chrome
+     vim-empty-lines
+     asm
+     octave
+     csv
+     erc
+     docker
+     ;; ansible
+     vimscript
+     sonic-pi
+     ;; eyebrowse
+     prodigy
+     c-c++
+     search-engine
+     haskell
+     dash
+     vagrant
+     tmux
+     selectric
+     html
+     shell-scripts
+     racket
+     php
+     elixir
+     erlang
+     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
+     restclient
+     yaml
+     ruby-on-rails
+     evil-cleverparens
+     evil-commentary
+     syntax-checking
+     (auto-completion :variables auto-completion-enable-help-tooltip t auto-completion-enable-sort-by-usage t auto-completion-enable-snippets-in-popup t)
+     ;; angularjs
+     sql
+     scheme
+     ;; personal-misc
+     (git :variables git-enable-github-support t git-gutter-use-fringe t)
+     markdown
+     html
+     (typescript :variables
+                 typescript-fmt-on-save t
+                 typescript-fmt-tool 'tide)
+     ( javascript :variables
+                  js-indent-level 2)
+     (python :variables python-test-runner '(nose pytest))
+     (ruby :variables ruby-enable-enh-ruby-mode t)
+     (clojure :variables clojure-enable-fancify-symbols t)
+     go
+     evernote
+     (colors :variables colors-colorize-identifiers 'all)
+     theming
+     themes-megapack
+     ;; python-extra
+     ;; groovy
+     common-lisp
+     lua
+     go
+     github
+     (org :variables org-enable-github-support t org-enable-reveal-js-support t)
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+     ;; <M-m f e R> (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
+     ;; auto-completion
+     ;; better-defaults
+     emacs-lisp
+     ;; git
+     ;; markdown
+     ;; org
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     ;; spell-checking
+     ;; syntax-checking
+     version-control
+     )
+   ;; List of additional packages that will be installed without being
+   ;; wrapped in a layer. If you need some configuration for these
+   ;; packages then consider to create a layer, you can also put the
+   ;; configuration in `dotspacemacs/config'.
+   dotspacemacs-additional-packages `(
+                                      ;; (eziam-theme
+                                      ;;  :location (recipe :repo "thblt/eziam-theme-emacs"
+                                      ;;                    :fetcher github
+                                      ;;                    :files ("*.el"))
+                                      ;;  :upgrade 't)
+                                      ;; epkg
+                                      ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
+                                      ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                      coin-ticker
+                                      doom-themes
+                                      creamsody-theme
+                                      borland-blue-theme
+                                      atom-one-dark-theme
+                                      atom-dark-theme
+                                      abyss-theme
+                                      easy-jekyll
+                                      flymake-solidity
+                                      solidity-mode
+                                      sx
+                                      org2blog
+                                      ts-comint
+                                      vagrant-tramp
+                                      ob-typescript
+                                      labburn-theme
+                                      evil-rails
+                                      evil-easymotion
+                                      evil-extra-operator
+                                      znc
+                                      ox-jira
+                                      realgud
+                                      ;; realgud-pry
+                                      plan9-theme
+                                      sourcerer-theme
+                                      0xc
+                                      fuel
+                                      lfe-mode
+                                      x-path-walker
+                                      pivotal-tracker
+                                      suggest
+                                      tramp-term
+                                      dark-mint-theme
+                                      ;; (meme
+                                      ;;  :location (recipe :repo "larsmagne/meme"
+                                      ;;                    :fetcher github
+                                      ;;                    :files ("*"))
+                                      ;;  :upgrade 't)
+                                      yagist
+                                      sage-shell-mode
+                                      intero
+                                      (mocha :location (recipe :fetcher file :path "/home/dancluna/code/mocha.el"))
+                                      (howdoi :location (recipe
+                                                         :repo "dcluna/emacs-howdoi"
+                                                         :fetcher github
+                                                         :branch "html2text-emacs26")
+                                              :upgrade 't)
+                                      ascii
+                                      multi-compile
+                                      dumb-jump
+                                      tldr
+                                      rainbow-mode
+                                      paredit
+                                      ruby-refactor
+                                      shen-mode
+                                      nvm
+                                      nov
+                                      yarn-mode
+                                      (indium :location (recipe :fetcher file :path "/home/dancluna/code/Indium")
+                                              :upgrade 't)
+                                      package-lint
+                                      flycheck-package
+                                      ;; doom-themes
+                                      ,(dcl/local-package 'rspec-mode)
+                                      ;; (yasnippet-ruby-mode
+                                      ;;  :location (recipe :repo "bmaland/yasnippet-ruby-mode"
+                                      ;;                    :fetcher github
+                                      ;;                    :files ("*.el")))
+                                      ;; ,(dcl/local-package 'flycheck)
+                                      (exercism
+                                       :location (recipe :repo "canweriotnow/exercism-emacs"
+                                                         :fetcher github
+                                                         :files ("*.el"))
+                                       :upgrade 't)
+                                      (reek
+                                       :location (recipe :repo "hanmoi-choi/reek-emacs"
+                                                         :fetcher github
+                                                         :files ("*.el"))
+                                       :upgrade 't)
+                                      (shen-elisp
+                                       :location (recipe :repo "deech/shen-elisp"
+                                                         :fetcher github
+                                                         :files ("shen*.el"))
+                                       :upgrade 't)
+                                      ;; (pmd :location "/home/dancluna/code-of-mine/pmd-el")
+                                      (pmd :location (recipe :fetcher file :path "/home/dancluna/code-of-mine/pmd-el"))
+                                      ;; (pmd
+                                      ;;  :location (recipe :repo "dcluna/pmd.el"
+                                      ;;                    :fetcher github
+                                      ;;                    :files ("*.el")))
+                                      (yarn.el :location "/home/dancluna/code/yarn.el/")
+                                      ,(dcl/local-package 'sass-mode)
+                                      ;; ,(dcl/local-package 'magit)
+                                      ;; (sass-mode :location (recipe :fetcher github :repo "dcluna/sass-mode"))
+                                      ;; (embrace :location (recipe :fetcher github :repo "dcluna/embrace.el"))
+                                      evil-embrace
+                                      ;; floobits
+                                      ;; lispyville ;; not yet available as of Thu Apr 21 18:32:36 BRT 2016
+                                      editorconfig
+                                      ,(dcl/local-package 'stock-ticker)
+                                      wsd-mode
+                                      )
+   ;; A list of packages and/or extensions that will not be install and loaded.
+   dotspacemacs-excluded-packages '()
+   ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
+   ;; are declared in a layer which is not a member of
+   ;; the list `dotspacemacs-configuration-layers'. (default t)
+   dotspacemacs-delete-orphan-packages t))
+  #+END_SRC
+** Prelude
+  :PROPERTIES:
+  :header-args: :noweb-ref spacemacs-prelude :tangle no
+  :END:
+
+  #+BEGIN_SRC emacs-lisp
+(defun dcl/local-package (pkg-sym)
+  (let ((pkg-location (concat (getenv "CODE_DIR") "/" (symbol-name pkg-sym))) )
+    ;; (push pkg-location load-path)
+    (list pkg-sym :location  pkg-location)))
+
+(defun dcl/shuffle (list)
+  "Destructively shuffles LIST."
+  (sort list (lambda (a b) (nth (random 2) '(nil t)))))
+  #+END_SRC
+** Init
+  :PROPERTIES:
+  :header-args: :noweb-ref spacemacs-init :tangle no
+  :END:
+  
+  #+BEGIN_SRC emacs-lisp
+ (defun dotspacemacs/init ()
+  "Initialization function.
+This function is called at the very startup of Spacemacs initialization
+before layers configuration.
+You should not put any user code in there besides modifying the variable
+values."
+  ;; This setq-default sexp is an exhaustive list of all the supported
+  ;; spacemacs settings.
+  (setq-default
+   ;; One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
+   ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
+   ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
+   ;; unchanged. (default 'vim)
+   dotspacemacs-editing-style 'hybrid
+   ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
+   dotspacemacs-verbose-loading t
+   ;; Specify the startup banner. Default value is `official', it displays
+   ;; the official spacemacs logo. An integer value is the index of text
+   ;; banner, `random' chooses a random text banner in `core/banners'
+   ;; directory. A string value must be a path to an image format supported
+   ;; by your Emacs build.
+   ;; If the value is nil then no banner is displayed. (default 'official)
+   dotspacemacs-startup-banner 'random
+   ;; List of items to show in the startup buffer. If nil it is disabled.
+   ;; Possible values are: `recents' `bookmarks' `projects'.
+   ;; (default '(recents projects))
+   dotspacemacs-startup-lists '(recents projects bookmarks)
+   ;; List of themes, the first of the list is loaded when spacemacs starts.
+   ;; Press <SPC> T n to cycle to the next theme in the list (works great
+   ;; with 2 themes variants, one dark and one light)
+   dotspacemacs-themes (dcl/shuffle (if (display-graphic-p)
+                                        '(
+                                          ;; tron
+                                          ;; eziam-dark
+                                          ;; eziam-light
+                                          seti
+                                          sanityinc-tomorrow-eighties
+                                          sanityinc-solarized-light
+                                          sanityinc-tomorrow-bright
+                                          sanityinc-tomorrow-day
+                                          sanityinc-tomorrow-blue
+                                          sanityinc-tomorrow-night
+                                          majapahit-light
+                                          plan9
+                                          labburn
+                                          sourcerer
+                                          alect-light
+                                          moe-light
+                                          ;; doom-dark
+                                          doom-one
+                                          granger
+                                          dark-mint
+                                          mccarthy
+                                          material
+                                          heroku
+                                          light-blue
+                                          spacemacs-dark
+                                          spacemacs-light
+                                          solarized-light
+                                          solarized-dark
+                                          leuven
+                                          monokai
+                                          zenburn
+                                          alect-dark-alt
+                                          ample-zen
+                                          badwolf
+                                          birds-of-paradise-plus
+                                          brin
+                                          bubbleberry
+                                          cherry-blossom
+                                          atom-dark
+                                          atom-one-dark
+                                          creamsody
+                                          borland-blue
+                                          cyberpunk
+                                          clues
+                                          darkmine
+                                          deeper-blue
+                                          farmhouse-dark
+                                          gruvbox
+                                          junio
+                                          noctilux
+                                          subatomic
+                                          purple-haze
+                                          ritchie
+                                          zonokai-red
+                                          )
+                                      '(
+                                        plan9
+                                        ritchie
+                                        leuven
+                                        alect-light
+                                        moe-light
+                                        sourcerer
+                                        clues
+                                        noctilux
+                                        badwolf
+                                        material
+                                        spacemacs-dark
+                                        gruvbox
+                                        monokai)))
+   ;; If non nil the cursor color matches the state color.
+   dotspacemacs-colorize-cursor-according-to-state t
+   ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
+   ;; size to make separators look not too crappy.
+   dotspacemacs-default-font '("Source Code Pro"
+                               :size 13
+                               :weight normal
+                               :width normal
+                               :powerline-scale 1.1)
+   ;; The leader key
+   dotspacemacs-leader-key "SPC"
+   ;; The leader key accessible in `emacs state' and `insert state'
+   ;; (default "M-m")
+   dotspacemacs-emacs-leader-key "M-m"
+   ;; Major mode leader key is a shortcut key which is the equivalent of
+   ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
+   dotspacemacs-major-mode-leader-key ","
+   ;; Major mode leader key accessible in `emacs state' and `insert state'.
+   ;; (default "C-M-m)
+   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   ;; The command key used for Evil commands (ex-commands) and
+   ;; Emacs commands (M-x).
+   ;; By default the command key is `:' so ex-commands are executed like in Vim
+   ;; with `:' and Emacs commands are executed with `<leader> :'.
+   dotspacemacs-command-key "SPC"
+   ;; Location where to auto-save files. Possible values are `original' to
+   ;; auto-save the file in-place, `cache' to auto-save the file to another
+   ;; file stored in the cache directory and `nil' to disable auto-saving.
+   ;; (default 'cache)
+   dotspacemacs-auto-save-file-location 'cache
+   ;; If non nil then `ido' replaces `helm' for some commands. For now only
+   ;; `find-files' (SPC f f), `find-spacemacs-file' (SPC f e s), and
+   ;; `find-contrib-file' (SPC f e c) are replaced. (default nil)
+   dotspacemacs-use-ido nil
+   ;; If non nil, `helm' will try to miminimize the space it uses. (default nil)
+   dotspacemacs-helm-resize nil
+   ;; if non nil, the helm header is hidden when there is only one source.
+   ;; (default nil)
+   dotspacemacs-helm-no-header nil
+   ;; define the position to display `helm', options are `bottom', `top',
+   ;; `left', or `right'. (default 'bottom)
+   dotspacemacs-helm-position 'bottom
+   ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
+   ;; several times cycle between the kill ring content. (default nil)
+   dotspacemacs-enable-paste-micro-state nil
+   ;; Which-key delay in seconds. The which-key buffer is the popup listing
+   ;; the commands bound to the current keystroke sequence. (default 0.4)
+   dotspacemacs-which-key-delay 0.4
+   ;; Which-key frame position. Possible values are `right', `bottom' and
+   ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
+   ;; right; if there is insufficient space it displays it at the bottom.
+   ;; (default 'bottom)
+   dotspacemacs-which-key-position 'right-then-bottom
+   ;; If non nil a progress bar is displayed when spacemacs is loading. This
+   ;; may increase the boot time on some systems and emacs builds, set it to
+   ;; nil to boost the loading time. (default t)
+   dotspacemacs-loading-progress-bar t
+   ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
+   ;; (Emacs 24.4+ only)
+   dotspacemacs-fullscreen-at-startup t
+   ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
+   ;; Use to disable fullscreen animations in OSX. (default nil)
+   dotspacemacs-fullscreen-use-non-native nil
+   ;; If non nil the frame is maximized when Emacs starts up.
+   ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
+   ;; (default nil) (Emacs 24.4+ only)
+   dotspacemacs-maximized-at-startup nil
+   ;; A value from the range (0..100), in increasing opacity, which describes
+   ;; the transparency level of a frame when it's active or selected.
+   ;; Transparency can be toggled through `toggle-transparency'. (default 90)
+   dotspacemacs-active-transparency 90
+   ;; A value from the range (0..100), in increasing opacity, which describes
+   ;; the transparency level of a frame when it's inactive or deselected.
+   ;; Transparency can be toggled through `toggle-transparency'. (default 90)
+   dotspacemacs-inactive-transparency 90
+   ;; If non nil unicode symbols are displayed in the mode line. (default t)
+   dotspacemacs-mode-line-unicode-symbols t
+   ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
+   ;; scrolling overrides the default behavior of Emacs which recenters the
+   ;; point when it reaches the top or bottom of the screen. (default t)
+   dotspacemacs-smooth-scrolling t
+   ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
+   ;; (default nil)
+   dotspacemacs-smartparens-strict-mode nil
+   ;; Select a scope to highlight delimiters. Possible values are `any',
+   ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
+   ;; emphasis the current one). (default 'all)
+   dotspacemacs-highlight-delimiters 'all
+   ;; If non nil advises quit functions to keep server open when quitting.
+   ;; (default nil)
+   dotspacemacs-persistent-server nil
+   ;; List of search tool executable names. Spacemacs uses the first installed
+   ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
+   ;; (default '("ag" "pt" "ack" "grep"))
+   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   ;; The default package repository used if no explicit repository has been
+   ;; specified with an installed package.
+   ;; Not used for now. (default nil)
+   dotspacemacs-default-package-repository nil
+   )) 
+  #+END_SRC
+** User-init
+  :PROPERTIES:
+  :header-args: :noweb-ref spacemacs-user-init :tangle no
+  :END:
+  #+BEGIN_SRC emacs-lisp
+ (defun dotspacemacs/user-init ()
+  "Initialization function for user code.
+It is called immediately after `dotspacemacs/init'.  You are free to put any
+user code."
+  (setq-default ruby-version-manager 'rvm)
+  (setq-default ruby-enable-ruby-on-rails-support t)
+  (setq spacemacs--custom-file (expand-file-name ".custom-settings" "~/dotfiles/"))
+  ) 
   #+END_SRC
 * Borg.el (package manager)
   :PROPERTIES:
@@ -1002,6 +1484,10 @@
          (dcl/add-env-toggle "CAPYBARA_TIMEOUT" "rc" (number-to-string (read-number "New Capybara timeout (secs): ")))
          (dcl/add-env-toggle "ADWORDS_TIMEOUT" "rat" (number-to-string (read-number "New Adwords gem timeout (secs): "))))
      #+END_SRC
+*** Rust
+    #+BEGIN_SRC emacs-lisp
+      (setq rust-format-on-save t)
+    #+END_SRC
 *** Javascript
     #+BEGIN_SRC emacs-lisp
       (require 'indium)
@@ -1040,7 +1526,7 @@
    #+BEGIN_SRC emacs-lisp
      (require 'coin-ticker)
 
-     (setq coin-ticker-syms '("BTC" "ETH" "LTC" "MIOTA"))
+     (setq coin-ticker-syms '(( "BTC" . "Ƀ") ("ETH" . "Ξ") ("LTC" . "Ł") ("MIOTA" . "ι") ("ADA" . "⬡")))
 
      (setq coin-ticker-price-convert "USD")
 
