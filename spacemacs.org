@@ -1524,6 +1524,8 @@ user code."
    Configs for [[https://github.com/eklitzke/coin-ticker-mode][coin-ticker-mode]].
 
    #+BEGIN_SRC emacs-lisp
+     (load-file "~/code/coin-ticker-mode/coin-ticker.el")
+
      (require 'coin-ticker)
 
      (setq coin-ticker-syms '(( "BTC" . "Ƀ") ("ETH" . "Ξ") ("LTC" . "Ł") ("MIOTA" . "ι") ("ADA" . "⬡")))
