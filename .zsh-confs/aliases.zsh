@@ -92,3 +92,4 @@ function chromess(){
 }
 
 alias mitmp="mitmproxy --palette solarized_dark"
+alias iotaseedgen="cat /dev/urandom |tr -dc A-Z9|head -c${1:-81}"
