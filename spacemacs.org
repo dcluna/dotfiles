@@ -34,233 +34,234 @@
   :END:
   
   #+BEGIN_SRC emacs-lisp
-  (defun dotspacemacs/layers ()
-  "Configuration Layers declaration.
-You should not put any user code in this function besides modifying the variable
-values."
-  (setq-default
-   dotspacemacs-scratch-mode 'emacs-lisp-mode
-   ;; Base distribution to use. This is a layer contained in the directory
-   ;; `+distribution'. For now available distributions are `spacemacs-base'
-   ;; or `spacemacs'. (default 'spacemacs)
-   dotspacemacs-distribution 'spacemacs
-   ;; List of additional paths where to look for configuration layers.
-   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '()
-   ;; List of configuration layers to load. If it is the symbol `all' instead
-   ;; of a list then all discovered layers will be installed.
-   dotspacemacs-configuration-layers
-   '(
-     emoji
-     ( parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
-     nlinum
-     helm
-     rust
-     windows-scripts
-     (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
-     ;; (elfeed :variables rmh-elfeed-org-files (list "~/.elfeed-list.org"))
-     slack
-     (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
-     ;; pdf-tools
-     chrome
-     vim-empty-lines
-     asm
-     octave
-     csv
-     erc
-     docker
-     ;; ansible
-     vimscript
-     sonic-pi
-     ;; eyebrowse
-     prodigy
-     c-c++
-     search-engine
-     haskell
-     dash
-     vagrant
-     tmux
-     selectric
-     html
-     shell-scripts
-     racket
-     php
-     elixir
-     erlang
-     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
-     restclient
-     yaml
-     ruby-on-rails
-     evil-cleverparens
-     evil-commentary
-     syntax-checking
-     (auto-completion :variables auto-completion-enable-help-tooltip t auto-completion-enable-sort-by-usage t auto-completion-enable-snippets-in-popup t)
-     ;; angularjs
-     sql
-     scheme
-     ;; personal-misc
-     (git :variables git-enable-github-support t git-gutter-use-fringe t)
-     markdown
-     html
-     (typescript :variables
-                 typescript-fmt-on-save t
-                 typescript-fmt-tool 'tide)
-     ( javascript :variables
-                  js-indent-level 2)
-     (python :variables python-test-runner '(nose pytest))
-     (ruby :variables ruby-enable-enh-ruby-mode t)
-     (clojure :variables clojure-enable-fancify-symbols t)
-     go
-     evernote
-     (colors :variables colors-colorize-identifiers 'all)
-     theming
-     themes-megapack
-     ;; python-extra
-     ;; groovy
-     common-lisp
-     lua
-     go
-     github
-     (org :variables org-enable-github-support t org-enable-reveal-js-support t)
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     ;; auto-completion
-     ;; better-defaults
-     emacs-lisp
-     ;; git
-     ;; markdown
-     ;; org
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     version-control
-     )
-   ;; List of additional packages that will be installed without being
-   ;; wrapped in a layer. If you need some configuration for these
-   ;; packages then consider to create a layer, you can also put the
-   ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages `(
-                                      ;; (eziam-theme
-                                      ;;  :location (recipe :repo "thblt/eziam-theme-emacs"
-                                      ;;                    :fetcher github
-                                      ;;                    :files ("*.el"))
-                                      ;;  :upgrade 't)
-                                      ;; epkg
-                                      ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
-                                      ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
-                                      coin-ticker
-                                      doom-themes
-                                      creamsody-theme
-                                      borland-blue-theme
-                                      atom-one-dark-theme
-                                      atom-dark-theme
-                                      abyss-theme
-                                      easy-jekyll
-                                      flymake-solidity
-                                      solidity-mode
-                                      sx
-                                      org2blog
-                                      ts-comint
-                                      vagrant-tramp
-                                      ob-typescript
-                                      labburn-theme
-                                      evil-rails
-                                      evil-easymotion
-                                      evil-extra-operator
-                                      znc
-                                      ox-jira
-                                      realgud
-                                      ;; realgud-pry
-                                      plan9-theme
-                                      sourcerer-theme
-                                      0xc
-                                      fuel
-                                      lfe-mode
-                                      x-path-walker
-                                      pivotal-tracker
-                                      suggest
-                                      tramp-term
-                                      dark-mint-theme
-                                      ;; (meme
-                                      ;;  :location (recipe :repo "larsmagne/meme"
-                                      ;;                    :fetcher github
-                                      ;;                    :files ("*"))
-                                      ;;  :upgrade 't)
-                                      yagist
-                                      sage-shell-mode
-                                      intero
-                                      (mocha :location (recipe :fetcher file :path "/home/dancluna/code/mocha.el"))
-                                      (howdoi :location (recipe
-                                                         :repo "dcluna/emacs-howdoi"
-                                                         :fetcher github
-                                                         :branch "html2text-emacs26")
-                                              :upgrade 't)
-                                      ascii
-                                      multi-compile
-                                      dumb-jump
-                                      tldr
-                                      rainbow-mode
-                                      paredit
-                                      ruby-refactor
-                                      shen-mode
-                                      nvm
-                                      nov
-                                      yarn-mode
-                                      (indium :location (recipe :fetcher file :path "/home/dancluna/code/Indium")
-                                              :upgrade 't)
-                                      package-lint
-                                      flycheck-package
-                                      ;; doom-themes
-                                      ,(dcl/local-package 'rspec-mode)
-                                      ;; (yasnippet-ruby-mode
-                                      ;;  :location (recipe :repo "bmaland/yasnippet-ruby-mode"
-                                      ;;                    :fetcher github
-                                      ;;                    :files ("*.el")))
-                                      ;; ,(dcl/local-package 'flycheck)
-                                      (exercism
-                                       :location (recipe :repo "canweriotnow/exercism-emacs"
-                                                         :fetcher github
-                                                         :files ("*.el"))
-                                       :upgrade 't)
-                                      (reek
-                                       :location (recipe :repo "hanmoi-choi/reek-emacs"
-                                                         :fetcher github
-                                                         :files ("*.el"))
-                                       :upgrade 't)
-                                      (shen-elisp
-                                       :location (recipe :repo "deech/shen-elisp"
-                                                         :fetcher github
-                                                         :files ("shen*.el"))
-                                       :upgrade 't)
-                                      ;; (pmd :location "/home/dancluna/code-of-mine/pmd-el")
-                                      (pmd :location (recipe :fetcher file :path "/home/dancluna/code-of-mine/pmd-el"))
-                                      ;; (pmd
-                                      ;;  :location (recipe :repo "dcluna/pmd.el"
-                                      ;;                    :fetcher github
-                                      ;;                    :files ("*.el")))
-                                      (yarn.el :location "/home/dancluna/code/yarn.el/")
-                                      ,(dcl/local-package 'sass-mode)
-                                      ;; ,(dcl/local-package 'magit)
-                                      ;; (sass-mode :location (recipe :fetcher github :repo "dcluna/sass-mode"))
-                                      ;; (embrace :location (recipe :fetcher github :repo "dcluna/embrace.el"))
-                                      evil-embrace
-                                      ;; floobits
-                                      ;; lispyville ;; not yet available as of Thu Apr 21 18:32:36 BRT 2016
-                                      editorconfig
-                                      ,(dcl/local-package 'stock-ticker)
-                                      wsd-mode
-                                      )
-   ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
-   ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
-   ;; are declared in a layer which is not a member of
-   ;; the list `dotspacemacs-configuration-layers'. (default t)
-   dotspacemacs-delete-orphan-packages t))
+    (defun dotspacemacs/layers ()
+      "Configuration Layers declaration.
+    You should not put any user code in this function besides modifying the variable
+    values."
+      (setq-default
+       dotspacemacs-scratch-mode 'emacs-lisp-mode
+       ;; Base distribution to use. This is a layer contained in the directory
+       ;; `+distribution'. For now available distributions are `spacemacs-base'
+       ;; or `spacemacs'. (default 'spacemacs)
+       dotspacemacs-distribution 'spacemacs
+       ;; List of additional paths where to look for configuration layers.
+       ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
+       dotspacemacs-configuration-layer-path '()
+       ;; List of configuration layers to load. If it is the symbol `all' instead
+       ;; of a list then all discovered layers will be installed.
+       dotspacemacs-configuration-layers
+       '(
+         emoji
+         ( parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
+         nlinum
+         helm
+         rust
+         windows-scripts
+         (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
+         ;; (elfeed :variables rmh-elfeed-org-files (list "~/.elfeed-list.org"))
+         slack
+         (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
+         ;; pdf-tools
+         chrome
+         vim-empty-lines
+         asm
+         octave
+         csv
+         erc
+         docker
+         ;; ansible
+         vimscript
+         sonic-pi
+         ;; eyebrowse
+         prodigy
+         c-c++
+         search-engine
+         haskell
+         dash
+         vagrant
+         tmux
+         selectric
+         html
+         shell-scripts
+         racket
+         php
+         elixir
+         erlang
+         (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
+         restclient
+         yaml
+         ruby-on-rails
+         evil-cleverparens
+         evil-commentary
+         syntax-checking
+         (auto-completion :variables auto-completion-enable-help-tooltip t auto-completion-enable-sort-by-usage t auto-completion-enable-snippets-in-popup t)
+         ;; angularjs
+         sql
+         scheme
+         ;; personal-misc
+         (git :variables git-enable-github-support t git-gutter-use-fringe t)
+         markdown
+         html
+         (typescript :variables
+                     typescript-fmt-on-save t
+                     typescript-fmt-tool 'tide)
+         ( javascript :variables
+                      js-indent-level 2)
+         (python :variables python-test-runner '(nose pytest))
+         (ruby :variables ruby-enable-enh-ruby-mode t)
+         (clojure :variables clojure-enable-fancify-symbols t)
+         go
+         evernote
+         (colors :variables colors-colorize-identifiers 'all)
+         theming
+         themes-megapack
+         ;; python-extra
+         ;; groovy
+         common-lisp
+         lua
+         go
+         github
+         (org :variables org-enable-github-support t org-enable-reveal-js-support t)
+         ;; ----------------------------------------------------------------
+         ;; Example of useful layers you may want to use right away.
+         ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+         ;; <M-m f e R> (Emacs style) to install them.
+         ;; ----------------------------------------------------------------
+         ;; auto-completion
+         ;; better-defaults
+         emacs-lisp
+         ;; git
+         ;; markdown
+         ;; org
+         (shell :variables
+                shell-default-height 30
+                shell-default-position 'bottom)
+         ;; spell-checking
+         ;; syntax-checking
+         version-control
+         )
+       ;; List of additional packages that will be installed without being
+       ;; wrapped in a layer. If you need some configuration for these
+       ;; packages then consider to create a layer, you can also put the
+       ;; configuration in `dotspacemacs/config'.
+       dotspacemacs-additional-packages `(
+                                          ;; (eziam-theme
+                                          ;;  :location (recipe :repo "thblt/eziam-theme-emacs"
+                                          ;;                    :fetcher github
+                                          ;;                    :files ("*.el"))
+                                          ;;  :upgrade 't)
+                                          ;; epkg
+                                          ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
+                                          ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          (rusti :location (recipe :fetcher github :repo "ruediger/rusti.el" :files ("rusti.el") :upgrade 't))
+                                          coin-ticker
+                                          doom-themes
+                                          creamsody-theme
+                                          borland-blue-theme
+                                          atom-one-dark-theme
+                                          atom-dark-theme
+                                          abyss-theme
+                                          easy-jekyll
+                                          flymake-solidity
+                                          solidity-mode
+                                          sx
+                                          org2blog
+                                          ts-comint
+                                          vagrant-tramp
+                                          ob-typescript
+                                          labburn-theme
+                                          evil-rails
+                                          evil-easymotion
+                                          evil-extra-operator
+                                          znc
+                                          ox-jira
+                                          realgud
+                                          ;; realgud-pry
+                                          plan9-theme
+                                          sourcerer-theme
+                                          0xc
+                                          fuel
+                                          lfe-mode
+                                          x-path-walker
+                                          pivotal-tracker
+                                          suggest
+                                          tramp-term
+                                          dark-mint-theme
+                                          ;; (meme
+                                          ;;  :location (recipe :repo "larsmagne/meme"
+                                          ;;                    :fetcher github
+                                          ;;                    :files ("*"))
+                                          ;;  :upgrade 't)
+                                          yagist
+                                          sage-shell-mode
+                                          intero
+                                          (mocha :location (recipe :fetcher file :path "/home/dancluna/code/mocha.el"))
+                                          (howdoi :location (recipe
+                                                             :repo "dcluna/emacs-howdoi"
+                                                             :fetcher github
+                                                             :branch "html2text-emacs26")
+                                                  :upgrade 't)
+                                          ascii
+                                          multi-compile
+                                          dumb-jump
+                                          tldr
+                                          rainbow-mode
+                                          paredit
+                                          ruby-refactor
+                                          shen-mode
+                                          nvm
+                                          nov
+                                          yarn-mode
+                                          (indium :location (recipe :fetcher file :path "/home/dancluna/code/Indium")
+                                                  :upgrade 't)
+                                          package-lint
+                                          flycheck-package
+                                          ;; doom-themes
+                                          ,(dcl/local-package 'rspec-mode)
+                                          ;; (yasnippet-ruby-mode
+                                          ;;  :location (recipe :repo "bmaland/yasnippet-ruby-mode"
+                                          ;;                    :fetcher github
+                                          ;;                    :files ("*.el")))
+                                          ;; ,(dcl/local-package 'flycheck)
+                                          (exercism
+                                           :location (recipe :repo "canweriotnow/exercism-emacs"
+                                                             :fetcher github
+                                                             :files ("*.el"))
+                                           :upgrade 't)
+                                          (reek
+                                           :location (recipe :repo "hanmoi-choi/reek-emacs"
+                                                             :fetcher github
+                                                             :files ("*.el"))
+                                           :upgrade 't)
+                                          (shen-elisp
+                                           :location (recipe :repo "deech/shen-elisp"
+                                                             :fetcher github
+                                                             :files ("shen*.el"))
+                                           :upgrade 't)
+                                          ;; (pmd :location "/home/dancluna/code-of-mine/pmd-el")
+                                          (pmd :location (recipe :fetcher file :path "/home/dancluna/code-of-mine/pmd-el"))
+                                          ;; (pmd
+                                          ;;  :location (recipe :repo "dcluna/pmd.el"
+                                          ;;                    :fetcher github
+                                          ;;                    :files ("*.el")))
+                                          (yarn.el :location "/home/dancluna/code/yarn.el/")
+                                          ,(dcl/local-package 'sass-mode)
+                                          ;; ,(dcl/local-package 'magit)
+                                          ;; (sass-mode :location (recipe :fetcher github :repo "dcluna/sass-mode"))
+                                          ;; (embrace :location (recipe :fetcher github :repo "dcluna/embrace.el"))
+                                          evil-embrace
+                                          ;; floobits
+                                          ;; lispyville ;; not yet available as of Thu Apr 21 18:32:36 BRT 2016
+                                          editorconfig
+                                          ,(dcl/local-package 'stock-ticker)
+                                          wsd-mode
+                                          )
+       ;; A list of packages and/or extensions that will not be install and loaded.
+       dotspacemacs-excluded-packages '()
+       ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
+       ;; are declared in a layer which is not a member of
+       ;; the list `dotspacemacs-configuration-layers'. (default t)
+       dotspacemacs-delete-orphan-packages t))
   #+END_SRC
 ** Prelude
   :PROPERTIES:
