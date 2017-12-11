@@ -1508,6 +1508,13 @@ user code."
     #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook 'auto-fill-mode)
     #+END_SRC
+    
+    Adding class for [[https://github.com/posquit0/Awesome-CV][Awesome-CV]]:
+
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'org-latex-classes '("awesomecv" "\\documentclass[12pt,a4paper,sans,unicode]{awesome-cv}"
+                                        ("\\lettersection{%s}" . "\\lettersection*{%s}")))
+    #+END_SRC
 *** Emacspeak
     #+BEGIN_SRC emacs-lisp
   (dcl/enable-emacspeak)
