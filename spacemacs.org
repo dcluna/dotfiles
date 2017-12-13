@@ -155,6 +155,7 @@
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
                                           (rusti :location (recipe :fetcher github :repo "ruediger/rusti.el" :files ("rusti.el") :upgrade 't))
                                           coin-ticker
+                                          eink-theme
                                           doom-themes
                                           creamsody-theme
                                           borland-blue-theme
@@ -315,7 +316,7 @@
        ;; Press <SPC> T n to cycle to the next theme in the list (works great
        ;; with 2 themes variants, one dark and one light)
        dotspacemacs-themes (if (display-graphic-p)
-                               (dcl/shuffle (cons 'doom-one '(
+                               (cons 'doom-one (dcl/shuffle '(
                                                               ;; tron
                                                               ;; eziam-dark
                                                               ;; eziam-light
@@ -333,7 +334,7 @@
                                                               alect-light
                                                               moe-light
                                                               ;; doom-dark
-                                                              doom-one
+                                                              ;; doom-one
                                                               granger
                                                               dark-mint
                                                               mccarthy
@@ -344,6 +345,7 @@
                                                               spacemacs-light
                                                               solarized-light
                                                               solarized-dark
+                                                              eink
                                                               leuven
                                                               monokai
                                                               zenburn
@@ -371,25 +373,25 @@
                                                               ritchie
                                                               zonokai-red
                                                               )))
-                             '(
-                               plan9
-                               ritchie
-                               leuven
-                               alect-light
-                               moe-light
-                               sourcerer
-                               clues
-                               noctilux
-                               badwolf
-                               material
-                               spacemacs-dark
-                               gruvbox
-                               monokai))
+                             (cons 'doom-one (dcl/shuffle '(
+                                                            plan9
+                                                            ritchie
+                                                            leuven
+                                                            alect-light
+                                                            moe-light
+                                                            sourcerer
+                                                            clues
+                                                            noctilux
+                                                            badwolf
+                                                            material
+                                                            spacemacs-dark
+                                                            gruvbox
+                                                            monokai))))
        ;; If non nil the cursor color matches the state color.
        dotspacemacs-colorize-cursor-according-to-state t
        ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
        ;; size to make separators look not too crappy.
-       dotspacemacs-default-font '("Source Code Pro"
+       dotspacemacs-default-font '("Bitstream Vera Sans Mono"
                                    :size 13
                                    :weight normal
                                    :width normal
@@ -491,14 +493,14 @@
   :header-args: :noweb-ref spacemacs-user-init :tangle no
   :END:
   #+BEGIN_SRC emacs-lisp
- (defun dotspacemacs/user-init ()
-  "Initialization function for user code.
-It is called immediately after `dotspacemacs/init'.  You are free to put any
-user code."
-  (setq-default ruby-version-manager 'rvm)
-  (setq-default ruby-enable-ruby-on-rails-support t)
-  (setq spacemacs--custom-file (expand-file-name ".custom-settings" "~/dotfiles/"))
-  ) 
+     (defun dotspacemacs/user-init ()
+      "Initialization function for user code.
+    It is called immediately after `dotspacemacs/init'.  You are free to put any
+    user code."
+      (setq-default ruby-version-manager 'rvm)
+      (setq-default ruby-enable-ruby-on-rails-support t)
+      ;; (setq spacemacs--custom-file (expand-file-name ".custom-settings" "~/dotfiles/"))
+      )
   #+END_SRC
 * Borg.el (package manager)
   :PROPERTIES:
@@ -1512,6 +1514,9 @@ user code."
     Adding class for [[https://github.com/posquit0/Awesome-CV][Awesome-CV]]:
 
     #+BEGIN_SRC emacs-lisp
+      (unless (boundp 'org-latex-classes)
+        (setq org-latex-classes '()))
+
       (add-to-list 'org-latex-classes '("awesomecv" "\\documentclass[12pt,a4paper,sans,unicode]{awesome-cv}"
                                         ("\\lettersection{%s}" . "\\lettersection*{%s}")))
     #+END_SRC
