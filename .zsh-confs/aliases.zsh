@@ -1,7 +1,7 @@
 alias acs='apt-cache search'
 alias acsh='apt-cache show'
 alias suagi='sudo apt-get install'
-alias suagiy='sudo apt-get install -y'
+alias suagy='sudo apt-get install -y'
 alias sagu='sudo apt-get update'
 alias grepi='grep -i'
 alias ec='emacsclient -nw'
