@@ -153,6 +153,7 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          helpful
                                           (rusti :location (recipe :fetcher github :repo "ruediger/rusti.el" :files ("rusti.el") :upgrade 't))
                                           coin-ticker
                                           eink-theme
@@ -391,11 +392,13 @@
        dotspacemacs-colorize-cursor-according-to-state t
        ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
        ;; size to make separators look not too crappy.
-       dotspacemacs-default-font '("Bitstream Vera Sans Mono"
-                                   :size 13
-                                   :weight normal
-                                   :width normal
-                                   :powerline-scale 1.1)
+       dotspacemacs-default-font (cons (car (dcl/shuffle (list
+                                                          "Bitstream Vera Sans Mono")))
+                                       '(
+                                         :size 13
+                                         :weight normal
+                                         :width normal
+                                         :powerline-scale 1.1))
        ;; The leader key
        dotspacemacs-leader-key "SPC"
        ;; The leader key accessible in `emacs state' and `insert state'
@@ -1419,6 +1422,10 @@
           (add-hook mode-hook (lambda () (helm-dash-use-docsets docset)))))))
   (setq dash-helm-dash-docset-path "/home/dancluna/.docsets")
    #+END_SRC
+** ERC
+   #+BEGIN_SRC emacs-lisp
+   
+   #+END_SRC
 ** git/magit
     #+BEGIN_SRC emacs-lisp
   (add-hook 'git-commit-mode 'dcl/set-fill-column-magit-commit-mode)
@@ -1549,6 +1556,7 @@
 
      (coin-ticker-mode 1)
    #+END_SRC
+
 ** Auto-insert
     #+BEGIN_SRC emacs-lisp
       (use-package autoinsert
@@ -1653,4 +1661,16 @@
         (define-key yarn-keymap "w" 'yarn-why)
         (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "oy" yarn-keymap)
         (spacemacs/declare-prefix-for-mode 'typescript-mode "moy" "yarn"))
+    #+END_SRC
+*** Helpful keymap
+    #+BEGIN_SRC emacs-lisp
+      (let ((helpful-keymap (make-sparse-keymap)))
+        (define-key helpful-keymap "f" 'helpful-callable)
+        (define-key helpful-keymap "v" 'helpful-variable)
+        (define-key helpful-keymap "p" 'helpful-at-point)
+        (define-key helpful-keymap "k" 'helpful-key)
+        (define-key helpful-keymap "F" 'helpful-function)
+        (define-key helpful-keymap "C" 'helpful-command)
+        (spacemacs/set-leader-keys "oH" helpful-keymap)
+        (spacemacs/declare-prefix "oH" "helpful"))
     #+END_SRC
