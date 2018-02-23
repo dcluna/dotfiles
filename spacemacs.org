@@ -36,8 +36,8 @@
   #+BEGIN_SRC emacs-lisp
     (defun dotspacemacs/layers ()
       "Configuration Layers declaration.
-    You should not put any user code in this function besides modifying the variable
-    values."
+     You should not put any user code in this function besides modifying the variable
+     values."
       (setq-default
        dotspacemacs-scratch-mode 'emacs-lisp-mode
        ;; Base distribution to use. This is a layer contained in the directory
@@ -51,19 +51,21 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         windows-scripts
+         perl5
          emoji
          ( parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
-         nlinum
+         ;; nlinum
          helm
          rust
          windows-scripts
          (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
          ;; (elfeed :variables rmh-elfeed-org-files (list "~/.elfeed-list.org"))
-         slack
+         ;; slack
          (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
          ;; pdf-tools
          chrome
-         vim-empty-lines
+         ;; vim-empty-lines
          asm
          octave
          csv
@@ -158,6 +160,10 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          (org-rich-yank :location (recipe :fetcher github :repo "unhammer/org-rich-yank" :files ("*.el") :upgrade 't))
+                                          ialign
+                                          sublimity
+                                          beacon
                                           helpful
                                           (rusti :location (recipe :fetcher github :repo "ruediger/rusti.el" :files ("rusti.el") :upgrade 't))
                                           coin-ticker
@@ -175,6 +181,7 @@
                                           org2blog
                                           ts-comint
                                           vagrant-tramp
+                                          ob-php
                                           ob-typescript
                                           labburn-theme
                                           evil-rails
@@ -472,6 +479,7 @@
        dotspacemacs-inactive-transparency 90
        ;; If non nil unicode symbols are displayed in the mode line. (default t)
        dotspacemacs-mode-line-unicode-symbols t
+       dotspacemacs-mode-line-theme 'vim-powerline
        ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
        ;; scrolling overrides the default behavior of Emacs which recenters the
        ;; point when it reaches the top or bottom of the screen. (default t)
@@ -520,7 +528,7 @@
     (dolist (dir (f-directories borg-drone-directory))
       (add-to-list 'load-path dir))
 
-    <<borg-config>>
+    ;; <<borg-config>>
 
     (add-to-list 'load-path (expand-file-name "~/code/borg"))
     (require 'borg)
@@ -1429,7 +1437,31 @@
    #+END_SRC
 ** ERC
    #+BEGIN_SRC emacs-lisp
-   
+     (setq erc-join-buffer 'bury)
+     (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#offsec")))
+     (setq erc-prompt-for-password nil)
+     (setq erc-autojoin-timing 'ident)
+     (setq erc-nick "mondz")
+   #+END_SRC
+** Beacon-mode
+   #+BEGIN_SRC emacs-lisp
+   (beacon-mode 1)
+   #+END_SRC
+** Emacs-winum
+   #+BEGIN_SRC emacs-lisp
+   (setq winum-scope 'frame-local)
+   #+END_SRC
+** Sublimity
+   #+BEGIN_SRC emacs-lisp
+     (sublimity-mode 1)
+     ;; (require 'sublimity-scroll)
+;;      (setq sublimity-scroll-weight 10
+;;            sublimity-scroll-drift-length 5)
+     (require 'sublimity-map)
+     (setq sublimity-map-size 20)
+     (setq sublimity-map-fraction 0.3)
+     (setq sublimity-map-text-scale -7)
+     (sublimity-map-set-delay 10)
    #+END_SRC
 ** git/magit
     #+BEGIN_SRC emacs-lisp
@@ -1559,7 +1591,7 @@
 
      (setq coin-ticker-price-symbol "$")
 
-     (coin-ticker-mode 1)
+     ;; (coin-ticker-mode 1)
    #+END_SRC
 
 ** Auto-insert
@@ -1572,7 +1604,7 @@
       (eval-after-load 'autoinsert
           '(progn
              (setq auto-insert-query nil)
-             <<custom-auto-inserts>>
+             ;; <<custom-auto-inserts>>
              ))
     #+END_SRC
 
@@ -1592,6 +1624,21 @@
     #+BEGIN_SRC emacs-lisp
   (setq yas--default-user-snippets-dir (expand-file-name "yasnippets" "/mnt/lmde/home/dancluna"))
     #+END_SRC
+
+** Nethack-el
+   First, install nethack-{lisp,el}, then use this:
+
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'load-path "/usr/share/emacs/site-lisp/nethack")
+
+     ;; (require 'nethack)
+
+     (setq nethack-program "nethack-lisp")
+
+     (add-to-list 'evil-emacs-state-modes 'nh-map-mode)
+     (add-to-list 'evil-emacs-state-modes 'nh-menu-mode)
+   #+END_SRC
+
 ** Evil
    #+BEGIN_SRC emacs-lisp
      (evil-global-set-key 'normal (kbd "K") 'newline-and-indent)
@@ -1631,6 +1678,7 @@
      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "odp" 'mocha-debug-at-point)
      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "odf" 'mocha-debug-file)
 
+     (spacemacs/set-leader-keys-for-major-mode 'org-mode "oy" 'org-rich-yank)
 
      (evil-leader/set-key-for-mode 'js2-mode "msr" 'skewer-eval-region)
 
