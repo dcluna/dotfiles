@@ -26,6 +26,8 @@
 
       ;; configuration
       <<configuration>>)
+
+    <<genome>>
   #+END_SRC
 * Spacemacs-specific
 ** Layers
@@ -93,7 +95,7 @@
          restclient
          yaml
          ruby-on-rails
-         evil-cleverparens
+         ;; evil-cleverparens
          evil-commentary
          syntax-checking
          (auto-completion :variables
@@ -1170,10 +1172,9 @@
         (let* ((ticket-id (replace-regexp-in-string "^.*/\\([^/]+\\)$" (lambda (text) (downcase (replace-regexp-in-string "-" "_" (match-string 1 text)))) jira-url))
                (sanitized-branch-name (dcl/sanitize-branch-name branch-name))
                (new-branch-name (format "%s_%s" ticket-id sanitized-branch-name)))
-          (with-magit-status-for "haystak" "~/client-code/haystak"
-                                 (magit-branch new-branch-name "master")
-                                 (magit-checkout new-branch-name)
-                                 (call-interactively 'magit-push-current-to-pushremote)))
+          (magit-branch new-branch-name "master")
+          (magit-checkout new-branch-name)
+          (call-interactively 'magit-push-current-to-pushremote))
         )
 
       (defun dcl/create-branch-from-pivotal (pivotal-tracker branch-name)
@@ -1622,7 +1623,8 @@
 
 ** Yasnippets
     #+BEGIN_SRC emacs-lisp
-  (setq yas--default-user-snippets-dir (expand-file-name "yasnippets" "/mnt/lmde/home/dancluna"))
+      (setq yas--default-user-snippets-dir (expand-file-name "yasnippets" "/mnt/lmde/home/dancluna"))
+      (add-to-list 'yas-snippet-dirs "/home/dancluna/yasnippets")
     #+END_SRC
 
 ** Nethack-el
@@ -1727,3 +1729,12 @@
         (spacemacs/set-leader-keys "oH" helpful-keymap)
         (spacemacs/declare-prefix "oH" "helpful"))
     #+END_SRC
+* Geno.me
+  :PROPERTIES:
+  :header-args: :noweb yes :noweb-ref genome
+  :END:
+
+  #+BEGIN_SRC emacs-lisp
+    (org-babel-load-file "/home/dancluna/dotfiles/genome.org")
+  #+END_SRC
+  
