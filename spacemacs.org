@@ -1,5 +1,5 @@
 #+TITLE: My .spacemacs
-#+PROPERTY: tangle ".spacemacs.el"
+#+PROPERTY: tangle no
 #+PROPERTY: noweb yes
 * Initialization
   #+BEGIN_SRC emacs-lisp :tangle yes :noweb yes
@@ -25,9 +25,10 @@
       <<keybindings>>
 
       ;; configuration
-      <<configuration>>)
+      <<configuration>>
 
-    <<genome>>
+      ;; genome-related stuff. I added it inside this function because spacemacs doesn't like literate files too much.
+      <<genome>>)
   #+END_SRC
 * Spacemacs-specific
 ** Layers
@@ -162,6 +163,8 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          ob-elixir
+                                          org-jira
                                           (org-rich-yank :location (recipe :fetcher github :repo "unhammer/org-rich-yank" :files ("*.el") :upgrade 't))
                                           ialign
                                           sublimity
@@ -527,6 +530,8 @@
   #+BEGIN_SRC emacs-lisp
     (setq borg-drone-directory (expand-file-name "~/dotfiles/collective/lib"))
 
+    (require 'f)
+
     (dolist (dir (f-directories borg-drone-directory))
       (add-to-list 'load-path dir))
 
@@ -557,21 +562,22 @@
   A few conveniences for magit:
 
   #+BEGIN_SRC emacs-lisp
-     (magit-add-section-hook 'magit-status-sections-hook
-                             'magit-insert-modules-unpulled-from-upstream
-                             'magit-insert-unpulled-from-upstream)
-     (magit-add-section-hook 'magit-status-sections-hook
-                             'magit-insert-modules-unpulled-from-pushremote
-                             'magit-insert-unpulled-from-upstream)
-     (magit-add-section-hook 'magit-status-sections-hook
-                             'magit-insert-modules-unpushed-to-upstream
-                             'magit-insert-unpulled-from-upstream)
-     (magit-add-section-hook 'magit-status-sections-hook
-                             'magit-insert-modules-unpushed-to-pushremote
-                             'magit-insert-unpulled-from-upstream)
-     (magit-add-section-hook 'magit-status-sections-hook
-                             'magit-insert-submodules
-                             'magit-insert-unpulled-from-upstream)
+    (require 'magit)
+    (magit-add-section-hook 'magit-status-sections-hook
+                            'magit-insert-modules-unpulled-from-upstream
+                            'magit-insert-unpulled-from-upstream)
+    (magit-add-section-hook 'magit-status-sections-hook
+                            'magit-insert-modules-unpulled-from-pushremote
+                            'magit-insert-unpulled-from-upstream)
+    (magit-add-section-hook 'magit-status-sections-hook
+                            'magit-insert-modules-unpushed-to-upstream
+                            'magit-insert-unpulled-from-upstream)
+    (magit-add-section-hook 'magit-status-sections-hook
+                            'magit-insert-modules-unpushed-to-pushremote
+                            'magit-insert-unpulled-from-upstream)
+    (magit-add-section-hook 'magit-status-sections-hook
+                            'magit-insert-submodules
+                            'magit-insert-unpulled-from-upstream)
   #+END_SRC
 * Custom functions
   :PROPERTIES:
@@ -1729,6 +1735,43 @@
         (spacemacs/set-leader-keys "oH" helpful-keymap)
         (spacemacs/declare-prefix "oH" "helpful"))
     #+END_SRC
+* OSCP
+  
+  #+BEGIN_SRC emacs-lisp :tangle /home/dancluna/code-of-mine/oscp/.dir-locals.el
+    ((org-mode . ((eval . (progn
+                            (coin-ticker-mode -1)
+                            (setq-local org-src-window-setup 'other-window)
+                            (setq-local yas-snippet-dirs (append '("/home/dancluna/code-of-mine/oscp/yasnippets") yas-snippet-dirs))
+                            (defun gen-nmap-script-cmd (scriptpart)
+                              (interactive "sScript string: ")
+                              (let ((scriptsearch (format "ls $NMAPSCRIPTSDIR/*%s*" scriptpart)))
+                                (kill-new (message "nmap --script=$(%s | paste -s -d\",\") -oA" scriptsearch))))
+                            (defun kali-prefix (filename)
+                              (concat "/ssh:kali:" filename))
+                            (defun find-in-kali ()
+                              (interactive)
+                              (ffap (kali-prefix (thing-at-point 'filename))))
+                            (defun exploitdb-at-point ()
+                              (interactive)
+                              (let ((filename (thing-at-point 'filename)))
+                                (find-file-other-window (concat (kali-prefix "/usr/share/exploitdb/platforms/") filename))))
+                            (let ((oscp-keymap (make-sparse-keymap)))
+                              (define-key oscp-keymap "e" 'exploitdb-at-point)
+                              (define-key oscp-keymap "f" 'find-in-kali)
+                              (define-key oscp-keymap "n" 'gen-nmap-script-cmd)
+                              (spacemacs/set-leader-keys-for-major-mode 'org-mode "oo" oscp-keymap)
+                              (spacemacs/declare-prefix-for-mode 'org-mode "moo" "oscp"))
+                            (spacemacs/toggle-auto-completion-off)
+                            (with-temp-buffer
+                              (insert "#+BEGIN_SRC sh :session oscp-kali :results raw drawer\n")
+                              (copy-to-register ?b (point-min) (point-max))
+                              (erase-buffer)
+                              (insert "#+END_SRC\n")
+                              (copy-to-register ?e (point-min) (point-max))
+                              (erase-buffer)
+                              (insert "#+BEGIN_SRC sh :session oscp-kali\n#+END_SRC")
+                              (copy-to-register ?c (point-min) (point-max))))))))
+  #+END_SRC
 * Geno.me
   :PROPERTIES:
   :header-args: :noweb yes :noweb-ref genome
