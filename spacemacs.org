@@ -926,14 +926,15 @@
             (with-current-buffer jasmine-compilation-buffer-name
               (setq-local compilation-filter-hook 'colorize-compilation-buffer))))))
 
-     (defun dcl/ruby-staged-files-hook ()
-       "Runs `rubocop-autocorrect-current-file' and `reek-check-current-file' on currently staged .rb files."
-       (interactive)
-       (dolist (ruby-file (--filter (string-match-p ".rb$" it) (magit-staged-files)))
+     (defvar rubocop-files-history (list '(split-string (shell-command-to-string "\"git diff --name-only HEAD master\"") "\"\\n\"") ))
+
+     (defun dcl/rubocop-files (files-command)
+       "Runs `rubocop-autocorrect-current-file' and `reek-check-current-file' on FILES."
+       (interactive (list (read-from-minibuffer "Rubocop on(Lisp expression): " (format "%s" (car rubocop-files-history)) nil t 'rubocop-files-history)))
+       (dolist (ruby-file (--filter (string-match-p ".rb$" it) (eval files-command)))
          (with-current-buffer (find-file-noselect ruby-file)
            (rubocop-autocorrect-current-file)
-           (if (fboundp 'reek-check-current-file)
-               (reek-check-current-file)))))
+           )))
 
      (defun dcl/make-test-sh-file (filename)
        "Generates a shell script that runs the current file as an rspec test, for bisecting."
@@ -1342,6 +1343,20 @@
                             (message "/%s" (mapconcat 'identity path "/"))
                           (format "/%s" (mapconcat 'identity path "/"))))))))
     #+END_SRC
+*** Ediff
+    #+BEGIN_SRC emacs-lisp
+      (defun ediff-copy-both-to-C ()
+        (interactive)
+        (ediff-copy-diff ediff-current-difference nil 'C nil
+                         (concat
+                          (ediff-get-region-contents ediff-current-difference 'A ediff-control-buffer)
+                          (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
+
+      (defun setup-ediff-mode-map-extras ()
+        (define-key ediff-mode-map "d" 'ediff-copy-both-to-C))
+
+      (add-hook 'ediff-keymap-setup-hook 'setup-ediff-mode-map-extras)
+    #+END_SRC
 ** Perl
    #+BEGIN_SRC emacs-lisp
      (defun dcl/perl1line-txt ()
@@ -1460,7 +1475,7 @@
    #+END_SRC
 ** Sublimity
    #+BEGIN_SRC emacs-lisp
-     (sublimity-mode 1)
+     (sublimity-mode -1)
      ;; (require 'sublimity-scroll)
 ;;      (setq sublimity-scroll-weight 10
 ;;            sublimity-scroll-drift-length 5)
