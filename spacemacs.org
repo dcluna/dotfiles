@@ -148,7 +148,10 @@
                 shell-default-position 'bottom)
          ;; spell-checking
          ;; syntax-checking
-         version-control
+         (version-control :variables
+                          version-control-diff-tool 'diff-hl
+                          ;; version-control-global-margin nil
+                          )
          )
        ;; List of additional packages that will be installed without being
        ;; wrapped in a layer. If you need some configuration for these
@@ -1045,6 +1048,25 @@
        ;;   (add-to-list 'helm-dash-common-docsets docset))
        )
    #+END_SRC
+
+*** Setenv 
+
+    Helper function for setting variables from .env files (from the [[https://github.com/bkeepers/dotenv][dotenv]] gem)
+
+    #+BEGIN_SRC emacs-lisp
+      (defun dcl-set-dotenv (text)
+        "Sets environment variables specified in TEXT, one per line."
+        (interactive (list (if ( region-active-p )
+                               (buffer-substring (region-beginning) (region-end))
+                             (buffer-substring (line-beginning-position) (line-end-position)))))
+        (mapc (lambda (line)
+                (let* ((split (split-string line "="))
+                       (envvar (car split))
+                       (varval (mapconcat 'identity (cdr split) "")))
+                  (setenv envvar varval)))
+              (split-string text "\n")))
+    #+END_SRC
+   
 *** Keyboard macros turned into functions
     #+BEGIN_SRC emacs-lisp
       (fset 'dcl/eshell-circleci-ssh-to-tramp
@@ -1760,7 +1782,7 @@
                             (defun gen-nmap-script-cmd (scriptpart)
                               (interactive "sScript string: ")
                               (let ((scriptsearch (format "ls $NMAPSCRIPTSDIR/*%s*" scriptpart)))
-                                (kill-new (message "nmap --script=$(%s | paste -s -d\",\") -oA" scriptsearch))))
+                                (kill-new (message "nmap --script=$(%s | paste -s -d\",\") -oN %s.nmap" scriptsearch scriptsearch))))
                             (defun kali-prefix (filename)
                               (concat "/ssh:kali:" filename))
                             (defun find-in-kali ()
