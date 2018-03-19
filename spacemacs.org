@@ -1665,9 +1665,29 @@
     #+END_SRC
 
 ** Yasnippets
+
+   #+BEGIN_SRC emacs-lisp
+      (defvar dcl-yas-snippets-dir (expand-file-name "yasnippets" "/mnt/lmde/home/dancluna") "Personal yasnippets directory")
+      (setq yas--default-user-snippets-dir dcl-yas-snippets-dir)
+      (add-to-list 'yas-snippet-dirs dcl-yas-snippets-dir)
+    #+END_SRC
+
+*** Auto-Yasnippet
+    
+    This is a very handy package for easily generating yasnippets on the fly.
+    Many thanks to [[http://cestlaz.github.io/posts/using-emacs-46-auto-yasnippets/][this blog post]] for showing me what it's able to do.
+   
     #+BEGIN_SRC emacs-lisp
-      (setq yas--default-user-snippets-dir (expand-file-name "yasnippets" "/mnt/lmde/home/dancluna"))
-      (add-to-list 'yas-snippet-dirs "/home/dancluna/yasnippets")
+    (setq aya-persist-snippets-dir dcl-yas-snippets-dir)
+    #+END_SRC
+
+*** Keybindings 
+
+    #+BEGIN_SRC emacs-lisp
+      (let ((custom-yas-keymap (make-sparse-keymap)))
+        (define-key custom-yas-keymap "i" 'yas-insert-snippet)
+        (evil-leader/set-key (kbd "o y") custom-yas-keymap)
+        (spacemacs/declare-prefix "o y" "yasnippets" "yasnippets-custom-keymap"))
     #+END_SRC
 
 ** Nethack-el
