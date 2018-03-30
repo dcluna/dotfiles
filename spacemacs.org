@@ -1,6 +1,7 @@
 #+TITLE: My .spacemacs
 #+PROPERTY: tangle no
 #+PROPERTY: noweb yes
+#+PROPERTY: eval no
 * Initialization
   #+BEGIN_SRC emacs-lisp :tangle yes :noweb yes
     ;; spacemacs initialization routines
@@ -929,7 +930,7 @@
             (with-current-buffer jasmine-compilation-buffer-name
               (setq-local compilation-filter-hook 'colorize-compilation-buffer))))))
 
-     (defvar rubocop-files-history (list '(split-string (shell-command-to-string "\"git diff --name-only HEAD master\"") "\"\\n\"") ))
+     (defvar rubocop-files-history (list '(split-string (shell-command-to-string "\"git diff --name-status HEAD master | grep -v '^D' | cut -f 2\"") "\"\\n\"") ))
 
      (defun dcl/rubocop-files (files-command)
        "Runs `rubocop-autocorrect-current-file' and `reek-check-current-file' on FILES."
@@ -1575,6 +1576,22 @@
          (dcl/add-env-toggle "CAPYBARA_TIMEOUT" "rc" (number-to-string (read-number "New Capybara timeout (secs): ")))
          (dcl/add-env-toggle "ADWORDS_TIMEOUT" "rat" (number-to-string (read-number "New Adwords gem timeout (secs): "))))
      #+END_SRC
+**** Rubocop
+
+     This sets it up to silently run rubocop as a before-save hook. Kinda like
+     that other gem rufo does, but at least it's more configurable.
+
+     #+BEGIN_SRC emacs-lisp
+       (defun dcl-rubocop-silent ()
+         (save-window-excursion (rubocop-autocorrect-current-file)))
+
+       (defun dcl-setup-rubocop-autosave ()
+         (add-hook 'before-save-hook 'dcl-rubocop-silent nil t))
+
+       (add-hook 'ruby-mode-hook 'dcl-setup-rubocop-autosave)
+       (add-hook 'enh-ruby-mode-hook 'dcl-setup-rubocop-autosave)
+     #+END_SRC
+
 *** Rust
     #+BEGIN_SRC emacs-lisp
       (setq rust-format-on-save t)
@@ -1672,6 +1689,13 @@
       (add-to-list 'yas-snippet-dirs dcl-yas-snippets-dir)
     #+END_SRC
 
+    The following gets us in normal mode upon snippet expansion - easier if/when
+    we want to change something:
+
+    #+BEGIN_SRC emacs-lisp :tangle no :noweb no
+      ;; (add-hook 'yas-before-expand-snippet-hook 'evil-normal-state)
+    #+END_SRC
+
 *** Auto-Yasnippet
     
     This is a very handy package for easily generating yasnippets on the fly.
@@ -1682,6 +1706,9 @@
     #+END_SRC
 
 *** Keybindings 
+
+    These will be made obsolete when
+    https://github.com/emacs-jp/helm-c-yasnippet/pull/16 is merged.
 
     #+BEGIN_SRC emacs-lisp
       (let ((custom-yas-keymap (make-sparse-keymap)))
