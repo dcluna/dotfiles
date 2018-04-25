@@ -36,7 +36,7 @@
   :PROPERTIES:
   :header-args: :noweb-ref spacemacs-layers :tangle no
   :END:
-  
+
   #+BEGIN_SRC emacs-lisp
     (defun dotspacemacs/layers ()
       "Configuration Layers declaration.
@@ -55,6 +55,8 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         ansible
+         nginx
          windows-scripts
          perl5
          emoji
@@ -150,10 +152,10 @@
          ;; spell-checking
          ;; syntax-checking
          (version-control :variables
-                          version-control-diff-tool 'diff-hl
+                          version-control-diff-tool 'diff-hl))
                           ;; version-control-global-margin nil
-                          )
-         )
+
+
        ;; List of additional packages that will be installed without being
        ;; wrapped in a layer. If you need some configuration for these
        ;; packages then consider to create a layer, you can also put the
@@ -167,11 +169,12 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          multishell
                                           ob-elixir
                                           org-jira
                                           (org-rich-yank :location (recipe :fetcher github :repo "unhammer/org-rich-yank" :files ("*.el") :upgrade 't))
                                           ialign
-                                          sublimity
+                                          ;; sublimity
                                           beacon
                                           helpful
                                           (rusti :location (recipe :fetcher github :repo "ruediger/rusti.el" :files ("rusti.el") :upgrade 't))
@@ -277,8 +280,8 @@
                                           ;; lispyville ;; not yet available as of Thu Apr 21 18:32:36 BRT 2016
                                           editorconfig
                                           ,(dcl/local-package 'stock-ticker)
-                                          wsd-mode
-                                          )
+                                          wsd-mode)
+
        ;; A list of packages and/or extensions that will not be install and loaded.
        dotspacemacs-excluded-packages '()
        ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -305,7 +308,7 @@
   :PROPERTIES:
   :header-args: :noweb-ref spacemacs-init :tangle no
   :END:
-  
+
   #+BEGIN_SRC emacs-lisp
     (defun dotspacemacs/init ()
       "Initialization function.
@@ -545,9 +548,9 @@
     (require 'borg)
     (borg-initialize)
   #+END_SRC
-  
+
   Configuring the returned epkg:
-  
+
   #+BEGIN_SRC emacs-lisp :noweb-ref borg-config :tangle no
     (add-to-list 'load-path (expand-file-name "packed" borg-drone-directory))
     (add-to-list 'load-path (expand-file-name "auto-compile" borg-drone-directory))
@@ -562,7 +565,7 @@
       :init (setq epkg-repository
                   (expand-file-name "var/epkgs/" borg-drone-directory)))
   #+END_SRC
-  
+
   A few conveniences for magit:
 
   #+BEGIN_SRC emacs-lisp
@@ -803,6 +806,9 @@
        (dcl/leader-keys-major-mode
         '(enh-ruby-mode ruby-mode) "ox" "text"
         '(("m" dcl/ruby-copy-camelized-class)))
+       (dcl/leader-keys-major-mode
+        '(enh-ruby-mode ruby-mode) "oT" "toggles"
+        '(("r" dcl-toggle-rubocop-autosave)))
        (dcl/ruby-embrace-setup)
        (auto-fill-mode 1)
        (setq-local zeal-at-point-docset "ruby,rails")
@@ -1050,7 +1056,7 @@
        )
    #+END_SRC
 
-*** Setenv 
+*** Setenv
 
     Helper function for setting variables from .env files (from the [[https://github.com/bkeepers/dotenv][dotenv]] gem)
 
@@ -1067,7 +1073,7 @@
                   (setenv envvar varval)))
               (split-string text "\n")))
     #+END_SRC
-   
+
 *** Keyboard macros turned into functions
     #+BEGIN_SRC emacs-lisp
       (fset 'dcl/eshell-circleci-ssh-to-tramp
@@ -1489,7 +1495,7 @@
      (setq erc-nick "mondz")
    #+END_SRC
 ** Beacon-mode
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :noweb no :noweb-ref beacon-mode :tangle no
    (beacon-mode 1)
    #+END_SRC
 ** Emacs-winum
@@ -1497,24 +1503,26 @@
    (setq winum-scope 'frame-local)
    #+END_SRC
 ** Sublimity
-   #+BEGIN_SRC emacs-lisp
-     (sublimity-mode -1)
-     ;; (require 'sublimity-scroll)
-;;      (setq sublimity-scroll-weight 10
-;;            sublimity-scroll-drift-length 5)
-     (require 'sublimity-map)
-     (setq sublimity-map-size 20)
-     (setq sublimity-map-fraction 0.3)
-     (setq sublimity-map-text-scale -7)
-     (sublimity-map-set-delay 10)
+   #+BEGIN_SRC emacs-lisp :noweb no :noweb-ref sublimity :tangle no
+          (sublimity-mode -1)
+          ;; (require 'sublimity-scroll)
+     ;;      (setq sublimity-scroll-weight 10
+     ;;            sublimity-scroll-drift-length 5)
+          (require 'sublimity-map)
+          (setq sublimity-map-size 20)
+          (setq sublimity-map-fraction 0.3)
+          (setq sublimity-map-text-scale -7)
+          (sublimity-map-set-delay 10)
    #+END_SRC
 ** git/magit
     #+BEGIN_SRC emacs-lisp
-  (add-hook 'git-commit-mode 'dcl/set-fill-column-magit-commit-mode)
+      (add-hook 'git-commit-mode 'dcl/set-fill-column-magit-commit-mode)
 
-  (add-hook 'magit-mode-hook 'dcl/set-local-evil-escape)
+      (add-hook 'magit-mode-hook 'dcl/set-local-evil-escape)
 
-  (setq git-link-open-in-browser nil)
+      (setq git-link-open-in-browser nil)
+
+      (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
     #+END_SRC
 
 ** Major modes
@@ -1539,7 +1547,7 @@
 *** ASM
     For instruction lookup, asm-mode relies on [[file:~/Documents/books/Programming/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf][this file]].
     #+BEGIN_SRC emacs-lisp
-  (setq x86-lookup-pdf "~/Documents/books/Programming/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf") ;; asm-mode 
+  (setq x86-lookup-pdf "~/Documents/books/Programming/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf") ;; asm-mode
     #+END_SRC
 
 *** Haskell
@@ -1590,6 +1598,31 @@
 
        (add-hook 'ruby-mode-hook 'dcl-setup-rubocop-autosave)
        (add-hook 'enh-ruby-mode-hook 'dcl-setup-rubocop-autosave)
+
+       (defun dcl-toggle-rubocop-autosave ()
+         (interactive)
+         (let ((rubocop-mode-p (memq major-mode '(enh-ruby-mode ruby-mode))))
+           (when rubocop-mode-p
+             (if (memq 'dcl-rubocop-silent before-save-hook)
+                 (progn
+                   (remove-hook 'before-save-hook 'dcl-rubocop-silent t)
+                   (message "Auto-Rubocop is off"))
+               (progn
+                 (dcl-setup-rubocop-autosave)
+                 (message "Auto-Rubocop is on"))))))
+
+     #+END_SRC
+
+     The following is a helper function to disable the Rubocop errors at point.
+     Needs flycheck.
+
+     #+BEGIN_SRC emacs-lisp
+       (defun dcl-rubocop-disable-errors-at-point ()
+         "Disables Rubocop error at point."
+         (interactive)
+         (let* ((errors (mapcar 'flycheck-error-id (flycheck-overlay-errors-at (point)))))
+           (comment-dwim nil)
+           (insert (concat "rubocop:disable " (mapconcat 'identity errors ", ")))))
      #+END_SRC
 
 *** Rust
@@ -1615,7 +1648,7 @@
     #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook 'auto-fill-mode)
     #+END_SRC
-    
+
     Adding class for [[https://github.com/posquit0/Awesome-CV][Awesome-CV]]:
 
     #+BEGIN_SRC emacs-lisp
@@ -1641,7 +1674,7 @@
 ** Coin-ticker
    Configs for [[https://github.com/eklitzke/coin-ticker-mode][coin-ticker-mode]].
 
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :noweb-ref coin-ticker-mode :noweb no :tangle no
      (load-file "~/code/coin-ticker-mode/coin-ticker.el")
 
      (require 'coin-ticker)
@@ -1697,15 +1730,15 @@
     #+END_SRC
 
 *** Auto-Yasnippet
-    
+
     This is a very handy package for easily generating yasnippets on the fly.
     Many thanks to [[http://cestlaz.github.io/posts/using-emacs-46-auto-yasnippets/][this blog post]] for showing me what it's able to do.
-   
+
     #+BEGIN_SRC emacs-lisp
     (setq aya-persist-snippets-dir dcl-yas-snippets-dir)
     #+END_SRC
 
-*** Keybindings 
+*** Keybindings
 
     These will be made obsolete when
     https://github.com/emacs-jp/helm-c-yasnippet/pull/16 is merged.
@@ -1729,6 +1762,16 @@
 
      (add-to-list 'evil-emacs-state-modes 'nh-map-mode)
      (add-to-list 'evil-emacs-state-modes 'nh-menu-mode)
+   #+END_SRC
+
+** Multishell
+
+   #+BEGIN_SRC emacs-lisp
+     (let ((multishell-keymap (make-sparse-keymap)))
+       (define-key multishell-keymap "s" 'multishell-pop-to-shell)
+       (define-key multishell-keymap "l" 'multishell-list)
+       (evil-leader/set-key (kbd "o s") multishell-keymap)
+       (spacemacs/declare-prefix "o s" "multishell" "multishell"))
    #+END_SRC
 
 ** Evil
@@ -1757,7 +1800,8 @@
      (evil-leader/set-key (kbd "o a") 'ascii-display)
      (evil-leader/set-key (kbd "o h h") 'howdoi-query)
      (evil-leader/set-key (kbd "o h t") 'tldr)
-     (evil-leader/set-key (kbd "o s") 'embrace-commander)
+     ;; (evil-leader/set-key (kbd "o s") 'embrace-commander)
+     ;; (evil-leader/set-key (kbd "o s") 'multishell-pop-to-shell)
      (evil-leader/set-key (kbd "o p y") 'dcl/project-relative-path)
 
      (spacemacs/set-leader-keys-for-major-mode 'python-mode "sp" 'python-shell-print-line-or-region)
@@ -1780,6 +1824,12 @@
 
      (evil-ex-define-cmd "slow[pokemode]" 'dcl/filip-slowpoke)
      (evil-ex-define-cmd "fast[pokemode]" 'dcl/normal-delay)
+
+     (defun dcl-revert-buffer ()
+       (interactive)
+       (revert-buffer nil t))
+
+     (evil-ex-define-cmd "rev" 'dcl-revert-buffer)
 
      (add-to-list 'evil-emacs-state-modes 'indium-debugger-mode)
    #+END_SRC
@@ -1820,10 +1870,9 @@
         (spacemacs/declare-prefix "oH" "helpful"))
     #+END_SRC
 * OSCP
-  
+
   #+BEGIN_SRC emacs-lisp :tangle /home/dancluna/code-of-mine/oscp/.dir-locals.el
     ((org-mode . ((eval . (progn
-                            (coin-ticker-mode -1)
                             (setq-local org-src-window-setup 'other-window)
                             (setq-local yas-snippet-dirs (append '("/home/dancluna/code-of-mine/oscp/yasnippets") yas-snippet-dirs))
                             (defun gen-nmap-script-cmd (scriptpart)
@@ -1864,4 +1913,3 @@
   #+BEGIN_SRC emacs-lisp
     (org-babel-load-file "/home/dancluna/dotfiles/genome.org")
   #+END_SRC
-  
