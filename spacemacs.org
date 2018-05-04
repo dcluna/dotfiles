@@ -4,6 +4,10 @@
 #+PROPERTY: eval no
 * Initialization
   #+BEGIN_SRC emacs-lisp :tangle yes :noweb yes
+    ;; Straight.el
+    <<straight>>
+    ;; load straight.el packages
+    <<straight-load-packages>>
     ;; spacemacs initialization routines
     <<spacemacs-prelude>>
 
@@ -15,7 +19,7 @@
 
     (defun dotspacemacs/user-config ()
       ;; Borg.el
-      <<borg>>
+      ;; <<borg>>
       ;; function and macro definitions
       <<functions>>
 
@@ -586,6 +590,76 @@
                             'magit-insert-submodules
                             'magit-insert-unpulled-from-upstream)
   #+END_SRC
+* Straight.el (package manager)
+  :PROPERTIES:
+  :header-args: :noweb-ref straight :tangle no
+  :END:
+
+  Bootstrap snippet:
+
+  #+BEGIN_SRC emacs-lisp
+  (let ((bootstrap-file (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el"))
+      (bootstrap-version 3))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+  #+END_SRC
+
+  Refer to [[https://github.com/raxod502/straight.el/issues/128][this issue]] for instructions.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq straight-enable-package-integration nil
+          straight-enable-use-package-integration t
+          straight-vc-git-upstream-remote "origin"
+          straight-vc-git-primary-remote "my-version")
+
+
+    (setq straight-packages '((helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
+                                                :branch "fix-helm-insert-on-region"
+                                                :upstream (:host github
+                                                           :repo "emacs-jp/helm-c-yasnippet"))))
+  #+END_SRC
+
+  See [[https://github.com/raxod502/straight.el/issues/128#issuecomment-325229672][this]] for a solution for ignoring packages already installed by straight. I
+  updated it to use the maintainer's suggestion, also had to stringify the
+  package name that gets to the function, otherwise it works as expected.
+
+  #+BEGIN_SRC emacs-lisp
+    (defun my-straight-installed-p (package)
+      "Return non-nil if PACKAGE is installed by `straight'."
+      (gethash (if (symbolp package) (symbol-name package) package) straight--recipe-cache))
+
+    (defun my--advice-package-installed-p (original-function &rest args)
+      "Return t if package is installed via `straight' package manager. Otherwise
+    call the original function `package-installed-p'."
+      (or (my-straight-installed-p (car args))
+          (apply original-function args)))
+    (advice-add 'package-installed-p :around 'my--advice-package-installed-p)
+
+    (defun my--advice-package-activate (original-function &rest args)
+      "Return t if package is installed via `straight' package manager. Otherwise
+    call the original function `package-activate'."
+      (if (my-straight-installed-p (car args))
+          (progn
+            ;; (message "%s already installed" (car args))
+            (unless (memq (car args) package-activated-list)
+              ;; Not sure if package-activated-list needs to be updated here ...
+              (push (car args) package-activated-list))
+            t)
+        (apply original-function args)))
+    (advice-add 'package-activate :around 'my--advice-package-activate)
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp :noweb-ref straight-load-packages
+    (straight-transaction
+      (mapc #'straight-use-package straight-packages))
+  #+END_SRC
+
 * Custom functions
   :PROPERTIES:
   :header-args: :noweb-ref functions :tangle no
