@@ -622,7 +622,8 @@
     (setq straight-packages '((helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
                                                 :branch "fix-helm-insert-on-region"
                                                 :upstream (:host github
-                                                           :repo "emacs-jp/helm-c-yasnippet"))))
+                                                                 :repo "emacs-jp/helm-c-yasnippet"))
+                              magit))
   #+END_SRC
 
   See [[https://github.com/raxod502/straight.el/issues/128#issuecomment-325229672][this]] for a solution for ignoring packages already installed by straight. I
@@ -1590,7 +1591,7 @@
    #+END_SRC
 ** git/magit
     #+BEGIN_SRC emacs-lisp
-      (add-hook 'git-commit-mode 'dcl/set-fill-column-magit-commit-mode)
+      (add-hook 'git-commit-mode-hook 'dcl/set-fill-column-magit-commit-mode)
 
       (add-hook 'magit-mode-hook 'dcl/set-local-evil-escape)
 
@@ -1764,10 +1765,17 @@
 
 ** Auto-insert
     #+BEGIN_SRC emacs-lisp
+      ;; (defvar auto-insert-major-modes '(enh-ruby-mode ruby-mode))
+
+      ;; (defun auto-insert-on-modes ()
+      ;;   (if (-contains? auto-insert-major-modes major-mode)
+      ;;       (auto-insert)))
+
       (use-package autoinsert
-          :init (progn
-                  (add-hook 'find-file-hook 'auto-insert)
-                  (auto-insert-mode 1)))
+        :init (progn
+                ;; (add-hook 'find-file-hook 'auto-insert-on-modes)
+                ;; (auto-insert-mode 1)
+                ))
 
       (eval-after-load 'autoinsert
           '(progn
