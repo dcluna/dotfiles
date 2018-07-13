@@ -619,10 +619,17 @@
           straight-vc-git-primary-remote "my-version")
 
 
-    (setq straight-packages '((helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
+    (setq straight-packages '(
+                              (vlf :type git :host github :repo "m00natic/vlfi")
+                              evil-numbers
+                              (magit-todos :type git :host github :repo "alphapapa/magit-todos" :branch "async-ag"
+                                           :upstream (:host github :repo "alphapapa/magit-todos"))
+                              auto-minor-mode
+                              (helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
                                                 :branch "fix-helm-insert-on-region"
                                                 :upstream (:host github
                                                                  :repo "emacs-jp/helm-c-yasnippet"))
+                              vue-mode
                               magit))
   #+END_SRC
 
@@ -883,7 +890,7 @@
         '(("m" dcl/ruby-copy-camelized-class)))
        (dcl/leader-keys-major-mode
         '(enh-ruby-mode ruby-mode) "oT" "toggles"
-        '(("r" dcl-toggle-rubocop-autosave)))
+        '(("r" auto-rubocop-mode)))
        (dcl/ruby-embrace-setup)
        (auto-fill-mode 1)
        (setq-local zeal-at-point-docset "ruby,rails")
@@ -1546,6 +1553,11 @@
     #+BEGIN_SRC emacs-lisp
       (defalias 'display-buffer-in-major-side-window 'window--make-major-side-window)
     #+END_SRC
+*** Auth-sources order
+
+    #+BEGIN_SRC emacs-lisp
+    (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
+    #+END_SRC
 ** Zeal/Dash docsets
    #+BEGIN_SRC emacs-lisp
  (let ((helm-dash-mode-alist
@@ -1666,26 +1678,30 @@
 
      #+BEGIN_SRC emacs-lisp
        (defun dcl-rubocop-silent ()
-         (save-window-excursion (rubocop-autocorrect-current-file)))
+         (when (memq major-mode '(enh-ruby-mode ruby-mode))
+           (save-window-excursion (rubocop-autocorrect-current-file))))
 
-       (defun dcl-setup-rubocop-autosave ()
-         (add-hook 'before-save-hook 'dcl-rubocop-silent nil t))
+       (defun dcl-setup-rubocop-autosave (&optional remove local)
+         (if remove
+             (remove-hook 'before-save-hook 'dcl-rubocop-silent local)
+           (add-hook 'before-save-hook 'dcl-rubocop-silent nil local)))
 
-       (add-hook 'ruby-mode-hook 'dcl-setup-rubocop-autosave)
-       (add-hook 'enh-ruby-mode-hook 'dcl-setup-rubocop-autosave)
+       (define-minor-mode auto-rubocop-mode
+         "Toggle Rubocop's autocorrect.
+       With a prefix argument ARG, enable Whitespace mode if ARG is
+       positive, and disable it otherwise.
 
-       (defun dcl-toggle-rubocop-autosave ()
-         (interactive)
-         (let ((rubocop-mode-p (memq major-mode '(enh-ruby-mode ruby-mode))))
-           (when rubocop-mode-p
-             (if (memq 'dcl-rubocop-silent before-save-hook)
-                 (progn
-                   (remove-hook 'before-save-hook 'dcl-rubocop-silent t)
-                   (message "Auto-Rubocop is off"))
-               (progn
-                 (dcl-setup-rubocop-autosave)
-                 (message "Auto-Rubocop is on"))))))
-
+       If called from Lisp, also enables the mode if ARG is omitted or nil,
+       and toggles it if ARG is `toggle'."
+         :lighter " arcp"
+         :init-value nil
+         :global nil
+         :group 'rubocop
+         (cond
+          (auto-rubocop-mode
+           (dcl-setup-rubocop-autosave nil t))
+          (t
+           (dcl-setup-rubocop-autosave t t))))
      #+END_SRC
 
      The following is a helper function to disable the Rubocop errors at point.
@@ -1698,6 +1714,14 @@
          (let* ((errors (mapcar 'flycheck-error-id (flycheck-overlay-errors-at (point)))))
            (comment-dwim nil)
            (insert (concat "rubocop:disable " (mapconcat 'identity errors ", ")))))
+     #+END_SRC
+
+**** Pry
+
+     Pry as default inf-ruby implementation:
+
+     #+BEGIN_SRC emacs-lisp
+     (setq inf-ruby-default-implementation "pry")
      #+END_SRC
 
 *** Rust
@@ -1854,6 +1878,27 @@
        (define-key multishell-keymap "l" 'multishell-list)
        (evil-leader/set-key (kbd "o s") multishell-keymap)
        (spacemacs/declare-prefix "o s" "multishell" "multishell"))
+   #+END_SRC
+
+** VLFI (View Large Files in Emacs)
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'vlf-setup)
+     (require 'vlf)
+   #+END_SRC
+
+   Evil bindings:
+
+   #+BEGIN_SRC emacs-lisp
+     (evil-leader/set-key (kbd "o v") vlf-mode-map)
+     (spacemacs/declare-prefix "o v" "vlf")
+   #+END_SRC
+   
+** Auto-minor-mode
+
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'auto-minor-mode-alist '("spec\/factories\/.*\.rb$" . rspec-mode))
+     (add-to-list 'auto-minor-mode-alist '("\.rb$" . auto-rubocop-mode))
    #+END_SRC
 
 ** Evil

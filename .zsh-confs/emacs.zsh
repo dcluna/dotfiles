@@ -13,3 +13,5 @@ export DTK_PROGRAM=espeak
 export EMACSPEAK_DIR="$HOME/code/emacspeak"
 
 export PATH="$HOME/bin/mbrola:$PATH"
+
+export MANPAGER="eless"

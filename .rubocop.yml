@@ -1,6 +1,41 @@
 Rails:
   Enabled: true
 
+Rails/SaveBang:
+  Enabled: true
+  Exclude:
+    - spec/**/*.rb
+
+Rails/Validation:
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+    - app/form/**/*.rb
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - spec/requests/**/*.rb
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.4
+  DisplayCopNames: true
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - vendor/**/*
+    - tmp/**/*
+    - Gemfile
+    - Vagrantfile
+
 Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
@@ -16,6 +51,7 @@ Layout/SpaceInLambdaLiteral:
 # Commonly used screens these days easily fit more than 80 characters.
 Metrics/LineLength:
   Max: 120
+  Enabled: false
 
 # Too short methods lead to extraction of single-use methods, which can make
 # the code easier to read (by naming things), but can also clutter the class
@@ -33,7 +69,14 @@ Layout/SpaceAroundEqualsInParameterDefault:
 
 # We do not need to support Ruby 1.9, so this is good to use.
 Style/SymbolArray:
-  Enabled: true
+  EnforcedStyle: brackets
+
+Style/WordArray:
+  EnforcedStyle: brackets
+
+# I prefer procs than lambdas
+Style/Lambda:
+  EnforcedStyle: literal
 
 # Most readable form.
 Layout/AlignHash:
@@ -45,8 +88,8 @@ Style/HashSyntax:
   EnforcedStyle: ruby19_no_mixed_keys
 
 # String#% is by far the least verbose and only object oriented variant.
-Style/FormatString:
-  EnforcedStyle: percent
+# Style/FormatString:
+#   EnforcedStyle: percent
 
 Style/CollectionMethods:
   Enabled: true
