@@ -59,6 +59,7 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         lsp
          crystal
          ansible
          nginx
@@ -621,6 +622,9 @@
 
 
     (setq straight-packages '(
+                              (lsp-ruby :type git :host github :repo "emacs-lsp/lsp-ruby")
+                              lsp-mode
+                              jq-mode
                               (rubocop :type git :host github :repo "dcluna/rubocop-emacs"
                                        :upstream (:host github :repo "bbatsov/rubocop-emacs"))
                               org
@@ -1268,6 +1272,14 @@
     This depends on [[https://github.com/lastpass/lastpass-cli][lastpass-cli]].
 
     #+BEGIN_SRC emacs-lisp
+      (defvar lastpass-email "dancluna@gmail.com" "Default email for LastPass.")
+
+      (defun dcl/lastpass-login ()
+        "Logs in LastPass."
+        (interactive)
+        (let ((email (read-string "Email: " lastpass-email)))
+          (message (shell-command-to-string (format "lpass login %s" email)))))
+
       (defun dcl/lastpass-import-table ()
         "Imports to LastPass from Org-table at point."
         (interactive)
@@ -1721,6 +1733,8 @@
           (t
            (dcl-setup-rubocop-autosave t t))))
      #+END_SRC
+
+     This should be made obsolete by https://github.com/rubocop-hq/rubocop-emacs/pull/29
 
      The following is a helper function to disable the Rubocop errors at point.
      Needs flycheck.
