@@ -59,6 +59,7 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         crystal
          ansible
          nginx
          windows-scripts
@@ -620,6 +621,9 @@
 
 
     (setq straight-packages '(
+                              (rubocop :type git :host github :repo "dcluna/rubocop-emacs"
+                                       :upstream (:host github :repo "bbatsov/rubocop-emacs"))
+                              org
                               (vlf :type git :host github :repo "m00natic/vlfi")
                               evil-numbers
                               (magit-todos :type git :host github :repo "alphapapa/magit-todos" :branch "async-ag"
@@ -1045,6 +1049,20 @@
          '(("p" pmd/print-vars)))
         (setq-local comment-start "//")
         (setq-local before-save-hook (add-to-list 'before-save-hook 'whitespace-cleanup)))
+    #+END_SRC
+
+*** ERB
+
+    Adds some ERB tags to evil-embrace:
+
+    #+BEGIN_SRC emacs-lisp
+      (defun dcl-setup-erb-embrace ()
+        (when (equal web-mode-engine "erb")
+          (embrace-add-pair ?% "<% " " %>")
+          (embrace-add-pair ?= "<%= " " %>")
+          (embrace-add-pair ?# "#{" "}")))
+
+      (add-hook 'web-mode-hook 'dcl-setup-erb-embrace)
     #+END_SRC
 
 *** Bundler
