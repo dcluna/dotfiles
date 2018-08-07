@@ -1105,6 +1105,12 @@
         (setq-local rspec-spec-file-name-re "\\(_\\|-\\)spec\\.js")
         (setq-local before-save-hook (add-to-list 'before-save-hook 'whitespace-cleanup)))
     #+END_SRC
+*** LSP
+
+    #+BEGIN_SRC emacs-lisp
+      (require 'lsp-ruby)
+      ;; (add-hook 'enh-ruby-mode-hook #'lsp-ruby-enable)
+    #+END_SRC
 ** Elisp
    #+BEGIN_SRC emacs-lisp
      ;; creating a tags file from emacs - stolen from https://www.emacswiki.org/emacs/BuildTags
@@ -1606,10 +1612,21 @@
 ** ERC
    #+BEGIN_SRC emacs-lisp
      (setq erc-join-buffer 'bury)
-     (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#offsec")))
+     (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#offsec" "#corelan" "#ruby" "#RubyOnRails")))
      (setq erc-prompt-for-password nil)
      (setq erc-autojoin-timing 'ident)
      (setq erc-nick "mondz")
+
+     (require 'erc-services)
+     (erc-services-mode 1)
+     (setq erc-prompt-for-nickserv-password nil)
+
+     (let* ((server "freenode.net")
+            (source (auth-source-search :host server))
+            (user (plist-get (car source ) :user))
+            (passwd (plist-get (nth 0 source) :secret)))
+       (setq erc-nickserv-passwords `(
+                                      (freenode  ((,user . ,(if (functionp passwd) (funcall passwd) passwd)))))))
    #+END_SRC
 ** Beacon-mode
    #+BEGIN_SRC emacs-lisp :noweb no :noweb-ref beacon-mode :tangle no
