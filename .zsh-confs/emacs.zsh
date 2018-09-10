@@ -4,8 +4,8 @@ fi
 
 export PATH="$HOME/.evm/bin:$PATH"
 
-export EDITOR='emacsclient -s dcl -a "" -nw'
-export VISUAL='emacsclient -s dcl -a ""'
+export EDITOR='emacsclient -a "" -nw'
+export VISUAL='emacsclient -a ""'
 
 export REMACS_DIR="$HOME/code/remacs"
 

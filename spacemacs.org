@@ -622,6 +622,10 @@
 
 
     (setq straight-packages '(
+                              pretty-mode
+                              helm-ghq
+                              ghq
+                              graphql-mode
                               (lsp-ruby :type git :host github :repo "emacs-lsp/lsp-ruby")
                               lsp-mode
                               jq-mode
@@ -1111,6 +1115,38 @@
       (require 'lsp-ruby)
       ;; (add-hook 'enh-ruby-mode-hook #'lsp-ruby-enable)
     #+END_SRC
+*** RSpec
+
+    #+BEGIN_SRC emacs-lisp
+      (defun dcl/rspec-custom-hook ()
+        (embrace-add-pair ?a "array_including( " " )")
+        (embrace-add-pair ?h "hash_including( " " )"))
+
+      (add-hook 'rspec-mode-hook 'dcl/rspec-custom-hook)
+    #+END_SRC
+*** Pretty-mode / prettify-symbols-mode
+    
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'enh-ruby-mode-hook 'turn-on-pretty-mode)
+      (add-hook 'enh-ruby-mode-hook 'dcl/enh-ruby-prettify-symbols)
+
+      (defun dcl/enh-ruby-prettify-symbols ()
+        (pretty-deactivate-groups '(:neg) 'ruby-mode)
+        (mapc (lambda (pair) (push pair prettify-symbols-alist))
+              '(
+                ;; ("def" .      #x2131)
+                ("not" .      #x2757)
+                ("return" .   #x27fc)
+                ("yield" .    #x27fb)
+                ;; ("for" .      #x2200)
+                ;; Base Types
+                ("True" .     #x1d54b)
+                ("False" .    #x1d53d)
+                ;; Mypy
+                ("Set" .      #x2126)))
+        (turn-on-prettify-symbols-mode))
+    #+END_SRC
+
 ** Elisp
    #+BEGIN_SRC emacs-lisp
      ;; creating a tags file from emacs - stolen from https://www.emacswiki.org/emacs/BuildTags
@@ -1519,6 +1555,20 @@
         (root (projectile-project-root)))
     (kill-new (message (replace-regexp-in-string root "" filename)))))
    #+END_SRC
+** GHQ
+
+   #+BEGIN_SRC emacs-lisp
+     (let ((ghq-keymap (make-sparse-keymap)))
+       (define-key ghq-keymap "h" 'helm-ghq)
+       (define-key ghq-keymap "g" 'ghq)
+       (define-key ghq-keymap "l" 'helm-ghq-list)
+       (evil-leader/set-key (kbd "o q") ghq-keymap)
+       (spacemacs/declare-prefix "o q" "ghq" "GHQ"))
+
+     (use-package helm-ghq)
+     (use-package ghq)
+   #+END_SRC
+
 * Auto modes
   :PROPERTIES:
   :header-args: :noweb-ref auto-modes :tangle no
@@ -1575,9 +1625,12 @@
     #+BEGIN_SRC emacs-lisp
   (add-hook 'after-change-major-mode-hook 'dcl/favorite-text-scale)
     #+END_SRC
-*** Ignore purpose-mode (dedicated windows)
+*** Purpose-mode (dedicated windows)
     #+BEGIN_SRC emacs-lisp
-  (purpose-mode -1)
+      ;; (add-to-list 'purpose-user-mode-purposes '(enh-ruby-mode . ruby))
+      ;; (add-to-list 'purpose-user-mode-purposes '(inf-ruby-mode . repl))
+      ;; (add-to-list 'purpose-user-mode-purposes '(rspec-compilation-mode . compilation))
+      ;; (purpose-compile-user-configuration)
     #+END_SRC
 *** Setup minibuffer font size
     Tweak this function when you want to change it.
@@ -2045,6 +2098,13 @@
         (spacemacs/set-leader-keys "oH" helpful-keymap)
         (spacemacs/declare-prefix "oH" "helpful"))
     #+END_SRC
+
+** Tags
+
+   #+BEGIN_SRC emacs-lisp
+   (setq projectile-tags-command "uctags -Re -f \"%s\" %s")
+   #+END_SRC
+
 * OSCP
 
   #+BEGIN_SRC emacs-lisp :tangle /home/dancluna/code-of-mine/oscp/.dir-locals.el
