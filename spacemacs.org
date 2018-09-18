@@ -347,63 +347,63 @@
        ;; Press <SPC> T n to cycle to the next theme in the list (works great
        ;; with 2 themes variants, one dark and one light)
        dotspacemacs-themes (if (display-graphic-p)
-                               (cons 'doom-one (dcl/shuffle '(
-                                                              ;; tron
-                                                              ;; eziam-dark
-                                                              ;; eziam-light
-                                                              seti
-                                                              sanityinc-tomorrow-eighties
-                                                              sanityinc-solarized-light
-                                                              sanityinc-tomorrow-bright
-                                                              sanityinc-tomorrow-day
-                                                              sanityinc-tomorrow-blue
-                                                              sanityinc-tomorrow-night
-                                                              majapahit-light
-                                                              plan9
-                                                              labburn
-                                                              sourcerer
-                                                              alect-light
-                                                              moe-light
-                                                              ;; doom-dark
-                                                              ;; doom-one
-                                                              granger
-                                                              dark-mint
-                                                              mccarthy
-                                                              material
-                                                              heroku
-                                                              light-blue
-                                                              spacemacs-dark
-                                                              spacemacs-light
-                                                              solarized-light
-                                                              solarized-dark
-                                                              eink
-                                                              leuven
-                                                              monokai
-                                                              zenburn
-                                                              alect-dark-alt
-                                                              ample-zen
-                                                              badwolf
-                                                              birds-of-paradise-plus
-                                                              brin
-                                                              bubbleberry
-                                                              cherry-blossom
-                                                              atom-dark
-                                                              atom-one-dark
-                                                              creamsody
-                                                              borland-blue
-                                                              cyberpunk
-                                                              clues
-                                                              darkmine
-                                                              deeper-blue
-                                                              farmhouse-dark
-                                                              gruvbox
-                                                              junio
-                                                              noctilux
-                                                              subatomic
-                                                              purple-haze
-                                                              ritchie
-                                                              zonokai-red
-                                                              )))
+                               (dcl/shuffle '(
+                                              ;; tron
+                                              ;; eziam-dark
+                                              ;; eziam-light
+                                              seti
+                                              sanityinc-tomorrow-eighties
+                                              sanityinc-solarized-light
+                                              sanityinc-tomorrow-bright
+                                              sanityinc-tomorrow-day
+                                              sanityinc-tomorrow-blue
+                                              sanityinc-tomorrow-night
+                                              majapahit-light
+                                              plan9
+                                              labburn
+                                              sourcerer
+                                              alect-light
+                                              moe-light
+                                              ;; doom-dark
+                                              doom-one
+                                              granger
+                                              dark-mint
+                                              mccarthy
+                                              material
+                                              heroku
+                                              light-blue
+                                              spacemacs-dark
+                                              spacemacs-light
+                                              solarized-light
+                                              solarized-dark
+                                              eink
+                                              leuven
+                                              monokai
+                                              zenburn
+                                              alect-dark-alt
+                                              ample-zen
+                                              badwolf
+                                              birds-of-paradise-plus
+                                              brin
+                                              bubbleberry
+                                              cherry-blossom
+                                              atom-dark
+                                              atom-one-dark
+                                              creamsody
+                                              borland-blue
+                                              cyberpunk
+                                              clues
+                                              darkmine
+                                              deeper-blue
+                                              farmhouse-dark
+                                              gruvbox
+                                              junio
+                                              noctilux
+                                              subatomic
+                                              purple-haze
+                                              ritchie
+                                              zonokai-red
+                                              ))
                              (cons 'doom-one (dcl/shuffle '(
                                                             plan9
                                                             ritchie
@@ -821,57 +821,14 @@
        ;; (setq-local hs-special-modes-alist '((ruby-trace-mode ":>:" ":<:")))
        )
 
-      (defun dcl/ruby-copy-camelized-class (beg end)
+     (defun dcl/ruby-copy-camelized-class (beg end)
        "Camelizes the current region's class name."
        (interactive "r")
        (let* ((class-name (buffer-substring beg end))
               (no-module-or-class-name (replace-regexp-in-string " *\\(module\\|class\\) " "" class-name)))
          (kill-new (message (s-join "::" (s-split "\n" no-module-or-class-name))))))
 
-     (defvar ruby-trace-default-location "/tmp/tracer_output.rb_trace" "Location for the current ruby trace file.")
-
-     (defun dcl/wrap-region (beg end start-text end-text)
-       "Wraps the currently-active region."
-       (interactive "r\nsStart with: \nsEnd with: ")
-       (let ((code (buffer-substring beg end)))
-         (goto-char beg)
-         (delete-region (point) end)
-         (insert (format "%s\n%s\n%s" start-text code end-text))))
-
-     (defun dcl/ruby-trace-region (beg end)
-       "Adds a 'Tracer.on' call around region."
-       (interactive "r")
-       (dcl/wrap-region beg
-                        end
-                        (format
-                         "require 'tracer'; Tracer.stdout = File.open('%s', 'a'); Tracer.on {"
-                         ruby-trace-default-location)
-                        "}"))
-
-     (defun dcl/ruby-gc-trace-region (beg end)
-       "Adds a 'GC.start_logging' call around region."
-       (interactive "r")
-       (dcl/wrap-region beg end
-                        "require 'gc_tracer'; GC::Tracer.start_logging(gc_stat: true, gc_latest_gc_info: true, rusage: true) {"
-                        "}"))
-
-     (defun dcl/ruby-profile-region (beg end)
-       "Adds a RubyProf block around region."
-       (interactive "r")
-       (dcl/wrap-region beg end
-                        "require 'ruby-prof'; RubyProf::MultiPrinter.new(RubyProf.profile {"
-                        "}).print(path: '/tmp', profile: 'ruby-prof.txt')"))
-
-     (defun dcl/ruby-benchmark-region (beg end)
-       "Adds a 'Benchmark.ms' call around region."
-       (interactive "r")
-       (dcl/wrap-region beg end "Benchmark.ms {" "}"))
-
      (defun dcl/ruby-special-setup ()
-       (dcl/leader-keys-major-mode
-        '(enh-ruby-mode ruby-mode) "oB" "bundler"
-        '(("l" dcl/bundle-config-local-gem-use)
-          ("d" dcl/bundle-config-local-gem-delete)))
        (dcl/leader-keys-major-mode
         '(enh-ruby-mode ruby-mode) "os" "repl"
         '(("b" ruby-send-buffer)))
@@ -879,24 +836,6 @@
         '(enh-ruby-mode ruby-mode) "ot" "test"
         '(("d" ruby/rspec-verify-directory)
           ("j" dcl/run-jasmine-specs)))
-       (dcl/leader-keys-major-mode
-        '(enh-ruby-mode ruby-mode) "of" "file"
-        '(("y" rails-copy-relative-path)))
-       (dcl/leader-keys-major-mode
-        '(enh-ruby-mode ruby-mode) "od" "debug"
-        '(("p" pmd/print-vars)
-          ("r" dcl/ruby-remove-puts-vars)
-          ("t" dcl/ruby-trace-region)
-          ("f" dcl/ruby-profile-region)
-          ("g" dcl/ruby-gc-trace-region)
-          ("b" dcl/ruby-benchmark-region)
-          ("c" dcl/ruby-rspec-profiling-console)))
-       (dcl/leader-keys-major-mode
-        '(enh-ruby-mode ruby-mode) "ob" "breakpoints"
-        '(("b" ruby-insert-breakpoint)
-          ("p" ruby-save-page)
-          ("s" ruby-save-screenshot)
-          ("r" ruby-remove-breakpoints)))
        (dcl/leader-keys-major-mode
         '(enh-ruby-mode ruby-mode) "ox" "text"
         '(("m" dcl/ruby-copy-camelized-class)))
@@ -912,72 +851,9 @@
        (interactive "P\nDrspec directory: ")
        (rspec-run-single-file dir (concat (rspec-core-options) (if (and prefix (>= (car prefix) 4)) (format " --seed %d" (read-number "Seed: "))))))
 
-     (defun current-line-empty-p ()
-       (save-excursion
-         (beginning-of-line)
-         (looking-at "[[:space:]]*$")))
-
-     (defmacro dcl/ensure-newline (&rest body)
-       `(progn (unless (current-line-empty-p) (progn (end-of-line) (newline)))
-               (progn ,@body)))
-
-     (defmacro dcl/ruby-ensure-newline (&rest body)
-       `(dcl/ensure-newline ,@body (ruby-indent-line)))
-
      (defun dcl/markdown-embedded-image (alt-text)
        (interactive "sAlt text: ")
        (message (kill-new (format "![%s](data:image/%s;%s)" alt-text (file-name-extension (buffer-file-name)) (base64-encode-string (buffer-substring-no-properties (point-min) (point-max)))))))
-
-     (defun dcl/tmp-file-name ()
-       (format "/tmp/%s_%d" (file-name-base) (random 9999)))
-
-     (defun ruby-save-page ()
-       (interactive)
-       (dcl/ruby-ensure-newline
-        (insert (format "save_page('%s.html')" (dcl/tmp-file-name)))))
-
-     (defun ruby-save-screenshot ()
-       (interactive)
-       (dcl/ruby-ensure-newline
-        (insert (format "save_screenshot('%s.png')" (dcl/tmp-file-name)))))
-
-     (defvar ruby-ignore-breakpoint-format "ignore_breakpoint")
-
-     (defun ruby-insert-breakpoint ()
-       (interactive)
-       (let ((ignore_bp_var (format "%s_%s" ruby-ignore-breakpoint-format (number-to-string (random 99999)))))
-         (unless (current-line-empty-p) (progn (end-of-line) (newline)))
-         (insert (format "binding.pry unless %s" ignore_bp_var))
-         (ruby-indent-line)
-         (beginning-of-line)
-         (let ((old-point (point)))
-           (save-excursion (ruby-beginning-of-defun)
-                           (unless (equal old-point (point)) (forward-line))
-                           (insert (format "%s = false\n" ignore_bp_var))
-                           (forward-line -1)
-                           (ruby-indent-line)))))
-
-     (defun ruby-remove-breakpoints-in-region (beg end)
-       (dolist (bp-pattern (list ruby-ignore-breakpoint-format "binding.pry" "save"))
-         (save-excursion (delete-matching-lines bp-pattern beg end))))
-
-     (defun ruby-remove-breakpoints ()
-       (interactive)
-       (let ((rbeg (if (region-active-p) (region-beginning) (save-excursion (beginning-of-defun) (point))))
-             (rend (if (region-active-p) (region-end) (1- (save-excursion (end-of-defun) (point))))))
-         (ruby-remove-breakpoints-in-region rbeg rend)))
-
-     (defmacro dcl/with-custom-region (rbegf rendf &rest body)
-       `(let ((rbeg (if (region-active-p) beg (save-excursion ,rbegf (point))))
-              (rend (if (region-active-p) end (1- (save-excursion ,rendf (point))))))
-          (progn ,@body)))
-
-     (defun dcl/ruby-remove-puts-vars ()
-       (interactive)
-       (dcl/with-custom-region
-        (beginning-of-buffer)
-        (end-of-buffer)
-        (save-excursion (delete-matching-lines "var-debug: " rbeg rend))))
 
      (defun dcl/ruby-rspec-profiling-console ()
        (interactive)
@@ -998,11 +874,6 @@
        (dotimes (i lines)
          (ruby-send-region (line-beginning-position) (line-end-position))
          (next-line (signum lines))))
-
-     (defun ruby-insert-methods-check ()
-       (interactive)
-       (forward-char)
-       (insert ".methods.uniq.sort"))
 
      (defun rails-copy-relative-path ()
        (interactive)
@@ -1131,18 +1002,16 @@
       (add-hook 'enh-ruby-mode-hook 'dcl/enh-ruby-prettify-symbols)
 
       (defun dcl/enh-ruby-prettify-symbols ()
-        (pretty-deactivate-groups '(:neg) 'ruby-mode)
+        (pretty-deactivate-groups '(:neg :lambda) 'ruby-mode)  ;bang-style methods aren't very visible with this
         (mapc (lambda (pair) (push pair prettify-symbols-alist))
               '(
-                ;; ("def" .      #x2131)
-                ("not" .      #x2757)
+                ("def" .      #x3bb)
                 ("return" .   #x27fc)
+                ("not"    .   #x00ac)
+                (" ^ "      .   #x2295)
                 ("yield" .    #x27fb)
-                ;; ("for" .      #x2200)
-                ;; Base Types
-                ("True" .     #x1d54b)
-                ("False" .    #x1d53d)
-                ;; Mypy
+                ("true" .     #x22a4)
+                ("false" .    #x22a5)
                 ("Set" .      #x2126)))
         (turn-on-prettify-symbols-mode))
     #+END_SRC
