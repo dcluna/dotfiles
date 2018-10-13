@@ -249,7 +249,7 @@
                                           package-lint
                                           flycheck-package
                                           ;; doom-themes
-                                          ,(dcl/local-package 'rspec-mode)
+                                          ;; ,(dcl/local-package 'rspec-mode)
                                           ;; (yasnippet-ruby-mode
                                           ;;  :location (recipe :repo "bmaland/yasnippet-ruby-mode"
                                           ;;                    :fetcher github
@@ -402,7 +402,6 @@
                                               subatomic
                                               purple-haze
                                               ritchie
-                                              zonokai-red
                                               ))
                              (cons 'doom-one (dcl/shuffle '(
                                                             plan9
@@ -622,6 +621,15 @@
 
 
     (setq straight-packages '(
+                              (emacs-direnv  :type git :host github :repo "wbolster/emacs-direnv")
+                              projectile-rails
+                              rake
+                              robe
+                              (rspec-mode :type git :host github :repo "pezra/rspec-mode")
+                              (magit-lfs :type git :host github :repo "Ailrun/magit-lfs")
+                              (rmsbolt :type git :host gitlab :repo "jgkamat/rmsbolt")
+                              evil-collection
+                              evil
                               pretty-mode
                               helm-ghq
                               ghq
@@ -998,20 +1006,36 @@
 *** Pretty-mode / prettify-symbols-mode
     
     #+BEGIN_SRC emacs-lisp
-      (add-hook 'enh-ruby-mode-hook 'turn-on-pretty-mode)
+      (require 'pretty-mode)
       (add-hook 'enh-ruby-mode-hook 'dcl/enh-ruby-prettify-symbols)
+      (setq prettify-symbols-unprettify-at-point t)
 
       (defun dcl/enh-ruby-prettify-symbols ()
-        (pretty-deactivate-groups '(:neg :lambda) 'ruby-mode)  ;bang-style methods aren't very visible with this
+        (pretty-deactivate-patterns '(:neq :Rightarrow :nil :neg :lambda :|| :and) 'ruby-mode)  ;bang-style methods aren't very visible with this
+        (turn-on-pretty-mode)
         (mapc (lambda (pair) (push pair prettify-symbols-alist))
               '(
-                ("def" .      #x3bb)
+                ("def" .      #x192)
                 ("return" .   #x27fc)
-                ("not"    .   #x00ac)
+                ("not "    .   #x00ac)
+                ("nil"    .   #x2205)
+                ;; ("! "    .   #x00ac)
+                ("!="    .   #x2260)
+                ("||="      .   #x2254)
+                ("||"     . #x2228)
+                (" and "    . #x2227)
+                ("&&"    . #x2227)
                 (" ^ "      .   #x2295)
+                ("=~"      .   #x2248)
+                ("->"      .   #x21a0)
+                ("&."      .   #x21d2)
+                ("match"   .   #x2248)
+                ("include?"   .   #x220b)
                 ("yield" .    #x27fb)
                 ("true" .     #x22a4)
                 ("false" .    #x22a5)
+                ("Integer"  .  #x2124)
+                ("Float"  .  #x211d)
                 ("Set" .      #x2126)))
         (turn-on-prettify-symbols-mode))
     #+END_SRC
@@ -1579,6 +1603,8 @@
       (setq git-link-open-in-browser nil)
 
       (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
+
+      (require 'magit-lfs)
     #+END_SRC
 
 ** Major modes
@@ -1612,18 +1638,18 @@
     #+END_SRC
 *** Ruby
     #+BEGIN_SRC emacs-lisp
-  (add-hook 'sass-mode-hook 'rainbow-mode)
-  (add-hook 'ruby-mode-hook 'dcl/ruby-special-setup)
-  (add-hook 'enh-ruby-mode-hook 'dcl/ruby-special-setup)
-  (add-hook 'haml-mode-hook 'dcl/haml-special-setup)
-  (add-hook 'coffee-mode-hook 'dcl/coffee-special-setup)
-  (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
+      (add-hook 'sass-mode-hook 'rainbow-mode)
+      (add-hook 'ruby-mode-hook 'dcl/ruby-special-setup)
+      (add-hook 'enh-ruby-mode-hook 'dcl/ruby-special-setup)
+      (add-hook 'haml-mode-hook 'dcl/haml-special-setup)
+      (add-hook 'coffee-mode-hook 'dcl/coffee-special-setup)
+      (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
 
-  (setup-rails-linters)
+      (setup-rails-linters)
 
-  (load "~/code/rspec-mode/rspec-mode") ; I run a local version and this has some extra goodies
+      ;; (load "~/code/rspec-mode/rspec-mode") ; I run a local version and this has some extra goodies
 
-  (setq inf-ruby-breakpoint-pattern "\\(\\[1\\] pry(\\)\\|\\(\\[1\\] haystack\\)\\|\\((rdb:1)\\)\\|\\((byebug)\\)")
+      (setq inf-ruby-breakpoint-pattern "\\(\\[1\\] pry(\\)\\|\\(\\[1\\] haystack\\)\\|\\((rdb:1)\\)\\|\\((byebug)\\)")
     #+END_SRC
 **** Env toggles
      #+BEGIN_SRC emacs-lisp
@@ -1972,6 +1998,36 @@
 
    #+BEGIN_SRC emacs-lisp
    (setq projectile-tags-command "uctags -Re -f \"%s\" %s")
+   #+END_SRC
+
+** Projectile
+*** Project-local yasnippets
+
+    Based on this [[https://www.reddit.com/r/emacs/comments/57i41t/projectlocal_snippets/daw67dd/][post]].
+    
+
+    #+BEGIN_SRC emacs-lisp
+      (defvar yas-projectile-local-dir ".yasnippets" "Directory name for project-local yasnippets.")
+
+      (defun dcl/maybe-call-yas-with-local-source-and-set-snippet-dirs (original-function &rest args)
+        (aif (and (y-or-n-p (format "Use local %s directory?" yas-projectile-local-dir)) (projectile-project-p))
+            (lexical-let ((yas-snippet-dirs (cons (message (format "%s%s" it yas-projectile-local-dir)) yas-snippet-dirs)))
+              (apply original-function args)
+              (setq-local yas-snippet-dirs yas-snippet-dirs))
+          (apply original-function args)))
+
+      (mapc
+       (lambda (fn)
+         (advice-add fn :around 'dcl/maybe-call-yas-with-local-source-and-set-snippet-dirs))
+       (list 'yas-new-snippet))
+    #+END_SRC
+
+** Direnv
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package direnv
+       :config
+       (direnv-mode))
    #+END_SRC
 
 * OSCP

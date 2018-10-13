@@ -7,56 +7,56 @@ export ZSH_CUSTOM="$ZSH/custom"
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-if [ -n "$EMACS" ]; then
-    export LANG=en_US.UTF-8
-    export LC_ALL=en_US.UTF-8
-    export TERM=xterm-256color
-    ZSH_THEME="dogenpunk"
-else
-    SPACESHIP_EXIT_CODE_SHOW=true
-    SPACESHIP_TIME_SHOW=true
-    export SPACESHIP_PROMPT_ORDER=(
-        time          # Time stampts section
-        user          # Username section
-        host          # Hostname section
-        dir           # Current directory section
-        git           # Git section (git_branch + git_status)
-        hg            # Mercurial section (hg_branch  + hg_status)
-        package       # Package version
-        node          # Node.js section
-        ruby          # Ruby section
-        elixir        # Elixir section
-        xcode         # Xcode section
-        swift         # Swift section
-        golang        # Go section
-        php           # PHP section
-        rust          # Rust section
-        haskell       # Haskell Stack section
-        julia         # Julia section
-        docker        # Docker section
-        aws           # Amazon Web Services section
-        venv          # virtualenv section
-        conda         # conda virtualenv section
-        pyenv         # Pyenv section
-        dotnet        # .NET section
-        ember         # Ember.js section
-        kubecontext   # Kubectl context section
-        exec_time     # Execution time
-        line_sep      # Line break
-        battery       # Battery level and status
-        vi_mode       # Vi-mode indicator
-        jobs          # Backgound jobs indicator
-        exit_code     # Exit code section
-        char          # Prompt character
-    )
-    ZSH_THEME="spaceship"
-    # source "$ZSH/custom/themes/spaceship.zsh-theme"
-fi
+# if [ -n "$EMACS" ]; then
+#     export LANG=en_US.UTF-8
+#     export LC_ALL=en_US.UTF-8
+#     export TERM=xterm-256color
+#     ZSH_THEME="dogenpunk"
+# else
+SPACESHIP_EXIT_CODE_SHOW=true
+SPACESHIP_TIME_SHOW=true
+export SPACESHIP_PROMPT_ORDER=(
+    time          # Time stampts section
+    user          # Username section
+    host          # Hostname section
+    dir           # Current directory section
+    git           # Git section (git_branch + git_status)
+    hg            # Mercurial section (hg_branch  + hg_status)
+    package       # Package version
+    node          # Node.js section
+    ruby          # Ruby section
+    elixir        # Elixir section
+    xcode         # Xcode section
+    swift         # Swift section
+    golang        # Go section
+    php           # PHP section
+    rust          # Rust section
+    haskell       # Haskell Stack section
+    julia         # Julia section
+    docker        # Docker section
+    aws           # Amazon Web Services section
+    venv          # virtualenv section
+    conda         # conda virtualenv section
+    pyenv         # Pyenv section
+    dotnet        # .NET section
+    ember         # Ember.js section
+    kubecontext   # Kubectl context section
+    exec_time     # Execution time
+    line_sep      # Line break
+    battery       # Battery level and status
+    vi_mode       # Vi-mode indicator
+    jobs          # Backgound jobs indicator
+    exit_code     # Exit code section
+    char          # Prompt character
+)
+ZSH_THEME="spaceship"
+#     # source "$ZSH/custom/themes/spaceship.zsh-theme"
+# fi
 
 # funny color schemes
-if [ -n "$EMACS" ]; then
+if [ -n "$INSIDE_EMACS" ]; then
 else
-    ( wal -t -r & )
+    ( wal -t -R & )
 fi
 
 # Uncomment the following line to use case-sensitive completion.
@@ -209,15 +209,21 @@ export PATH="$HOME/code/lastpass-cli:$PATH"
 
 export WINEARCH="win32"
 
-if [ -n "$EMACS" ]; then
+if [[  -n "$EMACS" || -n "$TMUX"  ]]; then
 else
     # VOICE='-v mb-us1'
     # 'welcome screen' with ponies
-    text=`fortune | iconv -t 'ASCII' 2>>/dev/null`; ( ponysay "$text" &; coinmon -t 99 -C 3 & ); if [ `shuf -i 1-100 -n 1` -lt 10 ]; then ( espeak $VOICE "$text" & ); fi
+    text=`fortune | iconv -t 'ASCII' 2>>/dev/null`; ( ponysay "$text" &; coinmon -t 99 -C 3 & );
 fi
 nvm_auto_switch
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 # added by Anaconda2 installer
-export PATH="/home/dancluna/anaconda2/bin:$PATH"
+# export PATH="/home/dancluna/anaconda2/bin:$PATH"
+export PATH="$PATH:/home/dancluna/anaconda2/bin"
+
+# anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+eval "$(direnv hook zsh)"
