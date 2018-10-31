@@ -93,9 +93,5 @@ deploy-ccz (){
 # kills the lag from pressing ESC and showing the new cursor
 export KEYTIMEOUT=1
 
-# opp for vi-ish text objects
-# ls $HOME/code/opp.zsh || (cd $HOME/code/ && git clone https://github.com/hchbaw/opp.zsh.git && cd -)
-source $HOME/code/opp.zsh/opp.zsh
-
 # disables 'suspend' in terms - this is particularly annoying with spacemacs' C-z shortcut for getting back to normal mode
 bindkey -r "^Z"

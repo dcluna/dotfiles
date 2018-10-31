@@ -54,10 +54,10 @@ ZSH_THEME="spaceship"
 # fi
 
 # funny color schemes
-if [ -n "$INSIDE_EMACS" ]; then
-else
-    ( wal -t -R & )
-fi
+#if [ -n "$INSIDE_EMACS" ]; then
+#else
+#    ( wal -t -R & )
+#fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -99,7 +99,7 @@ fi
 # Add wi2gold:$HOME/bin/android-ndk-r10d:$HOME/bin/jdk1.8.0_31/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-plugins=(tmate git ruby rails rake rake-fast rbenv node nvm npm nvm-auto yarn rust vi-mode)
+plugins=(tmate git ruby rails rake rake-fast rbenv node nvm npm nvm-auto yarn rust vi-mode osx)
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 
@@ -157,8 +157,6 @@ export PATH="$HOME/bin/elixir-1.1.1/bin:$PATH"
 
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
-source "$HOME/code/zsh-autoenv/autoenv.zsh"
-
 export JAVA_HOME="$HOME/bin/jdk1.8.0_144"
 
 export PATH="$JAVA_HOME/bin:$PATH"
@@ -201,7 +199,7 @@ export REVEALJS_DIR="$HOME/bin/reveal.js-3.3.0"
 
 export EXPLOIT_EX_DIR="$HOME/code-examples/exploit-exercises/protostar"
 
-source $HOME/.cargo/env
+#source $HOME/.cargo/env
 
 export AMDAPPSDKROOT="/mnt/lmde/home/dcluna/AMDAPPSDK-3.0"
 
@@ -209,21 +207,18 @@ export PATH="$HOME/code/lastpass-cli:$PATH"
 
 export WINEARCH="win32"
 
-if [[  -n "$EMACS" || -n "$TMUX"  ]]; then
-else
-    # VOICE='-v mb-us1'
-    # 'welcome screen' with ponies
-    text=`fortune | iconv -t 'ASCII' 2>>/dev/null`; ( ponysay "$text" &; coinmon -t 99 -C 3 & );
-fi
-nvm_auto_switch
-
+#if [[  -n "$EMACS" || -n "$TMUX"  ]]; then
+#else
+#    # VOICE='-v mb-us1'
+#    # 'welcome screen' with ponies
+#    text=`fortune | iconv -t 'ASCII' 2>>/dev/null`; ( ponysay "$text" &; coinmon -t 99 -C 3 & );
+#fi
+#nvm_auto_switch
+#
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 # added by Anaconda2 installer
 # export PATH="/home/dancluna/anaconda2/bin:$PATH"
 export PATH="$PATH:/home/dancluna/anaconda2/bin"
 
-# anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
 eval "$(direnv hook zsh)"

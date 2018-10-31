@@ -85,7 +85,7 @@
          docker
          ;; ansible
          vimscript
-         sonic-pi
+         ;; sonic-pi
          ;; eyebrowse
          prodigy
          c-c++
@@ -227,7 +227,7 @@
                                           yagist
                                           sage-shell-mode
                                           intero
-                                          (mocha :location (recipe :fetcher file :path "/home/dancluna/code/mocha.el"))
+                                          ;; (mocha :location (recipe :fetcher file :path "/code/mocha.el"))
                                           (howdoi :location (recipe
                                                              :repo "dcluna/emacs-howdoi"
                                                              :fetcher github
@@ -244,8 +244,7 @@
                                           nvm
                                           nov
                                           yarn-mode
-                                          (indium :location (recipe :fetcher file :path "/home/dancluna/code/Indium")
-                                                  :upgrade 't)
+                                          ;; (indium :location (recipe :fetcher file :path "/code/Indium") :upgrade 't)
                                           package-lint
                                           flycheck-package
                                           ;; doom-themes
@@ -270,13 +269,13 @@
                                                              :fetcher github
                                                              :files ("shen*.el"))
                                            :upgrade 't)
-                                          ;; (pmd :location "/home/dancluna/code-of-mine/pmd-el")
-                                          (pmd :location (recipe :fetcher file :path "/home/dancluna/code-of-mine/pmd-el"))
+                                          ;; (pmd :location "/code-of-mine/pmd-el")
+                                          ;; (pmd :location (recipe :fetcher file :path "/code-of-mine/pmd-el"))
                                           ;; (pmd
                                           ;;  :location (recipe :repo "dcluna/pmd.el"
                                           ;;                    :fetcher github
                                           ;;                    :files ("*.el")))
-                                          (yarn.el :location "/home/dancluna/code/yarn.el/")
+                                          ;; (yarn.el :location "/code/yarn.el/")
                                           ,(dcl/local-package 'sass-mode)
                                           ;; ,(dcl/local-package 'magit)
                                           ;; (sass-mode :location (recipe :fetcher github :repo "dcluna/sass-mode"))
@@ -478,7 +477,7 @@
        dotspacemacs-loading-progress-bar t
        ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
        ;; (Emacs 24.4+ only)
-       dotspacemacs-fullscreen-at-startup t
+       dotspacemacs-fullscreen-at-startup nil
        ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
        ;; Use to disable fullscreen animations in OSX. (default nil)
        dotspacemacs-fullscreen-use-non-native nil
@@ -621,6 +620,11 @@
 
 
     (setq straight-packages '(
+                              (multi-magit :type git :host github :repo "luismbo/multi-magit")
+                              groovy-mode
+                              anaphora
+                              exec-path-from-shell
+                              (pmd :type git :host github :repo "dcluna/pmd.el")
                               (emacs-direnv  :type git :host github :repo "wbolster/emacs-direnv")
                               projectile-rails
                               rake
@@ -784,7 +788,7 @@
     :END:
     This file looks kinda like this:
 
-    #+BEGIN_SRC javascript :tangle ~/code-examples/smapcli.js :shebang "#!/usr/bin/env node"
+    #+BEGIN_SRC javascript :tangle no :shebang "#!/usr/bin/env node"
       // generated from ~/dotfiles/spacemacs.org
       const sourceMap = require("source-map");
       const fs = require("fs");
@@ -888,9 +892,9 @@
        (message (kill-new (replace-regexp-in-string (regexp-opt (list (or (projectile-rails-root) ""))) "" (buffer-file-name)))))
 
        ;;; linter setup
-     (defun setup-rails-linters ()
-       (dolist (elisp (list "~/code-examples/haml-lint-flycheck" "~/code-examples/sass-lint-flycheck"))
-         (load elisp)))
+     ;; (defun setup-rails-linters ()
+     ;;   (dolist (elisp (list "~/code-examples/haml-lint-flycheck" "~/code-examples/sass-lint-flycheck"))
+     ;;     (load elisp)))
 
      (defvar jasmine-compilation-buffer-name "*jasmine:ci*")
 
@@ -1180,11 +1184,11 @@
     #+BEGIN_SRC emacs-lisp
       (defun dcl/new-blog-post (post-title)
         (interactive "sPost title:")
-        (find-file-other-window (format "%s/%s-%s.md" "/home/dancluna/code/dcluna.github.io/_posts" (format-time-string "%Y-%m-%d" (current-time)) post-title)))
+        (find-file-other-window (format "%s/%s-%s.md" "/code/dcluna.github.io/_posts" (format-time-string "%Y-%m-%d" (current-time)) post-title)))
     #+END_SRC
 *** Work-related
     #+BEGIN_SRC emacs-lisp
-      (defvar dcl-rate-per-hour (string-to-number (getenv "RATE_PER_HOUR")))
+      (defvar dcl-rate-per-hour (string-to-number (or (getenv "RATE_PER_HOUR") "0")))
 
       (defun dcl/stackbuilders-invoice-template (hours-worked)
         (interactive "nHours worked: \n")
@@ -1645,7 +1649,7 @@
       (add-hook 'coffee-mode-hook 'dcl/coffee-special-setup)
       (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
 
-      (setup-rails-linters)
+      ;; (setup-rails-linters)
 
       ;; (load "~/code/rspec-mode/rspec-mode") ; I run a local version and this has some extra goodies
 
@@ -1727,9 +1731,9 @@
     #+END_SRC
 *** Javascript
     #+BEGIN_SRC emacs-lisp
-      (require 'indium)
-      (add-hook 'js2-mode-hook #'indium-interaction-mode)
-      (require 'yarn)
+      ;; (require 'indium)
+      ;; (add-hook 'js2-mode-hook #'indium-interaction-mode)
+      ;; (require 'yarn)
     #+END_SRC
 *** nov.el
     #+BEGIN_SRC emacs-lisp
@@ -1820,7 +1824,7 @@
 ** Yasnippets
 
    #+BEGIN_SRC emacs-lisp
-      (defvar dcl-yas-snippets-dir (expand-file-name "yasnippets" "/mnt/lmde/home/dancluna") "Personal yasnippets directory")
+      (defvar dcl-yas-snippets-dir (expand-file-name "yasnippets" "~/") "Personal yasnippets directory")
       (setq yas--default-user-snippets-dir dcl-yas-snippets-dir)
       (add-to-list 'yas-snippet-dirs dcl-yas-snippets-dir)
     #+END_SRC
@@ -1994,6 +1998,17 @@
         (spacemacs/declare-prefix "oH" "helpful"))
     #+END_SRC
 
+*** Comint/compilation/shell related buffers
+
+    #+BEGIN_SRC emacs-lisp
+      (let ((comint-search-keymap (make-sparse-keymap))
+            (modes '(shell-mode comint-mode)))
+        (define-key comint-search-keymap "h" 'helm-comint-input-ring)
+        (dolist (mode modes)
+          (spacemacs/set-leader-keys-for-major-mode mode "os" comint-search-keymap)
+          (spacemacs/declare-prefix-for-mode mode "mos" "comint-search")))
+    #+END_SRC
+    
 ** Tags
 
    #+BEGIN_SRC emacs-lisp
@@ -2030,12 +2045,28 @@
        (direnv-mode))
    #+END_SRC
 
+** Exec-path-from-shell
+
+   #+BEGIN_SRC emacs-lisp
+     (when (memq window-system '(mac ns x))
+       (exec-path-from-shell-initialize))
+   #+END_SRC
+
+** Helm-comint
+
+   #+BEGIN_SRC emacs-lisp
+     (defun helm-comint-input-ring-action (candidate)
+       "Default action for comint history."
+       (with-helm-current-buffer
+         (set-register ?h candidate)))
+   #+END_SRC
+
 * OSCP
 
-  #+BEGIN_SRC emacs-lisp :tangle /home/dancluna/code-of-mine/oscp/.dir-locals.el
+  #+BEGIN_SRC emacs-lisp :tangle no
     ((org-mode . ((eval . (progn
                             (setq-local org-src-window-setup 'other-window)
-                            (setq-local yas-snippet-dirs (append '("/home/dancluna/code-of-mine/oscp/yasnippets") yas-snippet-dirs))
+                            (setq-local yas-snippet-dirs (append '("/code-of-mine/oscp/yasnippets") yas-snippet-dirs))
                             (defun gen-nmap-script-cmd (scriptpart)
                               (interactive "sScript string: ")
                               (let ((scriptsearch (format "ls $NMAPSCRIPTSDIR/*%s*" scriptpart)))
@@ -2065,12 +2096,4 @@
                               (erase-buffer)
                               (insert "#+BEGIN_SRC sh :session oscp-kali\n#+END_SRC")
                               (copy-to-register ?c (point-min) (point-max))))))))
-  #+END_SRC
-* Geno.me
-  :PROPERTIES:
-  :header-args: :noweb yes :noweb-ref genome
-  :END:
-
-  #+BEGIN_SRC emacs-lisp
-    (org-babel-load-file "/home/dancluna/dotfiles/genome.org")
   #+END_SRC
