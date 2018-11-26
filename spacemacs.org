@@ -620,6 +620,9 @@
 
 
     (setq straight-packages '(
+                              docker
+                              with-editor
+                              magit-gh-pulls
                               (multi-magit :type git :host github :repo "luismbo/multi-magit")
                               groovy-mode
                               anaphora
@@ -1609,6 +1612,8 @@
       (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 
       (require 'magit-lfs)
+
+      (magit-wip-mode 1)
     #+END_SRC
 
 ** Major modes
@@ -2024,6 +2029,17 @@
     #+BEGIN_SRC emacs-lisp
       (defvar yas-projectile-local-dir ".yasnippets" "Directory name for project-local yasnippets.")
 
+      (defun yas-projectile-local-dir ()
+        "Returns the top-level projectile local directory."
+        (format "%s%s" (projectile-project-root) yas-projectile-local-dir))
+
+      (defun yas-load-local-projectile-dir ()
+        "Loads yasnippets under `yas-projectile-local-dir' for the current project."
+        (interactive)
+        (let* ((local-dir (yas-projectile-local-dir)))
+          (yas-load-directory local-dir)
+          (message "Loaded snippets under %s" local-dir)))
+
       (defun dcl/maybe-call-yas-with-local-source-and-set-snippet-dirs (original-function &rest args)
         (aif (and (y-or-n-p (format "Use local %s directory?" yas-projectile-local-dir)) (projectile-project-p))
             (lexical-let ((yas-snippet-dirs (cons (message (format "%s%s" it yas-projectile-local-dir)) yas-snippet-dirs)))
@@ -2059,6 +2075,12 @@
        "Default action for comint history."
        (with-helm-current-buffer
          (set-register ?h candidate)))
+   #+END_SRC
+
+** Multi-magit
+
+   #+BEGIN_SRC emacs-lisp
+     (setq magit-repository-directories (list (cons "/Users/dluna/Projects/Chime/" 1)))
    #+END_SRC
 
 * OSCP
