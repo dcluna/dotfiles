@@ -618,7 +618,7 @@
           straight-vc-git-primary-remote "my-version")
 
 
-    (setq straight-packages '(
+    (setq straight-packages '(helpful
                               (enh-ruby-mode :type git :host github :repo "zenspider/enhanced-ruby-mode")
                               hydra
                               znc
@@ -893,7 +893,7 @@
         '(("m" dcl/ruby-copy-camelized-class)))
        (dcl/leader-keys-major-mode
         '(enh-ruby-mode ruby-mode) "oT" "toggles"
-        '(("r" auto-rubocop-mode)))
+        '(("r" spacemacs/toggle-rubocop-autocorrect-on-save)))
        (dcl/ruby-embrace-setup)
        (auto-fill-mode 1)
        (setq-local zeal-at-point-docset "ruby,rails")
@@ -1090,6 +1090,12 @@
                 ("Float"  .  #x211d)
                 ("Set" .      #x2126)))
         (turn-on-prettify-symbols-mode))
+    #+END_SRC
+
+*** Straight.el's enh-ruby-mode
+
+    #+BEGIN_SRC emacs-lisp
+      (setq erm-source-dir (straight--repos-dir "enhanced-ruby-mode"))
     #+END_SRC
 
 ** Elisp
@@ -1726,31 +1732,19 @@
      that other gem rufo does, but at least it's more configurable.
 
      #+BEGIN_SRC emacs-lisp
-       (defun dcl-rubocop-silent ()
-         (when (memq major-mode '(enh-ruby-mode ruby-mode))
-           (save-window-excursion (rubocop-autocorrect-current-file))))
+       ;; (defcustom run-auto-rubocop nil "Runs Rubocop on every save" :type 'boolean :group 'rubocop)
 
-       (defun dcl-setup-rubocop-autosave (&optional remove local)
-         (if remove
-             (remove-hook 'before-save-hook 'dcl-rubocop-silent local)
-           (add-hook 'before-save-hook 'dcl-rubocop-silent nil local)))
+       (setq rubocop-autocorrect-on-save t)
 
-       (define-minor-mode auto-rubocop-mode
-         "Toggle Rubocop's autocorrect.
-       With a prefix argument ARG, enable Whitespace mode if ARG is
-       positive, and disable it otherwise.
+       ;; (defun dcl-rubocop-silent ()
+       ;;   (when (and run-auto-rubocop (memq major-mode '(enh-ruby-mode ruby-mode)))
+       ;;     (save-window-excursion (rubocop-autocorrect-current-file))))
 
-       If called from Lisp, also enables the mode if ARG is omitted or nil,
-       and toggles it if ARG is `toggle'."
-         :lighter " arcp"
-         :init-value nil
-         :global nil
-         :group 'rubocop
-         (cond
-          (auto-rubocop-mode
-           (dcl-setup-rubocop-autosave nil t))
-          (t
-           (dcl-setup-rubocop-autosave t t))))
+       ;; (add-hook 'enh-ruby-mode-hook 'dcl-rubocop-silent)
+
+       ;; (spacemacs|add-toggle run-auto-rubocop :status run-auto-rubocop :on (setq-local run-auto-rubocop t) :off (setq-local run-auto-rubocop nil))
+
+       (spacemacs|add-toggle rubocop-autocorrect-on-save :status rubocop-autocorrect-on-save :on (setq-local rubocop-autocorrect-on-save t) :off (setq-local rubocop-autocorrect-on-save nil))
      #+END_SRC
 
      This should be made obsolete by https://github.com/rubocop-hq/rubocop-emacs/pull/29
@@ -1949,7 +1943,6 @@
 
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'auto-minor-mode-alist '("spec\/factories\/.*\.rb$" . rspec-mode))
-     (add-to-list 'auto-minor-mode-alist '("\.rb$" . auto-rubocop-mode))
    #+END_SRC
 
 ** Evil
