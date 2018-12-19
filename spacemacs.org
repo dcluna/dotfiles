@@ -175,6 +175,9 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          iodine-theme
+                                          hydandata-light-theme
+                                          github-modern-theme
                                           multishell
                                           ob-elixir
                                           org-jira
@@ -400,9 +403,16 @@
                                               subatomic
                                               purple-haze
                                               ritchie
+                                              minimal-light
+                                              doom-nord-light
+                                              github-modern
+                                              iodine
+                                              hydandata-light
+                                              organic-green
                                               ))
                              (cons 'doom-one (dcl/shuffle '(
                                                             plan9
+                                                            organic-green
                                                             ritchie
                                                             leuven
                                                             alect-light
@@ -1659,6 +1669,8 @@
       (add-hook 'magit-mode-hook 'dcl/set-local-evil-escape)
 
       (setq git-link-open-in-browser nil)
+
+      (setq git-link-use-commit t)
 
       (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 
