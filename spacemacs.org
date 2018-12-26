@@ -127,7 +127,7 @@
          ( javascript :variables
                       js-indent-level 2)
          (python :variables python-test-runner '(nose pytest))
-         (ruby :variables ruby-enable-enh-ruby-mode t)
+         (ruby :variables ruby-enable-enh-ruby-mode t ruby-test-runner 'rspec)
          (clojure :variables clojure-enable-fancify-symbols t)
          go
          evernote
@@ -628,7 +628,11 @@
           straight-vc-git-primary-remote "my-version")
 
 
-    (setq straight-packages '(helpful
+    (setq straight-packages '(
+                              magit-annex
+                              alchemist
+                              minitest
+                              helpful
                               (enh-ruby-mode :type git :host github :repo "zenspider/enhanced-ruby-mode")
                               hydra
                               znc
@@ -1063,6 +1067,8 @@
 
     #+BEGIN_SRC emacs-lisp
       (setq docker-compose-run-buffer-name-function (lambda (service command) (format "*%s %s*" service command)))
+
+      (add-to-list 'docker-compose-run-arguments "-e PAGER=/bin/cat")
     #+END_SRC
 
 *** Pretty-mode / prettify-symbols-mode
@@ -1677,6 +1683,8 @@
       (require 'magit-lfs)
 
       (magit-wip-mode 1)
+
+      (magit-define-popup-action 'magit-log-popup ?w "WIP log" 'magit-wip-log)
     #+END_SRC
 
 ** Major modes
