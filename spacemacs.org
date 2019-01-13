@@ -118,7 +118,7 @@
          sql
          scheme
          ;; personal-misc
-         (git :variables git-enable-github-support t git-gutter-use-fringe t)
+         (git :variables git-enable-github-support t git-gutter-use-fringe t git-enable-magit-gitflow nil)
          markdown
          html
          (typescript :variables
@@ -1065,10 +1065,34 @@
     #+END_SRC
 *** Docker
 
-    #+BEGIN_SRC emacs-lisp
-      (setq docker-compose-run-buffer-name-function (lambda (service command) (format "*%s %s*" service command)))
+    In my branch:
 
-      (add-to-list 'docker-compose-run-arguments "-e PAGER=/bin/cat")
+    #+BEGIN_SRC emacs-lisp
+      ;; (setq docker-compose-run-buffer-name-function (lambda (service command) (format "*%s %s*" service command)))
+
+      (setq docker-compose-run-arguments '("-e PAGER=/bin/cat"))
+    #+END_SRC
+    
+    With Philippe's branch (see
+    https://github.com/Silex/docker.el/pull/99#issuecomment-445220495):
+
+    #+BEGIN_SRC emacs-lisp
+      (defun dcluna-make-buffer-name (action args)
+        (if (string-equal action "run")
+            (-let (((service command) (-take-last 2 args)))
+              (format "*%s %s*" service command))
+          (docker-compose-make-buffer-name action args)))
+
+      (setq docker-compose-run-buffer-name-function 'dcluna-make-buffer-name)
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (let ((docker-container-keymap (make-sparse-keymap)))
+        (define-key docker-container-keymap "f" 'docker-container-find-file)
+        (define-key docker-container-keymap "e" 'docker-container-eshell)
+        (define-key docker-container-keymap "d" 'docker-container-dired)
+        (evil-leader/set-key-for-mode 'docker-container-mode "c" docker-container-keymap)
+        (spacemacs/declare-prefix-for-mode 'docker-container-mode "c" "docker-container"))
     #+END_SRC
 
 *** Pretty-mode / prettify-symbols-mode

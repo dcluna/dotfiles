@@ -4,3 +4,5 @@ fi
 
 export PATH="$PATH:/usr/local/global-6.6.2/bin"
 alias eman='PAGER=less man -P eless'
+
+eval "$(fasd --init auto)"
