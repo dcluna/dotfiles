@@ -220,5 +220,12 @@ export WINEARCH="win32"
 # added by Anaconda2 installer
 # export PATH="/home/dancluna/anaconda2/bin:$PATH"
 export PATH="$PATH:/home/dancluna/anaconda2/bin"
+export PATH="$PATH:/home/dancluna/.bin"
+
+# show my stock tickers on every new term
+if [[ -n "$EMACS" ]]; then
+else
+    ~/.bin/ticker.sh $(cat ~/.ticker.conf)
+fi
 
 eval "$(direnv hook zsh)"
