@@ -1,0 +1,3 @@
+-d postgresql
+--skip-spring
+--skip-coffee
