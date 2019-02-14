@@ -131,7 +131,7 @@
          (clojure :variables clojure-enable-fancify-symbols t)
          go
          evernote
-         (colors :variables colors-colorize-identifiers 'all)
+         (colors :variables colors-colorize-identifiers 'all colors-enable-nyan-cat-progress-bar (display-graphic-p))
          theming
          themes-megapack
          ;; python-extra
