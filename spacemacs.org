@@ -391,8 +391,8 @@
                                               atom-dark
                                               atom-one-dark
                                               creamsody
-                                              borland-blue
                                               cyberpunk
+                                              cyberpunk-2019
                                               clues
                                               darkmine
                                               deeper-blue
@@ -406,7 +406,6 @@
                                               minimal-light
                                               doom-nord-light
                                               github-modern
-                                              iodine
                                               hydandata-light
                                               organic-green
                                               ))
@@ -629,6 +628,7 @@
 
 
     (setq straight-packages '(
+                              (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
                               (forge :type git :host github :repo "magit/forge")
                               magit-annex
                               alchemist
@@ -2165,6 +2165,14 @@
 
    #+BEGIN_SRC emacs-lisp
      (setq magit-repository-directories (list (cons "/Users/dluna/Projects/Chime/" 1)))
+   #+END_SRC
+
+** Custom color themes
+
+   [[https://github.com/the-frey/cyberpunk-2019][Cyberpunk-2019]]:
+
+   #+BEGIN_SRC emacs-lisp
+   (add-to-list 'custom-theme-load-path "~/.emacs.d/straight/repos/cyberpunk-2019/")
    #+END_SRC
 
 * OSCP
