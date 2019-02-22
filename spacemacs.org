@@ -1825,6 +1825,16 @@
       ;; (add-hook 'js2-mode-hook #'indium-interaction-mode)
       ;; (require 'yarn)
     #+END_SRC
+**** JSON
+
+     #+BEGIN_SRC emacs-lisp
+       (defun dcl-json-setup ()
+         (setq-local web-beautify-js-program "jsonpp")
+         (setq-local web-beautify-args '()))
+
+       (add-hook 'json-mode-hook 'dcl-json-setup)
+
+     #+END_SRC
 *** nov.el
     #+BEGIN_SRC emacs-lisp
   (setq nov-text-width 200)
