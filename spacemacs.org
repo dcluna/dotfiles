@@ -1102,7 +1102,7 @@
       (setq prettify-symbols-unprettify-at-point t)
 
       (defun dcl/enh-ruby-prettify-symbols ()
-        (pretty-deactivate-patterns '(:neq :Rightarrow :nil :neg :lambda :|| :and) 'ruby-mode)  ;bang-style methods aren't very visible with this
+        (pretty-deactivate-patterns '(:leq :neq :Rightarrow :nil :neg :lambda :|| :and) 'ruby-mode)  ;bang-style methods aren't very visible with this
         (turn-on-pretty-mode)
         (mapc (lambda (pair) (push pair prettify-symbols-alist))
               '(
@@ -1120,6 +1120,8 @@
                 ("=~"      .   #x2248)
                 ("->"      .   #x21a0)
                 ("&."      .   #x21d2)
+                ("<=>"     .   #x394)
+                ("<=" .  #x2264)
                 ("match"   .   #x2248)
                 ("include?"   .   #x220b)
                 ("yield" .    #x27fb)
