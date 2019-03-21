@@ -59,6 +59,8 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         javascript
+         coffeescript
          lsp
          crystal
          ansible
