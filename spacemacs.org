@@ -632,8 +632,9 @@
     (setq straight-packages '(
                               (tron-legacy-theme :type git :host github :repo "ianpan870102/Emacs-Tron-Legacy-Theme")
                               (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
-                              (forge :type git :host github :repo "magit/forge")
-                              magit-annex
+                              ;; (docker-robe :type git :host github :repo "aki2o/emacs-docker-robe")
+                              ;; (forge :type git :host github :repo "magit/forge")
+                              ;; magit-annex
                               alchemist
                               minitest
                               helpful
@@ -653,7 +654,7 @@
                               rake
                               robe
                               (rspec-mode :type git :host github :repo "pezra/rspec-mode")
-                              (magit-lfs :type git :host github :repo "Ailrun/magit-lfs")
+                              ;; (magit-lfs :type git :host github :repo "Ailrun/magit-lfs")
                               (rmsbolt :type git :host gitlab :repo "jgkamat/rmsbolt")
                               evil-collection
                               evil
@@ -1706,7 +1707,7 @@
 
       (setq git-link-use-commit t)
 
-      (require 'magit-lfs)
+      ;; (require 'magit-lfs)
 
       (magit-wip-mode 1)
 
