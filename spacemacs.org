@@ -133,7 +133,10 @@
          (clojure :variables clojure-enable-fancify-symbols t)
          go
          evernote
-         (colors :variables colors-colorize-identifiers 'all colors-enable-nyan-cat-progress-bar (display-graphic-p))
+         (colors :variables
+                 colors-colorize-identifiers 'all
+                 colors-enable-nyan-cat-progress-bar (display-graphic-p)
+                 nyan-minimum-window-width 64)
          theming
          themes-megapack
          ;; python-extra
@@ -539,7 +542,7 @@
       "Initialization function for user code.
     It is called immediately after `dotspacemacs/init'.  You are free to put any
     user code."
-      (setq-default ruby-version-manager 'rvm)
+      (setq-default ruby-version-manager 'rbenv)
       (setq-default ruby-enable-ruby-on-rails-support t)
       ;; (setq spacemacs--custom-file (expand-file-name ".custom-settings" "~/dotfiles/"))
       )
@@ -633,7 +636,8 @@
                               (tron-legacy-theme :type git :host github :repo "ianpan870102/Emacs-Tron-Legacy-Theme")
                               (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
                               ;; (docker-robe :type git :host github :repo "aki2o/emacs-docker-robe")
-                              ;; (forge :type git :host github :repo "magit/forge")
+                              (transient :type git :host github :repo "magit/transient")
+                              (forge :type git :host github :repo "magit/forge")
                               ;; magit-annex
                               alchemist
                               minitest
@@ -676,7 +680,7 @@
                                                 :upstream (:host github
                                                                  :repo "emacs-jp/helm-c-yasnippet"))
                               vue-mode
-                              ;; magit
+                              magit
                               ))
   #+END_SRC
 
@@ -1709,6 +1713,7 @@
 
       ;; (require 'magit-lfs)
 
+      (require 'magit)
       (magit-wip-mode 1)
 
       (magit-define-popup-action 'magit-log-popup ?w "WIP log" 'magit-wip-log)
@@ -1819,6 +1824,12 @@
 
      #+BEGIN_SRC emacs-lisp
      (setq inf-ruby-default-implementation "pry")
+     #+END_SRC
+
+**** Rbenv
+
+     #+BEGIN_SRC emacs-lisp
+       (setq rbenv-executable (s-chomp (shell-command-to-string "which rbenv")))
      #+END_SRC
 
 *** Rust
@@ -2005,6 +2016,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'auto-minor-mode-alist '("spec\/factories\/.*\.rb$" . rspec-mode))
+     (add-to-list 'auto-minor-mode-alist '("data.org.gpg$" . read-only-mode))
    #+END_SRC
 
 ** Evil
