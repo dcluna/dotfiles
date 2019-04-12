@@ -1078,6 +1078,8 @@
       ;; (setq docker-compose-run-buffer-name-function (lambda (service command) (format "*%s %s*" service command)))
 
       (setq docker-compose-run-arguments '("-e PAGER=/bin/cat"))
+
+      (setq docker-container-ls-arguments '("--all" "--filter status=running"))
     #+END_SRC
     
     With Philippe's branch (see
@@ -1850,6 +1852,7 @@
          (setq-local web-beautify-args '()))
 
        (add-hook 'json-mode-hook 'dcl-json-setup)
+       (add-hook 'js2-mode-hook 'dcl-json-setup)
 
      #+END_SRC
 *** nov.el
