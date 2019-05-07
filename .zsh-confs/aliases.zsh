@@ -21,6 +21,7 @@ alias brspec='bundle exec rspec'
 alias ghist='history | grep -i'
 alias re="remacsclient -c"
 alias rec='remacsclient -nw -a ""'
+alias spacevim='docker run -it --rm spacevim/spacevim nvim'
 
 # cleans a block of text between $1 and $2 patterns
 function cleanbetween() {
