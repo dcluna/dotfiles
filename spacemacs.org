@@ -1877,6 +1877,10 @@
 
       (add-to-list 'org-latex-classes '("awesomecv" "\\documentclass[12pt,a4paper,sans,unicode]{awesome-cv}"
                                         ("\\lettersection{%s}" . "\\lettersection*{%s}")))
+
+      (add-to-list 'org-latex-classes '("moderncv" "\\documentclass[12pt,a4paper,sans,unicode]{moderncv}"
+                                        ("\\section{%s}" . "\\section*{%s}")
+                                        ("\\cvitem{%s}" . "\\cvitem{%s}")))
     #+END_SRC
 *** Emacspeak
     #+BEGIN_SRC emacs-lisp
