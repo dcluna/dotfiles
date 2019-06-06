@@ -180,6 +180,8 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          sunburn-theme
+                                          grayscale-theme
                                           iodine-theme
                                           hydandata-light-theme
                                           github-modern-theme
@@ -382,7 +384,11 @@
                                               spacemacs-light
                                               solarized-light
                                               solarized-dark
+                                              grayscale
                                               eink
+                                              sunburn
+                                              creamsody
+                                              underwater
                                               leuven
                                               monokai
                                               zenburn
