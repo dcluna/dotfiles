@@ -180,6 +180,7 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          kaolin-themes
                                           sunburn-theme
                                           grayscale-theme
                                           iodine-theme
@@ -359,6 +360,17 @@
                                               ;; tron
                                               ;; eziam-dark
                                               ;; eziam-light
+                                              kaolin-dark
+                                              kaolin-light
+                                              kaolin-aurora
+                                              kaolin-bubblegum
+                                              kaolin-eclipse
+                                              kaolin-temple
+                                              kaolin-galaxy
+                                              kaolin-ocean
+                                              kaolin-valley-dark
+                                              kaolin-valley-light
+                                              kaolin-mono-dark
                                               seti
                                               sanityinc-tomorrow-eighties
                                               sanityinc-solarized-light
