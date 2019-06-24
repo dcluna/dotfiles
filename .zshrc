@@ -99,7 +99,7 @@ ZSH_THEME="spaceship"
 # Add wi2gold:$HOME/bin/android-ndk-r10d:$HOME/bin/jdk1.8.0_31/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-plugins=(tmate git ruby rails rake rake-fast rbenv node nvm npm nvm-auto yarn rust vi-mode osx)
+plugins=(tmate git ruby rails rake rake-fast rbenv node nvm npm nvm-auto yarn rust vi-mode osx zsh-autosuggestions zsh-syntax-highlighting zsh-completions history-substring-search)
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 
