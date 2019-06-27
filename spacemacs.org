@@ -2045,6 +2045,12 @@
    #+END_SRC
 
 ** Evil
+   Shortcut for going to the definition in the tag file:
+
+   #+BEGIN_SRC emacs-lisp
+     (define-key evil-motion-state-map "g]" 'evil-jump-to-tag)
+   #+END_SRC
+
    #+BEGIN_SRC emacs-lisp
      (evil-global-set-key 'normal (kbd "K") 'newline-and-indent)
      (evil-global-set-key 'normal (kbd "g b") 'browse-url-at-point)
