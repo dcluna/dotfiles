@@ -59,6 +59,7 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         systemd
          javascript
          coffeescript
          lsp
@@ -114,7 +115,7 @@
                           auto-completion-enable-help-tooltip 'manual
                           auto-completion-enable-sort-by-usage t
                           auto-completion-enable-snippets-in-popup t
-                          auto-completion-idle-delay nil
+                          auto-completion-idle-delay 0.3
                           :disabled-for org spacemacs-org)
          ;; angularjs
          sql
@@ -383,6 +384,8 @@
                                               labburn
                                               sourcerer
                                               alect-light
+                                              gruvbox-light-hard
+                                              moe-dark
                                               moe-light
                                               ;; doom-dark
                                               doom-one
