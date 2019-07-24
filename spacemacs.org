@@ -181,6 +181,7 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          gif-screencast
                                           kaolin-themes
                                           sunburn-theme
                                           grayscale-theme
@@ -654,6 +655,7 @@
 
 
     (setq straight-packages '(
+                              git-link
                               (tron-legacy-theme :type git :host github :repo "ianpan870102/Emacs-Tron-Legacy-Theme")
                               (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
                               ;; (docker-robe :type git :host github :repo "aki2o/emacs-docker-robe")
@@ -2002,6 +2004,15 @@
         (spacemacs/declare-prefix "o y" "yasnippets" "yasnippets-custom-keymap"))
     #+END_SRC
 
+*** Ruby indentation
+
+    #+BEGIN_SRC emacs-lisp
+      (eval-after-load 'mode-local
+        '(progn
+          (setq-mode-local ruby-mode yas-also-auto-indent-first-line t)
+          (setq-mode-local enh-ruby-mode yas-also-auto-indent-first-line t)))
+    #+END_SRC
+
 ** Nethack-el
    First, install nethack-{lisp,el}, then use this:
 
@@ -2227,6 +2238,25 @@
 
    #+BEGIN_SRC emacs-lisp
      (setq magit-repository-directories (list (cons "/Users/dluna/Projects/Chime/" 1)))
+   #+END_SRC
+
+** Gif-screencast
+
+   #+BEGIN_SRC emacs-lisp
+     (eval-after-load 'gif-screencast
+       '(progn
+          (evil-ex-define-cmd "gifstart" 'gif-screencast)
+          (evil-ex-define-cmd "gifpause" 'gif-screencast-toggle-pause)
+          (evil-ex-define-cmd "gifstop" 'gif-screencast-stop)))
+   #+END_SRC
+
+   From the install instructions for MacOS:
+
+   #+BEGIN_SRC emacs-lisp
+     (with-eval-after-load 'gif-screencast
+       (setq gif-screencast-args '("-x")) ;; To shut up the shutter sound of `screencapture' (see `gif-screencast-command').
+       (setq gif-screencast-cropping-program "mogrify") ;; Optional: Used to crop the capture to the Emacs frame.
+       (setq gif-screencast-capture-format "ppm")) ;; Optional: Required to crop captured images.
    #+END_SRC
 
 ** Custom color themes
