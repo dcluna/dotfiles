@@ -2268,6 +2268,17 @@
      (add-to-list 'custom-theme-load-path "~/.emacs.d/straight/repos/Emacs-Tron-Legacy-Theme/")
    #+END_SRC
 
+*** Hl-todo
+
+    https://github.com/tarsius/hl-todo is the package for higlighting certain
+    comments in code.
+
+    #+BEGIN_SRC emacs-lisp
+      (push
+       '("DEPRECATED" . "#cc9393")
+       hl-todo-keyword-faces)
+    #+END_SRC
+
 * OSCP
 
   #+BEGIN_SRC emacs-lisp :tangle no
