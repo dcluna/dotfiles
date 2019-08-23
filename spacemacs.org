@@ -1854,7 +1854,7 @@
 **** Rbenv
 
      #+BEGIN_SRC emacs-lisp
-       (setq rbenv-executable (s-chomp (shell-command-to-string "which rbenv")))
+       (setq rbenv-executable "/usr/local/bin/rbenv")
      #+END_SRC
 
 *** Rust
@@ -2279,6 +2279,13 @@
        hl-todo-keyword-faces)
     #+END_SRC
 
+** Time zones
+
+   #+BEGIN_SRC emacs-lisp
+     (with-eval-after-load 'time
+       (setq display-time-world-list (append zoneinfo-style-world-list '(("Etc/GMT0" "UTC")))))
+   #+END_SRC
+   
 * OSCP
 
   #+BEGIN_SRC emacs-lisp :tangle no
