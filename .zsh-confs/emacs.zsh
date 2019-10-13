@@ -15,3 +15,5 @@ export EMACSPEAK_DIR="$HOME/code/emacspeak"
 export PATH="$HOME/bin/mbrola:$PATH"
 
 export MANPAGER="eless"
+
+export INFOPATH="$HOME/.emacs.d/straight/repos/forge/docs:$INFOPATH"
