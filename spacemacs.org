@@ -182,6 +182,7 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          copy-as-format
                                           gif-screencast
                                           kaolin-themes
                                           sunburn-theme
