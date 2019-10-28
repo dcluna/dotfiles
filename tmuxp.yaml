@@ -1,0 +1,20 @@
+session_name: dcl
+windows:
+- window_name: apps
+  layout: tiled
+  shell_command_before:
+    - cd ~/Projects/Chime/bank-account-service # run as a first command in all panes
+  panes:
+    - lazydocker
+- window_name: htop
+  layout: tiled
+  panes:
+    - htop
+- window_name: gotop
+  layout: tiled
+  panes:
+    - gotop
+- window_name: rtv
+  layout: tiled
+  panes:
+    - rtv
