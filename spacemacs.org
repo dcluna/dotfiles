@@ -175,14 +175,6 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
-                                          ;; (eziam-theme
-                                          ;;  :location (recipe :repo "thblt/eziam-theme-emacs"
-                                          ;;                    :fetcher github
-                                          ;;                    :files ("*.el"))
-                                          ;;  :upgrade 't)
-                                          ;; epkg
-                                          ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
-                                          ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
                                           wakatime
                                           copy-as-format
                                           gif-screencast
@@ -197,7 +189,6 @@
                                           org-jira
                                           (org-rich-yank :location (recipe :fetcher github :repo "unhammer/org-rich-yank" :files ("*.el") :upgrade 't))
                                           ialign
-                                          ;; sublimity
                                           beacon
                                           helpful
                                           (rusti :location (recipe :fetcher github :repo "ruediger/rusti.el" :files ("rusti.el") :upgrade 't))
@@ -235,15 +226,9 @@
                                           suggest
                                           tramp-term
                                           dark-mint-theme
-                                          ;; (meme
-                                          ;;  :location (recipe :repo "larsmagne/meme"
-                                          ;;                    :fetcher github
-                                          ;;                    :files ("*"))
-                                          ;;  :upgrade 't)
                                           yagist
                                           sage-shell-mode
                                           intero
-                                          ;; (mocha :location (recipe :fetcher file :path "/code/mocha.el"))
                                           (howdoi :location (recipe
                                                              :repo "dcluna/emacs-howdoi"
                                                              :fetcher github
@@ -256,20 +241,12 @@
                                           rainbow-mode
                                           paredit
                                           ruby-refactor
-                                          shen-mode
                                           nvm
                                           nov
                                           yarn-mode
-                                          ;; (indium :location (recipe :fetcher file :path "/code/Indium") :upgrade 't)
                                           package-lint
                                           flycheck-package
-                                          ;; doom-themes
-                                          ;; ,(dcl/local-package 'rspec-mode)
-                                          ;; (yasnippet-ruby-mode
-                                          ;;  :location (recipe :repo "bmaland/yasnippet-ruby-mode"
-                                          ;;                    :fetcher github
-                                          ;;                    :files ("*.el")))
-                                          ;; ,(dcl/local-package 'flycheck)
+
                                           (exercism
                                            :location (recipe :repo "canweriotnow/exercism-emacs"
                                                              :fetcher github
@@ -280,27 +257,8 @@
                                                              :fetcher github
                                                              :files ("*.el"))
                                            :upgrade 't)
-                                          (shen-elisp
-                                           :location (recipe :repo "deech/shen-elisp"
-                                                             :fetcher github
-                                                             :files ("shen*.el"))
-                                           :upgrade 't)
-                                          ;; (pmd :location "/code-of-mine/pmd-el")
-                                          ;; (pmd :location (recipe :fetcher file :path "/code-of-mine/pmd-el"))
-                                          ;; (pmd
-                                          ;;  :location (recipe :repo "dcluna/pmd.el"
-                                          ;;                    :fetcher github
-                                          ;;                    :files ("*.el")))
-                                          ;; (yarn.el :location "/code/yarn.el/")
-                                          ,(dcl/local-package 'sass-mode)
-                                          ;; ,(dcl/local-package 'magit)
-                                          ;; (sass-mode :location (recipe :fetcher github :repo "dcluna/sass-mode"))
-                                          ;; (embrace :location (recipe :fetcher github :repo "dcluna/embrace.el"))
                                           evil-embrace
-                                          ;; floobits
-                                          ;; lispyville ;; not yet available as of Thu Apr 21 18:32:36 BRT 2016
                                           editorconfig
-                                          ,(dcl/local-package 'stock-ticker)
                                           wsd-mode)
 
        ;; A list of packages and/or extensions that will not be install and loaded.
@@ -1615,7 +1573,6 @@
      (add-to-list 'auto-mode-alist '("\\spec.rb\\'" . rspec-mode))
      (add-to-list 'auto-mode-alist '("\\.yml.example\\'" . yaml-mode))
      (add-to-list 'auto-mode-alist '("\\.cap\\'" . enh-ruby-mode))
-     (add-to-list 'auto-mode-alist '("\\.shen\\'" . shen-mode))
      (add-to-list 'auto-mode-alist '("\\.rb_trace\\'" . ruby-trace-mode))
      (add-to-list 'auto-mode-alist '("\\.sequelizerc\\'" . js2-mode))
 
