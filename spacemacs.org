@@ -182,6 +182,7 @@
                                           ;; epkg
                                           ;; (Epkg :location (recipe :fetcher file :path "~/code/epkg/"))
                                           ;; (borg :location (recipe :fetcher file :path "~/code/borg/"))
+                                          wakatime
                                           copy-as-format
                                           gif-screencast
                                           kaolin-themes
@@ -2288,6 +2289,13 @@
        (setq display-time-world-list (append zoneinfo-style-world-list '(("Etc/GMT0" "UTC")))))
    #+END_SRC
    
+** Wakatime
+
+   #+BEGIN_SRC emacs-lisp
+     (setq wakatime-api-key (getenv "WAKATIME_API_KEY"))
+     (setq wakatime-cli-path "/usr/local/bin/wakatime")
+   #+END_SRC
+
 * OSCP
 
   #+BEGIN_SRC emacs-lisp :tangle no
