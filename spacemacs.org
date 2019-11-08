@@ -175,6 +175,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          (multi-libvterm :location (recipe :fetcher github :repo "suonlight/multi-libvterm" :files ("*.el") :upgrade 't))
                                           wakatime
                                           copy-as-format
                                           gif-screencast
