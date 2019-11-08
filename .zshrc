@@ -100,6 +100,7 @@ ZSH_THEME="spaceship"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 plugins=(tmate git ruby rails rake rake-fast rbenv node nvm npm yarn rust vi-mode osx zsh-autosuggestions zsh-syntax-highlighting zsh-completions history-substring-search docker docker-compose)
+plugins=(git ruby rails rake rake-fast rbenv node nvm npm yarn rust vi-mode osx history-substring-search docker docker-compose)
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 
@@ -107,7 +108,7 @@ source $ZSH/oh-my-zsh.sh
 
 source /usr/local/share/antigen/antigen.zsh
 
-for file in `ls ~/.zsh-confs/*.zsh`; do
+for file in `ls ~/dotfiles/.zsh-confs/*.zsh`; do
     source $file
 done
 
@@ -227,7 +228,7 @@ export PATH="$PATH:/home/dancluna/.bin"
 # show my stock tickers on every new term
 if [[ -n "$EMACS" ]]; then
 else
-    ~/.bin/ticker.sh $(cat ~/.ticker.conf)
+    ~/.ghq/github.com/pstadler/ticker.sh/ticker.sh $(cat ~/dotfiles/.ticker.conf)
 fi
 
 eval "$(direnv hook zsh)"

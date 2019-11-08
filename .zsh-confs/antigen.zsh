@@ -12,6 +12,9 @@ antigen bundles <<EOBUNDLES
     pkulev/zsh-rustup-completion
     zpm-zsh/ssh
     RobertAudi/tsm
+    zsh-users/zsh-autosuggestions
+    zsh-users/zsh-syntax-highlighting
+    zsh-users/zsh-completions
 EOBUNDLES
 
 antigen apply
