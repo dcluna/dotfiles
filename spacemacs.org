@@ -175,6 +175,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          inflections
                                           (multi-libvterm :location (recipe :fetcher github :repo "suonlight/multi-libvterm" :files ("*.el") :upgrade 't))
                                           wakatime
                                           copy-as-format
@@ -640,7 +641,6 @@
                               exec-path-from-shell
                               (pmd :type git :host github :repo "dcluna/pmd.el")
                               (emacs-direnv  :type git :host github :repo "wbolster/emacs-direnv")
-                              projectile-rails
                               rake
                               robe
                               (rspec-mode :type git :host github :repo "pezra/rspec-mode")
