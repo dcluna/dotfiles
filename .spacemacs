@@ -213,7 +213,7 @@ static char *gnus-pointer[] = {
    '(woman-path
      '("/home/dancluna/.rvm/gems/ruby-2.3.1/gems/bundler-1.13.6/man"))
    '(yas-snippet-dirs
-     '("/mnt/lmde/home/dancluna/yasnippets" "/home/dancluna/.emacs.d/private/snippets/" yas-installed-snippets-dir "/home/dancluna/.emacs.d/layers/+completion/auto-completion/local/snippets" "/home/dancluna/.emacs.d/elpa/clojure-snippets-20170713.2310/snippets" "/home/dancluna/.emacs.d/elpa/common-lisp-snippets-20170522.2147/snippets" "/home/dancluna/.emacs.d/elpa/haskell-snippets-20160918.1722/snippets")))
+     '("/Users/danielluna/yasnippets" "/Users/danielluna/.emacs.d/private/snippets/" yas-installed-snippets-dir "/Users/danielluna/.emacs.d/layers/+completion/auto-completion/local/snippets" "/Users/danielluna/.emacs.d/elpa/clojure-snippets-20170713.2310/snippets" "/Users/danielluna/.emacs.d/elpa/common-lisp-snippets-20170522.2147/snippets" "/Users/danielluna/.emacs.d/elpa/haskell-snippets-20160918.1722/snippets")))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
