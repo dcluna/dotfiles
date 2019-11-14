@@ -248,6 +248,11 @@
                                           yarn-mode
                                           package-lint
                                           flycheck-package
+                                          (doom-snippets
+                                           :location (recipe :repo "hlissner/doom-snippets"
+                                                             :fetcher github
+                                                             :files ("*")))
+
                                           (yasnippet-ruby-mode
                                            :location (recipe :repo "bmaland/yasnippet-ruby-mode"
                                                              :fetcher github
