@@ -248,6 +248,10 @@
                                           yarn-mode
                                           package-lint
                                           flycheck-package
+                                          (yasnippet-ruby-mode
+                                           :location (recipe :repo "bmaland/yasnippet-ruby-mode"
+                                                             :fetcher github
+                                                             :files ("*")))
 
                                           (exercism
                                            :location (recipe :repo "canweriotnow/exercism-emacs"
