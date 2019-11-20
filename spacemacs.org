@@ -2156,7 +2156,7 @@
 ** Tags
 
    #+BEGIN_SRC emacs-lisp
-   (setq projectile-tags-command "uctags -Re -f \"%s\" %s")
+   (setq projectile-tags-command "ctags -Re -f \"%s\" %s")
    #+END_SRC
 
 ** Projectile
