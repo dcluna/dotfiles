@@ -285,14 +285,9 @@
   :END:
 
   #+BEGIN_SRC emacs-lisp
-(defun dcl/local-package (pkg-sym)
-  (let ((pkg-location (concat (getenv "CODE_DIR") "/" (symbol-name pkg-sym))) )
-    ;; (push pkg-location load-path)
-    (list pkg-sym :location  pkg-location)))
-
-(defun dcl/shuffle (list)
-  "Destructively shuffles LIST."
-  (sort list (lambda (a b) (nth (random 2) '(nil t)))))
+    (defun dcl/shuffle (list)
+      "Destructively shuffles LIST."
+      (sort list (lambda (a b) (nth (random 2) '(nil t)))))
   #+END_SRC
 ** Init
   :PROPERTIES:
@@ -335,6 +330,10 @@
                                               ;; tron
                                               ;; eziam-dark
                                               ;; eziam-light
+                                              twilight-bright
+                                              hemisu-light
+                                              apropospriate-light
+                                              flatui
                                               kaolin-dark
                                               kaolin-light
                                               kaolin-aurora
@@ -409,21 +408,26 @@
                                               hydandata-light
                                               organic-green
                                               ))
-                             (cons 'doom-one (dcl/shuffle '(
-                                                            plan9
-                                                            organic-green
-                                                            ritchie
-                                                            leuven
-                                                            alect-light
-                                                            moe-light
-                                                            sourcerer
-                                                            clues
-                                                            noctilux
-                                                            badwolf
-                                                            material
-                                                            spacemacs-dark
-                                                            gruvbox
-                                                            monokai))))
+                             (cons (dcl/shuffle '(
+                                                  twilight-bright
+                                                  hemisu-light
+                                                  apropospriate-light
+                                                  flatui
+                                                  doom-one
+                                                  plan9
+                                                  organic-green
+                                                  ritchie
+                                                  leuven
+                                                  alect-light
+                                                  moe-light
+                                                  sourcerer
+                                                  clues
+                                                  noctilux
+                                                  badwolf
+                                                  material
+                                                  spacemacs-dark
+                                                  gruvbox
+                                                  monokai))))
        ;; If non nil the cursor color matches the state color.
        dotspacemacs-colorize-cursor-according-to-state t
        ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -1942,9 +1946,16 @@
 ** Yasnippets
 
    #+BEGIN_SRC emacs-lisp
-      (defvar dcl-yas-snippets-dir (expand-file-name "yasnippets" "~/") "Personal yasnippets directory")
-      (setq yas--default-user-snippets-dir dcl-yas-snippets-dir)
-      (add-to-list 'yas-snippet-dirs dcl-yas-snippets-dir)
+     (if-let (yasnippet-snippets-snippet-dir
+              (concat
+               (file-name-directory (locate-library "yasnippet-snippets"))
+               "snippets"))
+         (add-to-list 'yas-snippet-dirs yasnippet-snippets-snippet-dir t))
+
+
+     (defvar dcl-yas-snippets-dir (expand-file-name "yasnippets" "~/") "Personal yasnippets directory")
+     (setq yas--default-user-snippets-dir dcl-yas-snippets-dir)
+     (add-to-list 'yas-snippet-dirs dcl-yas-snippets-dir)
     #+END_SRC
 
     The following gets us in normal mode upon snippet expansion - easier if/when
@@ -2203,12 +2214,6 @@
        "Default action for comint history."
        (with-helm-current-buffer
          (set-register ?h candidate)))
-   #+END_SRC
-
-** Multi-magit
-
-   #+BEGIN_SRC emacs-lisp
-     (setq magit-repository-directories (list (cons "/Users/dluna/Projects/Chime/" 1)))
    #+END_SRC
 
 ** Gif-screencast
