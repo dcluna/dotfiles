@@ -226,9 +226,9 @@ export PATH="$PATH:/home/dancluna/anaconda2/bin"
 export PATH="$PATH:/home/dancluna/.bin"
 
 # show my stock tickers on every new term
-if [[ -n "$EMACS" ]]; then
-else
+if [ -n "$TMUX" ] && [ -z "$EMACS" ]; then
     ~/.ghq/github.com/pstadler/ticker.sh/ticker.sh $(cat ~/dotfiles/.ticker.conf)
+else
 fi
 
 eval "$(direnv hook zsh)"
