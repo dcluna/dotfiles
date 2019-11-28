@@ -408,7 +408,7 @@
                                               hydandata-light
                                               organic-green
                                               ))
-                             (cons (dcl/shuffle '(
+                             (dcl/shuffle '(
                                                   twilight-bright
                                                   hemisu-light
                                                   apropospriate-light
@@ -427,7 +427,7 @@
                                                   material
                                                   spacemacs-dark
                                                   gruvbox
-                                                  monokai))))
+                                                  monokai)))
        ;; If non nil the cursor color matches the state color.
        dotspacemacs-colorize-cursor-according-to-state t
        ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -1946,12 +1946,12 @@
 ** Yasnippets
 
    #+BEGIN_SRC emacs-lisp
-     (if-let (yasnippet-snippets-snippet-dir
-              (concat
-               (file-name-directory (locate-library "yasnippet-snippets"))
-               "snippets"))
-         (add-to-list 'yas-snippet-dirs yasnippet-snippets-snippet-dir t))
-
+     (with-eval-after-load 'yasnippet-snippets
+       (if-let (yasnippet-snippets-snippet-dir
+                 (concat
+                   (file-name-directory (locate-library "yasnippet-snippets"))
+                   "snippets"))
+           (add-to-list 'yas/snippet-dirs yasnippet-snippets-snippet-dir t)))
 
      (defvar dcl-yas-snippets-dir (expand-file-name "yasnippets" "~/") "Personal yasnippets directory")
      (setq yas--default-user-snippets-dir dcl-yas-snippets-dir)
