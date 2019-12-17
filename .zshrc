@@ -49,7 +49,7 @@ export SPACESHIP_PROMPT_ORDER=(
     exit_code     # Exit code section
     char          # Prompt character
 )
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
 #     # source "$ZSH/custom/themes/spaceship.zsh-theme"
 # fi
 
