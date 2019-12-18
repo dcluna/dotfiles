@@ -17,6 +17,7 @@ antigen bundles <<EOBUNDLES
     zsh-users/zsh-autosuggestions
     zsh-users/zsh-syntax-highlighting
     zsh-users/zsh-completions
+    dcluna/tmate-zsh-plugin
 EOBUNDLES
 
 antigen apply
