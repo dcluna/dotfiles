@@ -17,23 +17,24 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(Linum-format "%7i ")
-   '(ansi-color-faces-vector
-     [default default default italic underline success warning])
+   '(ansi-color-faces-vector [default default default italic underline success warning])
    '(ansi-color-names-vector
      ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
    '(background-color "#202020")
    '(background-mode dark)
-   '(compilation-message-face 'default)
+   '(compilation-message-face (quote default))
    '(cursor-color "#cccccc")
-   '(cursor-type 'bar)
+   '(cursor-type (quote bar))
    '(default-frame-alist
-      '((buffer-predicate . spacemacs/useful-buffer-p)
+      (quote
+       ((buffer-predicate . spacemacs/useful-buffer-p)
         (vertical-scroll-bars)
         (alpha 85)
-        (fullscreen . fullboth)))
-   '(diary-entry-marker 'font-lock-variable-name-face)
+        (fullscreen . maximized))))
+   '(diary-entry-marker (quote font-lock-variable-name-face))
    '(emms-mode-line-icon-image-cache
-     '(image :type xpm :ascent center :data "/* XPM */
+     (quote
+      (image :type xpm :ascent center :data "/* XPM */
 static char *note[] = {
 /* width height num_colors chars_per_pixel */
 \"    10   11        2            1\",
