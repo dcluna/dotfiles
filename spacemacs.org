@@ -59,6 +59,7 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         kubernetes
          dap
          latex
          systemd
@@ -537,13 +538,20 @@
   :header-args: :noweb-ref spacemacs-user-init :tangle no
   :END:
   #+BEGIN_SRC emacs-lisp
-     (defun dotspacemacs/user-init ()
+    (defun dotspacemacs/user-init ()
       "Initialization function for user code.
     It is called immediately after `dotspacemacs/init'.  You are free to put any
     user code."
       (setq-default ruby-version-manager 'rbenv)
       (setq-default ruby-enable-ruby-on-rails-support t)
-      ;; (setq spacemacs--custom-file (expand-file-name ".custom-settings" "~/dotfiles/"))
+      (setq configuration-layer-elpa-archives
+            '(("melpa-stable" . "stable.melpa.org/packages/")
+              ("melpa" . "melpa.org/packages/")
+              ("org" . "orgmode.org/elpa/")
+              ("gnu" . "elpa.gnu.org/packages/")))
+      (add-to-list 'package-pinned-packages '(magit . "melpa-stable"))
+      (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))
+      (add-to-list 'package-pinned-packages '(async . "melpa-stable"))
       )
   #+END_SRC
 * Borg.el (package manager)
@@ -636,10 +644,10 @@
                               (tron-legacy-theme :type git :host github :repo "ianpan870102/Emacs-Tron-Legacy-Theme")
                               (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
                               ;; (docker-robe :type git :host github :repo "aki2o/emacs-docker-robe")
-                              (transient :type git :host github :repo "magit/transient")
-                              (forge :type git :host github :repo "magit/forge")
+                              ;; (transient :type git :host github :repo "magit/transient")
+                              ;; (forge :type git :host github :repo "magit/forge")
                               ;; magit-annex
-                              alchemist
+                              ;; alchemist
                               minitest
                               helpful
                               (enh-ruby-mode :type git :host github :repo "zenspider/enhanced-ruby-mode")
@@ -647,7 +655,7 @@
                               znc
                               gist
                               docker
-                              with-editor
+                              ;; with-editor
                               ;; (multi-magit :type git :host github :repo "luismbo/multi-magit")
                               groovy-mode
                               anaphora
@@ -659,8 +667,8 @@
                               (rspec-mode :type git :host github :repo "pezra/rspec-mode")
                               ;; (magit-lfs :type git :host github :repo "Ailrun/magit-lfs")
                               (rmsbolt :type git :host gitlab :repo "jgkamat/rmsbolt")
-                              evil-collection
-                              evil
+                              ;; evil-collection
+                              ;; evil
                               pretty-mode
                               helm-ghq
                               ghq
@@ -670,7 +678,7 @@
                               jq-mode
                               (rubocop :type git :host github :repo "dcluna/rubocop-emacs"
                                        :upstream (:host github :repo "bbatsov/rubocop-emacs"))
-                              org
+                              ;; org
                               (vlf :type git :host github :repo "m00natic/vlfi")
                               evil-numbers
                               auto-minor-mode
@@ -679,7 +687,7 @@
                                                 :upstream (:host github
                                                                  :repo "emacs-jp/helm-c-yasnippet"))
                               vue-mode
-                              magit
+                              ;; magit
                               ))
   #+END_SRC
 
