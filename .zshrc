@@ -103,6 +103,10 @@ plugins=(git ruby rails rake rake-fast rbenv node nvm npm yarn rust vi-mode osx 
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 source /usr/local/share/antigen/antigen.zsh
