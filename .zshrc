@@ -154,6 +154,9 @@ export CHROMEDRIVER="/opt/google/chrome-beta/google-chrome-beta"
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
+# enable vi-mode by default in new shells
+spaceship_vi_mode_enable
+
 export INFOPATH="$HOME/Downloads:$HOME/code/python-info/build:$HOME/code/guix/doc:/usr/local/share/info:/usr/share/info"
 
 export NVM_DIR="$HOME/.nvm"
