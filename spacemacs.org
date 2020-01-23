@@ -177,6 +177,8 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          reveal-in-osx-finder
+                                          jest
                                           inflections
                                           (multi-libvterm :location (recipe :fetcher github :repo "suonlight/multi-libvterm" :files ("*.el") :upgrade 't))
                                           wakatime
