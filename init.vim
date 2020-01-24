@@ -8,6 +8,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'asvetliakov/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
+Plug 'rhysd/clever-f.vim'
 
 call plug#end()
 
