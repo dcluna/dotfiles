@@ -9,11 +9,14 @@ Plug 'asvetliakov/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
+Plug 'tpope/vim-repeat'
 
 call plug#end()
 
 let g:mapleader = " "
 let g:maplocalleader = ','
+let g:sneak#label = 1
+let g:sneak#s_next = 1
 
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
