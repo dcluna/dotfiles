@@ -1958,12 +1958,8 @@
 ** Yasnippets
 
    #+BEGIN_SRC emacs-lisp
-     (with-eval-after-load 'yasnippet-snippets
-       (if-let (yasnippet-snippets-snippet-dir
-                 (concat
-                   (file-name-directory (locate-library "yasnippet-snippets"))
-                   "snippets"))
-           (add-to-list 'yas/snippet-dirs yasnippet-snippets-snippet-dir t)))
+     (require 'yasnippet-snippets)
+     (yasnippet-snippets-initialize)
 
      (defvar dcl-yas-snippets-dir (expand-file-name "yasnippets" "~/") "Personal yasnippets directory")
      (setq yas--default-user-snippets-dir dcl-yas-snippets-dir)
