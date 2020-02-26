@@ -99,7 +99,7 @@ export SPACESHIP_PROMPT_ORDER=(
 # Add wi2gold:$HOME/bin/android-ndk-r10d:$HOME/bin/jdk1.8.0_31/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-plugins=(git ruby rails rake rake-fast rbenv node nvm npm yarn rust vi-mode osx history-substring-search docker docker-compose)
+plugins=(git ruby rails rake rake-fast rbenv node nvm npm yarn rust vi-mode osx history-substring-search docker docker-compose pyenv history)
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 
