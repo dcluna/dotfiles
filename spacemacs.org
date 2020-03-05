@@ -2161,6 +2161,24 @@
           (spacemacs/declare-prefix-for-mode mode "mos" "comint-search")))
     #+END_SRC
     
+*** Dired keymap
+    First, we need to add the location of this convenience file to my load-path:
+
+    #+begin_src emacs-lisp
+      (add-to-list 'load-path "~/.ghq/github.com/dcluna/dotfiles/elisp/")
+
+      (if (file-exists-p "~/.ghq/github.com/dcluna/dotfiles/elisp/loaddefs.el")
+          (load-file "~/.ghq/github.com/dcluna/dotfiles/elisp/loaddefs.el"))
+    #+end_src
+
+    #+begin_src emacs-lisp
+      (let ((dired-mode-visidata-keymap (make-sparse-keymap)))
+        (define-key dired-mode-visidata-keymap "n" 'tmux-utils/visidata-open-files-in-new-windows)
+        (define-key dired-mode-visidata-keymap "a" 'tmux-utils/visidata-open-all-in-new-window)
+        (evil-leader/set-key-for-mode 'dired-mode "ov" dired-mode-visidata-keymap)
+        (spacemacs/declare-prefix-for-mode 'dired-mode "ov" "visidata"))
+    #+end_src
+
 ** Tags
 
    #+BEGIN_SRC emacs-lisp
