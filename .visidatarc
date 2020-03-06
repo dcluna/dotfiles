@@ -1,3 +1,18 @@
 from datetime import datetime
 
 options.clipboard_copy_cmd = "pbcopy"
+
+def count_distinct_string(values):
+  'Counts distinct values of string, optionally splitting by a separator'
+  separator = input("separator (optional):", "count_distinct_sep")
+  distincts = set()
+  for value in values:
+    if separator != None and len(separator) > 0:
+        for split_value in value.split(separator):
+            distincts.add(split_value)
+    else:
+      distincts.add(value)
+  return len(distincts)
+
+aggregator('str_count_distinct', count_distinct_string)
+
