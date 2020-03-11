@@ -3,7 +3,7 @@ if [ -n "$INSIDE_EMACS" ]; then
 fi
 
 export PATH="$PATH:/usr/local/global-6.6.2/bin"
-export PATH="$PATH:/Users/dluna/.bin"
+export PATH="$PATH:$HOME/.bin"
 export CRONITOR_CONFIG="/Users/dluna/.cronitor.json"
 alias eman='PAGER=less man -P eless'
 

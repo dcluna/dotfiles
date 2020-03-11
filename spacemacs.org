@@ -1844,6 +1844,28 @@
        (setq rbenv-executable "/usr/local/bin/rbenv")
      #+END_SRC
 
+**** VCR
+
+     Helper function to toggle the record mode by using an env var. Needs
+     supporting code on the repo.
+
+     #+begin_src emacs-lisp
+       (defgroup rails-custom nil
+         "Group for my custom Rails settings")
+
+       (defcustom vcr-record-mode-var
+         "VCR_RECORD_MODE"
+         "Environment variable to be used to set the record mode. Customize it on a per-project basis."
+         :type 'string
+         :group 'rails-custom)
+
+       (defun vcr/set-record-mode-in-env (record-mode)
+         (interactive (list (completing-read "Record mode: " '("unset" "all" "none" "once" "new_episodes") nil t)))
+         (if (equal record-mode "unset")
+             (setenv vcr-record-mode-var nil)
+           (setenv vcr-record-mode-var record-mode)))
+     #+end_src
+
 *** Rust
     #+BEGIN_SRC emacs-lisp
       (setq rust-format-on-save t)
