@@ -59,6 +59,9 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         (geolocation :variables
+                      geolocation-enable-automatic-theme-changer t
+                      geolocation-enable-location-service t)
          react
          kubernetes
          dap
@@ -293,6 +296,38 @@
     (defun dcl/shuffle (list)
       "Destructively shuffles LIST."
       (sort list (lambda (a b) (nth (random 2) '(nil t)))))
+
+    (defvar dcl/light-themes
+      (dcl/shuffle
+       '(twilight-bright hemisu-light apropospriate-light flatui
+                         kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
+                         doom-tomorrow-day majapahit-light plan9 alect-light
+                         gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
+                         spacemacs-light solarized-light eink leuven
+                         ritchie minimal-light doom-nord-light hydandata-light
+                         organic-green)))
+
+    (defvar dcl/dark-themes
+      (dcl/shuffle
+       '(kaolin-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
+                     kaolin-temple kaolin-galaxy kaolin-ocean kaolin-valley-dark
+                     kaolin-mono-dark seti sanityinc-tomorrow-eighties sanityinc-tomorrow-bright
+                     sanityinc-tomorrow-blue sanityinc-tomorrow-night labburn sourcerer
+                     moe-dark doom-one granger dark-mint
+                     material heroku light-blue spacemacs-dark
+                     solarized-dark grayscale sunburn creamsody
+                     underwater monokai zenburn alect-dark-alt
+                     ample-zen badwolf birds-of-paradise-plus brin bubbleberry cherry-blossom atom-dark atom-one-dark
+                     creamsody cyberpunk cyberpunk-2019 clues
+                     darkmine deeper-blue farmhouse-dark gruvbox
+                     junio noctilux subatomic purple-haze github-modern)))
+
+
+    (require 'dash)
+
+    (defvar dcl/all-themes
+      (-flatten (-zip-with (lambda (a b) (list a b)) dcl/light-themes dcl/dark-themes))
+      "Themes ready for localization package.")
   #+END_SRC
 ** Init
   :PROPERTIES:
@@ -331,108 +366,27 @@
        ;; Press <SPC> T n to cycle to the next theme in the list (works great
        ;; with 2 themes variants, one dark and one light)
        dotspacemacs-themes (if (display-graphic-p)
-                               (dcl/shuffle '(
-                                              ;; tron
-                                              ;; eziam-dark
-                                              ;; eziam-light
-                                              twilight-bright
-                                              hemisu-light
-                                              apropospriate-light
-                                              flatui
-                                              kaolin-dark
-                                              kaolin-light
-                                              kaolin-aurora
-                                              kaolin-bubblegum
-                                              kaolin-eclipse
-                                              kaolin-temple
-                                              kaolin-galaxy
-                                              kaolin-ocean
-                                              kaolin-valley-dark
-                                              kaolin-valley-light
-                                              kaolin-mono-dark
-                                              seti
-                                              sanityinc-tomorrow-eighties
-                                              sanityinc-solarized-light
-                                              sanityinc-tomorrow-bright
-                                              sanityinc-tomorrow-day
-                                              sanityinc-tomorrow-blue
-                                              sanityinc-tomorrow-night
-                                              majapahit-light
-                                              plan9
-                                              labburn
-                                              sourcerer
-                                              alect-light
-                                              gruvbox-light-hard
-                                              moe-dark
-                                              moe-light
-                                              ;; doom-dark
-                                              doom-one
-                                              granger
-                                              dark-mint
-                                              mccarthy
-                                              material
-                                              heroku
-                                              light-blue
-                                              spacemacs-dark
-                                              spacemacs-light
-                                              solarized-light
-                                              solarized-dark
-                                              grayscale
-                                              eink
-                                              sunburn
-                                              creamsody
-                                              underwater
-                                              leuven
-                                              monokai
-                                              zenburn
-                                              alect-dark-alt
-                                              ample-zen
-                                              badwolf
-                                              birds-of-paradise-plus
-                                              brin
-                                              bubbleberry
-                                              cherry-blossom
-                                              atom-dark
-                                              atom-one-dark
-                                              creamsody
-                                              cyberpunk
-                                              cyberpunk-2019
-                                              clues
-                                              darkmine
-                                              deeper-blue
-                                              farmhouse-dark
-                                              gruvbox
-                                              junio
-                                              noctilux
-                                              subatomic
-                                              purple-haze
-                                              ritchie
-                                              minimal-light
-                                              doom-nord-light
-                                              github-modern
-                                              hydandata-light
-                                              organic-green
-                                              ))
+                               dcl/all-themes
                              (dcl/shuffle '(
-                                                  twilight-bright
-                                                  hemisu-light
-                                                  apropospriate-light
-                                                  flatui
-                                                  doom-one
-                                                  plan9
-                                                  organic-green
-                                                  ritchie
-                                                  leuven
-                                                  alect-light
-                                                  moe-light
-                                                  sourcerer
-                                                  clues
-                                                  noctilux
-                                                  badwolf
-                                                  material
-                                                  spacemacs-dark
-                                                  gruvbox
-                                                  monokai)))
+                                            twilight-bright
+                                            hemisu-light
+                                            apropospriate-light
+                                            flatui
+                                            doom-one
+                                            plan9
+                                            organic-green
+                                            ritchie
+                                            leuven
+                                            alect-light
+                                            moe-light
+                                            sourcerer
+                                            clues
+                                            noctilux
+                                            badwolf
+                                            material
+                                            spacemacs-dark
+                                            gruvbox
+                                            monokai)))
        ;; If non nil the cursor color matches the state color.
        dotspacemacs-colorize-cursor-according-to-state t
        ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
