@@ -1,0 +1,62 @@
+#+TITLE: Handy scripts
+#+PROPERTY: tangle ./scripts
+#+PROPERTY: noweb yes
+#+PROPERTY: eval no
+* Generating TLS certificates
+
+  Because I followed the instructions in the following links:
+
+  - https://rossta.net/blog/local-ssl-for-rails-5.html
+
+    This is a good primer on what you need to do, and from where I took the script below.
+
+  - https://deliciousbrains.com/ssl-certificate-authority-for-local-https-development/
+
+    If I ever want to become my own CA, this is a good primer.
+
+    First, here's a script for generating an OpenSSL cnf file:
+
+    #+begin_src sh :tangle ./scripts/generate_openssl_cnf.sh :shebang "#!/bin/bash"
+      name=${1:-$(whoami)}
+      configFile=$(mktemp "./ssl/$name.cnf.XXXX")
+      cat <<-EOF > $configFile
+                [req]
+                distinguished_name = req_distinguished_name
+                x509_extensions = v3_req
+                prompt = yes
+                [req_distinguished_name]
+                CN = Issuer
+                [v3_req]
+                basicConstraints = CA:FALSE
+                keyUsage = nonRepudiation, digitalSignature, keyCertSign, cRLSign
+                extendedKeyUsage = serverAuth
+                subjectAltName = @alt_names
+                [alt_names]
+                DNS.1 = $name
+                DNS.2 = *.$name
+      EOF
+    #+end_src
+
+    And here is a script for generating a non-self-signed certificate (taken
+    from https://gist.github.com/kyledrake/d7457a46a03d7408da31):
+
+    #+begin_src sh :tangle ./scripts/generate_cert.sh :shebang "#!/bin/bash"
+      ca_key_file=ca.key
+      site_name=${1:-$(whoami)}
+      configFile=${2:-./ssl/$1.cnf}
+
+      openssl genrsa -aes256 -out ca.key 2048
+      openssl req -new -x509 -days 7300 -key ca.key -sha256 -extensions v3_ca -out ca.crt
+
+      # Generate the domain key:
+      openssl genrsa -out $site_name.key 2048
+
+      # Generate the certificate signing request
+      openssl req -sha256 -new -key $site_name.key -out $site_name.csr -config $configFile
+
+      # Sign the request with your root key
+      openssl x509 -sha256 -req -in $site_name.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out $site_name.crt -days 7300
+
+      # Check your homework:
+      openssl verify -CAfile ca.crt $site_name.crt
+    #+end_src
