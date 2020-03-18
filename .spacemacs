@@ -24,6 +24,7 @@ This function is called at the very end of Spacemacs initialization."
      [unspecified "#FFFFFF" "#d15120" "#5f9411" "#d2ad00" "#6b82a7" "#a66bab" "#6b82a7" "#505050"] t)
    '(background-color "#202020")
    '(background-mode dark)
+   '(beacon-color "#F8BBD0")
    '(compilation-message-face (quote default))
    '(cua-global-mark-cursor-color "#2aa198")
    '(cua-normal-cursor-color "#657b83")
@@ -60,7 +61,11 @@ static char *note[] = {
 \"######....\",
 \"#######..#\" };")))
    '(erc-hide-list (quote ("JOIN" "PART" "QUIT")))
+   '(evil-emacs-state-cursor (quote ("#D50000" hbar)) t)
    '(evil-escape-key-sequence "jk")
+   '(evil-insert-state-cursor (quote ("#D50000" bar)) t)
+   '(evil-normal-state-cursor (quote ("#F57F17" box)) t)
+   '(evil-visual-state-cursor (quote ("#66BB6A" box)) t)
    '(evil-want-Y-yank-to-eol nil)
    '(fci-rule-character-color "#202020")
    '(fci-rule-color "#f6f0e1")
@@ -93,6 +98,7 @@ static char *gnus-pointer[] = {
 \"###########.######\" };")) t)
    '(helm-completion-style (quote emacs))
    '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
+   '(highlight-indent-guides-auto-enabled nil)
    '(highlight-symbol-colors
      (quote
       ("#efe4da49afb1" "#cfc4e1acd08b" "#fe52c9e6b34e" "#dbb6d3c2dcf3" "#e183dee0b053" "#f944cc6dae47" "#d35fdac4e069")))
@@ -127,6 +133,11 @@ static char *gnus-pointer[] = {
    '(main-line-color1 "#1E1E1E")
    '(main-line-color2 "#111111")
    '(main-line-separator-style (quote chamfer))
+   '(notmuch-search-line-faces
+     (quote
+      (("unread" :foreground "#aeee00")
+       ("flagged" :foreground "#0a9dff")
+       ("deleted" :foreground "#ff2c4b" :bold t))))
    '(nrepl-message-colors
      (quote
       ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
@@ -163,14 +174,14 @@ static char *gnus-pointer[] = {
         ("\\chapter{%s}" . "\\chapter*{%s}")
         ("\\section{%s}" . "\\section*{%s}")
         ("\\subsection{%s}" . "\\subsection*{%s}")
-        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))) t)
+        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))
    '(org-src-block-faces
      (quote
       (("emacs-lisp"
         (:background "#F0FFF0"))
        ("dot"
         (:foreground "gray50")))))
-   '(org-src-tab-acts-natively t t)
+   '(org-src-tab-acts-natively t)
    '(package-selected-packages
      (quote
       (play-crystal ob-crystal inf-crystal flycheck-crystal crystal-mode ameba nov mocha pmd flycheck-package package-lint indium sourcemap orgit org-brain ob-elixir evil-org yarn-mode tide nvm rufo toml-mode racer flycheck-rust cargo rust-mode sayid password-generator impatient-mode godoctor flycheck-bashate evil-lion dante company-php ac-php-core xcscope powershell elfeed-org winum white-sand-theme symon string-inflection rebecca-theme realgud test-simple loc-changes load-relative magithub ghub+ s magit-popup git-commit with-editor apiwrap ghub madhat2r-theme go-rename fuzzy flymd flycheck-credo emoji-cheat-sheet-plus doom-themes all-the-icons memoize font-lock+ company-lua company-emoji browse-at-remote dockerfile-mode docker tablist docker-tramp dash async company-ansible markdown-mode markdown-mode+ eziam-theme ox-reveal vi-tilde-fringe evil-nerd-commenter zonokai-theme znc zenburn-theme zen-and-art-theme zeal-at-point yapfify yaml-mode yagist xterm-color x86-lookup x-path-walker wsd-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vimrc-mode vagrant-tramp vagrant uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme tramp-term toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme suggest sublime-themes subatomic256-theme subatomic-theme sql-indent spacemacs-theme spaceline spacegray-theme sourcerer-theme soothe-theme sonic-pi solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slime-company slim-mode slack shen-mode shen-elisp shell-pop seti-theme selectric-mode scss-mode sage-shell-mode rvm ruby-tools ruby-test-mode ruby-refactor rubocop robe reverse-theme restclient-helm restart-emacs reek rbenv ranger rainbow-mode rainbow-identifiers rainbow-delimiters railscasts-theme racket-mode quelpa pyvenv pytest pylint pyenv-mode py-isort py-autopep8 purple-haze-theme pug-mode professional-theme prodigy planet-theme plan9-theme pivotal-tracker pip-requirements phpunit phpcbf php-extras php-auto-yasnippets phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pastels-on-dark-theme paredit-menu paradox ox-jira ox-gfm organic-green-theme org-projectile org-present org-pomodoro org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient noctilux-theme niflheim-theme neotree nasm-mode naquadah-theme mustang-theme mu4e-maildirs-extension mu4e-alert move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minitest minimal-theme meme material-theme markdown-toc majapahit-theme magit-gitflow magit-gh-pulls lush-theme lua-mode lorem-ipsum livid-mode live-py-mode linum-relative link-hint light-soap-theme lfe-mode less-css-mode labburn-theme json-mode js2-refactor js-doc jinja2-mode jedi-direx jbeans-theme jazz-theme ir-black-theme intero insert-shebang inkpot-theme info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize howdoi hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mt helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag hc-zenburn-theme haskell-snippets haml-mode gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio go-guru go-eldoc gnuplot gmail-message-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md geiser geeknote gandalf-theme fuel flycheck-pos-tip flycheck-mix flycheck-haskell flx-ido flatui-theme flatland-theme fish-mode firebelly-theme fill-column-indicator feature-mode farmhouse-theme fancy-battery eyebrowse exercism exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-snipe evil-search-highlight-persist evil-rails evil-quickscope evil-paredit evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-extra-operator evil-exchange evil-escape evil-embrace evil-ediff evil-easymotion evil-commentary evil-cleverparens evil-args evil-anzu espresso-theme eshell-z eshell-prompt-extras esh-help erlang erc-yt erc-view-log erc-social-graph erc-image erc-hl-nicks enh-ruby-mode engine-mode emmet-mode elisp-slime-nav elfeed-web elfeed-goodies editorconfig edit-server dumb-jump drupal-mode dracula-theme django-theme disaster diff-hl define-word debbugs darktooth-theme darkokai-theme darkmine-theme darkburn-theme dark-mint-theme dakrone-theme dactyl-mode cython-mode cyberpunk-theme csv-mode company-web company-tern company-statistics company-shell company-restclient company-quickhelp company-go company-ghci company-ghc company-cabal company-c-headers company-anaconda common-lisp-snippets column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-identifiers-mode coffee-mode cmm-mode cmake-mode clues-theme clojure-snippets clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu chruby cherry-blossom-theme busybee-theme bundler bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-compile ascii apropospriate-theme anti-zenburn-theme ansible-doc ansible ample-zen-theme ample-theme alect-themes alchemist aggressive-indent afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell 0xc)))
@@ -197,6 +208,7 @@ static char *gnus-pointer[] = {
         (sql-server "0.0.0.0")
         (sql-database "attributions_demo")
         (sql-port 5432)))))
+   '(tabbar-background-color "#ffffffffffff")
    '(term-default-bg-color "#fdf6e3")
    '(term-default-fg-color "#657b83")
    '(tls-checktrust t)
