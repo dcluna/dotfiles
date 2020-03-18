@@ -41,12 +41,14 @@
     from https://gist.github.com/kyledrake/d7457a46a03d7408da31):
 
     #+begin_src sh :tangle ./scripts/generate_cert.sh :shebang "#!/bin/bash"
-      ca_key_file=ca.key
+      ca_key_prefix=${3:-ca}
       site_name=${1:-$(whoami)}
       configFile=${2:-./ssl/$1.cnf}
 
-      openssl genrsa -aes256 -out ca.key 2048
-      openssl req -new -x509 -days 7300 -key ca.key -sha256 -extensions v3_ca -out ca.crt
+      if [ ! -f $ca_key_prefix.key ] || [ ! -f $ca_key_prefix.crt ]; then
+        openssl genrsa -aes256 -out $ca_key_prefix.key 2048
+        openssl req -new -x509 -days 7300 -key $ca_key_prefix.key -sha256 -extensions v3_ca -out $ca_key_prefix.crt
+      fi
 
       # Generate the domain key:
       openssl genrsa -out $site_name.key 2048
@@ -55,8 +57,12 @@
       openssl req -sha256 -new -key $site_name.key -out $site_name.csr -config $configFile
 
       # Sign the request with your root key
-      openssl x509 -sha256 -req -in $site_name.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out $site_name.crt -days 7300
+      openssl x509 -sha256 -req -in $site_name.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out $site_name.crt -days 7300 -extfile $configFile -extensions v3_req
 
       # Check your homework:
       openssl verify -CAfile ca.crt $site_name.crt
+
+      cat $site_name.key $site_name.crt > $site_name.pem
     #+end_src
+
+    Also, this is very comprehensive: https://stackoverflow.com/questions/21297139/how-do-you-sign-a-certificate-signing-request-with-your-certification-authority/21340898#21340898
