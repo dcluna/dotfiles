@@ -66,3 +66,24 @@
     #+end_src
 
     Also, this is very comprehensive: https://stackoverflow.com/questions/21297139/how-do-you-sign-a-certificate-signing-request-with-your-certification-authority/21340898#21340898
+* Get where clause from Arel
+
+  This is an example I took from reading
+  https://github.com/rails/rails/issues/21958,
+  https://jpospisil.com/2014/06/16/the-definitive-guide-to-arel-the-sql-manager-for-ruby.html
+  and playing around with the console:
+
+  #+begin_src ruby
+    where_clause ||= begin
+                       collector = Arel::Collectors::SubstituteBinds.new(
+                         Table.connection,
+                         Arel::Collectors::SQLString.new
+                       )
+                       Table.connection.visitor.accept(table_scope.all.where_clause.ast, collector)
+                       if (where = collector.value.presence)
+                         "WHERE #{where}"
+                       else
+                         ''
+                       end
+                     end
+  #+end_src
