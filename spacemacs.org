@@ -63,7 +63,6 @@
                       geolocation-enable-automatic-theme-changer t
                       geolocation-enable-location-service t)
          react
-         kubernetes
          dap
          latex
          systemd
@@ -507,9 +506,9 @@
               ("melpa" . "melpa.org/packages/")
               ("org" . "orgmode.org/elpa/")
               ("gnu" . "elpa.gnu.org/packages/")))
-      (add-to-list 'package-pinned-packages '(magit . "melpa-stable"))
-      (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))
-      (add-to-list 'package-pinned-packages '(async . "melpa-stable"))
+      ;; (add-to-list 'package-pinned-packages '(magit . "melpa-stable"))
+      ;; (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))
+      ;; (add-to-list 'package-pinned-packages '(async . "melpa-stable"))
       )
   #+END_SRC
 * Borg.el (package manager)
@@ -1046,7 +1045,7 @@
 
       (setq docker-container-ls-arguments '("--all" "--filter status=running"))
     #+END_SRC
-    
+
     With Philippe's branch (see
     https://github.com/Silex/docker.el/pull/99#issuecomment-445220495):
 
@@ -1070,7 +1069,7 @@
     #+END_SRC
 
 *** Pretty-mode / prettify-symbols-mode
-    
+
     #+BEGIN_SRC emacs-lisp
       (require 'pretty-mode)
       (add-hook 'enh-ruby-mode-hook 'dcl/enh-ruby-prettify-symbols)
@@ -2016,7 +2015,7 @@
      (evil-leader/set-key (kbd "o v") vlf-mode-map)
      (spacemacs/declare-prefix "o v" "vlf")
    #+END_SRC
-   
+
 ** Auto-minor-mode
 
    #+BEGIN_SRC emacs-lisp
@@ -2136,7 +2135,7 @@
           (spacemacs/set-leader-keys-for-major-mode mode "os" comint-search-keymap)
           (spacemacs/declare-prefix-for-mode mode "mos" "comint-search")))
     #+END_SRC
-    
+
 *** Dired keymap
     First, we need to add the location of this convenience file to my load-path:
 
@@ -2158,14 +2157,14 @@
 ** Tags
 
    #+BEGIN_SRC emacs-lisp
-   (setq projectile-tags-command "ctags -Re -f \"%s\" %s")
+     (setq projectile-tags-command "/usr/local/bin/ctags -Re -f \"%s\" %s")
    #+END_SRC
 
 ** Projectile
 *** Project-local yasnippets
 
     Based on this [[https://www.reddit.com/r/emacs/comments/57i41t/projectlocal_snippets/daw67dd/][post]].
-    
+
 
     #+BEGIN_SRC emacs-lisp
       (defvar yas-projectile-local-dir ".yasnippets" "Directory name for project-local yasnippets.")
@@ -2263,7 +2262,7 @@
      (with-eval-after-load 'time
        (setq display-time-world-list (append zoneinfo-style-world-list '(("Etc/GMT0" "UTC")))))
    #+END_SRC
-   
+
 ** Wakatime
 
    #+BEGIN_SRC emacs-lisp
