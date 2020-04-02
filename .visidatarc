@@ -1,6 +1,11 @@
 from datetime import datetime
+import time
 
 options.clipboard_copy_cmd = "pbcopy"
+
+def to_timestamp(str):
+  ts = datetime.strptime(str, "%Y-%m-%d")
+  return time.mktime(ts.timetuple())
 
 def count_distinct_string(values):
   'Counts distinct values of string, optionally splitting by a separator'
@@ -15,4 +20,3 @@ def count_distinct_string(values):
   return len(distincts)
 
 aggregator('str_count_distinct', count_distinct_string)
-
