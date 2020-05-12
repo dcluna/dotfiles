@@ -21,13 +21,22 @@
    (list 4)
    (dired-get-marked-files)))
 
+(defun tmux-utils/visidata-command (file-or-files)
+  (let ((files (if (listp file-or-files)
+                   file-or-files
+                 (list file-or-files))))
+    (s-join " " (list "vd"
+                      (if (-all? (lambda (f) (equal "parquet" (file-name-extension f))) files)
+                          "-f pandas")
+                      (s-join " " files)))))
+
 ;;;###autoload
 (defun tmux-utils/visidata-open-files-in-new-windows (session)
   "Opens each marked file in dired on a new tmux window, named after the file."
   (interactive (list (tmux-utils--read-session)))
   (dolist (file (dired-get-marked-files))
     (dired-do-shell-command
-     (tmux-utils--new-window-command session "vd" (file-name-base file))
+     (tmux-utils--new-window-command session (tmux-utils/visidata-command file) (file-name-base file))
      (list 4)
      (list file))))
 
@@ -39,9 +48,7 @@
              (call-process-shell-command
               (tmux-utils--new-window-command
                session
-               (format
-                "vd %s"
-                (mapconcat #'identity (dired-get-marked-files) " "))
+               (tmux-utils/visidata-command (dired-get-marked-files))
                window-name)))
       (message "visidata window %s opened in session %s" window-name session)))
 

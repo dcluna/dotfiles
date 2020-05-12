@@ -59,6 +59,8 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         ipython-notebook
+         (flow-type :variables flow-type-enable-eldoc-type-info nil)
          (geolocation :variables
                       geolocation-enable-automatic-theme-changer t
                       geolocation-enable-location-service t)
@@ -302,6 +304,7 @@
                          kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                          doom-tomorrow-day majapahit-light plan9 alect-light
                          gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
+                         soft-stone tango-plus
                          spacemacs-light solarized-light eink leuven
                          ritchie minimal-light doom-nord-light hydandata-light
                          organic-green)))
@@ -312,6 +315,7 @@
                      kaolin-temple kaolin-galaxy kaolin-ocean kaolin-valley-dark
                      kaolin-mono-dark seti sanityinc-tomorrow-eighties sanityinc-tomorrow-bright
                      sanityinc-tomorrow-blue sanityinc-tomorrow-night labburn sourcerer
+                     hickey doom-wilmersdorf
                      moe-dark doom-one granger dark-mint
                      material heroku light-blue spacemacs-dark
                      solarized-dark grayscale sunburn creamsody
@@ -2049,6 +2053,7 @@
      (evil-leader/set-key (kbd "o g b") 'dcl/magit-checkout-last-branch)
      (evil-leader/set-key (kbd "o g r") 'dcl/magit-branch-rebase)
      (evil-leader/set-key (kbd "o g h") 'magit-history-checkout)
+     (evil-leader/set-key (kbd "o g l") 'magit-lfs)
      (evil-leader/set-key (kbd "o p t") 'dcl/pivotal-github-tasks-template)
      (evil-leader/set-key (kbd "o l !") 'dcl/evil-ex-run-current-line)
      (evil-leader/set-key (kbd "o n c") '0xc-convert)

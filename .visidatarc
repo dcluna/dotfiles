@@ -1,11 +1,18 @@
 from datetime import datetime
 import time
+import maya
 
 options.clipboard_copy_cmd = "pbcopy"
 
 def to_timestamp(str):
   ts = datetime.strptime(str, "%Y-%m-%d")
   return time.mktime(ts.timetuple())
+
+def to_datetime(str, tz=None):
+  return datetime.fromtimestamp(str, tz=tz)
+
+def maya_to_datetime(str):
+  return maya.parse(str).datetime()
 
 def count_distinct_string(values):
   'Counts distinct values of string, optionally splitting by a separator'
