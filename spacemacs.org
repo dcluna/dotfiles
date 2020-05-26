@@ -59,6 +59,7 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         scala
          ipython-notebook
          (flow-type :variables flow-type-enable-eldoc-type-info nil)
          (geolocation :variables

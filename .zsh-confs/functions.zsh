@@ -8,3 +8,7 @@ function bq_load_csv_autodetect() {
 function visidata_csv_to_trend() {
     cat $1 | jq "reduce .[] as \$item ({}; . + {(\$item.${2:-day}): \$item.${3:-count}})"
 }
+
+function fileio_upload() {
+    curl -F "file=@$1" "https://file.io/?expires=1"
+}
