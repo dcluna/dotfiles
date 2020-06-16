@@ -59,12 +59,9 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
-         scala
+         (scala :variables scala-backend 'scala-metals)
          ipython-notebook
          (flow-type :variables flow-type-enable-eldoc-type-info nil)
-         (geolocation :variables
-                      geolocation-enable-automatic-theme-changer t
-                      geolocation-enable-location-service t)
          react
          dap
          latex
@@ -138,7 +135,7 @@
                      typescript-fmt-tool 'tide)
          ( javascript :variables
                       js-indent-level 2)
-         (python :variables python-test-runner '(nose pytest))
+         (python :variables python-test-runner '(pytest) python-backend 'anaconda)
          (ruby :variables ruby-enable-enh-ruby-mode t ruby-test-runner 'rspec)
          (clojure :variables clojure-enable-fancify-symbols t)
          go
@@ -511,6 +508,7 @@
               ("melpa" . "melpa.org/packages/")
               ("org" . "orgmode.org/elpa/")
               ("gnu" . "elpa.gnu.org/packages/")))
+      (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
       ;; (add-to-list 'package-pinned-packages '(magit . "melpa-stable"))
       ;; (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))
       ;; (add-to-list 'package-pinned-packages '(async . "melpa-stable"))
@@ -1561,6 +1559,7 @@
      (add-to-list 'auto-mode-alist '("\\.sequelizerc\\'" . js2-mode))
 
      (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+     (add-to-list 'auto-mode-alist '("\\.visidatarc\\'" . python-mode))
    #+END_SRC
 * Keybindings
   :PROPERTIES:
@@ -1617,6 +1616,13 @@
     #+BEGIN_SRC emacs-lisp
     (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
     #+END_SRC
+*** Scala layer adds ob-scala to org-babel-load-languages
+
+    #+begin_src emacs-lisp
+      (with-eval-after-load "org"
+        (setq org-babel-load-languages (remove '(scala . t) org-babel-load-languages)))
+    #+end_src
+
 ** Zeal/Dash docsets
    #+BEGIN_SRC emacs-lisp
  (let ((helm-dash-mode-alist

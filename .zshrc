@@ -152,15 +152,21 @@ export CHROMEDRIVER="/opt/google/chrome-beta/google-chrome-beta"
 
 # docker completion
 fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit -i;
+else
+  compinit -i -C;
+fi;
 
 # enable vi-mode by default in new shells
 spaceship_vi_mode_enable
 
 export INFOPATH="$HOME/Downloads:$HOME/code/python-info/build:$HOME/code/guix/doc:/usr/local/share/info:/usr/share/info"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+eval "$(nodenv init -)"
 
 export PATH="$HOME/bin/elixir-1.1.1/bin:$PATH"
 

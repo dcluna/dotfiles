@@ -42,24 +42,24 @@ This function is called at the very end of Spacemacs initialization."
    '(emms-mode-line-icon-image-cache
      (quote
       (image :type xpm :ascent center :data "/* XPM */
-static char *note[] = {
-/* width height num_colors chars_per_pixel */
-\"    10   11        2            1\",
-/* colors */
-\". c #358d8d\",
-\"# c None s None\",
-/* pixels */
-\"###...####\",
-\"###.#...##\",
-\"###.###...\",
-\"###.#####.\",
-\"###.#####.\",
-\"#...#####.\",
-\"....#####.\",
-\"#..######.\",
-\"#######...\",
-\"######....\",
-\"#######..#\" };")))
+  static char *note[] = {
+  /* width height num_colors chars_per_pixel */
+  \"    10   11        2            1\",
+  /* colors */
+  \". c #358d8d\",
+  \"# c None s None\",
+  /* pixels */
+  \"###...####\",
+  \"###.#...##\",
+  \"###.###...\",
+  \"###.#####.\",
+  \"###.#####.\",
+  \"#...#####.\",
+  \"....#####.\",
+  \"#..######.\",
+  \"#######...\",
+  \"######....\",
+  \"#######..#\" };")))
    '(erc-hide-list (quote ("JOIN" "PART" "QUIT")))
    '(evil-emacs-state-cursor (quote ("#D50000" hbar)) t)
    '(evil-escape-key-sequence "jk")
@@ -69,6 +69,7 @@ static char *note[] = {
    '(evil-want-Y-yank-to-eol nil)
    '(fci-rule-character-color "#202020")
    '(fci-rule-color "#f6f0e1")
+   '(flycheck-javascript-flow-args (quote ("--respect-pragma")))
    '(foreground-color "#cccccc")
    '(fringe-mode 4 nil (fringe))
    '(global-rbenv-mode t)
@@ -271,11 +272,10 @@ static char *gnus-pointer[] = {
      ["#fdf6e3" "#cb4b16" "#93a1a1" "#839496" "#657b83" "#6c71c4" "#586e75" "#002b36"])
    '(yas-snippet-dirs
      (quote
-      ("/Users/danielluna/yasnippets" "/Users/danielluna/.emacs.d/private/snippets/" yas-installed-snippets-dir "/Users/danielluna/.emacs.d/layers/+completion/auto-completion/local/snippets" "/Users/danielluna/.emacs.d/elpa/clojure-snippets-20170713.2310/snippets" "/Users/danielluna/.emacs.d/elpa/common-lisp-snippets-20170522.2147/snippets" "/Users/danielluna/.emacs.d/elpa/haskell-snippets-20160918.1722/snippets"))))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(default ((t (:background nil)))))
-  )
+      ("/Users/danielluna/yasnippets" "/Users/danielluna/.emacs.d/private/snippets/" yas-installed-snippets-dir "/Users/danielluna/.emacs.d/layers/+completion/auto-completion/local/snippets" "/Users/danielluna/.emacs.d/elpa/clojure-snippets-20170713.2310/snippets" "/Users/danielluna/.emacs.d/elpa/common-lisp-snippets-20170522.2147/snippets" "/Users/danielluna/.emacs.d/elpa/haskell-snippets-20160918.1722/snippets")))
+   (custom-set-faces
+    ;; custom-set-faces was added by Custom.
+    ;; If you edit it by hand, you could mess it up, so be careful.
+    ;; Your init file should contain only one such instance.
+    ;; If there is more than one, they won't work right.
+    '(default ((t (:background nil)))))))
