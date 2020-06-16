@@ -296,8 +296,6 @@ set -g mode-keys vi
 # TMUX plugin manager
 set -g @tpm_plugins '          \
   tmux-plugins/tpm             \
-  tmux-plugins/tmux-resurrect  \
-  tmux-plugins/tmux-continuum  \
   Morantron/tmux-fingers       \
 '
 
@@ -306,10 +304,6 @@ set -g @tpm_plugins '          \
 tmux_conf_theme_status_right="#{continuum_status} $tmux_conf_theme_status_right"
 
 # tmux-ressurrect options
-set -g @resurrect-processes 'lazydocker htop gotop ssh psql mysql sqlite3'
-set -g @resurrect-save-shell-history 'on'
-# tmux-continuum auto-restore
-set -g @continuum-restore 'on'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/.tmux/plugins/tpm/tpm'
