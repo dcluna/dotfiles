@@ -1,6 +1,7 @@
 from datetime import datetime
 import time
 import maya
+from geopy.distance import geodesic
 
 options.clipboard_copy_cmd = "pbcopy"
 
@@ -8,11 +9,17 @@ def to_timestamp(str):
   ts = datetime.strptime(str, "%Y-%m-%d")
   return time.mktime(ts.timetuple())
 
-def to_datetime(str, tz=None):
-  return datetime.fromtimestamp(str, tz=tz)
+def to_datetime(num, tz=None):
+  return datetime.fromtimestamp(num, tz=tz)
 
-def maya_to_datetime(str):
+def maya_timestamp_to_datetime(timestamp):
+  return maya.MayaDT(timestamp).iso8601()
+
+def maya_parse_to_datetime(str):
   return maya.parse(str).datetime()
+
+def geodesic_distance_meters(lat1, lon1, lat2, lon2):
+  return geodesic((lat1, lon1), (lat2, lon2)).meters
 
 def count_distinct_string(values):
   'Counts distinct values of string, optionally splitting by a separator'
