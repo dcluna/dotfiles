@@ -902,6 +902,8 @@
           (with-current-buffer (run-ruby "bundle exec rake rspec_profiling:console"))
           (projectile-rails-mode +1))))
 
+     (require 'evil-embrace)
+
      (defun dcl/ruby-embrace-setup ()
        (mapc (lambda (key) (setq-local evil-embrace-evil-surround-keys (cl-remove key evil-embrace-evil-surround-keys))) '(?\{ ?\}))
        (embrace-add-pair ?{ "{" "}")
@@ -1860,6 +1862,12 @@
   (defadvice slack-start (before load-slack-teams)
     (unless slack-teams (load-file "~/.slack-teams.el.gpg")))
     #+END_SRC
+*** SQL
+
+    #+BEGIN_SRC emacs-lisp
+    (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/sql-connections.el.gpg"))
+    #+END_SRC
+    
 *** Org-mode
     #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook 'auto-fill-mode)
@@ -2032,6 +2040,7 @@
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'auto-minor-mode-alist '("spec\/factories\/.*\.rb$" . rspec-mode))
      (add-to-list 'auto-minor-mode-alist '("data.org.gpg$" . read-only-mode))
+     (add-to-list 'auto-minor-mode-alist '("\.s[ac]ss$" . indent-guide-mode))
    #+END_SRC
 
 ** Evil
