@@ -1300,7 +1300,8 @@ user code."
   (defalias 'display-buffer-in-major-side-window 'window--make-major-side-window)
   (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
   (with-eval-after-load 'org
-    (setq org-babel-load-languages (remove '(scala . t) org-babel-load-languages)))
+    (setq org-babel-load-languages (remove '(scala . t) org-babel-load-languages))
+    (add-to-list 'org-babel-load-languages '(calc . t)))
   (let ((helm-dash-mode-alist
           '((python-mode-hook . '("Python" "NumPy"))
             (ruby-mode-hook . '("Ruby" "Ruby on Rails"))
