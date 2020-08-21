@@ -183,7 +183,7 @@
                                           reveal-in-osx-finder
                                           jest
                                           inflections
-                                          (multi-libvterm :location (recipe :fetcher github :repo "suonlight/multi-libvterm" :files ("*.el") :upgrade 't))
+                                          ;; (multi-vterm :location (recipe :fetcher github :repo "suonlight/multi-vterm" :files ("*.el") :upgrade 't))
                                           wakatime
                                           copy-as-format
                                           gif-screencast
@@ -604,7 +604,6 @@
                               (tron-legacy-theme :type git :host github :repo "ianpan870102/Emacs-Tron-Legacy-Theme")
                               (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
                               ;; (docker-robe :type git :host github :repo "aki2o/emacs-docker-robe")
-                              ;; (transient :type git :host github :repo "magit/transient")
                               ;; (forge :type git :host github :repo "magit/forge")
                               ;; magit-annex
                               ;; alchemist
