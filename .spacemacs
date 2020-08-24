@@ -59,9 +59,10 @@ static char *note[] = {
 \"#..######.\",
 \"#######...\",
 \"######....\",
-\"#######..#\" };")))
-   '(erc-hide-list (quote ("JOIN" "PART" "QUIT")))
-   '(evil-emacs-state-cursor (quote ("#D50000" hbar)) t)
+\"#######..#\" };"))
+   '(enh-ruby-check-syntax nil)
+   '(erc-hide-list '("JOIN" "PART" "QUIT"))
+   '(evil-emacs-state-cursor '("#D50000" hbar) t)
    '(evil-escape-key-sequence "jk")
    '(evil-insert-state-cursor (quote ("#D50000" bar)) t)
    '(evil-normal-state-cursor (quote ("#F57F17" box)) t)
