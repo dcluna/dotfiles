@@ -253,3 +253,7 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-clou
 
 # source asdf
 . $(brew --prefix asdf)/asdf.sh
+
+if [[ -z "$INSIDE_EMACS" ]]; then
+  alias ls='exa'
+fi
