@@ -1211,6 +1211,9 @@ user code."
   (defun dcl/set-fill-column-magit-commit-mode ()
     ;; magit always complains that 'line is too big' w/ the old fill-column values (72, I think). I set this to something a little smaller
     (setq fill-column 52))
+
+  (with-eval-after-load 'magit
+    (define-key magit-mode-map (kbd "%") 'magit-worktree))
   (defun dcl/eshell-pipe-to-buffer (buffer-name)
     (interactive "sBuffer name: ")
     (insert (format " > #<buffer %s>" buffer-name)))
