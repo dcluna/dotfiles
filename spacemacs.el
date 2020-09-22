@@ -244,7 +244,7 @@ call the original function `package-activate'."
      sql
      scheme
      ;; personal-misc
-     (git :variables git-enable-github-support t git-gutter-use-fringe t git-enable-magit-gitflow nil)
+     (git :variables git-enable-github-support t git-gutter-use-fringe t git-enable-magit-gitflow nil git-enable-magit-delta-plugin t)
      markdown
      html
      (typescript :variables
