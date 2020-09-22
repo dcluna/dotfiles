@@ -1264,6 +1264,26 @@ user code."
 
   (use-package helm-ghq)
   (use-package ghq)
+  (defun sql-explain-line-or-region ()
+    "EXPLAINs a line/region to the SQL process."
+    (interactive)
+    (let ((start (or (and (region-active-p) (region-beginning))
+                     (line-beginning-position 1)))
+          (end (or (and (region-active-p) (region-end))
+                   (line-beginning-position 2))))
+      (sql-send-string (concat "EXPLAIN " (buffer-substring-no-properties start end)))))
+
+  (defun sql-explain-line-or-region-and-focus ()
+    "EXPLAINs a line/region to the SQL process, then goes to the SQL buffer."
+    (interactive)
+    (let ((sql-pop-to-buffer-after-send-region t))
+      (sql-explain-line-or-region)
+      (evil-insert-state)))
+  (let ((sql-keymap (make-sparse-keymap)))
+    (define-key sql-keymap "e" 'sql-explain-line-or-region)
+    (define-key sql-keymap "E" 'sql-explain-line-or-region-and-focus)
+    (evil-leader/set-key-for-mode 'sql-mode (kbd "o s") sql-keymap)
+    (spacemacs/declare-prefix-for-mode 'sql-mode "mos" "REPL" "REPL"))
 
   ;;auto-modes
   (add-to-list 'auto-mode-alist '("messages_ccodk_default.txt" . conf-javaprop-mode))
