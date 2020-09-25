@@ -1284,6 +1284,17 @@ user code."
     (define-key sql-keymap "E" 'sql-explain-line-or-region-and-focus)
     (evil-leader/set-key-for-mode 'sql-mode (kbd "o s") sql-keymap)
     (spacemacs/declare-prefix-for-mode 'sql-mode "mos" "REPL" "REPL"))
+  (defun dcl-toggle-forge-sections ()
+    (interactive)
+    (if (or ( -contains? magit-status-sections-hook 'forge-insert-pullreqs) (-contains? magit-status-sections-hook 'forge-insert-issues))
+        (progn
+          (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
+          (remove-hook 'magit-status-sections-hook 'forge-insert-issues)
+          (message "Forge sections off"))
+      (progn
+        (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-pullreqs nil t)
+        (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-issues   nil t)
+        (message "Forge sections on"))))
 
   ;;auto-modes
   (add-to-list 'auto-mode-alist '("messages_ccodk_default.txt" . conf-javaprop-mode))

@@ -1568,6 +1568,23 @@
        (evil-leader/set-key-for-mode 'sql-mode (kbd "o s") sql-keymap)
        (spacemacs/declare-prefix-for-mode 'sql-mode "mos" "REPL" "REPL"))
    #+end_src
+** Magit
+
+   Toggling Forge sections on/off with a function:
+
+   #+begin_src emacs-lisp
+     (defun dcl-toggle-forge-sections ()
+       (interactive)
+       (if (or ( -contains? magit-status-sections-hook 'forge-insert-pullreqs) (-contains? magit-status-sections-hook 'forge-insert-issues))
+           (progn
+             (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
+             (remove-hook 'magit-status-sections-hook 'forge-insert-issues)
+             (message "Forge sections off"))
+         (progn
+           (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-pullreqs nil t)
+           (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-issues   nil t)
+           (message "Forge sections on"))))
+   #+end_src
 
 * Auto modes
   :PROPERTIES:
@@ -1897,7 +1914,7 @@
     #+BEGIN_SRC emacs-lisp
     (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/sql-connections.el.gpg"))
     #+END_SRC
-    
+
 *** Org-mode
     #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook 'auto-fill-mode)
