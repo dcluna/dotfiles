@@ -100,5 +100,5 @@ alias asciicast2gif='docker run --rm -e DEBUG -e "GIFSICLE_OPTS=--lossy=80" -e "
 alias availablerubies='rbenv install -l | $PAGER'
 
 # rust utilities
-alias time='hyperfine'
+# alias time='hyperfine'
 alias top='btm -b'
