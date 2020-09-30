@@ -13,51 +13,6 @@ export ZSH_CUSTOM="$ZSH/custom"
 #     export TERM=xterm-256color
 #     ZSH_THEME="dogenpunk"
 # else
-SPACESHIP_EXIT_CODE_SHOW=true
-SPACESHIP_TIME_SHOW=true
-export SPACESHIP_PROMPT_ORDER=(
-    time          # Time stampts section
-    user          # Username section
-    host          # Hostname section
-    dir           # Current directory section
-    git           # Git section (git_branch + git_status)
-    hg            # Mercurial section (hg_branch  + hg_status)
-    package       # Package version
-    node          # Node.js section
-    ruby          # Ruby section
-    elixir        # Elixir section
-    xcode         # Xcode section
-    swift         # Swift section
-    golang        # Go section
-    php           # PHP section
-    rust          # Rust section
-    haskell       # Haskell Stack section
-    julia         # Julia section
-    docker        # Docker section
-    aws           # Amazon Web Services section
-    venv          # virtualenv section
-    conda         # conda virtualenv section
-    pyenv         # Pyenv section
-    dotnet        # .NET section
-    ember         # Ember.js section
-    kubecontext   # Kubectl context section
-    exec_time     # Execution time
-    line_sep      # Line break
-    battery       # Battery level and status
-    vi_mode       # Vi-mode indicator
-    jobs          # Backgound jobs indicator
-    exit_code     # Exit code section
-    char          # Prompt character
-)
-# ZSH_THEME="spaceship"
-#     # source "$ZSH/custom/themes/spaceship.zsh-theme"
-# fi
-
-# funny color schemes
-#if [ -n "$INSIDE_EMACS" ]; then
-#else
-#    ( wal -t -R & )
-#fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -99,17 +54,19 @@ export SPACESHIP_PROMPT_ORDER=(
 # Add wi2gold:$HOME/bin/android-ndk-r10d:$HOME/bin/jdk1.8.0_31/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-plugins=(git ruby rails rake rake-fast rbenv node nvm npm yarn rust vi-mode osx history-substring-search docker docker-compose pyenv history kubectl)
+plugins=(git ruby rails rake rake-fast rbenv node npm yarn rust osx history-substring-search docker docker-compose pyenv history)
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 
 if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    # FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    FPATH=/usr/local/share/zsh/site-functions:$FPATH
 fi
 
 source $ZSH/oh-my-zsh.sh
 
-source /usr/local/share/antigen/antigen.zsh
+source <(antibody init)
+# source /usr/local/share/antigen/antigen.zsh
 
 for file in `ls ~/dotfiles/.zsh-confs/*.zsh`; do
     source $file
@@ -141,15 +98,6 @@ done
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export GYB_HOME="$HOME/code/got-your-back"
-
-export CLING_HOME="$HOME/code/inst" # cpp interpreter
-export PATH="$PATH:$CLING_HOME/bin"
-export PATH="$HOME/code/git:$PATH"
-export PATH="$HOME/.linuxbrew/bin:$PATH"
-export PATH="$HOME/code/apache-storm-0.9.5/bin:$PATH"
-export CHROMEDRIVER="/opt/google/chrome-beta/google-chrome-beta"
-
 # docker completion
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit
@@ -162,66 +110,9 @@ fi;
 # enable vi-mode by default in new shells
 # spaceship_vi_mode_enable
 
-export INFOPATH="$HOME/Downloads:$HOME/code/python-info/build:$HOME/code/guix/doc:/usr/local/share/info:/usr/share/info"
-
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-eval "$(nodenv init -)"
-
-export PATH="$HOME/bin/elixir-1.1.1/bin:$PATH"
-
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-
-export JAVA_HOME="$HOME/bin/jdk1.8.0_144"
-
-export PATH="$JAVA_HOME/bin:$PATH"
-
-export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/"
-
-export PATH="$HOME/.cask/bin:$PATH"
-
-export PATH="$HOME/code-examples:$PATH"
-
-export CODE_DIR="$HOME/code"
-
-export PATH="$PATH:$CODE_DIR/no-more-secrets/bin"
-
-export PATH="$PATH:$HOME/bin/hashcat-3.00"
-
-export PATH="$HOME/bin/node-v4.5.0-linux-x64/bin:$PATH"
-
-export PATH="$HOME/code-examples:$PATH"
-
-DWARF_FORTRESS_PATH="$HOME/games/df_linux"
-export DWARF_FORTRESS_PATH="$DWARF_FORTRESS_PATH/df_linux:$DWARF_FORTRESS_PATH"
-
-# export PATH="$DWARF_FORTRESS_PATH:$PATH"
-
-export SASS_LIBSASS_PATH="$HOME/code/libsass"
-
-export SKIP_HOOKUP=1 git checkout master
-
-export PROCESSING_PATH="$HOME/bin/processing-3.0.2/"
-
-export SONIC_PI_DIR="$HOME/code/sonic-pi"
-
-export XERCES_HOME="/usr/share/java"
-
-export RSPEC_PROFILING="false"
-export VORLON="true"
-
-export REVEALJS_DIR="$HOME/bin/reveal.js-3.3.0"
-
-export EXPLOIT_EX_DIR="$HOME/code-examples/exploit-exercises/protostar"
-
-#source $HOME/.cargo/env
-
-export AMDAPPSDKROOT="/mnt/lmde/home/dcluna/AMDAPPSDK-3.0"
-
-export PATH="$HOME/code/lastpass-cli:$PATH"
-
-export WINEARCH="win32"
-
+# eval "$(nodenv init -)"
 #if [[  -n "$EMACS" || -n "$TMUX"  ]]; then
 #else
 #    # VOICE='-v mb-us1'
@@ -230,7 +121,7 @@ export WINEARCH="win32"
 #fi
 #nvm_auto_switch
 #
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 # added by Anaconda2 installer
 # export PATH="/home/dancluna/anaconda2/bin:$PATH"
@@ -252,7 +143,9 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 # source asdf
-. $(brew --prefix asdf)/asdf.sh
+# . $(brew --prefix asdf)/asdf.sh
+. /usr/local/opt/asdf/asdf.sh
+
 if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/danielluna/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 if [[ -z "$INSIDE_EMACS" ]]; then
@@ -260,3 +153,9 @@ if [[ -z "$INSIDE_EMACS" ]]; then
 fi
 
 eval "$(starship init zsh)"
+
+# enables vi mode
+# taken from http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
+bindkey -v
+bindkey -M vicmd "^V" edit-command-line
+
