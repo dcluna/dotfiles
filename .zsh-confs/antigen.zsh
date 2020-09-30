@@ -1,7 +1,5 @@
 antigen use oh-my-zsh
 
-antigen theme https://github.com/denysdovhan/spaceship-zsh-theme spaceship
-
 antigen bundles <<EOBUNDLES
     unixorn/autoupdate-antigen.zshplugin
     oldratlee/hacker-quotes

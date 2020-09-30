@@ -98,6 +98,7 @@ brew "redis"
 brew "ripgrep"
 brew "s3fs"
 brew "sshuttle"
+brew "starship"
 brew "terminal-notifier"
 brew "wireshark", link: false
 brew "termshark"

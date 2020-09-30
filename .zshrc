@@ -160,7 +160,7 @@ else
 fi;
 
 # enable vi-mode by default in new shells
-spaceship_vi_mode_enable
+# spaceship_vi_mode_enable
 
 export INFOPATH="$HOME/Downloads:$HOME/code/python-info/build:$HOME/code/guix/doc:/usr/local/share/info:/usr/share/info"
 
@@ -239,7 +239,7 @@ export PATH="$PATH:/home/dancluna/.bin"
 
 # show my stock tickers on every new term
 if [ -n "$TMUX" ] && [ -z "$EMACS" ]; then
-    ~/.ghq/github.com/pstadler/ticker.sh/ticker.sh $(cat ~/dotfiles/.ticker.conf)
+    # ~/.ghq/github.com/pstadler/ticker.sh/ticker.sh $(cat ~/dotfiles/.ticker.conf)
 else
 fi
 
@@ -253,7 +253,10 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-clou
 
 # source asdf
 . $(brew --prefix asdf)/asdf.sh
+if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/danielluna/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 if [[ -z "$INSIDE_EMACS" ]]; then
   alias ls='exa'
 fi
+
+eval "$(starship init zsh)"
