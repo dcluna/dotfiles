@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM="$ZSH/custom"
+export ZSH_DISABLE_COMPFIX="true"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -65,7 +66,7 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-source <(antibody init)
+# source <(antibody init)
 # source /usr/local/share/antigen/antigen.zsh
 
 for file in `ls ~/dotfiles/.zsh-confs/*.zsh`; do
@@ -99,13 +100,13 @@ done
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # docker completion
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-  compinit -i;
-else
-  compinit -i -C;
-fi;
+# fpath=(~/.zsh/completion $fpath)
+# autoload -Uz compinit
+# if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+#   compinit -i;
+# else
+#   compinit -i -C;
+# fi;
 
 # enable vi-mode by default in new shells
 # spaceship_vi_mode_enable
@@ -130,6 +131,7 @@ export PATH="$PATH:/home/dancluna/.bin"
 
 # show my stock tickers on every new term
 if [ -n "$TMUX" ] && [ -z "$EMACS" ]; then
+    source hacker-quotes.plugin.zsh
     # ~/.ghq/github.com/pstadler/ticker.sh/ticker.sh $(cat ~/dotfiles/.ticker.conf)
 else
 fi
@@ -140,7 +142,7 @@ eval "$(direnv hook zsh)"
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+# if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 # source asdf
 # . $(brew --prefix asdf)/asdf.sh
