@@ -194,7 +194,7 @@ call the original function `package-activate'."
      emoji
      ( parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
      ;; nlinum
-     helm
+     (ivy :variables ivy-wrap t ivy-height 25)
      rust
      windows-scripts
      (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
@@ -1483,7 +1483,7 @@ user code."
                                     ("\\cvitem{%s}" . "\\cvitem{%s}")))
   (dcl/enable-emacspeak)
   (add-hook 'conf-javaprop-mode-hook '(lambda () (conf-quote-normal nil)))
-  (helm-mode 1) ;; for some reason, all the describe-* goodness is not working with Spacemacs v.0.103.2 unless I add this line
+  ;; (helm-mode 1) ;; for some reason, all the describe-* goodness is not working with Spacemacs v.0.103.2 unless I add this line
   ;; (defvar auto-insert-major-modes '(enh-ruby-mode ruby-mode))
 
   ;; (defun auto-insert-on-modes ()

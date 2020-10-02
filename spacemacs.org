@@ -77,7 +77,7 @@
          emoji
          ( parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
          ;; nlinum
-         helm
+         (ivy :variables ivy-wrap t ivy-height 25)
          rust
          windows-scripts
          (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
@@ -1942,8 +1942,8 @@
   (add-hook 'conf-javaprop-mode-hook '(lambda () (conf-quote-normal nil)))
     #+END_SRC
 *** Helm
-    #+BEGIN_SRC emacs-lisp
-  (helm-mode 1) ;; for some reason, all the describe-* goodness is not working with Spacemacs v.0.103.2 unless I add this line
+    #+BEGIN_SRC emacs-lisp :noweb no :tangle no
+      ;; (helm-mode 1) ;; for some reason, all the describe-* goodness is not working with Spacemacs v.0.103.2 unless I add this line
     #+END_SRC
 
 ** Coin-ticker
