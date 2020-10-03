@@ -59,52 +59,30 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
-         (scala :variables scala-backend 'scala-metals)
+         ;; (scala :variables scala-backend 'scala-metals)
          ipython-notebook
-         (flow-type :variables flow-type-enable-eldoc-type-info nil)
          react
          dap
          latex
-         systemd
          javascript
-         coffeescript
          lsp
          crystal
-         ansible
-         nginx
-         windows-scripts
          perl5
          emoji
-         ( parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
-         ;; nlinum
+         (parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
          (ivy :variables ivy-wrap t ivy-height 25)
          rust
-         windows-scripts
-         (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
-         ;; (elfeed :variables rmh-elfeed-org-files (list "~/.elfeed-list.org"))
-         ;; slack
+         ;; (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
          (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
-         ;; pdf-tools
-         chrome
-         ;; vim-empty-lines
          asm
-         octave
          csv
          erc
          docker
-         ;; ansible
          vimscript
-         ;; sonic-pi
-         ;; eyebrowse
-         prodigy
          c-c++
          search-engine
          haskell
          dash
-         vagrant
-         tmux
-         selectric
-         html
          shell-scripts
          racket
          php
@@ -114,7 +92,6 @@
          restclient
          yaml
          ruby-on-rails
-         ;; evil-cleverparens
          evil-commentary
          syntax-checking
          (auto-completion :variables
@@ -123,7 +100,6 @@
                           auto-completion-enable-snippets-in-popup t
                           auto-completion-idle-delay 0.3
                           :disabled-for org spacemacs-org)
-         ;; angularjs
          sql
          scheme
          ;; personal-misc
@@ -133,21 +109,17 @@
          (typescript :variables
                      typescript-fmt-on-save t
                      typescript-fmt-tool 'tide)
-         ( javascript :variables
+         (javascript :variables
                       js-indent-level 2)
          (python :variables python-test-runner '(pytest) python-backend 'anaconda)
          (ruby :variables ruby-enable-enh-ruby-mode t ruby-test-runner 'rspec)
          (clojure :variables clojure-enable-fancify-symbols t)
-         go
-         evernote
          (colors :variables
                  colors-colorize-identifiers 'all
                  colors-enable-nyan-cat-progress-bar (display-graphic-p)
                  nyan-minimum-window-width 64)
          theming
          themes-megapack
-         ;; python-extra
-         ;; groovy
          common-lisp
          lua
          go
@@ -167,11 +139,8 @@
          (shell :variables
                 shell-default-height 30
                 shell-default-position 'bottom)
-         ;; spell-checking
-         ;; syntax-checking
          (version-control :variables
                           version-control-diff-tool 'diff-hl))
-                          ;; version-control-global-margin nil
 
 
        ;; List of additional packages that will be installed without being
@@ -179,29 +148,27 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
-                                          indium
+                                          ;; indium
                                           reveal-in-osx-finder
-                                          jest
+                                          ;; jest
                                           inflections
                                           ;; (multi-vterm :location (recipe :fetcher github :repo "suonlight/multi-vterm" :files ("*.el") :upgrade 't))
-                                          wakatime
                                           copy-as-format
-                                          gif-screencast
+                                          ;; gif-screencast
                                           kaolin-themes
                                           sunburn-theme
                                           grayscale-theme
                                           iodine-theme
                                           hydandata-light-theme
                                           github-modern-theme
-                                          multishell
+                                          ;; multishell
                                           ob-elixir
-                                          org-jira
+                                          ;; org-jira
                                           (org-rich-yank :location (recipe :fetcher github :repo "unhammer/org-rich-yank" :files ("*.el") :upgrade 't))
-                                          ialign
-                                          beacon
+                                          ;; ialign
+                                          ;; beacon
                                           helpful
                                           (rusti :location (recipe :fetcher github :repo "ruediger/rusti.el" :files ("rusti.el") :upgrade 't))
-                                          coin-ticker
                                           eink-theme
                                           doom-themes
                                           creamsody-theme
@@ -213,7 +180,6 @@
                                           flymake-solidity
                                           solidity-mode
                                           sx
-                                          org2blog
                                           ts-comint
                                           vagrant-tramp
                                           ob-php
@@ -222,37 +188,35 @@
                                           evil-rails
                                           evil-easymotion
                                           evil-extra-operator
-                                          ox-jira
                                           realgud
                                           ;; realgud-pry
                                           plan9-theme
                                           sourcerer-theme
                                           0xc
                                           fuel
-                                          lfe-mode
+                                          ;; lfe-mode
                                           x-path-walker
-                                          pivotal-tracker
+                                          ;; pivotal-tracker
                                           suggest
                                           tramp-term
                                           dark-mint-theme
                                           yagist
-                                          sage-shell-mode
+                                          ;; sage-shell-mode
                                           intero
                                           (howdoi :location (recipe
                                                              :repo "dcluna/emacs-howdoi"
                                                              :fetcher github
                                                              :branch "html2text-emacs26")
                                                   :upgrade 't)
-                                          ascii
                                           multi-compile
                                           dumb-jump
                                           tldr
                                           rainbow-mode
                                           paredit
                                           ruby-refactor
-                                          nvm
+                                          ;; nvm
                                           nov
-                                          yarn-mode
+                                          ;; yarn-mode
                                           package-lint
                                           flycheck-package
                                           (doom-snippets
@@ -277,7 +241,8 @@
                                            :upgrade 't)
                                           evil-embrace
                                           editorconfig
-                                          wsd-mode)
+                                          ;; wsd-mode
+                                          )
 
        ;; A list of packages and/or extensions that will not be install and loaded.
        dotspacemacs-excluded-packages '()
@@ -601,12 +566,8 @@
 
     (setq straight-packages '(
                               git-link
-                              (tron-legacy-theme :type git :host github :repo "ianpan870102/Emacs-Tron-Legacy-Theme")
                               (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
-                              ;; (docker-robe :type git :host github :repo "aki2o/emacs-docker-robe")
                               ;; (forge :type git :host github :repo "magit/forge")
-                              ;; magit-annex
-                              ;; alchemist
                               minitest
                               helpful
                               (enh-ruby-mode :type git :host github :repo "zenspider/enhanced-ruby-mode")
@@ -614,9 +575,7 @@
                               znc
                               gist
                               docker
-                              ;; with-editor
-                              ;; (multi-magit :type git :host github :repo "luismbo/multi-magit")
-                              groovy-mode
+                              ;; groovy-mode
                               anaphora
                               exec-path-from-shell
                               (pmd :type git :host github :repo "dcluna/pmd.el")
@@ -624,15 +583,11 @@
                               rake
                               robe
                               (rspec-mode :type git :host github :repo "pezra/rspec-mode")
-                              ;; (magit-lfs :type git :host github :repo "Ailrun/magit-lfs")
-                              (rmsbolt :type git :host gitlab :repo "jgkamat/rmsbolt")
-                              ;; evil-collection
-                              ;; evil
+                              ;; (rmsbolt :type git :host gitlab :repo "jgkamat/rmsbolt")
                               pretty-mode
                               helm-ghq
                               ghq
-                              graphql-mode
-                              ;; (lsp-ruby :type git :host github :repo "emacs-lsp/lsp-ruby")
+                              ;; graphql-mode
                               ;; lsp-mode
                               jq-mode
                               (rubocop :type git :host github :repo "dcluna/rubocop-emacs"
@@ -641,12 +596,10 @@
                               (vlf :type git :host github :repo "m00natic/vlfi")
                               evil-numbers
                               auto-minor-mode
-                              (helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
-                                                :branch "fix-helm-insert-on-region"
-                                                :upstream (:host github
-                                                                 :repo "emacs-jp/helm-c-yasnippet"))
-                              vue-mode
-                              ;; magit
+                              ;; (helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
+                              ;;                   :branch "fix-helm-insert-on-region"
+                              ;;                   :upstream (:host github
+                              ;;                                    :repo "emacs-jp/helm-c-yasnippet"))
                               ))
   #+END_SRC
 
