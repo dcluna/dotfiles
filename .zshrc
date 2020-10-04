@@ -147,6 +147,8 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 # source asdf
 # . $(brew --prefix asdf)/asdf.sh
 . /usr/local/opt/asdf/asdf.sh
+. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+. ~/.asdf/plugins/java/set-java-home.zsh
 
 if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/danielluna/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
@@ -160,4 +162,3 @@ eval "$(starship init zsh)"
 # taken from http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
 bindkey -v
 bindkey -M vicmd "^V" edit-command-line
-
