@@ -227,7 +227,7 @@ call the original function `package-activate'."
      themes-megapack
      common-lisp
      lua
-     (go :variables go-tab-width 4)
+     (go :variables go-tab-width 4 go-format-before-save t)
      github
      (org :variables org-enable-github-support t org-enable-reveal-js-support t)
      ;; ----------------------------------------------------------------
