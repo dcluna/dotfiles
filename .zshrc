@@ -66,9 +66,6 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-# source <(antibody init)
-# source /usr/local/share/antigen/antigen.zsh
-
 for file in `ls ~/dotfiles/.zsh-confs/*.zsh`; do
     source $file
 done
@@ -99,31 +96,6 @@ done
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# docker completion
-# fpath=(~/.zsh/completion $fpath)
-# autoload -Uz compinit
-# if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-#   compinit -i;
-# else
-#   compinit -i -C;
-# fi;
-
-# enable vi-mode by default in new shells
-# spaceship_vi_mode_enable
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-# eval "$(nodenv init -)"
-#if [[  -n "$EMACS" || -n "$TMUX"  ]]; then
-#else
-#    # VOICE='-v mb-us1'
-#    # 'welcome screen' with ponies
-#    text=`fortune | iconv -t 'ASCII' 2>>/dev/null`; ( ponysay "$text" &; coinmon -t 99 -C 3 & );
-#fi
-#nvm_auto_switch
-#
-# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-
 # added by Anaconda2 installer
 # export PATH="/home/dancluna/anaconda2/bin:$PATH"
 export PATH="$PATH:/home/dancluna/anaconda2/bin"
@@ -131,18 +103,28 @@ export PATH="$PATH:/home/dancluna/.bin"
 
 # show my stock tickers on every new term
 if [ -n "$TMUX" ] && [ -z "$EMACS" ]; then
-    source hacker-quotes.plugin.zsh
-    # ~/.ghq/github.com/pstadler/ticker.sh/ticker.sh $(cat ~/dotfiles/.ticker.conf)
+    # source hacker-quotes.plugin.zsh
+    ticker-go $(cat ~/dotfiles/.ticker.conf)
 else
 fi
+
+if [[ -z "$INSIDE_EMACS" ]]; then
+  alias ls='exa'
+fi
+
+# enables vi mode
+# taken from http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
+bindkey -v
+bindkey -M vicmd "^V" edit-command-line
+
+eval "$(starship init zsh)"
 
 eval "$(direnv hook zsh)"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
-# The next line enables shell command completion for gcloud.
-# if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/danielluna/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # source asdf
 # . $(brew --prefix asdf)/asdf.sh
@@ -150,15 +132,6 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 . ~/.asdf/plugins/java/set-java-home.zsh
 
-if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/danielluna/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-if [[ -z "$INSIDE_EMACS" ]]; then
-  alias ls='exa'
-fi
-
-eval "$(starship init zsh)"
-
-# enables vi mode
-# taken from http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
-bindkey -v
-bindkey -M vicmd "^V" edit-command-line
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/danielluna/.sdkman"
+[[ -s "/Users/danielluna/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/danielluna/.sdkman/bin/sdkman-init.sh"
