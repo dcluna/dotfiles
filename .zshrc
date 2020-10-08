@@ -114,8 +114,11 @@ fi
 
 # enables vi mode
 # taken from http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
-bindkey -v
 bindkey -M vicmd "^V" edit-command-line
+
+bindkey -N vimacs emacs
+bindkey -M vimacs "\e" vi-cmd-mode
+bindkey -A vimacs main
 
 eval "$(starship init zsh)"
 
