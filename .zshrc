@@ -138,3 +138,10 @@ if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/dan
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/danielluna/.sdkman"
 [[ -s "/Users/danielluna/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/danielluna/.sdkman/bin/sdkman-init.sh"
+
+# HSTR configuration - add this to ~/.zshrc
+alias hh=hstr                    # hh to be alias for hstr
+setopt histignorespace           # skip cmds w/ leading space from history
+export HSTR_CONFIG=hicolor       # get more colors
+bindkey -M vicmd -s "/" "a hstr --\n"
+bindkey -M vimacs -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
