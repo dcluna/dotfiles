@@ -96,11 +96,6 @@ done
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# added by Anaconda2 installer
-# export PATH="/home/dancluna/anaconda2/bin:$PATH"
-export PATH="$PATH:/home/dancluna/anaconda2/bin"
-export PATH="$PATH:/home/dancluna/.bin"
-
 # show my stock tickers on every new term
 if [ -n "$TMUX" ] && [ -z "$EMACS" ]; then
     # source hacker-quotes.plugin.zsh
@@ -114,11 +109,20 @@ fi
 
 # enables vi mode
 # taken from http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
-bindkey -M vicmd "^V" edit-command-line
+if [ -z "$INSIDE_EMACS" ]; then # inside emacs we already have evil
+    bindkey -M vicmd "^V" edit-command-line
 
-bindkey -N vimacs emacs
-bindkey -M vimacs "\e" vi-cmd-mode
-bindkey -A vimacs main
+    bindkey -N vimacs emacs
+    bindkey -M vimacs "\e" vi-cmd-mode
+    bindkey -A vimacs main
+
+    # HSTR configuration - add this to ~/.zshrc
+    alias hh=hstr                    # hh to be alias for hstr
+    setopt histignorespace           # skip cmds w/ leading space from history
+    export HSTR_CONFIG=hicolor       # get more colors
+    bindkey -M vicmd -s "/" "a hstr --\n"
+    bindkey -M vimacs -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+fi
 
 eval "$(starship init zsh)"
 
@@ -127,7 +131,7 @@ eval "$(direnv hook zsh)"
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
-if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/danielluna/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # source asdf
 # . $(brew --prefix asdf)/asdf.sh
@@ -136,12 +140,6 @@ if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/dan
 . ~/.asdf/plugins/java/set-java-home.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/danielluna/.sdkman"
-[[ -s "/Users/danielluna/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/danielluna/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# HSTR configuration - add this to ~/.zshrc
-alias hh=hstr                    # hh to be alias for hstr
-setopt histignorespace           # skip cmds w/ leading space from history
-export HSTR_CONFIG=hicolor       # get more colors
-bindkey -M vicmd -s "/" "a hstr --\n"
-bindkey -M vimacs -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
