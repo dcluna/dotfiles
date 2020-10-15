@@ -413,7 +413,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font (cons (car (dcl/shuffle (list
-                                                      "Bitstream Vera Sans Mono")))
+                                                      "Bitstream Vera Sans Mono" "Hack Nerd Font")))
                                    '(
                                      :size 13
                                      :weight normal
