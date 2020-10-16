@@ -115,7 +115,7 @@ call the original function `package-activate'."
 
 (defvar dcl/light-themes
   (dcl/shuffle
-   '(twilight-bright hemisu-light apropospriate-light flatui
+   '(acme twilight-bright hemisu-light apropospriate-light flatui
                      kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                      doom-tomorrow-day majapahit-light plan9 alect-light
                      gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
@@ -254,6 +254,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
+                                      acme-theme
                                       reveal-in-osx-finder
                                       ;; jest
                                       inflections
