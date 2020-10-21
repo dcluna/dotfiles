@@ -136,7 +136,7 @@ static char *gnus-pointer[] = {
    '(nrepl-message-colors
      '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
    '(objed-cursor-color "#99324B")
-   '(org-agenda-files '("~/client-code/genome/agenda.org"))
+   '(org-agenda-files '("~/org-agenda.org"))
    '(org-babel-load-languages
      '((scheme . t)
        (ruby . t)
