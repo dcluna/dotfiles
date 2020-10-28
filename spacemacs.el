@@ -254,6 +254,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
+                                      ivy-prescient
                                       acme-theme
                                       reveal-in-osx-finder
                                       ;; jest

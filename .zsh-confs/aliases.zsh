@@ -102,3 +102,4 @@ alias availablerubies='rbenv install -l | $PAGER'
 # rust utilities
 # alias time='hyperfine'
 alias top='btm -b'
+alias pgsyncd='pgsync --debug'
