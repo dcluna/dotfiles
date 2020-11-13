@@ -4,6 +4,7 @@ import maya
 from geopy.distance import geodesic
 
 options.clipboard_copy_cmd = "pbcopy"
+options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"
 
 def to_timestamp(str):
   ts = datetime.strptime(str, "%Y-%m-%d")
