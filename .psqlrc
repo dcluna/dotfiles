@@ -1,3 +1,6 @@
 \timing on
 \x auto
 \setenv EDITOR vi
+\setenv PAGER 'pspg -s 3'
+\pset border 2
+\pset linestyle unicode
