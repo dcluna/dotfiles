@@ -28,7 +28,9 @@
     (s-join " " (list "vd"
                       (if (-all? (lambda (f) (equal "parquet" (file-name-extension f))) files)
                           "-f pandas")
-                      (s-join " " files)))))
+                      (s-join " " (mapcar (lambda (file)
+                                            (format "\"%s\"" file))
+                                          files))))))
 
 ;;;###autoload
 (defun tmux-utils/visidata-open-files-in-new-windows (session)
