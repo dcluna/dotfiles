@@ -5,6 +5,14 @@ function bq_load_csv_autodetect() {
             $1 $2
 }
 
+function bq_load_tsv_autodetect() {
+    bq load --source_format=CSV \
+       --field_delimiter=tab \
+       --skip_leading_rows=1 \
+       --autodetect \
+       $1 $2
+}
+
 function bq_load_parquet() {
     bq load --source_format=PARQUET $1 $2
 }
