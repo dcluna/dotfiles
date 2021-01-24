@@ -208,14 +208,14 @@ call the original function `package-activate'."
      sql
      scheme
      ;; personal-misc
-     (git :variables git-enable-github-support t git-gutter-use-fringe t git-enable-magit-gitflow nil git-enable-magit-delta-plugin t)
+     (git :variables git-enable-github-support t git-gutter-use-fringe t git-enable-magit-gitflow nil git-enable-magit-delta-plugin nil)
      markdown
      html
      (typescript :variables
                  typescript-fmt-on-save t
                  typescript-fmt-tool 'tide)
      (javascript :variables
-                  js-indent-level 2)
+                 js-indent-level 2)
      (python :variables python-test-runner '(pytest) python-backend 'anaconda)
      (ruby :variables ruby-enable-enh-ruby-mode t ruby-test-runner 'rspec)
      (clojure :variables clojure-enable-fancify-symbols t)
