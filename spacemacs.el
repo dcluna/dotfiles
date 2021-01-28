@@ -16,6 +16,7 @@
 
 
 (setq straight-packages '(
+                          (homebrew :type git :host github :repo "jdormit/homebrew.el")
                           git-link
                           (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
                           ;; (forge :type git :host github :repo "magit/forge")
