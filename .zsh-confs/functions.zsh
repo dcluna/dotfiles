@@ -24,3 +24,11 @@ function visidata_csv_to_trend() {
 function fileio_upload() {
     curl -F "file=@$1" "https://file.io/?expires=1"
 }
+
+function jsonl_to_json() {
+  jq -s '.' "$1"
+}
+
+function json_to_jsonl() {
+    jq -c '.[]' "$1"
+}
