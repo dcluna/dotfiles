@@ -917,6 +917,15 @@
            (insert (format "bundle exec rspec %s" test-file)))))
    #+END_SRC
 
+   #+begin_src ruby
+     (defun dcl/ruby-date-to-unix-epoch (date)
+      "Given DATE, return the corresponding seconds since Unix epoch."
+      (interactive "sDate: ")
+      (kill-new
+       (message (s-chomp
+                 (shell-command-to-string (format "ruby -r 'active_support/all' -e \"puts '%s'.to_datetime.to_i\"" date))))))
+   #+end_src
+
 *** Haml
     #+BEGIN_SRC emacs-lisp
       (defun dcl/haml-special-setup ()

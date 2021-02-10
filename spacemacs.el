@@ -759,6 +759,12 @@ user code."
       (with-temp-file filename
         (insert "#!/bin/bash\n")
         (insert (format "bundle exec rspec %s" test-file)))))
+  (defun dcl/ruby-date-to-unix-epoch (date)
+   "Given DATE, return the corresponding seconds since Unix epoch."
+   (interactive "sDate: ")
+   (kill-new
+    (message (s-chomp
+              (shell-command-to-string (format "ruby -r 'active_support/all' -e \"puts '%s'.to_datetime.to_i\"" date))))))
   (defun dcl/haml-special-setup ()
     (dcl/leader-keys-major-mode
      '(haml-mode) "od" "debug"
