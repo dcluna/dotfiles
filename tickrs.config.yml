@@ -1,0 +1,70 @@
+---
+# List of ticker symbols to start app with
+symbols:
+ - VGIR11.SA
+ - VILG11.SA
+ - XPLG11.SA
+ - HGLG11.SA
+ - IRDM11.SA
+ - MXRF11.SA
+ - CPTS11.SA
+ - XPML11.SA
+ - XPPR11.SA
+ - DIVO11.SA
+ - ITSA4.SA
+ - ENBR3.SA
+ - FLRY3.SA
+ - BBAS3.SA
+ - LREN3.SA
+ - EGIE3.SA
+
+# Use specified time frame when starting program and when new stocks are added
+# Default is 1D
+# Possible values: 1D, 1W, 1M, 3M, 6M, 1Y, 5Y
+time_frame: 6M
+
+# Interval to update data from API (seconds)
+# Default is 1
+update_interval: 10
+
+# Enable pre / post market hours for graphs
+#enable_pre_post: true
+
+# Hide help icon in top right
+#hide_help: true
+
+# Hide previous close line on 1D chart
+#hide_prev_close: true
+
+# Hide toggle block
+#hide_toggle: true
+
+# Show volumes graph
+#show_volumes: true
+
+# Show x-axis labels
+#show_x_labels: true
+
+# Start in summary mode
+summary: true
+
+# Truncate pre market graphing to only 30 minutes prior to markets opening
+trunc_pre: true
+
+# Apply a custom theme
+#
+# All colors are optional. If commented out / omitted, the color will get sourced
+# from your terminal color scheme
+#theme:
+#  background: '#403E41'
+#  gray: '#727072'
+#  profit: '#ADD977'
+#  loss: '#FA648A'
+#  text_normal: '#FCFCFA'
+#  text_primary: '#FFDA65'
+#  text_secondary: '#79DBEA'
+#  border_primary: '#FC9766'
+#  border_secondary: '#FCFCFA'
+#  border_axis: '#FC9766'
+#  highlight_focused: '#FC9766'
+#  highlight_unfocused: '#727072'
