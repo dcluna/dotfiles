@@ -255,6 +255,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
+                                      emamux
                                       ivy-prescient
                                       acme-theme
                                       reveal-in-osx-finder
@@ -1653,6 +1654,14 @@ user code."
     (setq display-time-world-list (append zoneinfo-style-world-list '(("Etc/GMT0" "UTC")))))
   (setq wakatime-api-key (getenv "WAKATIME_API_KEY"))
   (setq wakatime-cli-path "/usr/local/bin/wakatime")
+  (progn
+    (require 'emamux)
+    (evil-leader/set-key (kbd "o e") emamux:keymap)
+    (define-key emamux:keymap "r" #'emamux:send-region)
+    (define-key emamux:keymap "s" #'emamux:send-command)
+    (define-key emamux:keymap "w" #'emamux:new-window)
+    (define-key emamux:keymap "z" #'emamux:zoom-runner)
+    (spacemacs/declare-prefix "o e" "emamux"))
 
   ;; genome-related stuff. I added it inside this function because spacemacs doesn't like literate files too much.
   )

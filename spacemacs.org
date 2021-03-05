@@ -149,6 +149,7 @@
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
                                           ;; indium
+                                          emamux
                                           ivy-prescient
                                           acme-theme
                                           reveal-in-osx-finder
@@ -2302,6 +2303,20 @@
      (setq wakatime-api-key (getenv "WAKATIME_API_KEY"))
      (setq wakatime-cli-path "/usr/local/bin/wakatime")
    #+END_SRC
+
+** Emamux
+
+   #+begin_src emacs-lisp
+     (progn
+       (require 'emamux)
+       (evil-leader/set-key (kbd "o e") emamux:keymap)
+       (define-key emamux:keymap "r" #'emamux:send-region)
+       (define-key emamux:keymap "s" #'emamux:send-command)
+       (define-key emamux:keymap "w" #'emamux:new-window)
+       (define-key emamux:keymap "z" #'emamux:zoom-runner)
+       (spacemacs/declare-prefix "o e" "emamux"))
+   #+end_src
+
 
 * OSCP
 
