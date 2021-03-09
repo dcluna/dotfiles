@@ -166,6 +166,7 @@ call the original function `package-activate'."
    dotspacemacs-configuration-layers
    '(
      ;; (scala :variables scala-backend 'scala-metals)
+     ess
      ipython-notebook
      react
      dap
