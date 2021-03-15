@@ -297,6 +297,7 @@ set -g mode-keys vi
 set -g @tpm_plugins '          \
   tmux-plugins/tpm             \
   Morantron/tmux-fingers       \
+  tmux-plugins/tmux-logging    \
 '
 
 
