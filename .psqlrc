@@ -4,3 +4,4 @@
 \setenv PAGER 'pspg -s 7'
 \pset border 2
 \pset linestyle unicode
+SET tcp_keepalives_idle = 15;
