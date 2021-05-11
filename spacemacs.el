@@ -257,6 +257,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
+                                      org-tanglesync
                                       emamux
                                       ivy-prescient
                                       acme-theme
@@ -351,9 +352,9 @@ call the original function `package-activate'."
                                                          :files ("*.el"))
                                        :upgrade 't)
                                       evil-embrace
-                                      editorconfig
+                                      editorconfig)
                                       ;; wsd-mode
-                                      )
+
 
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -1674,6 +1675,12 @@ user code."
     (define-key emamux:keymap "w" #'emamux:new-window)
     (define-key emamux:keymap "z" #'emamux:zoom-runner)
     (spacemacs/declare-prefix "o e" "emamux"))
+  (use-package org-tanglesync
+    :hook ((org-mode . org-tanglesync-mode)
+           ;; enable watch-mode globally:
+           ((prog-mode text-mode) . org-tanglesync-watch-mode))
+    :custom
+    (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
 
   ;; genome-related stuff. I added it inside this function because spacemacs doesn't like literate files too much.
   )

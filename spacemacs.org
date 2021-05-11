@@ -151,6 +151,7 @@
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
                                           ;; indium
+                                          org-tanglesync
                                           emamux
                                           ivy-prescient
                                           acme-theme
@@ -245,9 +246,9 @@
                                                              :files ("*.el"))
                                            :upgrade 't)
                                           evil-embrace
-                                          editorconfig
+                                          editorconfig)
                                           ;; wsd-mode
-                                          )
+                                      
 
        ;; A list of packages and/or extensions that will not be install and loaded.
        dotspacemacs-excluded-packages '()
@@ -2329,6 +2330,17 @@
        (spacemacs/declare-prefix "o e" "emamux"))
    #+end_src
 
+
+** Org-tanglesync
+
+    #+begin_src emacs-lisp
+      (use-package org-tanglesync
+        :hook ((org-mode . org-tanglesync-mode)
+               ;; enable watch-mode globally:
+               ((prog-mode text-mode) . org-tanglesync-watch-mode))
+        :custom
+        (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
+    #+end_src
 
 * OSCP
 
