@@ -34,5 +34,8 @@ if exists('g:vscode')
     omap gc  <Plug>VSCodeCommentary
     nmap gcc <Plug>VSCodeCommentaryLine
 else
-    " ordinary neovim
+" ordinary neovim
+:set ignorecase
+:set smartcase
+:set clipboard=unnamedplus
 endif
