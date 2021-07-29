@@ -232,7 +232,7 @@ call the original function `package-activate'."
      lua
      (go :variables go-tab-width 4 go-format-before-save t)
      github
-     (org :variables org-enable-github-support t org-enable-reveal-js-support t)
+     (org :variables org-enable-github-support t org-enable-reveal-js-support t org-enable-roam-support t org-enable-sticky-header t org-enable-appear-support t)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
