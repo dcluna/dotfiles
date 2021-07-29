@@ -99,6 +99,8 @@ alias pairsession="tmcreate pair && tma pair"
 alias asciicast2gif='docker run --rm -e DEBUG -e "GIFSICLE_OPTS=--lossy=80" -e "NODE_OPTS=--max-old-space-size=12288" -e "MAGICK_MEMORY_LIMIT=6gb" -e "MAGICK_MAP_LIMIT=12gb" -v $PWD:/data asciinema/asciicast2gif'
 alias availablerubies='rbenv install -l | $PAGER'
 
+alias vi='nvim'
+
 # rust utilities
 # alias time='hyperfine'
 alias top='btm -b'
