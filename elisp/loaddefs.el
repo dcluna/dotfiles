@@ -16,7 +16,27 @@ Opens all marked files in dired on one visidata session in a new tmux window, na
 
 \(fn SESSION WINDOW-NAME)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tmux-utils" '(#("tmux-utils" 0 10 (fontified t face ((:foreground "#ffffaa469bf4") font-lock-function-name-face))))))
+(register-definition-prefixes "tmux-utils" '("tmux-utils"))
+
+;;;***
+
+;;;### (autoloads nil "vterm-tmux-navigator" "vterm-tmux-navigator.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from vterm-tmux-navigator.el
+
+(autoload 'vterm-tmux-navigator/vterm-navigate-down "vterm-tmux-navigator" nil t nil)
+
+(autoload 'vterm-tmux-navigator/vterm-navigate-up "vterm-tmux-navigator" nil t nil)
+
+(autoload 'vterm-tmux-navigator/vterm-navigate-left "vterm-tmux-navigator" nil t nil)
+
+(autoload 'vterm-tmux-navigator/vterm-navigate-right "vterm-tmux-navigator" nil t nil)
+
+(autoload 'vterm-tmux-navigator/vterm-navigate-left-window "vterm-tmux-navigator" nil t nil)
+
+(autoload 'vterm-tmux-navigator/vterm-navigate-right-window "vterm-tmux-navigator" nil t nil)
+
+(register-definition-prefixes "vterm-tmux-navigator" '("vterm-tmux-navigator/vterm-send-prefix"))
 
 ;;;***
 
