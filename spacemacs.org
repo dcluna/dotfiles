@@ -2343,6 +2343,13 @@
         (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
     #+end_src
 
+** Org-roam
+
+   #+begin_src emacs-lisp
+     (setq org-roam-directory (file-truename "~/.ghq/github.com/dcluna/dotfiles/org-roam"))
+     (setq org-roam-v2-ack t)
+   #+end_src
+
 * OSCP
 
   #+BEGIN_SRC emacs-lisp :tangle no

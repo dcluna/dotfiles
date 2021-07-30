@@ -1682,6 +1682,8 @@ user code."
            ((prog-mode text-mode) . org-tanglesync-watch-mode))
     :custom
     (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
+  (setq org-roam-directory (file-truename "~/.ghq/github.com/dcluna/dotfiles/org-roam"))
+  (setq org-roam-v2-ack t)
 
   ;; genome-related stuff. I added it inside this function because spacemacs doesn't like literate files too much.
   )
