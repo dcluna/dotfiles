@@ -257,6 +257,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
+                                      edit-server
                                       org-tanglesync
                                       emamux
                                       ivy-prescient
