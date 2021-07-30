@@ -1675,6 +1675,12 @@ user code."
     (define-key emamux:keymap "s" #'emamux:send-command)
     (define-key emamux:keymap "w" #'emamux:new-window)
     (define-key emamux:keymap "z" #'emamux:zoom-runner)
+    (define-key emamux:keymap "j" #'tmux-utils/vterm-navigate-down)
+    (define-key emamux:keymap "k" #'tmux-utils/vterm-navigate-up)
+    (define-key emamux:keymap "h" #'tmux-utils/vterm-navigate-left)
+    (define-key emamux:keymap "l" #'tmux-utils/vterm-navigate-right)
+    (define-key emamux:keymap "H" #'tmux-utils/vterm-navigate-left-window)
+    (define-key emamux:keymap "L" #'tmux-utils/vterm-navigate-right-window)
     (spacemacs/declare-prefix "o e" "emamux"))
   (use-package org-tanglesync
     :hook ((org-mode . org-tanglesync-mode)

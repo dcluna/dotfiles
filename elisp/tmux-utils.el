@@ -54,4 +54,37 @@
                window-name)))
       (message "visidata window %s opened in session %s" window-name session)))
 
+(defun tmux-utils/vterm-send-prefix ()
+  (vterm-send-C-b))
+
+(defun tmux-utils/vterm-navigate-down ()
+  (interactive)
+  (tmux-utils/vterm-send-prefix)
+  (vterm-send-down))
+
+(defun tmux-utils/vterm-navigate-up ()
+  (interactive)
+  (tmux-utils/vterm-send-prefix)
+  (vterm-send-up))
+
+(defun tmux-utils/vterm-navigate-left ()
+  (interactive)
+  (tmux-utils/vterm-send-prefix)
+  (vterm-send-left))
+
+(defun tmux-utils/vterm-navigate-right ()
+  (interactive)
+  (tmux-utils/vterm-send-prefix)
+  (vterm-send-right))
+
+(defun tmux-utils/vterm-navigate-left-window ()
+  (interactive)
+  (tmux-utils/vterm-send-prefix)
+  (vterm-send-C-h))
+
+(defun tmux-utils/vterm-navigate-right-window ()
+  (interactive)
+  (tmux-utils/vterm-send-prefix)
+  (vterm-send-C-l))
+
 (provide 'tmux-utils)
