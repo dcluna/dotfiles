@@ -18,4 +18,6 @@
 (define-key evil-vterm-tmux-navigator-state-map (kbd "C-g") #'evil-vterm-tmux-navigator/quit)
 (define-key evil-vterm-tmux-navigator-state-map [escape] #'evil-vterm-tmux-navigator/quit)
 
+(setq evil-vterm-tmux-navigator-state-cursor '("#ff007b" box))
+
 (provide 'evil-vterm-tmux-navigator)
