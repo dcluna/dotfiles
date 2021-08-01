@@ -117,11 +117,15 @@ if [ -z "$INSIDE_EMACS" ]; then # inside emacs we already have evil
     bindkey -A vimacs main
 
     # HSTR configuration - add this to ~/.zshrc
-    alias hh=hstr                    # hh to be alias for hstr
-    setopt histignorespace           # skip cmds w/ leading space from history
-    export HSTR_CONFIG=hicolor       # get more colors
-    bindkey -M vicmd -s "/" "a hstr --\n"
-    bindkey -M vimacs -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+    # alias hh=hstr                    # hh to be alias for hstr
+    # setopt histignorespace           # skip cmds w/ leading space from history
+    # export HSTR_CONFIG=hicolor       # get more colors
+    # bindkey -M vicmd -s "/" "a hstr --\n"
+    # bindkey -M vimacs -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+    eval "$(mcfly init zsh)"
+    bindkey -a "/" mcfly-history-widget
+    bindkey -a "?" mcfly-history-widget
+    bindkey -M vimacs '^s' mcfly-history-widget
 fi
 
 eval "$(starship init zsh)"
