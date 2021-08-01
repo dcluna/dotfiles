@@ -297,6 +297,8 @@ set -g mode-keys vi
 # move status line to top
 #set -g status-position top
 
+set -g @fingers-key G
+
 # TMUX plugin manager
 set -g @tpm_plugins '          \
   tmux-plugins/tpm             \
