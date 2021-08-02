@@ -294,7 +294,7 @@ call the original function `package-activate'."
                                       solidity-mode
                                       sx
                                       ts-comint
-                                      vagrant-tramp
+                                      ;; vagrant-tramp
                                       ob-php
                                       ob-typescript
                                       labburn-theme
