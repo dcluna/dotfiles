@@ -126,6 +126,7 @@ if [ -z "$INSIDE_EMACS" ]; then # inside emacs we already have evil
     bindkey -a "/" mcfly-history-widget
     bindkey -a "?" mcfly-history-widget
     bindkey -M vimacs '^s' mcfly-history-widget
+    export MCFLY_FUZZY=true
 fi
 
 eval "$(starship init zsh)"
