@@ -106,3 +106,5 @@ alias vi='nvim'
 alias top='btm -b'
 alias pgsyncd='pgsync --debug'
 alias cat='bat --paging=never'
+
+alias nix-query='nix-env -qas --description'
