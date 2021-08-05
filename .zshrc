@@ -132,10 +132,14 @@ eval "$(starship init zsh)"
 
 eval "$(direnv hook zsh)"
 
+eval "$(zoxide init zsh)"
+
+source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
+export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
-
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # source asdf
 # . $(brew --prefix asdf)/asdf.sh
