@@ -1,0 +1,5 @@
+(add-to-list 'load-path "/Users/danielluna/.emacs.d/elpa/28.0/develop/evil-20210726.2220")
+
+(require 'evil)
+
+(evil-mode 1)
