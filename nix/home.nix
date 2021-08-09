@@ -12,6 +12,7 @@
   home.packages = [
     pkgs.zoxide
     pkgs.curlie
+    pkgs.visidata
   ];
 
   # This value determines the Home Manager release that your
