@@ -107,6 +107,9 @@ if [[ -z "$INSIDE_EMACS" ]]; then
   alias ls='exa'
 fi
 
+eval "$(mcfly init zsh)"
+export MCFLY_FUZZY=true
+
 # enables vi mode
 # taken from http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
 if [ -z "$INSIDE_EMACS" ]; then # inside emacs we already have evil
@@ -122,11 +125,9 @@ if [ -z "$INSIDE_EMACS" ]; then # inside emacs we already have evil
     # export HSTR_CONFIG=hicolor       # get more colors
     # bindkey -M vicmd -s "/" "a hstr --\n"
     # bindkey -M vimacs -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
-    eval "$(mcfly init zsh)"
     bindkey -a "/" mcfly-history-widget
     bindkey -a "?" mcfly-history-widget
     bindkey -M vimacs '^s' mcfly-history-widget
-    export MCFLY_FUZZY=true
 fi
 
 eval "$(starship init zsh)"
