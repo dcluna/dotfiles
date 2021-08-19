@@ -151,6 +151,7 @@
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
                                           ;; indium
+                                          rufo
                                           edit-server
                                           org-tanglesync
                                           emamux
@@ -1822,6 +1823,11 @@
            (comment-dwim nil)
            (insert (concat "rubocop:disable " (mapconcat 'identity errors ", ")))))
      #+END_SRC
+**** Rufo
+
+     #+begin_src emacs-lisp
+       (add-hook 'enh-ruby-mode-hook 'rufo-minor-mode)
+     #+end_src
 
 **** Pry
 

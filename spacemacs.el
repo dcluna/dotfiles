@@ -257,6 +257,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
+                                      rufo
                                       edit-server
                                       org-tanglesync
                                       emamux
@@ -1417,6 +1418,7 @@ user code."
     (let* ((errors (mapcar 'flycheck-error-id (flycheck-overlay-errors-at (point)))))
       (comment-dwim nil)
       (insert (concat "rubocop:disable " (mapconcat 'identity errors ", ")))))
+  (add-hook 'enh-ruby-mode-hook 'rufo-minor-mode)
   (setq inf-ruby-default-implementation "pry")
   (setq rbenv-executable "/usr/local/bin/rbenv")
   (defgroup rails-custom nil

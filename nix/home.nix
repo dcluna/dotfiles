@@ -13,6 +13,10 @@
     pkgs.zoxide
     pkgs.curlie
     pkgs.visidata
+    pkgs.xsv
+    pkgs.lazydocker
+    pkgs.pspg
+    pkgs.rufo
   ];
 
   # This value determines the Home Manager release that your
