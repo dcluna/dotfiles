@@ -9,7 +9,7 @@ export PATH="$HOME/.linuxbrew/bin:$PATH"
 export PATH="$HOME/code/apache-storm-0.9.5/bin:$PATH"
 export CHROMEDRIVER="/opt/google/chrome-beta/google-chrome-beta"
 
-export INFOPATH="$HOME/Downloads:$HOME/code/python-info/build:$HOME/code/guix/doc:/usr/local/share/info:/usr/share/info"
+export INFOPATH="$HOME/Downloads:$HOME/code/python-info/build:$HOME/code/guix/doc:/usr/local/share/info:/usr/share/info:/usr/local/Cellar/mdk/1.3.0/share/info"
 
 export PATH="$HOME/bin/elixir-1.1.1/bin:$PATH"
 
