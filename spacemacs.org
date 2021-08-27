@@ -2367,6 +2367,17 @@
      (setq org-roam-v2-ack t)
    #+end_src
 
+** MDK (Mix development kit)
+
+   #+begin_src emacs-lisp
+     (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
+
+     (autoload 'mixal-mode "mixal-mode" t)
+     (add-to-list 'auto-mode-alist '("\\.mixal\\'" . mixal-mode))
+
+     (autoload 'mixvm "mixvm" "mixvm/gud interaction" t)
+   #+end_src
+
 * OSCP
 
   #+BEGIN_SRC emacs-lisp :tangle no

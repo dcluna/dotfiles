@@ -1694,6 +1694,12 @@ user code."
     (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
   (setq org-roam-directory (file-truename "~/.ghq/github.com/dcluna/dotfiles/org-roam"))
   (setq org-roam-v2-ack t)
+  (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
+  
+  (autoload 'mixal-mode "mixal-mode" t)
+  (add-to-list 'auto-mode-alist '("\\.mixal\\'" . mixal-mode))
+  
+  (autoload 'mixvm "mixvm" "mixvm/gud interaction" t)
 
   ;; genome-related stuff. I added it inside this function because spacemacs doesn't like literate files too much.
   )
