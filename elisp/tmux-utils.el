@@ -8,7 +8,7 @@
   (format
    "tmux new-window -t %s: %s %s"
    session
-   (if window-name (concat  "-n " window-name) "")
+   (if window-name (format  "-n \"%s\"" window-name) "")
    command))
 
 (defun tmux-utils/dired-command-new-window (session command &optional window-name)
