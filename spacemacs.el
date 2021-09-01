@@ -714,7 +714,8 @@ user code."
     (embrace-add-pair ?{ "{" "}")
     (embrace-add-pair ?# "#{" "}")
     (embrace-add-pair ?d "do " " end")
-    (embrace-add-pair ?l "->() {" "}"))
+    (embrace-add-pair ?l "->() {" "}")
+    (embrace-add-pair ?S "send(:" ")"))
 
   (defun ruby-eval-line (lines)
     (interactive "p")
