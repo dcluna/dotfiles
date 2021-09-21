@@ -16,6 +16,9 @@
 
 
 (setq straight-packages '(
+                          (org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+                          org-roam
+                          magit-section
                           (homebrew :type git :host github :repo "jdormit/homebrew.el")
                           git-link
                           (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
@@ -107,8 +110,7 @@ call the original function `package-activate'."
 
 ;; (spacemacs/set-leader-keys "oS" 'hydra-straight-helper/body)
 ;; load straight.el packages
-(straight-transaction
-  (mapc #'straight-use-package straight-packages))
+(mapc #'straight-use-package straight-packages)
 ;; spacemacs initialization routines
 (defun dcl/shuffle (list)
   "Destructively shuffles LIST."
@@ -1695,6 +1697,19 @@ user code."
     (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
   (setq org-roam-directory (file-truename "~/.ghq/github.com/dcluna/dotfiles/org-roam"))
   (setq org-roam-v2-ack t)
+  (use-package org-roam-ui
+    :straight
+    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+    ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+    ;;         a hookable mode anymore, you're advised to pick something yourself
+    ;;         if you don't care about startup time, use
+    ;; :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
   (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
   
   (autoload 'mixal-mode "mixal-mode" t)
