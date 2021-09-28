@@ -1,8 +1,18 @@
-(defun tmux-utils--read-session ()
-  (or (and (getenv "TMUX")
-           (s-chomp
-            (shell-command-to-string "tmux display-message -p '#S'")))
-      (read-string "Session: ")))
+(defun tmux-utils--read-available-sessions ()
+  (s-split "\n" (s-chomp (shell-command-to-string "tmux ls -F '#{session_name}'"))))
+
+(defun tmux-utils--select-session ()
+  (completing-read-multiple "TMUX session: " (tmux-utils--read-available-sessions)))
+
+(defvar tmux-utils-session nil "Current TMUX session to use")
+
+(defun tmux-utils--set-session ()
+  (setq tmux-utils-session (tmux-utils--select-session)))
+
+(defun tmux-utils--read-session (&optional reread)
+  (if (or (not tmux-utils-session) reread)
+      (tmux-utils--set-session))
+  tmux-utils-session)
 
 (defun tmux-utils--new-window-command (session command &optional window-name)
   (format
