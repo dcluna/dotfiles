@@ -1555,6 +1555,24 @@
        (evil-leader/set-key-for-mode 'sql-mode (kbd "o s") sql-keymap)
        (spacemacs/declare-prefix-for-mode 'sql-mode "mos" "REPL" "REPL"))
    #+end_src
+
+*** SQL pretty symbols
+
+    #+begin_src emacs-lisp
+      (add-hook 'sql-mode-hook 'dcl/sql-prettify-symbols)
+
+      (defun dcl/sql-prettify-symbols ()
+        (mapc (lambda (pair) (push pair prettify-symbols-alist))
+              '(
+                ("union" . #x222a)
+                ("count" . #x23)
+                ("null" . #x2205)
+                ("left join" . #x27d5)
+                ("right join" . #x27d6)
+                ("inner join" . #x2229)))
+        (prettify-symbols-mode 1))
+    #+end_src
+    
 ** Magit
 
    Toggling Forge sections on/off with a function:

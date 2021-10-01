@@ -1265,6 +1265,18 @@ user code."
     (define-key sql-keymap "c" 'sql-csv-copy-line-or-region)
     (evil-leader/set-key-for-mode 'sql-mode (kbd "o s") sql-keymap)
     (spacemacs/declare-prefix-for-mode 'sql-mode "mos" "REPL" "REPL"))
+  (add-hook 'sql-mode-hook 'dcl/sql-prettify-symbols)
+  
+  (defun dcl/sql-prettify-symbols ()
+    (mapc (lambda (pair) (push pair prettify-symbols-alist))
+          '(
+            ("union" . #x222a)
+            ("count" . #x23)
+            ("null" . #x2205)
+            ("left join" . #x27d5)
+            ("right join" . #x27d6)
+            ("inner join" . #x2229)))
+    (prettify-symbols-mode 1))
   (defun dcl-toggle-forge-sections ()
     (interactive)
     (if (or ( -contains? magit-status-sections-hook 'forge-insert-pullreqs) (-contains? magit-status-sections-hook 'forge-insert-issues))
