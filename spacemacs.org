@@ -1139,14 +1139,10 @@
        (interactive (list (thing-at-point 'word t)))
        (message (shell-command-to-string (format "date --date @%s" unix-date))))
 
-     (defun dcl/freebsd-user-agent ()
+     (defun dcl/emamux-vterm ()
        (interactive)
-       (message (kill-new "Mozilla/5.0 (X11; FreeBSD amd64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36")))
-
-     (defun helm-dash-use-docsets (&rest docsets)
-       ;; (dolist (docset docsets)
-       ;;   (add-to-list 'helm-dash-common-docsets docset))
-       )
+       (vterm "*emamux-vterm*")
+       (vterm-send-string "tmux attach -t emamux"))
    #+END_SRC
 
 *** Setenv

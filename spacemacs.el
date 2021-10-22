@@ -907,26 +907,22 @@ user code."
            (interactive)
            (helm :sources '(,helm-source-var-name))))))
   (put 'dcl/make-helm-source 'lisp-indent-function 'defun)
-
+  
   (dcl/make-helm-source dcl/lib-code-magit-status "directories under ~/code"
     dir (magit-status dir) (directory-files "~/code" t))
-
+  
   (defun dcl/favorite-text-scale ()
     (unless (equal major-mode 'term-mode)
       (text-scale-set 2)))
-
+  
   (defun date-time-at-point (unix-date)
     (interactive (list (thing-at-point 'word t)))
     (message (shell-command-to-string (format "date --date @%s" unix-date))))
-
-  (defun dcl/freebsd-user-agent ()
+  
+  (defun dcl/emamux-vterm ()
     (interactive)
-    (message (kill-new "Mozilla/5.0 (X11; FreeBSD amd64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36")))
-
-  (defun helm-dash-use-docsets (&rest docsets)
-    ;; (dolist (docset docsets)
-    ;;   (add-to-list 'helm-dash-common-docsets docset))
-    )
+    (vterm "*emamux-vterm*")
+    (vterm-send-string "tmux attach -t emamux"))
   (defun dcl-set-dotenv (text)
     "Sets environment variables specified in TEXT, one per line."
     (interactive (list (if ( region-active-p )
