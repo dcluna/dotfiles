@@ -7,12 +7,13 @@
 (defvar tmux-utils-session nil "Current TMUX session to use")
 
 (defun tmux-utils--set-session ()
+  (interactive)
   (setq tmux-utils-session (tmux-utils--select-session)))
 
 (defun tmux-utils--read-session (&optional reread)
   (if (or (not tmux-utils-session) reread)
       (tmux-utils--set-session))
-  tmux-utils-session)
+  (car tmux-utils-session))
 
 (defun tmux-utils--new-window-command (session command &optional window-name)
   (format
