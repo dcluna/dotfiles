@@ -1517,6 +1517,15 @@
 ** SQL
 
    #+begin_src emacs-lisp
+     (defun sql-describe-line-or-region ()
+       "Describes a line/region to the SQL process."
+       (interactive)
+       (let ((start (or (and (region-active-p) (region-beginning))
+                        (line-beginning-position 1)))
+             (end (or (and (region-active-p) (region-end))
+                      (line-beginning-position 2))))
+         (sql-send-string (concat "\\d " (buffer-substring-no-properties start end)))))
+
      (defun sql-explain-line-or-region ()
        "EXPLAINs a line/region to the SQL process."
        (interactive)
@@ -1545,6 +1554,7 @@
 
    #+begin_src emacs-lisp
      (let ((sql-keymap (make-sparse-keymap)))
+       (define-key sql-keymap "d" 'sql-describe-line-or-region)
        (define-key sql-keymap "e" 'sql-explain-line-or-region)
        (define-key sql-keymap "E" 'sql-explain-line-or-region-and-focus)
        (define-key sql-keymap "c" 'sql-csv-copy-line-or-region)
