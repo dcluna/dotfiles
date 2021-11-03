@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import pandas as pd
 import pathlib
+import sys
 from scipy.stats import mstats
 from argparse import ArgumentParser
 
@@ -12,9 +13,10 @@ parser.add_argument("-u", "--upper-bound", dest="upper_bound",
 parser.add_argument("-c", "--column", dest="column",
                     help="column name to winsorize", type=str, required=True)
 parser.add_argument("-i", "--index_column", dest="index_column",
-                    help="index column (usually the date column)", type=str, default="date")
+                    help="index column (usually the market_name column)", type=str, default="market_name")
 parser.add_argument("-f", "--filename", dest="filename",
                     help="file name to use as input for winsorization", type=pathlib.Path, required=True)
+parser.add_argument('--verbose', '-v', action='count', default=0)
 args = parser.parse_args()
 
 lower_bound = args.lower_bound
@@ -22,9 +24,13 @@ upper_bound = args.upper_bound
 col = args.column
 index_column = args.index_column
 filename = args.filename
+verbose = args.verbose
+
+if verbose:
+  print(args, file=sys.stderr)
 
 def winsor_f(s):
-  return mstats.winsorize(s, limits=[lower_bound, upper_bound]) # between the 0-th and the 90-th quantile
+  return mstats.winsorize(s, limits=[lower_bound, upper_bound], inplace=False) # between the 0-th and the 90-th quantile
 
 input_data = pd.read_csv(filename, index_col = index_column)
 
