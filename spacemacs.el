@@ -1334,18 +1334,6 @@ user code."
   (with-eval-after-load 'org
     (setq org-babel-load-languages (remove '(scala . t) org-babel-load-languages))
     (add-to-list 'org-babel-load-languages '(calc . t)))
-  (let ((helm-dash-mode-alist
-          '((python-mode-hook . '("Python" "NumPy"))
-            (ruby-mode-hook . '("Ruby" "Ruby on Rails"))
-            (js2-mode-hook  . '("JavaScript" "D3JS" "NodeJS" "Ionic"))
-            (coffee-mode-hook . '("CofeeScript" "D3JS" "NodeJS" "Ionic"))
-            (emacs-lisp-mode-hook . '("Emacs Lisp"))
-            )))
-     (dolist (alist helm-dash-mode-alist)
-       (destructuring-bind (mode-hook . docsets) alist
-         (lexical-let ((docset docsets))
-           (add-hook mode-hook (lambda () (helm-dash-use-docsets docset)))))))
-   (setq dash-helm-dash-docset-path "/home/dancluna/.docsets")
   (setq erc-join-buffer 'bury)
   (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#offsec" "#corelan" "#ruby" "#RubyOnRails")))
   (setq erc-prompt-for-password nil)
