@@ -188,8 +188,9 @@ static char *gnus-pointer[] = {
    '(pos-tip-foreground-color "#272822")
    '(powerline-color1 "#1E1E1E")
    '(powerline-color2 "#111111")
-   '(rspec-spec-command "rescue rspec")
-   '(rspec-use-spring-when-possible nil)
+   '(rspec-command-options "--format documentation --require pry-rescue/rspec")
+   '(rspec-spec-command "rspec")
+   '(rspec-use-spring-when-possible t)
    '(rustic-ansi-faces
      ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
    '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
