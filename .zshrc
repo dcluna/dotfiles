@@ -99,7 +99,11 @@ done
 # show my stock tickers on every new term
 if [ -n "$TMUX" ] && [ -z "$EMACS" ]; then
     # source hacker-quotes.plugin.zsh
-    ticker-go $(cat ~/dotfiles/.ticker.conf)
+    if [ $(($RANDOM % 100)) -eq 7 ]; then
+        pokemonsay -n "yay"
+    else
+        ticker-go $(cat ~/dotfiles/.ticker.conf)
+    fi
 else
 fi
 
