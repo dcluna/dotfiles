@@ -168,6 +168,7 @@ call the original function `package-activate'."
    dotspacemacs-configuration-layers
    '(
      ;; (scala :variables scala-backend 'scala-metals)
+     imenu-list
      nixos
      ess
      ipython-notebook
