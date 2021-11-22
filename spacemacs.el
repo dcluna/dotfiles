@@ -259,6 +259,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
+                                      mini-frame
                                       rufo
                                       edit-server
                                       org-tanglesync
