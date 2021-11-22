@@ -108,3 +108,6 @@ alias pgsyncd='pgsync --debug'
 alias cat='bat --paging=never'
 
 alias nix-query='nix-env -qas --description'
+
+alias localwebserver="ruby -rwebrick -e\"WEBrick::HTTPServer.new(:Port => 8000, :DocumentRoot => Dir.pwd, RequestCallback: Proc.new{|req,res| res['Access-Control-Allow-Origin'] = '*' }).start\""
+alias mydoom="EMACS=/Users/danielluna/.ghq/git.sv.gnu.org/emacs/src/emacs ~/.doom-emacs/bin/doom"
