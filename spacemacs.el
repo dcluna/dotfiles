@@ -21,7 +21,7 @@
                           magit-section
                           (homebrew :type git :host github :repo "jdormit/homebrew.el")
                           git-link
-                          (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
+                          ;; (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
                           ;; (forge :type git :host github :repo "magit/forge")
                           minitest
                           helpful
@@ -50,12 +50,11 @@
                           ;; org
                           (vlf :type git :host github :repo "m00natic/vlfi")
                           evil-numbers
-                          auto-minor-mode
+                          auto-minor-mode))
                           ;; (helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
                           ;;                   :branch "fix-helm-insert-on-region"
                           ;;                   :upstream (:host github
                           ;;                                    :repo "emacs-jp/helm-c-yasnippet"))
-                          ))
 (defun my-straight-installed-p (package)
   "Return non-nil if PACKAGE is installed by `straight'."
   (gethash (if (symbolp package) (symbol-name package) package) straight--recipe-cache))
@@ -139,7 +138,7 @@ call the original function `package-activate'."
                  solarized-dark grayscale sunburn creamsody
                  underwater monokai zenburn alect-dark-alt
                  ample-zen badwolf birds-of-paradise-plus brin bubbleberry cherry-blossom atom-dark atom-one-dark
-                 creamsody cyberpunk cyberpunk-2019 clues
+                 creamsody cyberpunk clues
                  darkmine deeper-blue farmhouse-dark gruvbox
                  junio noctilux subatomic purple-haze github-modern)))
 
@@ -425,7 +424,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font (cons (car (dcl/shuffle (list
-                                                      "Bitstream Vera Sans Mono" "Hack Nerd Font")))
+                                                      "Azeret Mono" "Bitstream Vera Sans Mono" "Hack Nerd Font")))
                                    '(
                                      :size 13
                                      :weight normal

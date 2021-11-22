@@ -293,7 +293,7 @@
                      solarized-dark grayscale sunburn creamsody
                      underwater monokai zenburn alect-dark-alt
                      ample-zen badwolf birds-of-paradise-plus brin bubbleberry cherry-blossom atom-dark atom-one-dark
-                     creamsody cyberpunk cyberpunk-2019 clues
+                     creamsody cyberpunk clues
                      darkmine deeper-blue farmhouse-dark gruvbox
                      junio noctilux subatomic purple-haze github-modern)))
 
@@ -367,7 +367,7 @@
        ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
        ;; size to make separators look not too crappy.
        dotspacemacs-default-font (cons (car (dcl/shuffle (list
-                                                          "Bitstream Vera Sans Mono" "Hack Nerd Font")))
+                                                          "Azeret Mono" "Bitstream Vera Sans Mono" "Hack Nerd Font")))
                                        '(
                                          :size 13
                                          :weight normal
@@ -608,12 +608,11 @@
                               ;; org
                               (vlf :type git :host github :repo "m00natic/vlfi")
                               evil-numbers
-                              auto-minor-mode
+                              auto-minor-mode))
                               ;; (helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
                               ;;                   :branch "fix-helm-insert-on-region"
                               ;;                   :upstream (:host github
                               ;;                                    :repo "emacs-jp/helm-c-yasnippet"))
-                              ))
   #+END_SRC
 
   See [[https://github.com/raxod502/straight.el/issues/128#issuecomment-325229672][this]] for a solution for ignoring packages already installed by straight. I
