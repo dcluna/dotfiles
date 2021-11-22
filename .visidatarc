@@ -7,6 +7,7 @@ from geopy.distance import geodesic
 
 options.clipboard_copy_cmd = "pbcopy"
 options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"
+options.disp_float_fmt = '{:.08f}'
 
 def gsub(str, regex, repl):
   re.sub(regex, repl, str)
@@ -26,6 +27,9 @@ def maya_parse_to_datetime(str):
 
 def geodesic_distance_meters(lat1, lon1, lat2, lon2):
   return geodesic((lat1, lon1), (lat2, lon2)).meters
+
+def normalize_maid(device_id):
+  return device_id[0:8] + '-' + device_id[8:12] + '-' + device_id[12:16] + '-' + device_id[16:20] + '-' + device_id[20:]
 
 def count_distinct_string(values):
   'Counts distinct values of string, optionally splitting by a separator'
