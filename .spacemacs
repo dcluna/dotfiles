@@ -134,8 +134,9 @@ static char *gnus-pointer[] = {
    '(main-line-color1 "#1E1E1E")
    '(main-line-color2 "#111111")
    '(main-line-separator-style 'chamfer)
+   '(mini-frame-advice-functions '(read-from-minibuffer read-string))
    '(mini-frame-ignore-commands
-     '(eval-expression "edebug-eval-expression" debugger-eval-expression evil-ex yes-or-no-p swiper))
+     '(eval-expression "edebug-eval-expression" debugger-eval-expression evil-ex yes-or-no-p swiper insert-char))
    '(notmuch-search-line-faces
      '(("unread" :foreground "#aeee00")
        ("flagged" :foreground "#0a9dff")
