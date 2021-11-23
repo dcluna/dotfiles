@@ -16,6 +16,7 @@
 
 
 (setq straight-packages '(
+                          mini-frame
                           (org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
                           org-roam
                           magit-section
@@ -259,7 +260,6 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
-                                      mini-frame
                                       rufo
                                       edit-server
                                       org-tanglesync
