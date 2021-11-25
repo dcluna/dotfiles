@@ -1914,7 +1914,9 @@
 *** SQL
 
     #+BEGIN_SRC emacs-lisp
-    (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/sql-connections.el.gpg"))
+      (defun dcl/load-sql-connections ()
+        (interactive)
+        (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/sql-connections.el.gpg")))
     #+END_SRC
 
 *** Org-mode
