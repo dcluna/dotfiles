@@ -118,7 +118,7 @@ call the original function `package-activate'."
 
 (defvar dcl/light-themes
   (dcl/shuffle
-   '(acme twilight-bright hemisu-light apropospriate-light flatui
+   '(acme humanoid-light twilight-bright hemisu-light apropospriate-light flatui
                      kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                      doom-tomorrow-day majapahit-light plan9 alect-light
                      gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
@@ -129,7 +129,7 @@ call the original function `package-activate'."
 
 (defvar dcl/dark-themes
   (dcl/shuffle
-   '(kaolin-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
+   '(kaolin-dark humanoid-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
                  kaolin-temple kaolin-galaxy kaolin-ocean kaolin-valley-dark
                  kaolin-mono-dark seti sanityinc-tomorrow-eighties sanityinc-tomorrow-bright
                  sanityinc-tomorrow-blue sanityinc-tomorrow-night labburn sourcerer
@@ -260,6 +260,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
+                                      humanoid-themes
                                       rufo
                                       edit-server
                                       org-tanglesync
