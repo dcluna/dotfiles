@@ -22,6 +22,8 @@ This function is called at the very end of Spacemacs initialization."
      ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
    '(ansi-term-color-vector
      [unspecified "#FFFFFF" "#d15120" "#5f9411" "#d2ad00" "#6b82a7" "#a66bab" "#6b82a7" "#505050"] t)
+   '(avy-all-windows nil)
+   '(avy-all-windows-alt t)
    '(avy-timeout-seconds 0.3)
    '(background-color "#202020")
    '(background-mode dark)
@@ -35,7 +37,6 @@ This function is called at the very end of Spacemacs initialization."
    '(cursor-type 'bar)
    '(default-frame-alist
       '((buffer-predicate . spacemacs/useful-buffer-p)
-        (vertical-scroll-bars)
         (alpha 85)
         (fullscreen . maximized)))
    '(diary-entry-marker 'font-lock-variable-name-face)
