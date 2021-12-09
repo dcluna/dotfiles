@@ -100,7 +100,7 @@ done
 if [ -n "$TMUX" ] && [ -z "$EMACS" ]; then
     # source hacker-quotes.plugin.zsh
     if [ $(($RANDOM % 100)) -eq 7 ]; then
-        pokemonsay -n "yay"
+        ticker-go $(cat ~/dotfiles/.ticker.conf) | word_wrap='-n' pokemonsay -n
     else
         ticker-go $(cat ~/dotfiles/.ticker.conf)
     fi
