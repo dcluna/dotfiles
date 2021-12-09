@@ -260,6 +260,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       ;; indium
+                                      sqlformat
                                       humanoid-themes
                                       rufo
                                       edit-server

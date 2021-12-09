@@ -152,6 +152,7 @@
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
                                           ;; indium
+                                          sqlformat
                                           humanoid-themes
                                           rufo
                                           edit-server
