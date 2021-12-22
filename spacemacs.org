@@ -1554,7 +1554,16 @@
                         (line-beginning-position 1)))
              (end (or (and (region-active-p) (region-end))
                       (line-beginning-position 2))))
-         (sql-send-string (format "\\copy (%s) to '%s' delimiter ',' csv header;" (s-replace "\n" " " (buffer-substring-no-properties start end)) destination))))
+         (sql-send-string (format "COPY (\n%s\n) TO STDOUT WITH CSV HEADER \\g '%s'" (buffer-substring-no-properties start end) destination))))
+
+     (defun sql-create-temp-view (viewname)
+       "Creates a temporary view with `VIEWNAME' with the contents of the active region."
+       (interactive "sView name: ")
+       (let ((start (or (and (region-active-p) (region-beginning))
+                        (line-beginning-position 1)))
+             (end (or (and (region-active-p) (region-end))
+                      (line-beginning-position 2))))
+         (sql-send-string (format "CREATE TEMPORARY VIEW %s as (%s);" viewname (buffer-substring-no-properties start end)))))
    #+end_src
 
    #+begin_src emacs-lisp
@@ -1563,6 +1572,7 @@
        (define-key sql-keymap "e" 'sql-explain-line-or-region)
        (define-key sql-keymap "E" 'sql-explain-line-or-region-and-focus)
        (define-key sql-keymap "c" 'sql-csv-copy-line-or-region)
+       (define-key sql-keymap "v" 'sql-create-temp-view)
        (evil-leader/set-key-for-mode 'sql-mode (kbd "o s") sql-keymap)
        (spacemacs/declare-prefix-for-mode 'sql-mode "mos" "REPL" "REPL"))
    #+end_src
