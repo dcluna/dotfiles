@@ -77,3 +77,4 @@ wrap-comment=0
 
 # Add a list of function to be formatted as PG internal functions
 #extra-function=/opt/pgFormatter/functions.lst
+extra-function=/Users/danielluna/functions.lst
