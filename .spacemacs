@@ -215,6 +215,7 @@ static char *gnus-pointer[] = {
       [198 120 221]
       [86 182 194]])
    '(tls-checktrust t)
+   '(treemacs-width 70)
    '(undo-tree-auto-save-history t)
    '(vc-annotate-background "#f6f0e1")
    '(vc-annotate-background-mode nil)
