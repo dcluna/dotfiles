@@ -398,7 +398,7 @@ values."
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'.
    ;; (default '(recents projects))
-   dotspacemacs-startup-lists '(recents projects bookmarks)
+   dotspacemacs-startup-lists '((recents . 20) (projects . 20) (bookmarks . 5))
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -1278,12 +1278,30 @@ user code."
           (end (or (and (region-active-p) (region-end))
                    (line-beginning-position 2))))
       (sql-send-string (format "CREATE TEMPORARY VIEW %s as (%s);" viewname (buffer-substring-no-properties start end)))))
+
+  (defun sql-create-temp-table (tablename)
+    "Creates a temporary table with `TABLENAME' with the contents of the active region."
+    (interactive "sTable name: ")
+    (let ((start (or (and (region-active-p) (region-beginning))
+                     (line-beginning-position 1)))
+          (end (or (and (region-active-p) (region-end))
+                   (line-beginning-position 2))))
+      (sql-send-string (format "CREATE TEMPORARY TABLE %s as (%s);" tablename (buffer-substring-no-properties start end)))))
+
+  (defun dcl/sql-goto-end-of-buffer (&rest args)
+    (with-current-buffer sql-buffer
+      (goto-char (point-max))))
+
+  (advice-add 'sql-send-string
+              :before
+              #'dcl/sql-goto-end-of-buffer)
   (let ((sql-keymap (make-sparse-keymap)))
     (define-key sql-keymap "d" 'sql-describe-line-or-region)
     (define-key sql-keymap "e" 'sql-explain-line-or-region)
     (define-key sql-keymap "E" 'sql-explain-line-or-region-and-focus)
     (define-key sql-keymap "c" 'sql-csv-copy-line-or-region)
     (define-key sql-keymap "v" 'sql-create-temp-view)
+    (define-key sql-keymap "t" 'sql-create-temp-table)
     (evil-leader/set-key-for-mode 'sql-mode (kbd "o s") sql-keymap)
     (spacemacs/declare-prefix-for-mode 'sql-mode "mos" "REPL" "REPL"))
   (add-hook 'sql-mode-hook 'dcl/sql-prettify-symbols)
@@ -1476,6 +1494,9 @@ user code."
   (defun dcl/load-sql-connections ()
     (interactive)
     (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/sql-connections.el.gpg")))
+
+  (if (fboundp 'sqlformat-on-save-mode)
+      (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
   (add-hook 'org-mode-hook 'auto-fill-mode)
   (unless (boundp 'org-latex-classes)
     (setq org-latex-classes '()))
