@@ -16,6 +16,8 @@ parser.add_argument("-i", "--index_column", dest="index_column",
                     help="index column (usually the market_name column)", type=str, default="market_name")
 parser.add_argument("-f", "--filename", dest="filename",
                     help="file name to use as input for winsorization", type=pathlib.Path, required=True)
+parser.add_argument("-t", "--target-column", dest="target_column",
+                    help="winsorized column name", type=str, default=None)
 parser.add_argument('--verbose', '-v', action='count', default=0)
 args = parser.parse_args()
 
@@ -25,6 +27,7 @@ col = args.column
 index_column = args.index_column
 filename = args.filename
 verbose = args.verbose
+target_column = args.target_column or ('%s_winsorized' % col)
 
 if verbose:
   print(args, file=sys.stderr)
@@ -35,6 +38,6 @@ def winsor_f(s):
 input_data = pd.read_csv(filename, index_col = index_column)
 
 for c in input_data.index.values:
-  input_data.loc[input_data.index == c, '%s_winsorized' % col] = winsor_f(input_data.loc[c][col])
+  input_data.loc[input_data.index == c, target_column] = winsor_f(input_data.loc[c][col])
 
 print(input_data.to_csv(path_or_buf=None))
