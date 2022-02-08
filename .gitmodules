@@ -1,0 +1,3 @@
+[submodule "adquick-scripts"]
+	path = scripts/adquick-scripts
+	url = git@github.com:dcluna/adquick-scripts.git
