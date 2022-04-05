@@ -18,23 +18,28 @@
     <<spacemacs-user-init>>
 
     (defun dotspacemacs/user-config ()
-      ;; Borg.el
-      ;; <<borg>>
-      ;; function and macro definitions
-      <<functions>>
-
-      ;;auto-modes
-      <<auto-modes>>
-
-      ;; keybindings
-      <<keybindings>>
-
-      ;; configuration
-      <<configuration>>
-
-      ;; genome-related stuff. I added it inside this function because spacemacs doesn't like literate files too much.
-      <<genome>>)
+      (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/spacemacs-user-config.el")))
   #+END_SRC
+  
+  #+BEGIN_SRC emacs-lisp :tangle "spacemacs-user-config.el" :noweb yes
+    ;; Borg.el
+    ;; <<borg>>
+    ;; function and macro definitions
+    <<functions>>
+
+    ;;auto-modes
+    <<auto-modes>>
+
+    ;; keybindings
+    <<keybindings>>
+
+    ;; configuration
+    <<configuration>>
+
+    ;; genome-related stuff. I added it inside this function because spacemacs doesn't like literate files too much.
+    <<genome>>
+  #+END_SRC
+
 * Spacemacs-specific
 ** Layers
   :PROPERTIES:
@@ -155,7 +160,7 @@
                                           ;; indium
                                           sqlformat
                                           humanoid-themes
-                                          rufo
+                                          ;; rufo
                                           edit-server
                                           org-tanglesync
                                           emamux
@@ -189,8 +194,8 @@
                                           atom-dark-theme
                                           abyss-theme
                                           easy-jekyll
-                                          flymake-solidity
-                                          solidity-mode
+                                          ;; flymake-solidity
+                                          ;; solidity-mode
                                           sx
                                           ts-comint
                                           ;; vagrant-tramp
@@ -215,11 +220,11 @@
                                           yagist
                                           ;; sage-shell-mode
                                           intero
-                                          (howdoi :location (recipe
-                                                             :repo "dcluna/emacs-howdoi"
-                                                             :fetcher github
-                                                             :branch "html2text-emacs26")
-                                                  :upgrade 't)
+                                          ;; (howdoi :location (recipe
+                                          ;;                    :repo "dcluna/emacs-howdoi"
+                                          ;;                    :fetcher github
+                                          ;;                    :branch "html2text-emacs26")
+                                          ;;         :upgrade 't)
                                           multi-compile
                                           dumb-jump
                                           tldr
@@ -254,7 +259,7 @@
                                           evil-embrace
                                           editorconfig)
                                           ;; wsd-mode
-                                      
+
 
        ;; A list of packages and/or extensions that will not be install and loaded.
        dotspacemacs-excluded-packages '()
@@ -487,10 +492,11 @@
               ("org" . "orgmode.org/elpa/")
               ("gnu" . "elpa.gnu.org/packages/")))
       (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
-      ;; (add-to-list 'package-pinned-packages '(magit . "melpa-stable"))
+      (setq server-name "adquick")
+      (server-start)
+      (add-to-list 'package-pinned-packages '(magit . "melpa-stable")))
       ;; (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))
       ;; (add-to-list 'package-pinned-packages '(async . "melpa-stable"))
-      )
   #+END_SRC
 * Borg.el (package manager)
   :PROPERTIES:
@@ -531,19 +537,19 @@
   A few conveniences for magit:
 
   #+BEGIN_SRC emacs-lisp
-    (require 'magit)
-    (magit-add-section-hook 'magit-status-sections-hook
-                            'magit-insert-modules-unpulled-from-upstream
-                            'magit-insert-unpulled-from-upstream)
-    (magit-add-section-hook 'magit-status-sections-hook
-                            'magit-insert-modules-unpulled-from-pushremote
-                            'magit-insert-unpulled-from-upstream)
-    (magit-add-section-hook 'magit-status-sections-hook
-                            'magit-insert-modules-unpushed-to-upstream
-                            'magit-insert-unpulled-from-upstream)
-    (magit-add-section-hook 'magit-status-sections-hook
-                            'magit-insert-modules-unpushed-to-pushremote
-                            'magit-insert-unpulled-from-upstream)
+    ;; (require 'magit)
+    ;; (magit-add-section-hook 'magit-status-sections-hook
+    ;;                         'magit-insert-modules-unpulled-from-upstream
+    ;;                         'magit-insert-unpulled-from-upstream)
+    ;; (magit-add-section-hook 'magit-status-sections-hook
+    ;;                         'magit-insert-modules-unpulled-from-pushremote
+    ;;                         'magit-insert-unpulled-from-upstream)
+    ;; (magit-add-section-hook 'magit-status-sections-hook
+    ;;                         'magit-insert-modules-unpushed-to-upstream
+    ;;                         'magit-insert-unpulled-from-upstream)
+    ;; (magit-add-section-hook 'magit-status-sections-hook
+    ;;                         'magit-insert-modules-unpushed-to-pushremote
+    ;;                         'magit-insert-unpulled-from-upstream)
     ;; (magit-add-section-hook 'magit-status-sections-hook
     ;;                         'magit-insert-submodules
     ;;                         'magit-insert-unpulled-from-upstream)
@@ -578,13 +584,14 @@
 
 
     (setq straight-packages '(
+                              (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
                               mini-frame
                               (org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
                               org-roam
-                              magit-section
+                              ;; magit-section
                               (homebrew :type git :host github :repo "jdormit/homebrew.el")
                               git-link
-                              (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
+                              ;; (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
                               ;; (forge :type git :host github :repo "magit/forge")
                               minitest
                               helpful
@@ -1119,7 +1126,7 @@
 
      (defmacro dcl/make-helm-source (name desc cand-var action &rest body)
        (let ((candidate-source-fn-name (intern (format "%s-candidates" name)))
-             (helm-source-var-name (intern (format "%s-helm-source" name))) )
+             (helm-source-var-name (intern (format "%s-helm-source" name))))
          `(progn
             (defun ,candidate-source-fn-name ()
               ,@body)
@@ -1352,6 +1359,9 @@
         (interactive "p")
         (dcl/many-times-interactive-command arg var (evil-ex (concat "! " (current-line)))))
     #+END_SRC
+    
+
+
 *** Git/Magit
     #+BEGIN_SRC emacs-lisp
       (defun dcl/magit-branch-rebase ()
@@ -1491,6 +1501,13 @@
 
       (add-hook 'ediff-keymap-setup-hook 'setup-ediff-mode-map-extras)
     #+END_SRC
+*** Keyboard macros
+
+    #+begin_src emacs-lisp
+(fset 'org-mode-convert-causal-lift-entries-to-tsv
+   (kmacro-lambda-form [?d ?f ?: ?d ?w ?j ?d ?f ?: ?d ?w ?j ?d ?f ?: ?d ?w ?j ?d ?f ?: ?d ?w ?j ?d ?f ?: ?d ?w ?j ?d ?f ?: ?d ?w ?k ?$ ?v ?0 ?k ?k ?k ?k ?: ?s ?/ ?\C-q ?\C-j ?/ ?\C-q tab ?/ return ?j] 0 "%d"))
+    #+end_src
+    
 ** Perl
    #+BEGIN_SRC emacs-lisp
      (defun dcl/perl1line-txt ()
@@ -1513,8 +1530,8 @@
        (define-key ghq-keymap "h" 'helm-ghq)
        (define-key ghq-keymap "g" 'ghq)
        (define-key ghq-keymap "l" 'helm-ghq-list)
-       (evil-leader/set-key (kbd "o q") ghq-keymap)
-       (spacemacs/declare-prefix "o q" "ghq" "GHQ"))
+       (evil-leader/set-key "o q" ghq-keymap)
+       (spacemacs/declare-prefix "o q" "ghq"))
 
      (use-package helm-ghq)
      (use-package ghq)
@@ -1604,6 +1621,8 @@
         (mapc (lambda (pair) (push pair prettify-symbols-alist))
               '(
                 ("union" . #x222a)
+                ;; ("distinct" . (vector #x2203 #x0021 4 4))
+                ("distinct" . (list '(Br . Bl) #x2203 #x0021))
                 ("count" . #x23)
                 ("null" . #x2205)
                 ("left join" . #x27d5)
@@ -1619,7 +1638,7 @@
    #+begin_src emacs-lisp
      (defun dcl-toggle-forge-sections ()
        (interactive)
-       (if (or ( -contains? magit-status-sections-hook 'forge-insert-pullreqs) (-contains? magit-status-sections-hook 'forge-insert-issues))
+       (if (or (-contains? magit-status-sections-hook 'forge-insert-pullreqs) (-contains? magit-status-sections-hook 'forge-insert-issues))
            (progn
              (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
              (remove-hook 'magit-status-sections-hook 'forge-insert-issues)
@@ -1874,7 +1893,7 @@
 **** Rufo
 
      #+begin_src emacs-lisp
-       (add-hook 'enh-ruby-mode-hook 'rufo-minor-mode)
+       ;; (add-hook 'enh-ruby-mode-hook 'rufo-minor-mode)
      #+end_src
 
 **** Pry
@@ -2070,8 +2089,8 @@
     #+BEGIN_SRC emacs-lisp
       (let ((custom-yas-keymap (make-sparse-keymap)))
         (define-key custom-yas-keymap "i" 'yas-insert-snippet)
-        (evil-leader/set-key (kbd "o y") custom-yas-keymap)
-        (spacemacs/declare-prefix "o y" "yasnippets" "yasnippets-custom-keymap"))
+        (evil-leader/set-key "o y" custom-yas-keymap)
+        (spacemacs/declare-prefix "o y" "yasnippets"))
     #+END_SRC
 
 *** Ruby indentation
@@ -2103,8 +2122,8 @@
      (let ((multishell-keymap (make-sparse-keymap)))
        (define-key multishell-keymap "s" 'multishell-pop-to-shell)
        (define-key multishell-keymap "l" 'multishell-list)
-       (evil-leader/set-key (kbd "o s") multishell-keymap)
-       (spacemacs/declare-prefix "o s" "multishell" "multishell"))
+       (evil-leader/set-key "o s" multishell-keymap)
+       (spacemacs/declare-prefix "o s" "multishell"))
    #+END_SRC
 
 ** VLFI (View Large Files in Emacs)
@@ -2117,7 +2136,7 @@
    Evil bindings:
 
    #+BEGIN_SRC emacs-lisp
-     (evil-leader/set-key (kbd "o v") vlf-mode-map)
+     (evil-leader/set-key "o v" vlf-mode-map)
      (spacemacs/declare-prefix "o v" "vlf")
    #+END_SRC
 
@@ -2143,28 +2162,28 @@
      (add-hook 'anaconda-mode-hook (lambda ()
                                      (evil-global-set-key 'normal (kbd "C-,") 'pop-tag-mark)))
 
-     (evil-leader/set-key (kbd "g d") 'magit-diff-staged)
+     (evil-leader/set-key "g d" 'magit-diff-staged)
 
-     (evil-leader/set-key (kbd "g u") 'magit-set-tracking-upstream)
-     (evil-leader/set-key (kbd "g U") 'magit-unset-tracking-upstream)
-     (evil-leader/set-key (kbd "o g P c") 'endless/visit-pull-request-url)
-     (evil-leader/set-key (kbd "o g y") 'github/copy-branch-url)
-     (evil-leader/set-key (kbd "o g Y") 'github/copy-file-url)
-     (evil-leader/set-key (kbd "o g p") 'dcl/create-branch-from-pivotal)
-     (evil-leader/set-key (kbd "o g j") 'dcl/create-branch-from-jira)
-     (evil-leader/set-key (kbd "o g b") 'dcl/magit-checkout-last-branch)
-     (evil-leader/set-key (kbd "o g r") 'dcl/magit-branch-rebase)
-     (evil-leader/set-key (kbd "o g h") 'magit-history-checkout)
-     (evil-leader/set-key (kbd "o g l") 'magit-lfs)
-     (evil-leader/set-key (kbd "o p t") 'dcl/pivotal-github-tasks-template)
-     (evil-leader/set-key (kbd "o l !") 'dcl/evil-ex-run-current-line)
-     (evil-leader/set-key (kbd "o n c") '0xc-convert)
-     (evil-leader/set-key (kbd "o a") 'ascii-display)
-     (evil-leader/set-key (kbd "o h h") 'howdoi-query)
-     (evil-leader/set-key (kbd "o h t") 'tldr)
-     ;; (evil-leader/set-key (kbd "o s") 'embrace-commander)
-     ;; (evil-leader/set-key (kbd "o s") 'multishell-pop-to-shell)
-     (evil-leader/set-key (kbd "o p y") 'dcl/project-relative-path)
+     (evil-leader/set-key "g u" 'magit-set-tracking-upstream)
+     (evil-leader/set-key "g U" 'magit-unset-tracking-upstream)
+     (evil-leader/set-key "o g P c" 'endless/visit-pull-request-url)
+     (evil-leader/set-key "o g y" 'github/copy-branch-url)
+     (evil-leader/set-key "o g Y" 'github/copy-file-url)
+     (evil-leader/set-key "o g p" 'dcl/create-branch-from-pivotal)
+     (evil-leader/set-key "o g j" 'dcl/create-branch-from-jira)
+     (evil-leader/set-key "o g b" 'dcl/magit-checkout-last-branch)
+     (evil-leader/set-key "o g r" 'dcl/magit-branch-rebase)
+     (evil-leader/set-key "o g h" 'magit-history-checkout)
+     (evil-leader/set-key "o g l" 'magit-lfs)
+     (evil-leader/set-key "o p t" 'dcl/pivotal-github-tasks-template)
+     (evil-leader/set-key "o l !" 'dcl/evil-ex-run-current-line)
+     (evil-leader/set-key "o n c" '0xc-convert)
+     (evil-leader/set-key "o a" 'ascii-display)
+     (evil-leader/set-key "o h h" 'howdoi-query)
+     (evil-leader/set-key "o h t" 'tldr)
+     ;; (evil-leader/set-key "o s" 'embrace-commander)
+     ;; (evil-leader/set-key "o s" 'multishell-pop-to-shell)
+     (evil-leader/set-key "o p y" 'dcl/project-relative-path)
 
      (spacemacs/set-leader-keys-for-major-mode 'python-mode "sp" 'python-shell-print-line-or-region)
      (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "sl" 'ruby-eval-line)
@@ -2348,7 +2367,7 @@
    [[https://github.com/the-frey/cyberpunk-2019][Cyberpunk-2019]]:
 
    #+BEGIN_SRC emacs-lisp
-     (add-to-list 'custom-theme-load-path "~/.emacs.d/straight/repos/cyberpunk-2019/")
+     ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/straight/repos/cyberpunk-2019/")
      (add-to-list 'custom-theme-load-path "~/.emacs.d/straight/repos/Emacs-Tron-Legacy-Theme/")
    #+END_SRC
 
@@ -2382,7 +2401,7 @@
    #+begin_src emacs-lisp
      (progn
        (require 'emamux)
-       (evil-leader/set-key (kbd "o e") emamux:keymap)
+       (evil-leader/set-key "o e" emamux:keymap)
        (define-key emamux:keymap "r" #'emamux:send-region)
        (define-key emamux:keymap "s" #'emamux:send-command)
        (define-key emamux:keymap "w" #'emamux:new-window)
@@ -2401,6 +2420,30 @@
      (define-key emamux:keymap "n" #'evil-vterm-tmux-navigator-state)
    #+end_src
 
+** Vterm
+
+    #+begin_src emacs-lisp :tangle no
+      (defun spacemacs/vterm-send-string (termno)
+        "Sends STRINGS to TERMNO vterm buffer."
+        (interactive "p")
+        (let* ((start (or (and (region-active-p) (region-beginning)
+                               (line-beginning-position 1))))
+               (end (or (and (region-active-p) (region-end)
+                             (line-beginning-position 2))))
+               (strings (buffer-substring-no-properties start end)))
+          (save-excursion
+            (spacemacs/shell-pop-vterm termno)
+            (vterm-insert strings)
+            (vterm-send-return))))
+            ;; (mapc (lambda (str)
+            ;;        (vterm-insert str
+            ;;            (vterm-send-return)
+            ;;            strings))))))
+    #+end_src
+
+    #+begin_src emacs-lisp :tangle no
+      (define-key emamux:keymap "v" #'spacemacs/vterm-send-string)
+    #+end_src
 
 ** Org-tanglesync
 
@@ -2487,3 +2530,4 @@
                               (insert "#+BEGIN_SRC sh :session oscp-kali\n#+END_SRC")
                               (copy-to-register ?c (point-min) (point-max))))))))
   #+END_SRC
+  
