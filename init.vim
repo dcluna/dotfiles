@@ -29,6 +29,9 @@ vmap gI <Plug>(Inflect)
 if exists('g:vscode')
     " VSCode extension
 
+    :set ignorecase
+    :set smartcase
+
     xmap gc  <Plug>VSCodeCommentary
     nmap gc  <Plug>VSCodeCommentary
     omap gc  <Plug>VSCodeCommentary
