@@ -349,24 +349,25 @@
         (destructuring-bind (key def) key-def-pair
           (spacemacs/set-leader-keys-for-major-mode mode (concat prefix key) def))))))
 
-(defmacro dcl/make-helm-source (name desc cand-var action &rest body)
-  (let ((candidate-source-fn-name (intern (format "%s-candidates" name)))
-        (helm-source-var-name (intern (format "%s-helm-source" name))))
-    `(progn
-       (defun ,candidate-source-fn-name ()
-         ,@body)
-       (defvar ,helm-source-var-name
-         '((name . ,(capitalize desc))
-           (candidates . ,candidate-source-fn-name)
-           (action . (lambda (,cand-var) ,action))))
-       (defun ,name ()
-         ,(concat "Helm source for " desc)
-         (interactive)
-         (helm :sources '(,helm-source-var-name))))))
-(put 'dcl/make-helm-source 'lisp-indent-function 'defun)
-
-(dcl/make-helm-source dcl/lib-code-magit-status "directories under ~/code"
-  dir (magit-status dir) (directory-files "~/code" t))
+;; (defmacro dcl/make-helm-source (name desc cand-var action &rest body)
+;;   (let ((candidate-source-fn-name (intern (format "%s-candidates" name)))
+;;         (helm-source-var-name (intern (format "%s-helm-source" name))))
+;;     `(progn
+;;        (defun ,candidate-source-fn-name ()
+;;          ,@body)
+;;        (defvar ,helm-source-var-name
+;;          '((name . ,(capitalize desc))
+;;            (candidates . ,candidate-source-fn-name)
+;;            (action . (lambda (,cand-var) ,action))))
+;;        (defun ,name ()
+;;          ,(concat "Helm source for " desc)
+;;          (interactive)
+;;          (helm :sources '(,helm-source-var-name))))))
+;; (put
+;;  'dcl/make-helm-source 'lisp-indent-function 'defun)
+;;
+;; (dcl/make-helm-source dcl/lib-code-magit-status "directories under ~/code"
+;;   dir (magit-status dir) (directory-files "~/code" t))
 
 (defun dcl/favorite-text-scale ()
   (unless (equal major-mode 'term-mode)
@@ -682,13 +683,13 @@
         (root (projectile-project-root)))
     (kill-new (message (replace-regexp-in-string root "" filename)))))
 (let ((ghq-keymap (make-sparse-keymap)))
-  (define-key ghq-keymap "h" 'helm-ghq)
+  (define-key ghq-keymap "h" 'ivy-ghq-open)
   (define-key ghq-keymap "g" 'ghq)
-  (define-key ghq-keymap "l" 'helm-ghq-list)
+  ;; (define-key ghq-keymap "l" 'helm-ghq-list)
   (evil-leader/set-key "o q" ghq-keymap)
   (spacemacs/declare-prefix "o q" "ghq"))
 
-(use-package helm-ghq)
+;; (use-package helm-ghq)
 (use-package ghq)
 (defun sql-describe-line-or-region ()
   "Describes a line/region to the SQL process."

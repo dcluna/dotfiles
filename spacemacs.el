@@ -42,7 +42,7 @@
                           (rspec-mode :type git :host github :repo "pezra/rspec-mode")
                           ;; (rmsbolt :type git :host gitlab :repo "jgkamat/rmsbolt")
                           pretty-mode
-                          helm-ghq
+                          ;; helm-ghq
                           ghq
                           ;; graphql-mode
                           ;; lsp-mode
