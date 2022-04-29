@@ -28,6 +28,7 @@ This function is called at the very end of Spacemacs initialization."
    '(background-color "#202020")
    '(background-mode dark)
    '(beacon-color "#F8BBD0")
+   '(calc-context-sensitive-enter t)
    '(compilation-message-face 'default)
    '(cua-global-mark-cursor-color "#2aa198")
    '(cua-normal-cursor-color "#657b83")
