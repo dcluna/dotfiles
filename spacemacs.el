@@ -142,7 +142,7 @@ call the original function `package-activate'."
                  ample-zen badwolf birds-of-paradise-plus brin bubbleberry cherry-blossom atom-dark atom-one-dark
                  creamsody cyberpunk clues
                  darkmine deeper-blue farmhouse-dark gruvbox
-                 junio noctilux subatomic purple-haze github-modern)))
+                 junio noctilux subatomic purple-haze github-modern tao-yin)))
 
 
 (require 'dash)
