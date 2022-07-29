@@ -178,6 +178,7 @@ static char *gnus-pointer[] = {
         ("\\section{%s}" . "\\section*{%s}")
         ("\\subsection{%s}" . "\\subsection*{%s}")
         ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+   '(org-log-into-drawer t)
    '(org-src-block-faces
      '(("emacs-lisp"
         (:background "#F0FFF0"))
