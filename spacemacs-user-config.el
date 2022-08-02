@@ -1207,12 +1207,12 @@
       ;;            (vterm-send-return)
       ;;            strings))))))
 (define-key emamux:keymap "v" #'spacemacs/vterm-send-string)
-(use-package org-tanglesync
-  :hook ((org-mode . org-tanglesync-mode)
-         ;; enable watch-mode globally:
-         ((prog-mode text-mode) . org-tanglesync-watch-mode))
-  :custom
-  (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
+;; (use-package org-tanglesync
+;;   :hook ((org-mode . org-tanglesync-mode)
+;;          ;; enable watch-mode globally:
+;;          ((prog-mode text-mode) . org-tanglesync-watch-mode))
+;;   :custom
+;;   (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
 (setq org-roam-directory (file-truename "~/.ghq/github.com/dcluna/dotfiles/org-roam"))
 (setq org-roam-v2-ack t)
 (use-package org-roam-ui

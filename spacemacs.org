@@ -157,6 +157,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          persistent-scratch
                                           ;; indium
                                           sqlformat
                                           humanoid-themes
@@ -2449,12 +2450,12 @@
 ** Org-tanglesync
 
     #+begin_src emacs-lisp
-      (use-package org-tanglesync
-        :hook ((org-mode . org-tanglesync-mode)
-               ;; enable watch-mode globally:
-               ((prog-mode text-mode) . org-tanglesync-watch-mode))
-        :custom
-        (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
+      ;; (use-package org-tanglesync
+      ;;   :hook ((org-mode . org-tanglesync-mode)
+      ;;          ;; enable watch-mode globally:
+      ;;          ((prog-mode text-mode) . org-tanglesync-watch-mode))
+      ;;   :custom
+      ;;   (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
     #+end_src
 
 ** Org-roam

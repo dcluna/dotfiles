@@ -126,6 +126,7 @@ static char *gnus-pointer[] = {
    '(hl-paren-colors '("#40883f" "#0287c8" "#b85c57"))
    '(hl-sexp-background-color "#1c1f26")
    '(indium-nodejs-inspect-brk t)
+   '(initial-major-mode 'sql-mode)
    '(jdee-db-active-breakpoint-face-colors (cons "#F0F4FC" "#5d86b6"))
    '(jdee-db-requested-breakpoint-face-colors (cons "#F0F4FC" "#4F894C"))
    '(jdee-db-spec-breakpoint-face-colors (cons "#F0F4FC" "#B8C5DB"))
