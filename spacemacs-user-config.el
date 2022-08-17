@@ -1040,8 +1040,8 @@
 (evil-leader/set-key "o g r" 'dcl/magit-branch-rebase)
 (evil-leader/set-key "o g h" 'magit-history-checkout)
 (evil-leader/set-key "o g l" 'magit-lfs)
-(evil-leader/set-key "o p t" 'dcl/pivotal-github-tasks-template)
-(evil-leader/set-key "o l !" 'dcl/evil-ex-run-current-line)
+;; (evil-leader/set-key "o p t" 'dcl/pivotal-github-tasks-template)
+;; (evil-leader/set-key "o l !" 'dcl/evil-ex-run-current-line)
 (evil-leader/set-key "o n c" '0xc-convert)
 (evil-leader/set-key "o a" 'ascii-display)
 (evil-leader/set-key "o h h" 'howdoi-query)
@@ -1190,6 +1190,24 @@
   (spacemacs/declare-prefix "o e" "emamux"))
 (require 'evil-vterm-tmux-navigator)
 (define-key emamux:keymap "n" #'evil-vterm-tmux-navigator-state)
+(setq popper-keymap (make-sparse-keymap))
+(use-package popper
+  :ensure t ; or :straight t
+  :bind (:map popper-keymap
+              ("l"   . popper-toggle-latest)
+              ("c"   . popper-cycle)
+              ("t" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode))
+  (popper-mode +1)
+  (popper-echo-mode +1))                ; For echo area hints
+(evil-leader/set-key "o p" popper-keymap)
+(spacemacs/declare-prefix "o p" "popper")
 (defun spacemacs/vterm-send-string (termno)
   "Sends STRINGS to TERMNO vterm buffer."
   (interactive "p")
