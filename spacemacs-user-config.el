@@ -1203,7 +1203,9 @@
           "Output\\*$"
           "\\*Async Shell Command\\*"
           help-mode
-          compilation-mode))
+          compilation-mode
+          inf-ruby-mode
+          inferior-python-mode))
   (popper-mode +1)
   (popper-echo-mode +1))                ; For echo area hints
 (evil-leader/set-key "o p" popper-keymap)
