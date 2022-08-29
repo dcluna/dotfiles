@@ -16,6 +16,7 @@
 
 
 (setq straight-packages '(
+                          persistent-scratch
                           (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
                           mini-frame
                           (org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
@@ -262,7 +263,7 @@ call the original function `package-activate'."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
                                       popper
-                                      persistent-scratch
+                                      ;; persistent-scratch
                                       ;; indium
                                       sqlformat
                                       humanoid-themes

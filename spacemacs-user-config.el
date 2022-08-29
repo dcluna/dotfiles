@@ -1204,6 +1204,7 @@
           "\\*Async Shell Command\\*"
           help-mode
           compilation-mode
+          rspec-compilation-mode
           inf-ruby-mode
           inferior-python-mode))
   (popper-mode +1)
