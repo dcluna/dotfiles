@@ -824,6 +824,10 @@
 (with-eval-after-load 'org
   (setq org-babel-load-languages (remove '(scala . t) org-babel-load-languages))
   (add-to-list 'org-babel-load-languages '(calc . t)))
+(defun dcl/disable-truncate-lines-in-magit-status ()
+  (setq-local truncate-lines nil))
+
+(add-hook 'magit-status-mode-hook 'dcl/disable-truncate-lines-in-magit-status)
 (setq erc-join-buffer 'bury)
 (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#offsec" "#corelan" "#ruby" "#RubyOnRails")))
 (setq erc-prompt-for-password nil)

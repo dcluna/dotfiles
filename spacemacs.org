@@ -1738,6 +1738,16 @@
         (setq org-babel-load-languages (remove '(scala . t) org-babel-load-languages))
         (add-to-list 'org-babel-load-languages '(calc . t)))
     #+end_src
+*** Weird issue w/ Magit losing point info
+
+    See https://github.com/magit/magit/issues/4739
+
+    #+begin_src emacs-lisp
+      (defun dcl/disable-truncate-lines-in-magit-status ()
+        (setq-local truncate-lines nil))
+
+      (add-hook 'magit-status-mode-hook 'dcl/disable-truncate-lines-in-magit-status)
+    #+end_src
 
 ** ERC
    #+BEGIN_SRC emacs-lisp
