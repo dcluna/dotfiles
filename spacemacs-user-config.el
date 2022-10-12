@@ -958,6 +958,8 @@
 
 (if (fboundp 'sqlformat-on-save-mode)
     (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
+
+(dcl/load-sql-connections)
 (add-hook 'org-mode-hook 'auto-fill-mode)
 (unless (boundp 'org-latex-classes)
   (setq org-latex-classes '()))

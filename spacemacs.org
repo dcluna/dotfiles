@@ -1985,6 +1985,8 @@
 
       (if (fboundp 'sqlformat-on-save-mode)
           (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
+
+      (dcl/load-sql-connections)
     #+END_SRC
 
 *** Org-mode
