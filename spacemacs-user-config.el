@@ -960,6 +960,8 @@
     (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
 
 (dcl/load-sql-connections)
+(evil-define-key 'normal global-map ";" 'evil-execute-in-god-state)
+(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
 (add-hook 'org-mode-hook 'auto-fill-mode)
 (unless (boundp 'org-latex-classes)
   (setq org-latex-classes '()))

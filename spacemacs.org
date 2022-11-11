@@ -157,6 +157,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          evil-god-state
                                           popper
                                           ;; persistent-scratch
                                           ;; indium
@@ -1988,8 +1989,15 @@
 
       (dcl/load-sql-connections)
     #+END_SRC
+*** Evil-god-state
+
+    #+begin_src emacs-lisp
+      (evil-define-key 'normal global-map ";" 'evil-execute-in-god-state)
+      (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
+    #+end_src
 
 *** Org-mode
+
     #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook 'auto-fill-mode)
     #+END_SRC
