@@ -962,6 +962,7 @@
 (dcl/load-sql-connections)
 (evil-define-key 'normal global-map ";" 'evil-execute-in-god-state)
 (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
+(evil-define-key 'hybrid global-map (kbd "C-M-:" ) 'evil-execute-in-god-state)
 (add-hook 'org-mode-hook 'auto-fill-mode)
 (unless (boundp 'org-latex-classes)
   (setq org-latex-classes '()))
