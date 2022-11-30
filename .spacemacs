@@ -41,8 +41,6 @@ This function is called at the very end of Spacemacs initialization."
         (alpha 85)
         (fullscreen . maximized)))
    '(diary-entry-marker 'font-lock-variable-name-face)
-   '(docker-command "podman")
-   '(docker-compose-command "podman-compose")
    '(emms-mode-line-icon-color "#358d8d")
    '(emms-mode-line-icon-image-cache
      '(image :type xpm :ascent center :data "/* XPM */
