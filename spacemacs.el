@@ -545,7 +545,11 @@ user code."
           ("org" . "orgmode.org/elpa/")
           ("gnu" . "elpa.gnu.org/packages/")))
   (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
-  (setq server-name "adquick")
+  (if (server-running-p "adquick")
+      (progn
+        (setq server-name "server"))
+        (load-file (expand-file-name "~/.hammerspoon/spacehammer.el")))
+    (setq server-name "adquick"))
   (server-start)
   (add-to-list 'package-pinned-packages '(magit . "melpa-stable")))
   ;; (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))

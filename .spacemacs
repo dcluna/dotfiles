@@ -41,6 +41,7 @@ This function is called at the very end of Spacemacs initialization."
         (alpha 85)
         (fullscreen . maximized)))
    '(diary-entry-marker 'font-lock-variable-name-face)
+   '(docker-command "podman")
    '(emms-mode-line-icon-color "#358d8d")
    '(emms-mode-line-icon-image-cache
      '(image :type xpm :ascent center :data "/* XPM */
@@ -220,6 +221,7 @@ static char *gnus-pointer[] = {
    '(tls-checktrust t)
    '(treemacs-width 70)
    '(undo-tree-auto-save-history t)
+   '(use-dialog-box nil)
    '(vc-annotate-background "#f6f0e1")
    '(vc-annotate-background-mode nil)
    '(vc-annotate-color-map
@@ -274,8 +276,7 @@ static char *gnus-pointer[] = {
    '(xterm-color-names-bright
      ["#fdf6e3" "#cb4b16" "#93a1a1" "#839496" "#657b83" "#6c71c4" "#586e75" "#002b36"])
    '(yas-snippet-dirs
-     '("/Users/danielluna/yasnippets" "/Users/danielluna/.emacs.d/private/snippets/" yas-installed-snippets-dir "/Users/danielluna/.emacs.d/layers/+completion/auto-completion/local/snippets" "/Users/danielluna/.emacs.d/elpa/clojure-snippets-20170713.2310/snippets" "/Users/danielluna/.emacs.d/elpa/common-lisp-snippets-20170522.2147/snippets" "/Users/danielluna/.emacs.d/elpa/haskell-snippets-20160918.1722/snippets"))
-   '(use-dialog-box nil))
+     '("/Users/danielluna/yasnippets" "/Users/danielluna/.emacs.d/private/snippets/" yas-installed-snippets-dir "/Users/danielluna/.emacs.d/layers/+completion/auto-completion/local/snippets" "/Users/danielluna/.emacs.d/elpa/clojure-snippets-20170713.2310/snippets" "/Users/danielluna/.emacs.d/elpa/common-lisp-snippets-20170522.2147/snippets" "/Users/danielluna/.emacs.d/elpa/haskell-snippets-20160918.1722/snippets")))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
