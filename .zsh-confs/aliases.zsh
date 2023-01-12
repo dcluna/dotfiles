@@ -105,9 +105,13 @@ alias vi='nvim'
 # alias time='hyperfine'
 alias top='btm -b'
 alias pgsyncd='pgsync --debug'
+alias pgsyncdf='pgsync --debug --disable-integrity --defer-constraints-v2'
 alias cat='bat --paging=never'
 
 alias nix-query='nix-env -qas --description'
 
 alias localwebserver="ruby -rwebrick -e\"WEBrick::HTTPServer.new(:Port => 8000, :DocumentRoot => Dir.pwd, RequestCallback: Proc.new{|req,res| res['Access-Control-Allow-Origin'] = '*' }).start\""
 alias mydoom="EMACS=/Users/danielluna/.ghq/git.sv.gnu.org/emacs/src/emacs ~/.doom-emacs/bin/doom"
+alias gdbdashboard="gdb --command=~/.ghq/github.com/cyrus-and/gdb-dashboard/.gdbinit"
+
+alias updatedb='/usr/libexec/locate.updatedb'
