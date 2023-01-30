@@ -1055,6 +1055,7 @@
 (evil-leader/set-key "o a" 'ascii-display)
 (evil-leader/set-key "o h h" 'howdoi-query)
 (evil-leader/set-key "o h t" 'tldr)
+(evil-leader/set-key "o h c" 'copilot-complete)
 ;; (evil-leader/set-key "o s" 'embrace-commander)
 ;; (evil-leader/set-key "o s" 'multishell-pop-to-shell)
 (evil-leader/set-key "o p y" 'dcl/project-relative-path)
@@ -1258,6 +1259,20 @@
         org-roam-ui-follow t
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
+(with-eval-after-load 'company
+  ;; disable inline previews
+  (delq 'company-preview-if-just-one-frontend company-frontends))
+
+(with-eval-after-load 'copilot
+  (define-key copilot-completion-map (kbd "<up>") 'copilot-previous-completion)
+  (define-key copilot-completion-map (kbd "<down>") 'copilot-next-completion)
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+
+(add-hook 'prog-mode-hook 'copilot-mode)
+
+(define-key evil-insert-state-map (kbd "C-<tab>") 'copilot-accept-completion-by-word)
+(define-key evil-insert-state-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
 (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
 
 (autoload 'mixal-mode "mixal-mode" t)
