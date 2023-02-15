@@ -17,6 +17,7 @@
 
 (setq straight-packages '(
                           persistent-scratch
+                          (gpt :host github :repo "stuhlmueller/gpt.el" :files ("*.el"))
                           (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
                           mini-frame
                           (org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
@@ -262,6 +263,7 @@ call the original function `package-activate'."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
+                                      eat
                                       (copilot :location (recipe
                                                           :fetcher github
                                                           :repo "zerolfx/copilot.el"
@@ -547,13 +549,14 @@ user code."
         '(("melpa-stable" . "stable.melpa.org/packages/")
           ("melpa" . "melpa.org/packages/")
           ("org" . "orgmode.org/elpa/")
+          ("nongnu" . "elpa.nongnu.org/nongnu/")
           ("gnu" . "elpa.gnu.org/packages/")))
   (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
   (if (server-running-p "adquick")
       (progn
         (setq server-name "server"))
         (load-file (expand-file-name "~/.hammerspoon/spacehammer.el")))
-    (setq server-name "adquick"))
+    (setq server-name "adquick")
   (server-start)
   (add-to-list 'package-pinned-packages '(magit . "melpa-stable")))
   ;; (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))

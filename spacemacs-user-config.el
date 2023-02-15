@@ -1266,8 +1266,8 @@
 (with-eval-after-load 'copilot
   (define-key copilot-completion-map (kbd "<up>") 'copilot-previous-completion)
   (define-key copilot-completion-map (kbd "<down>") 'copilot-next-completion)
-  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+  (define-key copilot-completion-map (kbd "C-j") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion))
 
 (add-hook 'prog-mode-hook 'copilot-mode)
 

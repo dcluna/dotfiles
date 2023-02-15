@@ -305,6 +305,7 @@ set -g @tpm_plugins '          \
   Morantron/tmux-fingers       \
   tmux-plugins/tmux-logging    \
   schasse/tmux-jump            \
+  dracula/tmux                 \
 '
 
 
