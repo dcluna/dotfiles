@@ -1273,6 +1273,8 @@
 
 (define-key evil-insert-state-map (kbd "C-<tab>") 'copilot-accept-completion-by-word)
 (define-key evil-insert-state-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
+(define-key evil-insert-state-map (kbd "M-<right>") 'copilot-accept-completion-by-line)
+(define-key evil-insert-state-map (kbd "M-<return>") 'copilot-accept-completion)
 (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
 
 (autoload 'mixal-mode "mixal-mode" t)

@@ -598,7 +598,7 @@
 
     (setq straight-packages '(
                               persistent-scratch
-                              (gpt :host github :repo "stuhlmueller/gpt.el" :files ("*.el"))
+                              (gpt :host github :repo "stuhlmueller/gpt.el")
                               (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
                               mini-frame
                               (org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
@@ -2569,6 +2569,8 @@
 
      (define-key evil-insert-state-map (kbd "C-<tab>") 'copilot-accept-completion-by-word)
      (define-key evil-insert-state-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
+     (define-key evil-insert-state-map (kbd "M-<right>") 'copilot-accept-completion-by-line)
+     (define-key evil-insert-state-map (kbd "M-<return>") 'copilot-accept-completion)
    #+end_src
 
 ** MDK (Mix development kit)
