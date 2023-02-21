@@ -64,7 +64,7 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
-         finance
+         ;; finance
          ;; (scala :variables scala-backend 'scala-metals)
          imenu-list
          nixos
@@ -85,20 +85,20 @@
          (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
          asm
          csv
-         erc
+         ;; erc
          docker
          vimscript
          c-c++
          search-engine
-         haskell
+         ;; haskell
          dash
          shell-scripts
-         racket
-         php
+         ;; racket
+         ;; php
          elixir
          erlang
          (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
-         restclient
+         ;; restclient
          yaml
          ruby-on-rails
          evil-commentary
@@ -110,7 +110,7 @@
                           auto-completion-idle-delay 0.3
                           :disabled-for org spacemacs-org)
          sql
-         scheme
+         ;; scheme
          ;; personal-misc
          (git :variables git-enable-github-support t git-gutter-use-fringe t git-enable-magit-gitflow nil git-enable-magit-delta-plugin nil)
          markdown
@@ -122,11 +122,11 @@
                      js-indent-level 2)
          (python :variables python-test-runner '(pytest) python-backend 'anaconda)
          (ruby :variables ruby-enable-enh-ruby-mode t ruby-test-runner 'rspec)
-         (clojure :variables clojure-enable-fancify-symbols t)
+         ;; (clojure :variables clojure-enable-fancify-symbols t)
          (colors :variables
-                 colors-colorize-identifiers 'all
-                 colors-enable-nyan-cat-progress-bar (display-graphic-p)
-                 nyan-minimum-window-width 64)
+                 colors-colorize-identifiers 'all)
+                 ;; colors-enable-nyan-cat-progress-bar (display-graphic-p)
+                 ;; nyan-minimum-window-width 64)
          theming
          themes-megapack
          common-lisp
@@ -167,7 +167,6 @@
                                           ;; persistent-scratch
                                           ;; indium
                                           sqlformat
-                                          humanoid-themes
                                           ;; rufo
                                           edit-server
                                           org-tanglesync
@@ -205,10 +204,10 @@
                                           ;; flymake-solidity
                                           ;; solidity-mode
                                           sx
-                                          ts-comint
+                                          ;; ts-comint
                                           ;; vagrant-tramp
-                                          ob-php
-                                          ob-typescript
+                                          ;; ob-php
+                                          ;; ob-typescript
                                           labburn-theme
                                           evil-rails
                                           evil-easymotion
@@ -218,7 +217,7 @@
                                           plan9-theme
                                           sourcerer-theme
                                           0xc
-                                          fuel
+                                          ;; fuel
                                           ;; lfe-mode
                                           x-path-walker
                                           ;; pivotal-tracker
@@ -227,7 +226,7 @@
                                           dark-mint-theme
                                           yagist
                                           ;; sage-shell-mode
-                                          intero
+                                          ;; intero
                                           ;; (howdoi :location (recipe
                                           ;;                    :repo "dcluna/emacs-howdoi"
                                           ;;                    :fetcher github
@@ -240,7 +239,7 @@
                                           paredit
                                           ruby-refactor
                                           ;; nvm
-                                          nov
+                                          ;; nov
                                           ;; yarn-mode
                                           package-lint
                                           flycheck-package
@@ -288,7 +287,7 @@
 
     (defvar dcl/light-themes
       (dcl/shuffle
-       '(acme humanoid-light twilight-bright hemisu-light apropospriate-light flatui
+       '(acme twilight-bright hemisu-light apropospriate-light flatui
                          kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                          doom-tomorrow-day majapahit-light plan9 alect-light
                          gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
@@ -299,7 +298,7 @@
 
     (defvar dcl/dark-themes
       (dcl/shuffle
-       '(kaolin-dark humanoid-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
+       '(kaolin-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
                      kaolin-temple kaolin-galaxy kaolin-ocean kaolin-valley-dark
                      kaolin-mono-dark seti sanityinc-tomorrow-eighties sanityinc-tomorrow-bright
                      sanityinc-tomorrow-blue sanityinc-tomorrow-night labburn sourcerer
@@ -575,16 +574,20 @@
   Bootstrap snippet:
 
   #+BEGIN_SRC emacs-lisp
+  (setq straight-repository-branch "develop")
+
+  (defvaralias 'native-comp-deferred-compilation-deny-list 'native-comp-jit-compilation-deny-list)
+
   (let ((bootstrap-file (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el"))
-      (bootstrap-version 3))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+        (bootstrap-version 3))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+          "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+          'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
   #+END_SRC
 
   Refer to [[https://github.com/raxod502/straight.el/issues/128][this issue]] for instructions.
@@ -1850,7 +1853,7 @@
 
 *** Haskell
     #+BEGIN_SRC emacs-lisp
-  (add-hook 'haskell-mode-hook 'intero-mode)
+      ;; (add-hook 'haskell-mode-hook 'intero-mode)
     #+END_SRC
 *** Ruby
     #+BEGIN_SRC emacs-lisp

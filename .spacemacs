@@ -158,6 +158,7 @@ static char *gnus-pointer[] = {
        (clojure . t)
        (python . t)
        (emacs-lisp . t)))
+   '(org-download-screenshot-method "screencapture -i %s")
    '(org-latex-classes
      '(("moderncv" "\\documentclass[12pt,a4paper,sans,unicode]{moderncv}"
         ("\\section{%s}" . "\\section*{%s}"))

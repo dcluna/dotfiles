@@ -1,4 +1,8 @@
 ;; Straight.el
+(setq straight-repository-branch "develop")
+
+(defvaralias 'native-comp-deferred-compilation-deny-list 'native-comp-jit-compilation-deny-list)
+
 (let ((bootstrap-file (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el"))
     (bootstrap-version 3))
 (unless (file-exists-p bootstrap-file)
@@ -121,7 +125,7 @@ call the original function `package-activate'."
 
 (defvar dcl/light-themes
   (dcl/shuffle
-   '(acme humanoid-light twilight-bright hemisu-light apropospriate-light flatui
+   '(acme twilight-bright hemisu-light apropospriate-light flatui
                      kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                      doom-tomorrow-day majapahit-light plan9 alect-light
                      gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
@@ -132,7 +136,7 @@ call the original function `package-activate'."
 
 (defvar dcl/dark-themes
   (dcl/shuffle
-   '(kaolin-dark humanoid-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
+   '(kaolin-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
                  kaolin-temple kaolin-galaxy kaolin-ocean kaolin-valley-dark
                  kaolin-mono-dark seti sanityinc-tomorrow-eighties sanityinc-tomorrow-bright
                  sanityinc-tomorrow-blue sanityinc-tomorrow-night labburn sourcerer
@@ -231,8 +235,9 @@ call the original function `package-activate'."
      (clojure :variables clojure-enable-fancify-symbols t)
      (colors :variables
              colors-colorize-identifiers 'all
-             colors-enable-nyan-cat-progress-bar (display-graphic-p)
-             nyan-minimum-window-width 64)
+             ;; colors-enable-nyan-cat-progress-bar (display-graphic-p)
+             ;; nyan-minimum-window-width 64
+             )
      theming
      themes-megapack
      common-lisp
@@ -273,7 +278,6 @@ call the original function `package-activate'."
                                       ;; persistent-scratch
                                       ;; indium
                                       sqlformat
-                                      humanoid-themes
                                       ;; rufo
                                       edit-server
                                       org-tanglesync
@@ -333,7 +337,7 @@ call the original function `package-activate'."
                                       dark-mint-theme
                                       yagist
                                       ;; sage-shell-mode
-                                      intero
+                                      ;; intero
                                       ;; (howdoi :location (recipe
                                       ;;                    :repo "dcluna/emacs-howdoi"
                                       ;;                    :fetcher github
