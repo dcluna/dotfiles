@@ -150,12 +150,9 @@ static char *gnus-pointer[] = {
    '(objed-cursor-color "#99324B")
    '(org-agenda-files '("~/org-agenda.org"))
    '(org-babel-load-languages
-     '((scheme . t)
-       (ruby . t)
+     '((ruby . t)
        (elixir . t)
-       (restclient . t)
        (shell . t)
-       (clojure . t)
        (python . t)
        (emacs-lisp . t)))
    '(org-download-screenshot-method "screencapture -i %s")
