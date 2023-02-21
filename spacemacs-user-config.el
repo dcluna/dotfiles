@@ -877,7 +877,7 @@
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'eldoc-mode)
 (setq x86-lookup-pdf "~/Documents/books/Programming/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf") ;; asm-mode
-(add-hook 'haskell-mode-hook 'intero-mode)
+;; (add-hook 'haskell-mode-hook 'intero-mode)
 (add-hook 'sass-mode-hook 'rainbow-mode)
 (add-hook 'ruby-mode-hook 'dcl/ruby-special-setup)
 (add-hook 'enh-ruby-mode-hook 'dcl/ruby-special-setup)

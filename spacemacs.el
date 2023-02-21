@@ -4,15 +4,15 @@
 (defvaralias 'native-comp-deferred-compilation-deny-list 'native-comp-jit-compilation-deny-list)
 
 (let ((bootstrap-file (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el"))
-    (bootstrap-version 3))
-(unless (file-exists-p bootstrap-file)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-       'silent 'inhibit-cookies)
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-(load bootstrap-file nil 'nomessage))
+      (bootstrap-version 3))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+        "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+        'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 (setq straight-enable-package-integration nil
       straight-enable-use-package-integration t
       straight-vc-git-upstream-remote "origin"
@@ -174,7 +174,7 @@ call the original function `package-activate'."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     finance
+     ;; finance
      ;; (scala :variables scala-backend 'scala-metals)
      imenu-list
      nixos
@@ -195,20 +195,20 @@ call the original function `package-activate'."
      (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
      asm
      csv
-     erc
+     ;; erc
      docker
      vimscript
      c-c++
      search-engine
-     haskell
+     ;; haskell
      dash
      shell-scripts
-     racket
-     php
+     ;; racket
+     ;; php
      elixir
      erlang
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
-     restclient
+     ;; restclient
      yaml
      ruby-on-rails
      evil-commentary
@@ -220,7 +220,7 @@ call the original function `package-activate'."
                       auto-completion-idle-delay 0.3
                       :disabled-for org spacemacs-org)
      sql
-     scheme
+     ;; scheme
      ;; personal-misc
      (git :variables git-enable-github-support t git-gutter-use-fringe t git-enable-magit-gitflow nil git-enable-magit-delta-plugin nil)
      markdown
@@ -232,12 +232,11 @@ call the original function `package-activate'."
                  js-indent-level 2)
      (python :variables python-test-runner '(pytest) python-backend 'anaconda)
      (ruby :variables ruby-enable-enh-ruby-mode t ruby-test-runner 'rspec)
-     (clojure :variables clojure-enable-fancify-symbols t)
+     ;; (clojure :variables clojure-enable-fancify-symbols t)
      (colors :variables
-             colors-colorize-identifiers 'all
+             colors-colorize-identifiers 'all)
              ;; colors-enable-nyan-cat-progress-bar (display-graphic-p)
-             ;; nyan-minimum-window-width 64
-             )
+             ;; nyan-minimum-window-width 64)
      theming
      themes-megapack
      common-lisp
@@ -315,10 +314,10 @@ call the original function `package-activate'."
                                       ;; flymake-solidity
                                       ;; solidity-mode
                                       sx
-                                      ts-comint
+                                      ;; ts-comint
                                       ;; vagrant-tramp
-                                      ob-php
-                                      ob-typescript
+                                      ;; ob-php
+                                      ;; ob-typescript
                                       labburn-theme
                                       evil-rails
                                       evil-easymotion
@@ -328,7 +327,7 @@ call the original function `package-activate'."
                                       plan9-theme
                                       sourcerer-theme
                                       0xc
-                                      fuel
+                                      ;; fuel
                                       ;; lfe-mode
                                       x-path-walker
                                       ;; pivotal-tracker
@@ -350,7 +349,7 @@ call the original function `package-activate'."
                                       paredit
                                       ruby-refactor
                                       ;; nvm
-                                      nov
+                                      ;; nov
                                       ;; yarn-mode
                                       package-lint
                                       flycheck-package
