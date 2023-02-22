@@ -242,7 +242,7 @@ call the original function `package-activate'."
      common-lisp
      lua
      (go :variables go-tab-width 4 go-format-before-save t)
-     github
+     ;; github
      (org :variables org-enable-github-support t org-enable-reveal-js-support t org-enable-roam-support t org-enable-sticky-header t org-enable-appear-support t)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -555,11 +555,11 @@ user code."
           ("nongnu" . "elpa.nongnu.org/nongnu/")
           ("gnu" . "elpa.gnu.org/packages/")))
   (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
-  (if (server-running-p "adquick")
+  (if (and (require 'server) (fboundp 'server-running-p) (server-running-p "adquick"))
       (progn
         (setq server-name "server"))
-        (load-file (expand-file-name "~/.hammerspoon/spacehammer.el")))
-    (setq server-name "adquick")
+      (load-file (expand-file-name "~/.hammerspoon/spacehammer.el")))
+  (setq server-name "adquick")
   (server-start)
   (add-to-list 'package-pinned-packages '(magit . "melpa-stable")))
   ;; (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))
