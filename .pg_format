@@ -28,7 +28,7 @@ type-case=1
 
 # Change the case of the reserved keyword. Default is unchanged: 0.
 # Values: 0=>unchanged, 1=>lowercase, 2=>uppercase, 3=>capitalize.
-function-case=0
+function-case=2
 
 # Do not add an extra empty line at end of the output.
 no-extra-line=0
@@ -58,7 +58,7 @@ redshift=0
 separator=
 
 # Change space indent, default 4 spaces.
-spaces=4
+spaces=2
 
 # Try another formatting type for some statements.
 format-type=0
