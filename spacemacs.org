@@ -600,6 +600,7 @@
 
 
     (setq straight-packages '(
+                              tramp
                               persistent-scratch
                               (gpt :host github :repo "stuhlmueller/gpt.el")
                               (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
@@ -1706,6 +1707,13 @@
   :PROPERTIES:
   :header-args: :noweb-ref configuration :tangle no
   :END:
+** Variables
+*** Backup file organization
+
+    #+begin_src emacs-lisp
+      (setq backup-by-copying t backup-directory-alist '(("." . "~/.saves")) delete-old-versions t kept-new-versions 6 kept-old-versions 2 version-control t)
+    #+end_src
+
 ** Workarounds
 *** Issue with howdoi-query on Emacs 26
     html2text is not defined there, so I'm using the function under `shr` to

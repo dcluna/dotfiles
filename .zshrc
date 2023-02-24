@@ -129,10 +129,12 @@ if [ -z "$INSIDE_EMACS" ]; then # inside emacs we already have evil
     # export HSTR_CONFIG=hicolor       # get more colors
     # bindkey -M vicmd -s "/" "a hstr --\n"
     # bindkey -M vimacs -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
-    bindkey -a "/" mcfly-history-widget
-    bindkey -a "?" mcfly-history-widget
-    bindkey -M vimacs '^s' mcfly-history-widget
+    # bindkey -a "/" mcfly-history-widget
+    # bindkey -a "?" mcfly-history-widget
+    # bindkey -M vimacs '^s' mcfly-history-widget
 fi
+
+eval "$(atuin init zsh)"
 
 eval "$(starship init zsh)"
 
@@ -146,8 +148,9 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 
 # source asdf
 # . $(brew --prefix asdf)/asdf.sh
-. /usr/local/opt/asdf/asdf.sh
-. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+# . /usr/local/opt/asdf/asdf.sh
+. /usr/local/opt/asdf/libexec/asdf.sh
+# . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 . ~/.asdf/plugins/java/set-java-home.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!

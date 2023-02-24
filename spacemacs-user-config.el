@@ -810,6 +810,7 @@
 (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ots" 'dcl/toggle-ts-and-js-file)
 
 ;; configuration
+(setq backup-by-copying t backup-directory-alist '(("." . "~/.saves")) delete-old-versions t kept-new-versions 6 kept-old-versions 2 version-control t)
 (unless (fboundp 'html2text)
   (fset 'html2text (lambda () (shr-render-region (point-min) (point-max)))))
 (setenv "PAGER" "/bin/cat")

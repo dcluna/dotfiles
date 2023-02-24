@@ -11,6 +11,9 @@ export CHROMEDRIVER="/opt/google/chrome-beta/google-chrome-beta"
 
 export INFOPATH="$HOME/Downloads:$HOME/code/python-info/build:$HOME/code/guix/doc:/usr/local/share/info:/usr/share/info:/usr/local/Cellar/mdk/1.3.0/share/info"
 
+# export INFOPATH="/usr/local/Cellar/emacs-plus@29/29.0.50/share/info/emacs:$INFOPATH"
+export INFOPATH="/usr/local/Cellar/emacs-plus@30/30.0.50/share/info/emacs:$INFOPATH"
+
 export PATH="$HOME/bin/elixir-1.1.1/bin:$PATH"
 
 export JAVA_HOME="$HOME/bin/jdk1.8.0_144"

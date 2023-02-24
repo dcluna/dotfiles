@@ -20,6 +20,7 @@
 
 
 (setq straight-packages '(
+                          tramp
                           persistent-scratch
                           (gpt :host github :repo "stuhlmueller/gpt.el")
                           (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
