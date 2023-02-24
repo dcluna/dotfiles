@@ -115,3 +115,5 @@ alias mydoom="EMACS=/Users/danielluna/.ghq/git.sv.gnu.org/emacs/src/emacs ~/.doo
 alias gdbdashboard="gdb --command=~/.ghq/github.com/cyrus-and/gdb-dashboard/.gdbinit"
 
 alias updatedb='/usr/libexec/locate.updatedb'
+alias tmuxnvim='tmux new-window -d nvim'
+alias upgradenix="sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'"
