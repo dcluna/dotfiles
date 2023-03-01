@@ -865,7 +865,13 @@
 
 (setq magit-section-initial-visibility-alist '((untracked . hide)
                                                (stashes . hide)))
-(add-hook 'prog-mode-hook #'whitespace-cleanup)
+(defun dcl/setup-whitespace-cleanup ()
+  (add-hook 'before-save-hook #'whitespace-cleanup))
+
+(mapc (lambda (mode)
+        (add-hook mode #'dcl/setup-whitespace-cleanup))
+      '(prog-mode-hook
+        org-mode-hook))
 (setq inferior-lisp-program "/home/dancluna/code/sbcl/output")
 (setq sly-lisp-implementations
       '((ecl ("ecl"))
