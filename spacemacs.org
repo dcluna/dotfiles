@@ -52,7 +52,7 @@
      You should not put any user code in this function besides modifying the variable
      values."
       (setq-default
-       dotspacemacs-scratch-mode 'emacs-lisp-mode
+       dotspacemacs-scratch-mode 'sql-mode
        ;; Base distribution to use. This is a layer contained in the directory
        ;; `+distribution'. For now available distributions are `spacemacs-base'
        ;; or `spacemacs'. (default 'spacemacs)
@@ -2473,6 +2473,12 @@
    #+begin_src emacs-lisp
      (require 'evil-vterm-tmux-navigator)
      (define-key emamux:keymap "n" #'evil-vterm-tmux-navigator-state)
+   #+end_src
+
+** Scratch buffer
+
+   #+begin_src emacs-lisp
+     (add-hook 'spacemacs-scratch-mode-hook #'persistent-scratch-autosave-mode)
    #+end_src
 
 ** Popper

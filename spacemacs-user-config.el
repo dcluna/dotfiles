@@ -1205,6 +1205,7 @@
   (spacemacs/declare-prefix "o e" "emamux"))
 (require 'evil-vterm-tmux-navigator)
 (define-key emamux:keymap "n" #'evil-vterm-tmux-navigator-state)
+(add-hook 'spacemacs-scratch-mode-hook #'persistent-scratch-autosave-mode)
 (setq popper-keymap (make-sparse-keymap))
 (use-package popper
   :ensure t ; or :straight t
