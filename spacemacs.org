@@ -2453,6 +2453,12 @@
 ** Emamux
 
    #+begin_src emacs-lisp
+     (defun dcl/emamux:send-line ()
+       (interactive)
+       (emamux:send-region (line-beginning-position) (line-end-position)))
+   #+end_src
+
+   #+begin_src emacs-lisp
      (progn
        (require 'emamux)
        (evil-leader/set-key "o e" emamux:keymap)
@@ -2460,12 +2466,7 @@
        (define-key emamux:keymap "s" #'emamux:send-command)
        (define-key emamux:keymap "w" #'emamux:new-window)
        (define-key emamux:keymap "z" #'emamux:zoom-runner)
-       (define-key emamux:keymap "j" #'vterm-tmux-navigator/vterm-navigate-down)
-       (define-key emamux:keymap "k" #'vterm-tmux-navigator/vterm-navigate-up)
-       (define-key emamux:keymap "h" #'vterm-tmux-navigator/vterm-navigate-left)
-       (define-key emamux:keymap "l" #'vterm-tmux-navigator/vterm-navigate-right)
-       (define-key emamux:keymap "H" #'vterm-tmux-navigator/vterm-navigate-left-window)
-       (define-key emamux:keymap "L" #'vterm-tmux-navigator/vterm-navigate-right-window)
+       (define-key emamux:keymap "l" #'dcl/emamux:send-line)
        (spacemacs/declare-prefix "o e" "emamux"))
    #+end_src
 
