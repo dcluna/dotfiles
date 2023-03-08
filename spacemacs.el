@@ -22,6 +22,7 @@
 (setq straight-packages '(
                           tramp
                           persistent-scratch
+                          (gptel :host github :repo "karthink/gptel")
                           (gpt :host github :repo "stuhlmueller/gpt.el")
                           (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
                           mini-frame
