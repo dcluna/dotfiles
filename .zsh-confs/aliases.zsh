@@ -117,3 +117,5 @@ alias gdbdashboard="gdb --command=~/.ghq/github.com/cyrus-and/gdb-dashboard/.gdb
 alias updatedb='/usr/libexec/locate.updatedb'
 alias tmuxnvim='tmux new-window -d nvim'
 alias upgradenix="sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'"
+
+alias aqemacsclient="emacsclient -s adquick -a 'nvim'"
