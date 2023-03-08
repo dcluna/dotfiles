@@ -22,6 +22,9 @@
 (setq straight-packages '(
                           tramp
                           persistent-scratch
+                          (org-ai :type git :host github :repo "rksm/org-ai"
+                                  :local-repo "org-ai"
+                                  :files ("*.el" "README.md"))
                           (gptel :host github :repo "karthink/gptel")
                           (gpt :host github :repo "stuhlmueller/gpt.el")
                           (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
