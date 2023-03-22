@@ -272,6 +272,7 @@ call the original function `package-activate'."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
+                                      codegpt
                                       eat
                                       (copilot :location (recipe
                                                           :fetcher github
@@ -558,7 +559,8 @@ user code."
           ("melpa" . "melpa.org/packages/")
           ("org" . "orgmode.org/elpa/")
           ("nongnu" . "elpa.nongnu.org/nongnu/")
-          ("gnu" . "elpa.gnu.org/packages/")))
+          ("gnu" . "elpa.gnu.org/packages/")
+          ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
   (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
   (if (and (require 'server) (fboundp 'server-running-p) (server-running-p "adquick"))
       (progn
@@ -566,7 +568,9 @@ user code."
       (load-file (expand-file-name "~/.hammerspoon/spacehammer.el")))
   (setq server-name "adquick")
   (server-start)
-  (add-to-list 'package-pinned-packages '(magit . "melpa-stable")))
+  (add-to-list 'package-pinned-packages '(magit . "melpa-stable"))
+  (setq package-archive-priorities '(("melpa"    . 5)
+                                     ("jcs-elpa" . 0))))
   ;; (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))
   ;; (add-to-list 'package-pinned-packages '(async . "melpa-stable"))
 

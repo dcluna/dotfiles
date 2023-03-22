@@ -157,6 +157,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          codegpt
                                           eat
                                           (copilot :location (recipe
                                                               :fetcher github
@@ -498,7 +499,8 @@
               ("melpa" . "melpa.org/packages/")
               ("org" . "orgmode.org/elpa/")
               ("nongnu" . "elpa.nongnu.org/nongnu/")
-              ("gnu" . "elpa.gnu.org/packages/")))
+              ("gnu" . "elpa.gnu.org/packages/")
+              ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
       (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
       (if (and (require 'server) (fboundp 'server-running-p) (server-running-p "adquick"))
           (progn
@@ -506,7 +508,9 @@
           (load-file (expand-file-name "~/.hammerspoon/spacehammer.el")))
       (setq server-name "adquick")
       (server-start)
-      (add-to-list 'package-pinned-packages '(magit . "melpa-stable")))
+      (add-to-list 'package-pinned-packages '(magit . "melpa-stable"))
+      (setq package-archive-priorities '(("melpa"    . 5)
+                                         ("jcs-elpa" . 0))))
       ;; (add-to-list 'package-pinned-packages '(dash . "melpa-stable"))
       ;; (add-to-list 'package-pinned-packages '(async . "melpa-stable"))
   #+END_SRC
@@ -2579,6 +2583,20 @@
               org-roam-ui-update-on-save t
               org-roam-ui-open-on-start t))
     #+end_src
+
+** GPT
+
+   #+begin_src emacs-lisp
+     (let ((gpt-keymap (make-sparse-keymap)))
+       (define-key gpt-keymap "d" 'codegpt-doc)
+       (define-key gpt-keymap "f" 'codegpt-fix)
+       (define-key gpt-keymap "e" 'codegpt-explain)
+       (define-key gpt-keymap "i" 'codegpt-improve)
+       (define-key gpt-keymap "g" 'gptel)
+       (evil-leader/set-key "o G" gpt-keymap)
+       (spacemacs/declare-prefix "o G" "GPT"))
+
+   #+end_src
 
 ** Copilot.el
 
