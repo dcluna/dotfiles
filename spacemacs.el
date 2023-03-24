@@ -20,6 +20,7 @@
 
 
 (setq straight-packages '(
+                          (codeium :type git :host github :repo "Exafunction/codeium.el")
                           tramp
                           persistent-scratch
                           (org-ai :type git :host github :repo "rksm/org-ai"
