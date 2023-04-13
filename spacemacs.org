@@ -1102,6 +1102,8 @@
         (mapc (lambda (pair) (push pair prettify-symbols-alist))
               '(
                 ("def" .      #x192)
+                ;; ("end" .      #x3a9)
+                ;; ("if" .     #x21d2)
                 ("return" .   #x27fc)
                 ("not "    .   #x00ac)
                 ("nil"    .   #x2205)
