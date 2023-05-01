@@ -12,11 +12,12 @@
   home.packages = [
     pkgs.zoxide
     pkgs.curlie
-    pkgs.visidata
+    (pkgs.visidata.overrideAttrs(super: rec { propagatedBuildInputs = super.propagatedBuildInputs ++ [pkgs.python3Packages.pyarrow]; }))
     pkgs.xsv
     pkgs.lazydocker
     pkgs.pspg
     pkgs.rufo
+    pkgs.lnav
   ];
 
   # This value determines the Home Manager release that your
