@@ -18,6 +18,7 @@
     pkgs.pspg
     pkgs.rufo
     pkgs.lnav
+    pkgs.pqrs
   ];
 
   # This value determines the Home Manager release that your
