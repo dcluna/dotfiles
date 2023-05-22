@@ -20,6 +20,7 @@
 
 
 (setq straight-packages '(
+                          (myron-themes :host github :repo "neeasade/myron-themes" :files ("*.el" "themes/*.el"))
                           (codeium :type git :host github :repo "Exafunction/codeium.el")
                           tramp
                           persistent-scratch
