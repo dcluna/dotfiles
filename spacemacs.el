@@ -28,7 +28,8 @@
                                   :local-repo "org-ai"
                                   :files ("*.el" "README.md"))
                           (gptel :host github :repo "karthink/gptel")
-                          (gpt :host github :repo "stuhlmueller/gpt.el")
+                          (chat :host github :repo "iwahbe/chat.el" :files ("*.el"))
+                          ;; (gpt :host github :repo "stuhlmueller/gpt.el")
                           (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
                           mini-frame
                           (org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))

@@ -612,7 +612,8 @@
                                       :local-repo "org-ai"
                                       :files ("*.el" "README.md"))
                               (gptel :host github :repo "karthink/gptel")
-                              (gpt :host github :repo "stuhlmueller/gpt.el")
+                              (chat :host github :repo "iwahbe/chat.el" :files ("*.el"))
+                              ;; (gpt :host github :repo "stuhlmueller/gpt.el")
                               (ivy-ghq :host github :repo "analyticd/ivy-ghq" :files ("*.el"))
                               mini-frame
                               (org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
@@ -2592,14 +2593,14 @@
 
    #+begin_src emacs-lisp
      (let ((gpt-keymap (make-sparse-keymap)))
-       (define-key gpt-keymap "d" 'codegpt-doc)
-       (define-key gpt-keymap "f" 'codegpt-fix)
-       (define-key gpt-keymap "e" 'codegpt-explain)
-       (define-key gpt-keymap "i" 'codegpt-improve)
+       (define-key gpt-keymap "c" 'chat)
+       (define-key gpt-keymap "u" 'chat-query-user)
+       (define-key gpt-keymap "r" 'chat-query-region)
+       (define-key gpt-keymap "d" 'chat-query-dwim)
        (define-key gpt-keymap "g" 'gptel)
+       (define-key gpt-keymap "s" 'gptel-send)
        (evil-leader/set-key "o G" gpt-keymap)
        (spacemacs/declare-prefix "o G" "GPT"))
-
    #+end_src
 
 ** Copilot.el

@@ -1268,14 +1268,14 @@
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
 (let ((gpt-keymap (make-sparse-keymap)))
-  (define-key gpt-keymap "d" 'codegpt-doc)
-  (define-key gpt-keymap "f" 'codegpt-fix)
-  (define-key gpt-keymap "e" 'codegpt-explain)
-  (define-key gpt-keymap "i" 'codegpt-improve)
+  (define-key gpt-keymap "c" 'chat)
+  (define-key gpt-keymap "u" 'chat-query-user)
+  (define-key gpt-keymap "r" 'chat-query-region)
+  (define-key gpt-keymap "d" 'chat-query-dwim)
   (define-key gpt-keymap "g" 'gptel)
+  (define-key gpt-keymap "s" 'gptel-send)
   (evil-leader/set-key "o G" gpt-keymap)
   (spacemacs/declare-prefix "o G" "GPT"))
-
 (with-eval-after-load 'company
   ;; disable inline previews
   (delq 'company-preview-if-just-one-frontend company-frontends))
