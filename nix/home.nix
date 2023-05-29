@@ -19,6 +19,8 @@
     pkgs.rufo
     pkgs.lnav
     pkgs.pqrs
+    pkgs.wget
+    pkgs.gnupg
   ];
 
   # This value determines the Home Manager release that your
