@@ -157,6 +157,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          envrc
                                           codegpt
                                           eat
                                           (copilot :location (recipe
@@ -604,6 +605,7 @@
 
 
     (setq straight-packages '(
+                              (prism :host github :repo "alphapapa/prism.el" :files ("*.el"))
                               (myron-themes :host github :repo "neeasade/myron-themes" :files ("*.el" "themes/*.el"))
                               (codeium :type git :host github :repo "Exafunction/codeium.el")
                               tramp
@@ -634,7 +636,7 @@
                               anaphora
                               exec-path-from-shell
                               (pmd :type git :host github :repo "dcluna/pmd.el")
-                              (emacs-direnv  :type git :host github :repo "wbolster/emacs-direnv")
+                              ;; (emacs-direnv  :type git :host github :repo "wbolster/emacs-direnv")
                               rake
                               robe
                               (rspec-mode :type git :host github :repo "pezra/rspec-mode")
@@ -2389,9 +2391,11 @@
 ** Direnv
 
    #+BEGIN_SRC emacs-lisp
-     (use-package direnv
-       :config
-       (direnv-mode))
+     ;; (use-package direnv
+     ;;   :config
+     ;;   (direnv-mode))
+     (use-package envrc
+       :config (envrc-global-mode))
    #+END_SRC
 
 ** Exec-path-from-shell

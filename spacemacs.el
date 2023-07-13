@@ -50,7 +50,7 @@
                           anaphora
                           exec-path-from-shell
                           (pmd :type git :host github :repo "dcluna/pmd.el")
-                          (emacs-direnv  :type git :host github :repo "wbolster/emacs-direnv")
+                          ;; (emacs-direnv  :type git :host github :repo "wbolster/emacs-direnv")
                           rake
                           robe
                           (rspec-mode :type git :host github :repo "pezra/rspec-mode")
@@ -275,6 +275,7 @@ call the original function `package-activate'."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
+                                      envrc
                                       codegpt
                                       eat
                                       (copilot :location (recipe

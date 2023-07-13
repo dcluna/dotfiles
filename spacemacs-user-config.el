@@ -1166,9 +1166,12 @@
  (lambda (fn)
    (advice-add fn :around 'dcl/maybe-call-yas-with-local-source-and-set-snippet-dirs))
  (list 'yas-new-snippet))
-(use-package direnv
-  :config
-  (direnv-mode))
+;; (use-package direnv
+;;   :config
+;;   (direnv-mode))
+(use-package envrc
+  :config (envrc-global-mode))
+
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 (defun helm-comint-input-ring-action (candidate)
