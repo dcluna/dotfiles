@@ -1,0 +1,30 @@
+* Imported Feeds                                                     :elfeed:
+** Software development                                                 :dev:
+*** [[https://betterdev.link/rss.xml][Better Dev Link]]
+*** [[https://stratechery.com/feed/][Stratechery by Ben Thompson]]
+*** [[https://newsletter.pragmaticengineer.com/feed][The Pragmatic Engineer]]
+*** [[https://www.jendrikillner.com/tags/weekly/index.xml][Weekly on Jendrik Illner - 3D Programmer]]
+*** [[https://weinholt.se/feed.xml][https://weinholt.se/]]
+*** [[https://hardcoresoftware.learningbyshipping.com/feed][Hardcore Software]]
+*** [[https://blog.bytebytego.com/feed][ByteByteGo]]
+*** [[https://newsletter.micahlerner.com/feed][System Papers - Micah Lerner]]
+*** [[https://changelog.com/news/feed][Changelog News]]
+** Data / AI                                                        :data:ai:
+*** [[https://dataanalysis.substack.com/feed][Data Analysis Journal]]
+*** [[https://www.ignorance.ai/feed][Ignorance.ai - A nuanced, no-hype exploration of AI for founders and makers.]]
+*** [[https://aisupremacy.substack.com/feed][AI Supremacy]]
+*** [[https://www.latent.space/feed][Latent.space]]
+*** [[https://www.dataengineeringweekly.com/feed][Data Engineering Weekly]]
+** Books                                                              :books:
+*** [[https://astralcodexten.substack.com/feed][AstralCodexTen]]
+** Psychology                                                         :psych:
+*** [[https://www.robkhenderson.com/feed][Rob Henderson's Newsletter on human nature, psychology, social class, luxury beliefs, and more]]
+** Business / organization                                          :biz:org:
+*** [[https://commoncog.com/rss/][CommonCog - about business and career decision making in a world of constant change]]
+** Economics                                                           :econ:
+*** [[https://www.noahpinion.blog/][Noahpinion]]
+*** [[https://www.thediff.co/rss/][The Diff]]
+*** [[https://adamtooze.substack.com/][Adam Tooze's Chart Book]]
+*** [[https://www.overcomingbias.com/feed][Overcoming Bias - Robin Hanson]]
+** Philosophy                                                           :phi:
+*** [[https://fakenous.substack.com/][Michael Huemer's Fake Nous]]
