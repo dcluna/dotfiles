@@ -180,7 +180,7 @@ tmux_conf_theme_right_separator_sub='|'
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} '
-tmux_conf_theme_status_right='#(tmux-spotify-info) #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %Y-%m-%d | #{username}#{root} | #{hostname} '
+tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %Y-%m-%d | #{username}#{root} | #{hostname} '
 
 # status left style
 tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white
@@ -304,13 +304,19 @@ set -g @tpm_plugins '          \
   tmux-plugins/tpm             \
   Morantron/tmux-fingers       \
   tmux-plugins/tmux-logging    \
+  robhurring/tmux-spotify      \
   schasse/tmux-jump            \
   dracula/tmux                 \
 '
 
+set -g @dracula-show-powerline true
+set -g @dracula-plugins "spotify-tui battery network weather"
 
 # tmux-continuum status
-tmux_conf_theme_status_right="#{continuum_status} $tmux_conf_theme_status_right"
+tmux_conf_theme_status_right="#{continuum_status} | ♫ #{music_status} #{artist}: #{track} | $tmux_conf_theme_status_right"
+
+# run '~/.ghq/github.com/dracula/tmux/dracula.tmux'
+# set -ag status-right "#[fg=#44475a,bg=#ffb86c] | ♫ #{music_status} #{artist}: #{track}"
 
 # tmux-ressurrect options
 
