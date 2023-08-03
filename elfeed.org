@@ -9,14 +9,21 @@
 *** [[https://blog.bytebytego.com/feed][ByteByteGo]]
 *** [[https://newsletter.micahlerner.com/feed][System Papers - Micah Lerner]]
 *** [[https://changelog.com/news/feed][Changelog News]]
+** Emacs                                                              :emacs:
+*** [[https://www.masteringemacs.org/feed][Mastering Emacs]]
 ** Data / AI                                                        :data:ai:
 *** [[https://dataanalysis.substack.com/feed][Data Analysis Journal]]
 *** [[https://www.ignorance.ai/feed][Ignorance.ai - A nuanced, no-hype exploration of AI for founders and makers.]]
 *** [[https://aisupremacy.substack.com/feed][AI Supremacy]]
 *** [[https://www.latent.space/feed][Latent.space]]
 *** [[https://www.dataengineeringweekly.com/feed][Data Engineering Weekly]]
+*** [[https://linusekenstam.substack.com/feed][Linus Ekenstam's Inside My Head]]
+*** [[https://www.oneusefulthing.org/feed][One Useful Thing]]
+*** [[https://www.aisnakeoil.com/feed][AI Snake Oil]]
+*** [[https://ploum.net/atom_en.xml][Ploum.net]]
 ** Books                                                              :books:
 *** [[https://astralcodexten.substack.com/feed][AstralCodexTen]]
+*** [[https://scottaaronson.blog/?feed=rss2][Shtetl-optimized - Scott Aaronson's blog]]
 ** Psychology                                                         :psych:
 *** [[https://www.robkhenderson.com/feed][Rob Henderson's Newsletter on human nature, psychology, social class, luxury beliefs, and more]]
 ** Business / organization                                          :biz:org:
@@ -24,7 +31,11 @@
 ** Economics                                                           :econ:
 *** [[https://www.noahpinion.blog/][Noahpinion]]
 *** [[https://www.thediff.co/rss/][The Diff]]
-*** [[https://adamtooze.substack.com/][Adam Tooze's Chart Book]]
+*** [[https://adamtooze.substack.com/feed][Adam Tooze's Chart Book]]
 *** [[https://www.overcomingbias.com/feed][Overcoming Bias - Robin Hanson]]
+*** [[https://davidgerard.co.uk/blockchain/feed/][David Gerard's Attack of the 50ft blockchain]]
+*** [[https://newsletter.mollywhite.net/feed][Molly White's Newsletter]]
+*** [[https://daviddfriedman.substack.com/feed][David Friedman]]
+*** [[https://genuineimpact.substack.com/feed][Genuine Impact - Charting Finance, Investing & Tech]]
 ** Philosophy                                                           :phi:
-*** [[https://fakenous.substack.com/][Michael Huemer's Fake Nous]]
+*** [[https://fakenous.substack.com/feed][Michael Huemer's Fake Nous]]
