@@ -21,6 +21,10 @@
     pkgs.pqrs
     pkgs.wget
     pkgs.gnupg
+    pkgs.pgmetrics
+    pkgs.spotify-tui
+    pkgs.ledger-autosync
+    pkgs.hledger
   ];
 
   # This value determines the Home Manager release that your

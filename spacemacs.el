@@ -20,6 +20,8 @@
 
 
 (setq straight-packages '(
+                          (mastodon-alt :host github :repo "rougier/mastodon-alt" :files ("*.el"))
+                          (prism :host github :repo "alphapapa/prism.el" :files ("*.el"))
                           (myron-themes :host github :repo "neeasade/myron-themes" :files ("*.el" "themes/*.el"))
                           (codeium :type git :host github :repo "Exafunction/codeium.el")
                           tramp
@@ -183,7 +185,7 @@ call the original function `package-activate'."
    dotspacemacs-configuration-layers
    '(
      (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/elfeed.org")))
-     ;; finance
+     finance
      ;; (scala :variables scala-backend 'scala-metals)
      imenu-list
      nixos
