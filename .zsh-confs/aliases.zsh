@@ -106,6 +106,7 @@ alias vi='nvim'
 alias top='btm -b'
 alias pgsyncd='pgsync --debug'
 alias pgsyncdf='pgsync --debug --disable-integrity --defer-constraints-v2'
+alias pgsyncdfb='pgsync --debug --disable-integrity --defer-constraints-v2 --in-batches'
 alias cat='bat --paging=never'
 
 alias nix-query='nix-env -qas --description'
