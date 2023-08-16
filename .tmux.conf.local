@@ -311,7 +311,9 @@ set -g @tpm_plugins '          \
 
 set -g @dracula-show-powerline true
 set -g @dracula-show-fahrenheit false
-set -g @dracula-plugins "spotify-tui cpu-usage ram-usage battery network weather"
+set -g @dracula-show-location false
+set -g @dracula-day-month true
+set -g @dracula-plugins "time cpu-usage ram-usage battery network weather spotify-tui"
 
 # tmux-continuum status
 tmux_conf_theme_status_right="#{continuum_status} | ♫ #{music_status} #{artist}: #{track} | $tmux_conf_theme_status_right"
