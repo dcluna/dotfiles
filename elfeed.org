@@ -11,6 +11,7 @@
 *** [[https://changelog.com/news/feed][Changelog News]]
 ** Emacs                                                              :emacs:
 *** [[https://www.masteringemacs.org/feed][Mastering Emacs]]
+*** [[https://sachachua.com/blog/category/emacs-news/feed][Emacs News]]
 ** Data / AI                                                        :data:ai:
 *** [[https://dataanalysis.substack.com/feed][Data Analysis Journal]]
 *** [[https://www.ignorance.ai/feed][Ignorance.ai - A nuanced, no-hype exploration of AI for founders and makers.]]
@@ -21,11 +22,15 @@
 *** [[https://www.oneusefulthing.org/feed][One Useful Thing]]
 *** [[https://www.aisnakeoil.com/feed][AI Snake Oil]]
 *** [[https://ploum.net/atom_en.xml][Ploum.net]]
+*** [[https://markwatson.com/][Mark Watson's AI blog (Lisp-related)]]
 ** Books                                                              :books:
 *** [[https://astralcodexten.substack.com/feed][AstralCodexTen]]
 *** [[https://scottaaronson.blog/?feed=rss2][Shtetl-optimized - Scott Aaronson's blog]]
+*** [[https://jasonpargin.substack.com/feed][Jason Pargin]]
+*** [[https://crookedtimber.org/feed/][Crooked Timber]]
 ** Psychology                                                         :psych:
 *** [[https://www.robkhenderson.com/feed][Rob Henderson's Newsletter on human nature, psychology, social class, luxury beliefs, and more]]
+*** [[https://siderea.dreamwidth.org/data/atom][Sibylla Bostoniensis - Everything Unravels, Everything Will Fade]]
 ** Business / organization                                          :biz:org:
 *** [[https://commoncog.com/rss/][CommonCog - about business and career decision making in a world of constant change]]
 ** Economics                                                           :econ:
@@ -37,5 +42,6 @@
 *** [[https://newsletter.mollywhite.net/feed][Molly White's Newsletter]]
 *** [[https://daviddfriedman.substack.com/feed][David Friedman]]
 *** [[https://genuineimpact.substack.com/feed][Genuine Impact - Charting Finance, Investing & Tech]]
+*** [[https://robertreich.substack.com/feed][Robert Reich]]
 ** Philosophy                                                           :phi:
 *** [[https://fakenous.substack.com/feed][Michael Huemer's Fake Nous]]
