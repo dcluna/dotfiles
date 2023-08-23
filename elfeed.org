@@ -9,20 +9,24 @@
 *** [[https://blog.bytebytego.com/feed][ByteByteGo]]
 *** [[https://newsletter.micahlerner.com/feed][System Papers - Micah Lerner]]
 *** [[https://changelog.com/news/feed][Changelog News]]
+*** [[https://badsoftwareadvice.substack.com/feed][Bad software advice]]
+** Technology                                                          :tech:
+*** [[https://www.technologyreview.com/feed][MIT Technology Review]]
 ** Emacs                                                              :emacs:
 *** [[https://www.masteringemacs.org/feed][Mastering Emacs]]
 *** [[https://sachachua.com/blog/category/emacs-news/feed][Emacs News]]
-** Data / AI                                                        :data:ai:
+** Data                                                           :data:
 *** [[https://dataanalysis.substack.com/feed][Data Analysis Journal]]
+*** [[https://www.dataengineeringweekly.com/feed][Data Engineering Weekly]]
+*** [[https://www.oneusefulthing.org/feed][One Useful Thing]]
+*** [[https://ploum.net/atom_en.xml][Ploum.net]]                                                           :dev:
+*** [[https://markwatson.com/][Mark Watson's AI blog (Lisp-related)]]  :lisp:
+** AI                                                                    :ai:
 *** [[https://www.ignorance.ai/feed][Ignorance.ai - A nuanced, no-hype exploration of AI for founders and makers.]]
 *** [[https://aisupremacy.substack.com/feed][AI Supremacy]]
 *** [[https://www.latent.space/feed][Latent.space]]
-*** [[https://www.dataengineeringweekly.com/feed][Data Engineering Weekly]]
 *** [[https://linusekenstam.substack.com/feed][Linus Ekenstam's Inside My Head]]
-*** [[https://www.oneusefulthing.org/feed][One Useful Thing]]
 *** [[https://www.aisnakeoil.com/feed][AI Snake Oil]]
-*** [[https://ploum.net/atom_en.xml][Ploum.net]]
-*** [[https://markwatson.com/][Mark Watson's AI blog (Lisp-related)]]
 ** Books                                                              :books:
 *** [[https://astralcodexten.substack.com/feed][AstralCodexTen]]
 *** [[https://scottaaronson.blog/?feed=rss2][Shtetl-optimized - Scott Aaronson's blog]]
