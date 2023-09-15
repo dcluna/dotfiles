@@ -10,8 +10,19 @@
 *** [[https://newsletter.micahlerner.com/feed][System Papers - Micah Lerner]]
 *** [[https://changelog.com/news/feed][Changelog News]]
 *** [[https://badsoftwareadvice.substack.com/feed][Bad software advice]]
+*** [[https://andrewkelley.me/rss.xml][Andrew Kelley (Zig's creator) blog]] :zig:
+*** Ruby                                                               :ruby:
+**** [[https://cprss.s3.amazonaws.com/rubyweekly.com.xml][Ruby Weekly]]
+*** Videos/podcasts                                           :video:podcast:
+**** [[https://media.ccc.de/updates.rdf][Media.ccc.de]]
+*** Product management                                         :product_mgmt:
+**** [[https://newsletter.posthog.com/feed][Product for Engineers - PostHog Newsletter]]
 ** Technology                                                          :tech:
-*** [[https://www.technologyreview.com/feed][MIT Technology Review]]
+*** [[https://www.technologyreview.com/feed][MIT Technology Review]]  :noisy:
+** Permacomputing                                                  :permacpu:
+*** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
+** Climate / ecology                                                    :eco:
+*** [[https://natehagens.substack.com/feed][Nate Hagens' The Great Simplification]]
 ** Emacs                                                              :emacs:
 *** [[https://www.masteringemacs.org/feed][Mastering Emacs]]
 *** [[https://sachachua.com/blog/category/emacs-news/feed][Emacs News]]
@@ -21,12 +32,17 @@
 *** [[https://www.oneusefulthing.org/feed][One Useful Thing]]
 *** [[https://ploum.net/atom_en.xml][Ploum.net]]                                                           :dev:
 *** [[https://markwatson.com/][Mark Watson's AI blog (Lisp-related)]]  :lisp:
+*** Data visualization                                              :dataviz:
+**** [[https://thepuddingmail.substack.com/feed][The Pudding]]
+*** Databases                                                            :db:
+**** [[https://cprss.s3.amazonaws.com/postgresweekly.com.xml][Postgres Weekly]]
 ** AI                                                                    :ai:
 *** [[https://www.ignorance.ai/feed][Ignorance.ai - A nuanced, no-hype exploration of AI for founders and makers.]]
-*** [[https://aisupremacy.substack.com/feed][AI Supremacy]]
-*** [[https://www.latent.space/feed][Latent.space]]
-*** [[https://linusekenstam.substack.com/feed][Linus Ekenstam's Inside My Head]]
+*** [[https://aisupremacy.substack.com/feed][AI Supremacy]]                                                      :noisy:
+*** [[https://linusekenstam.substack.com/feed][Linus Ekenstam's Inside My Head]]                                   :noisy:
 *** [[https://www.aisnakeoil.com/feed][AI Snake Oil]]
+*** Videos/podcasts                                           :video:podcast:
+**** [[https://www.latent.space/feed][Latent.space]]                                                     :noisy:
 ** Books                                                              :books:
 *** [[https://astralcodexten.substack.com/feed][AstralCodexTen]]
 *** [[https://scottaaronson.blog/?feed=rss2][Shtetl-optimized - Scott Aaronson's blog]]
@@ -37,6 +53,7 @@
 *** [[https://siderea.dreamwidth.org/data/atom][Sibylla Bostoniensis - Everything Unravels, Everything Will Fade]]
 ** Business / organization                                          :biz:org:
 *** [[https://commoncog.com/rss/][CommonCog - about business and career decision making in a world of constant change]]
+*** [[https://studio.ribbonfarm.com/feed][Ribbonfarm Studio]]
 ** Economics                                                           :econ:
 *** [[https://www.noahpinion.blog/][Noahpinion]]
 *** [[https://www.thediff.co/rss/][The Diff]]
@@ -49,3 +66,5 @@
 *** [[https://robertreich.substack.com/feed][Robert Reich]]
 ** Philosophy                                                           :phi:
 *** [[https://fakenous.substack.com/feed][Michael Huemer's Fake Nous]]
+** Life advice                                                  :life_advice:
+*** [[https://moretothat.com/feed][More to That]]
