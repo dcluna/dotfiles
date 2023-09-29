@@ -11,14 +11,21 @@
 *** [[https://changelog.com/news/feed][Changelog News]]
 *** [[https://badsoftwareadvice.substack.com/feed][Bad software advice]]
 *** [[https://andrewkelley.me/rss.xml][Andrew Kelley (Zig's creator) blog]] :zig:
+*** [[https://programmingdigest.net/digests/feed.rss][Programming Digest]]
 *** Ruby                                                               :ruby:
 **** [[https://cprss.s3.amazonaws.com/rubyweekly.com.xml][Ruby Weekly]]
 *** Videos/podcasts                                           :video:podcast:
-**** [[https://media.ccc.de/updates.rdf][Media.ccc.de]]
+**** [[https://media.ccc.de/updates.rdf][Media.ccc.de]]                                                     :noisy:
 *** Product management                                         :product_mgmt:
 **** [[https://newsletter.posthog.com/feed][Product for Engineers - PostHog Newsletter]]
+**** [[https://vadimkravcenko.com/feed][Vadim Kravcenko - CTO Newsletter]]
 ** Technology                                                          :tech:
 *** [[https://www.technologyreview.com/feed][MIT Technology Review]]  :noisy:
+*** Software updates                                               :software:
+**** [[https://nyxt.atlas.engineer/feed][Nyxt]]                        :nyxt:
+**** [[https://gnu.tools/en/blog/feed.xml][Gnu Assembly]]                                                       :gnu:
+** Programmer blogs                                               :prog_blog:
+*** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -31,7 +38,7 @@
 *** [[https://www.dataengineeringweekly.com/feed][Data Engineering Weekly]]
 *** [[https://www.oneusefulthing.org/feed][One Useful Thing]]
 *** [[https://ploum.net/atom_en.xml][Ploum.net]]                                                           :dev:
-*** [[https://markwatson.com/][Mark Watson's AI blog (Lisp-related)]]  :lisp:
+*** [[https://mark-watson.blogspot.com/feeds/posts/default][Mark Watson's AI blog (Lisp-related)]] :lisp:
 *** Data visualization                                              :dataviz:
 **** [[https://thepuddingmail.substack.com/feed][The Pudding]]
 *** Databases                                                            :db:
@@ -41,6 +48,7 @@
 *** [[https://aisupremacy.substack.com/feed][AI Supremacy]]                                                      :noisy:
 *** [[https://linusekenstam.substack.com/feed][Linus Ekenstam's Inside My Head]]                                   :noisy:
 *** [[https://www.aisnakeoil.com/feed][AI Snake Oil]]
+*** [[https://codeconfessions.substack.com/feed][Confessions of a code addict]]
 *** Videos/podcasts                                           :video:podcast:
 **** [[https://www.latent.space/feed][Latent.space]]                                                     :noisy:
 ** Books                                                              :books:
@@ -55,7 +63,7 @@
 *** [[https://commoncog.com/rss/][CommonCog - about business and career decision making in a world of constant change]]
 *** [[https://studio.ribbonfarm.com/feed][Ribbonfarm Studio]]
 ** Economics                                                           :econ:
-*** [[https://www.noahpinion.blog/][Noahpinion]]
+*** [[https://www.noahpinion.blog/feed][Noahpinion]]
 *** [[https://www.thediff.co/rss/][The Diff]]
 *** [[https://adamtooze.substack.com/feed][Adam Tooze's Chart Book]]
 *** [[https://www.overcomingbias.com/feed][Overcoming Bias - Robin Hanson]]
@@ -64,7 +72,14 @@
 *** [[https://daviddfriedman.substack.com/feed][David Friedman]]
 *** [[https://genuineimpact.substack.com/feed][Genuine Impact - Charting Finance, Investing & Tech]]
 *** [[https://robertreich.substack.com/feed][Robert Reich]]
+*** [[https://backofmind.substack.com/feed][Back of Mind]]
 ** Philosophy                                                           :phi:
 *** [[https://fakenous.substack.com/feed][Michael Huemer's Fake Nous]]
 ** Life advice                                                  :life_advice:
 *** [[https://moretothat.com/feed][More to That]]
+** General essays                                                    :essays:
+*** [[https://nothinghuman.substack.com/feed][Nothing Human]]
+*** [[https://map.simonsarris.com/feed][The map is mostly water]]
+** Dirty commie stuff                                               :anticap:
+*** [[https://theluddite.org/feed.rss][TheLuddite.org]]
+*** [[https://theblockchainsocialist.com/feed][Blockchain Socialist]]
