@@ -64,6 +64,7 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         openai
          (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/elfeed.org")))
          finance
          ;; (scala :variables scala-backend 'scala-metals)
