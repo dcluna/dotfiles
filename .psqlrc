@@ -6,4 +6,5 @@
 \pset linestyle unicode
 \pset null 'ø'
 \set HISTFILE ~/.psql_history-:DBNAME
+\set PROMPT1 '%n@%M:%>/%~ %x> '
 SET tcp_keepalives_idle = 15;
