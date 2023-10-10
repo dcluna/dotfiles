@@ -24,8 +24,10 @@
 *** Software updates                                               :software:
 **** [[https://nyxt.atlas.engineer/feed][Nyxt]]                        :nyxt:
 **** [[https://gnu.tools/en/blog/feed.xml][Gnu Assembly]]                                                       :gnu:
+**** [[https://guix.gnu.org/feeds/blog.atom][Gnu Guix]]            :guix:gnu:
 ** Programmer blogs                                               :prog_blog:
 *** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
+*** [[https://drewdevault.com/blog/index.xml][Drew DeVault]]       :sircmpwn:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
