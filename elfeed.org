@@ -64,6 +64,8 @@
 ** Business / organization                                          :biz:org:
 *** [[https://commoncog.com/rss/][CommonCog - about business and career decision making in a world of constant change]]
 *** [[https://studio.ribbonfarm.com/feed][Ribbonfarm Studio]]
+** Culture                                                          :culture:
+*** [[https://draliceevans.substack.com/feed][The Great Gender Divergence - Dr Alice Evans]]                   :feminism:
 ** Economics                                                           :econ:
 *** [[https://www.noahpinion.blog/feed][Noahpinion]]
 *** [[https://www.thediff.co/rss/][The Diff]]
