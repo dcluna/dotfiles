@@ -898,7 +898,7 @@
 
 ;; (load "~/code/rspec-mode/rspec-mode") ; I run a local version and this has some extra goodies
 
-(setq inf-ruby-breakpoint-pattern "\\(\\[1\\] pry(\\)\\|\\(\\[1\\] haystack\\)\\|\\((rdb:1)\\)\\|\\((byebug)\\)")
+(setq inf-ruby-breakpoint-pattern "\\(\\[1\\] pry(\\)\\|\\(\\[1\\] haystack\\)\\|\\((rdb:1)\\)\\|\\((byebug)\\)\\|irb")
 (progn
   (dcl/add-env-toggle "POLTERGEIST_DEBUG" "p")
   (dcl/add-env-toggle "RUBY_PROF" "rp")
