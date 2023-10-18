@@ -14,6 +14,7 @@
 *** [[https://programmingdigest.net/digests/feed.rss][Programming Digest]]
 *** Ruby                                                               :ruby:
 **** [[https://cprss.s3.amazonaws.com/rubyweekly.com.xml][Ruby Weekly]]
+**** [[https://buttondown.email/hotwireweekly/rss][Hotwire Weekly]]                                                 :hotwire:
 *** Videos/podcasts                                           :video:podcast:
 **** [[https://media.ccc.de/updates.rdf][Media.ccc.de]]                                                     :noisy:
 *** Product management                                         :product_mgmt:
@@ -21,10 +22,13 @@
 **** [[https://vadimkravcenko.com/feed][Vadim Kravcenko - CTO Newsletter]]
 ** Technology                                                          :tech:
 *** [[https://www.technologyreview.com/feed][MIT Technology Review]]  :noisy:
+*** [[https://github.com/readme.rss][Github ReadME]]
 *** Software updates                                               :software:
 **** [[https://nyxt.atlas.engineer/feed][Nyxt]]                        :nyxt:
 **** [[https://gnu.tools/en/blog/feed.xml][Gnu Assembly]]                                                       :gnu:
 **** [[https://guix.gnu.org/feeds/blog.atom][Gnu Guix]]            :guix:gnu:
+*** Digital rights
+**** [[https://fightforthefuture.substack.com/feed][Fight for the Future's Touch Grass Newsletter]]
 ** Programmer blogs                                               :prog_blog:
 *** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
 *** [[https://drewdevault.com/blog/index.xml][Drew DeVault]]       :sircmpwn:
