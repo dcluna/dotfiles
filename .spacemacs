@@ -73,6 +73,8 @@ static char *note[] = {
    '(evil-normal-state-cursor '("#F57F17" box) t)
    '(evil-visual-state-cursor '("#66BB6A" box) t)
    '(evil-want-Y-yank-to-eol nil)
+   '(eww-auto-rename-buffer 'title)
+   '(eww-restore-desktop t)
    '(fci-rule-character-color "#202020")
    '(fci-rule-color "#f6f0e1")
    '(flycheck-javascript-flow-args '("--respect-pragma"))
