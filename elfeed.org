@@ -4,7 +4,7 @@
 *** [[https://stratechery.com/feed/][Stratechery by Ben Thompson]]
 *** [[https://newsletter.pragmaticengineer.com/feed][The Pragmatic Engineer]]
 *** [[https://www.jendrikillner.com/tags/weekly/index.xml][Weekly on Jendrik Illner - 3D Programmer]]
-*** [[https://weinholt.se/feed.xml][https://weinholt.se/]]
+*** [[https://weinholt.se/feed.xml][Weinholt]]
 *** [[https://hardcoresoftware.learningbyshipping.com/feed][Hardcore Software]]
 *** [[https://blog.bytebytego.com/feed][ByteByteGo]]
 *** [[https://newsletter.micahlerner.com/feed][System Papers - Micah Lerner]]
@@ -15,6 +15,7 @@
 *** Ruby                                                               :ruby:
 **** [[https://cprss.s3.amazonaws.com/rubyweekly.com.xml][Ruby Weekly]]
 **** [[https://buttondown.email/hotwireweekly/rss][Hotwire Weekly]]                                                 :hotwire:
+**** [[https://newsletter.shortruby.com/feed][Short Ruby]]
 *** Videos/podcasts                                           :video:podcast:
 **** [[https://media.ccc.de/updates.rdf][Media.ccc.de]]                                                     :noisy:
 *** Product management                                         :product_mgmt:
@@ -23,6 +24,7 @@
 ** Technology                                                          :tech:
 *** [[https://www.technologyreview.com/feed][MIT Technology Review]]  :noisy:
 *** [[https://github.com/readme.rss][Github ReadME]]
+*** [[https://blog.google/rss][The Keyword by Google]]
 *** Software updates                                               :software:
 **** [[https://nyxt.atlas.engineer/feed][Nyxt]]                        :nyxt:
 **** [[https://gnu.tools/en/blog/feed.xml][Gnu Assembly]]                                                       :gnu:
@@ -32,6 +34,11 @@
 ** Programmer blogs                                               :prog_blog:
 *** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
 *** [[https://drewdevault.com/blog/index.xml][Drew DeVault]]       :sircmpwn:
+*** [[https://unixsheikh.com/feed.rss][Unix Sheikh]]
+*** [[https://simonwillison.net/atom/everything/][Simon Willison]]                                                       :ai:
+*** [[https://www.spakhm.com/feed][Slava Akhmechet - Zero Credibility]]
+*** [[https://ludic.mataroa.blog/rss/][Ludic Mataroa]]
+*** [[https://www.evanmiller.org/news.xml][Evan Miller]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -72,6 +79,8 @@
 *** [[https://draliceevans.substack.com/feed][The Great Gender Divergence - Dr Alice Evans]]                   :feminism:
 ** Economics                                                           :econ:
 *** [[https://www.noahpinion.blog/feed][Noahpinion]]
+*** [[https://mattsclancy.substack.com/feed][What's New Under the Sun - Matt Clancy]]
+*** [[https://newsletter.rootsofprogress.org/feed][Roots of Progress by Jason Crawford]]
 *** [[https://www.thediff.co/rss/][The Diff]]
 *** [[https://adamtooze.substack.com/feed][Adam Tooze's Chart Book]]
 *** [[https://www.overcomingbias.com/feed][Overcoming Bias - Robin Hanson]]
@@ -79,8 +88,10 @@
 *** [[https://newsletter.mollywhite.net/feed][Molly White's Newsletter]]
 *** [[https://daviddfriedman.substack.com/feed][David Friedman]]
 *** [[https://genuineimpact.substack.com/feed][Genuine Impact - Charting Finance, Investing & Tech]]
-*** [[https://robertreich.substack.com/feed][Robert Reich]]
+*** [[https://robertreich.substack.com/feed][Robert Reich]]                                                      :noisy:
 *** [[https://backofmind.substack.com/feed][Back of Mind]]
+** History
+*** [[https://www.ageofinvention.xyz/feed][Age of Invention by Anton Howes]]
 ** Philosophy                                                           :phi:
 *** [[https://fakenous.substack.com/feed][Michael Huemer's Fake Nous]]
 ** Life advice                                                  :life_advice:
