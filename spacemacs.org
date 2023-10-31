@@ -159,6 +159,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          ellama
                                           catppuccin
                                           avk-emacs-themes
                                           mastodon
@@ -2634,6 +2635,14 @@
      (define-key evil-insert-state-map (kbd "M-<right>") 'copilot-accept-completion-by-line)
      (define-key evil-insert-state-map (kbd "M-<return>") 'copilot-accept-completion)
    #+end_src
+** Ellama
+
+   #+begin_src emacs-lisp
+     (when (package-installed-p 'ellama)
+       (require 'llm-openai)
+       (setopt ellama-provider (make-llm-openai :key openai-key)))
+   #+end_src
+
 ** Codeium
 
    Free alternative to Copilot, may or may not work better than copilot.el.

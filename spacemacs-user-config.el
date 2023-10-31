@@ -1294,6 +1294,9 @@
 (define-key evil-insert-state-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
 (define-key evil-insert-state-map (kbd "M-<right>") 'copilot-accept-completion-by-line)
 (define-key evil-insert-state-map (kbd "M-<return>") 'copilot-accept-completion)
+(when (package-installed-p 'ellama)
+  (require 'llm-openai)
+  (setopt ellama-provider (make-llm-openai :key openai-key)))
 ;; we recommend using use-package to organize your init.el
 (use-package codeium
     ;; if you use straight
