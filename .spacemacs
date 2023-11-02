@@ -238,6 +238,7 @@ static char *gnus-pointer[] = {
    '(treemacs-width 70)
    '(undo-tree-auto-save-history t)
    '(use-dialog-box nil)
+   '(user-mail-address "dancluna@gmail.com")
    '(vc-annotate-background "#f6f0e1")
    '(vc-annotate-background-mode nil)
    '(vc-annotate-color-map
