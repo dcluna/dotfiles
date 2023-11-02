@@ -159,6 +159,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          discover
                                           ellama
                                           catppuccin
                                           avk-emacs-themes
@@ -2711,6 +2712,8 @@
 
    #+begin_src emacs-lisp
      (define-key mastodon-mode-map (kbd "C-c ?") #'mastodon-help/body)
+
+     (use-package mastodon :ensure t :config (mastodon-discover))
    #+end_src
 
 ** Codeium

@@ -280,6 +280,7 @@ call the original function `package-activate'."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
+                                      discover
                                       ellama
                                       catppuccin
                                       avk-emacs-themes

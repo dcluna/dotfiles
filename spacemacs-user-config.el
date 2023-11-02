@@ -1357,6 +1357,8 @@ _u_pdate
 
   ("q" doom/escape))
 (define-key mastodon-mode-map (kbd "C-c ?") #'mastodon-help/body)
+
+(use-package mastodon :ensure t :config (mastodon-discover))
 ;; we recommend using use-package to organize your init.el
 (use-package codeium
     ;; if you use straight
