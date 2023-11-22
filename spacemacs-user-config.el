@@ -1276,8 +1276,12 @@
   (define-key gpt-keymap "d" 'chat-query-dwim)
   (define-key gpt-keymap "g" 'gptel)
   (define-key gpt-keymap "s" 'gptel-send)
+  (define-key gpt-keymap "m" 'gptel-menu)
   (evil-leader/set-key "o G" gpt-keymap)
   (spacemacs/declare-prefix "o G" "GPT"))
+(when (featurep 'org-ai)
+  (require 'org-ai)
+  (org-ai-global-mode 1))
 (with-eval-after-load 'company
   ;; disable inline previews
   (delq 'company-preview-if-just-one-frontend company-frontends))
