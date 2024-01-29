@@ -210,6 +210,8 @@ static char *gnus-pointer[] = {
    '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
    '(pos-tip-background-color "#F1EBDD")
    '(pos-tip-foreground-color "#272822")
+   '(persistent-scratch-backup-directory
+     "/Volumes/FreeAgent Drive/notes-repl/persistent-scratch-backups/")
    '(powerline-color1 "#1E1E1E")
    '(powerline-color2 "#111111")
    '(rspec-command-options "--format documentation --require pry-rescue/rspec")
