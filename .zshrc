@@ -107,10 +107,6 @@ if [ -n "$TMUX" ] && [ -z "$EMACS" ]; then
 else
 fi
 
-if [[ -z "$INSIDE_EMACS" ]]; then
-  alias ls='exa'
-fi
-
 eval "$(mcfly init zsh)"
 export MCFLY_FUZZY=true
 
