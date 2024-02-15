@@ -16,21 +16,34 @@
 **** [[https://cprss.s3.amazonaws.com/rubyweekly.com.xml][Ruby Weekly]]
 **** [[https://buttondown.email/hotwireweekly/rss][Hotwire Weekly]]                                                 :hotwire:
 **** [[https://newsletter.shortruby.com/feed][Short Ruby]]
+*** SQL                                                                 :sql:
+**** [[http://feeds.feedburner.com/explainextended][Explain Extended]]
+*** Front-end                                                      :frontend:
+**** [[https://www.htmhell.dev/feed_tips.xml][HTMLHell Tips & Tricks]]                                        :htmlhell:
 *** Videos/podcasts                                           :video:podcast:
 **** [[https://media.ccc.de/updates.rdf][Media.ccc.de]]                                                     :noisy:
 *** Product management                                         :product_mgmt:
 **** [[https://newsletter.posthog.com/feed][Product for Engineers - PostHog Newsletter]]
 **** [[https://vadimkravcenko.com/feed][Vadim Kravcenko - CTO Newsletter]]
+*** Jobs                                                               :jobs:
+**** [[https://jobs.rubyonrails.org/jobs.rss][Rails Jobs Board]]
+**** Hacker News                                                         :hn:
+***** [[https://hnrss.org/jobs][YC-funded jobs]]                                                     :yc:
+***** [[https://hnrss.org/whoishiring/jobs][Who is hiring?]]
+*** Status updates for cloud services                          :status:cloud:
+**** [[https://feeds.feedburner.com/herokustatus][Heroku Status]]
+**** [[https://status.cloud.google.com/en/feed.atom][Google Cloud]]
 ** Technology                                                          :tech:
 *** [[https://www.technologyreview.com/feed][MIT Technology Review]]  :noisy:
 *** [[https://github.com/readme.rss][Github ReadME]]
-*** [[https://blog.google/rss][The Keyword by Google]]
+*** [[https://blog.google/rss][The Keyword by Google]]                                             :noisy:
 *** Software updates                                               :software:
 **** [[https://nyxt.atlas.engineer/feed][Nyxt]]                        :nyxt:
 **** [[https://gnu.tools/en/blog/feed.xml][Gnu Assembly]]                                                       :gnu:
 **** [[https://guix.gnu.org/feeds/blog.atom][Gnu Guix]]            :guix:gnu:
 *** Digital rights
 **** [[https://fightforthefuture.substack.com/feed][Fight for the Future's Touch Grass Newsletter]]
+*** [[https://www.phoronix.com/rss.php][Phoronix - Linux news]]       :linux:
 ** Programmer blogs                                               :prog_blog:
 *** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
 *** [[https://drewdevault.com/blog/index.xml][Drew DeVault]]       :sircmpwn:
@@ -39,6 +52,11 @@
 *** [[https://www.spakhm.com/feed][Slava Akhmechet - Zero Credibility]]
 *** [[https://ludic.mataroa.blog/rss/][Ludic Mataroa]]
 *** [[https://www.evanmiller.org/news.xml][Evan Miller]]
+*** [[http://100r.co/links/rss.xml][100 Rabbits]]
+*** [[https://journal.miso.town/atom?url=https://kokorobot.ca/site/home.html][Rek Bell]]
+*** [[https://matt.sh/.rss][Matt.sh]]
+*** [[https://catonmat.net/feed][Catonmat.net]]
+*** [[https://gwern.substack.com/feed][Gwern.net]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -99,6 +117,15 @@
 ** General essays                                                    :essays:
 *** [[https://nothinghuman.substack.com/feed][Nothing Human]]
 *** [[https://map.simonsarris.com/feed][The map is mostly water]]
+*** [[https://www.jsanilac.com/rss/][J. Sanilac]]
 ** Dirty commie stuff                                               :anticap:
 *** [[https://theluddite.org/feed.rss][TheLuddite.org]]
-*** [[https://theblockchainsocialist.com/feed][Blockchain Socialist]]
+** Games                                                              :games:
+*** [[https://steamcommunity.com/groups/GrabFreeGames/rss/][GrabFreeGames]]
+*** [[https://aftermath.site/rss][Aftermath]]                                                         :noisy:
+** Elfeed-tube
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg][Two Minute Papers]]
+
+** Check this stuff out later
+
+   https://news.ycombinator.com/item?id=38242510
