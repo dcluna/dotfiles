@@ -214,6 +214,8 @@ static char *gnus-pointer[] = {
      "/Volumes/FreeAgent Drive/notes-repl/persistent-scratch-backups/")
    '(powerline-color1 "#1E1E1E")
    '(powerline-color2 "#111111")
+   '(rmh-elfeed-org-files
+     '("/Users/danielluna/.ghq/github.com/dcluna/dotfiles/elfeed.org" "/Users/danielluna/.ghq/github.com/dcluna/dotfiles/elfeed_private.org"))
    '(rspec-command-options "--format documentation --require pry-rescue/rspec")
    '(rspec-spec-command "rspec")
    '(rspec-use-spring-when-possible t)
