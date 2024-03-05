@@ -32,6 +32,20 @@
     pkgs.ledger-autosync
     pkgs.hledger
     pkgs.ledger
+    pkgs.asciinema
+    # pkgs.csvkit
+    pkgs.direnv
+    pkgs.htop
+    pkgs.httpie
+    pkgs.jq
+    pkgs.neovim
+    pkgs.parallel
+    pkgs.pigz
+    pkgs.radare2
+    pkgs.ripgrep
+    pkgs.xsv
+    pkgs.k9s
+    pkgs.rbspy
   ];
 
   home.file = {
