@@ -44,6 +44,7 @@
 *** Digital rights
 **** [[https://fightforthefuture.substack.com/feed][Fight for the Future's Touch Grass Newsletter]]
 *** [[https://www.phoronix.com/rss.php][Phoronix - Linux news]]       :linux:
+*** [[https://www.theintrinsicperspective.com/feed][Intrinsic Perspective]]
 ** Programmer blogs                                               :prog_blog:
 *** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
 *** [[https://drewdevault.com/blog/index.xml][Drew DeVault]]       :sircmpwn:
@@ -57,6 +58,8 @@
 *** [[https://matt.sh/.rss][Matt.sh]]
 *** [[https://catonmat.net/feed][Catonmat.net]]
 *** [[https://gwern.substack.com/feed][Gwern.net]]
+*** [[https://yorickpeterse.com/feed.xml][Yorick Peterse - Inko lang, Gitlab production DB deletion]]
+*** [[https://matklad.github.io/feed.xml][matklad - Alex Kladov]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -90,6 +93,7 @@
 ** Psychology                                                         :psych:
 *** [[https://www.robkhenderson.com/feed][Rob Henderson's Newsletter on human nature, psychology, social class, luxury beliefs, and more]]
 *** [[https://siderea.dreamwidth.org/data/atom][Sibylla Bostoniensis - Everything Unravels, Everything Will Fade]]
+*** [[https://www.afterbabel.com/feed][After Babel - Jonathan Haidt]]
 ** Business / organization                                          :biz:org:
 *** [[https://commoncog.com/rss/][CommonCog - about business and career decision making in a world of constant change]]
 *** [[https://studio.ribbonfarm.com/feed][Ribbonfarm Studio]]
