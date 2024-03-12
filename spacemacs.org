@@ -64,6 +64,7 @@
        ;; of a list then all discovered layers will be installed.
        dotspacemacs-configuration-layers
        '(
+         kubernetes
          openai
          (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/elfeed.org")))
          finance
@@ -159,6 +160,8 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          solaire
+                                          elfeed-tube-mpv
                                           discover
                                           ellama
                                           catppuccin
@@ -613,6 +616,7 @@
 
 
     (setq straight-packages '(
+                              (elfeed-tube :host github :repo "karthink/elfeed-tube" :files ("*.el"))
                               (mastodon-alt :host github :repo "rougier/mastodon-alt" :files ("*.el"))
                               (prism :host github :repo "alphapapa/prism.el" :files ("*.el"))
                               (myron-themes :host github :repo "neeasade/myron-themes" :files ("*.el" "themes/*.el"))
@@ -2618,10 +2622,18 @@
    #+end_src
 
    #+begin_src emacs-lisp
+     (require 'org-ai)
      (when (featurep 'org-ai)
-       (require 'org-ai)
-       (org-ai-global-mode 1))
+       (org-ai-global-mode 1)
+       (add-hook 'org-mode-hook 'org-ai-mode))
    #+end_src
+
+   #+begin_src emacs-lisp
+(gptel-make-anthropic "Claude"          ;Any name you want
+  :stream t                             ;Streaming responses
+  :key anthropic-api-key)
+   #+end_src
+
 
 ** Copilot.el
 
@@ -2718,9 +2730,11 @@
    https://holgerschurig.github.io/en/emacs-mastodon-hydra/, from where I took this:
 
    #+begin_src emacs-lisp
-     (define-key mastodon-mode-map (kbd "C-c ?") #'mastodon-help/body)
-
-     (use-package mastodon :ensure t :config (mastodon-discover))
+     (use-package mastodon
+       :ensure t
+       :config (progn
+                 (mastodon-discover)
+                 (define-key mastodon-mode-map (kbd "C-c ?") #'mastodon-help/body)))
    #+end_src
 
 ** Codeium
@@ -2789,6 +2803,32 @@
                  (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
          (setq codeium/document/text 'my-codeium/document/text)
          (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
+   #+end_src
+
+** Elfeed-tube
+
+   #+begin_src emacs-lisp
+     (use-package elfeed-tube
+       :straight t ;; or :ensure t
+       :after elfeed
+       :demand t
+       :config
+       ;; (setq elfeed-tube-auto-save-p nil) ; default value
+       ;; (setq elfeed-tube-auto-fetch-p t)  ; default value
+       (elfeed-tube-setup)
+
+       :bind (:map elfeed-show-mode-map
+              ("F" . elfeed-tube-fetch)
+              ([remap save-buffer] . elfeed-tube-save)
+              :map elfeed-search-mode-map
+              ("F" . elfeed-tube-fetch)
+              ([remap save-buffer] . elfeed-tube-save)))
+
+(use-package elfeed-tube-mpv
+  :ensure t ;; or :straight t
+  :bind (:map elfeed-show-mode-map
+              ("C-c C-f" . elfeed-tube-mpv-follow-mode)
+              ("C-c C-w" . elfeed-tube-mpv-where)))
    #+end_src
 
 ** MDK (Mix development kit)

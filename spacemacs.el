@@ -20,6 +20,7 @@
 
 
 (setq straight-packages '(
+                          (elfeed-tube :host github :repo "karthink/elfeed-tube" :files ("*.el"))
                           (mastodon-alt :host github :repo "rougier/mastodon-alt" :files ("*.el"))
                           (prism :host github :repo "alphapapa/prism.el" :files ("*.el"))
                           (myron-themes :host github :repo "neeasade/myron-themes" :files ("*.el" "themes/*.el"))
@@ -185,6 +186,7 @@ call the original function `package-activate'."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     kubernetes
      openai
      (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/elfeed.org")))
      finance
@@ -280,6 +282,8 @@ call the original function `package-activate'."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
+                                      solaire
+                                      elfeed-tube-mpv
                                       discover
                                       ellama
                                       catppuccin

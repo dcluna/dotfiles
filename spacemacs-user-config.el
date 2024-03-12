@@ -1279,9 +1279,13 @@
   (define-key gpt-keymap "m" 'gptel-menu)
   (evil-leader/set-key "o G" gpt-keymap)
   (spacemacs/declare-prefix "o G" "GPT"))
+(require 'org-ai)
 (when (featurep 'org-ai)
-  (require 'org-ai)
-  (org-ai-global-mode 1))
+  (org-ai-global-mode 1)
+  (add-hook 'org-mode-hook 'org-ai-mode))
+(gptel-make-anthropic "Claude"          ;Any name you want
+  :stream t                             ;Streaming responses
+  :key anthropic-api-key)
 (with-eval-after-load 'company
   ;; disable inline previews
   (delq 'company-preview-if-just-one-frontend company-frontends))
@@ -1360,9 +1364,11 @@ _u_pdate
   ("h" describe-mode)
 
   ("q" doom/escape))
-(define-key mastodon-mode-map (kbd "C-c ?") #'mastodon-help/body)
-
-(use-package mastodon :ensure t :config (mastodon-discover))
+(use-package mastodon
+  :ensure t
+  :config (progn
+            (mastodon-discover)
+            (define-key mastodon-mode-map (kbd "C-c ?") #'mastodon-help/body)))
 ;; we recommend using use-package to organize your init.el
 (use-package codeium
     ;; if you use straight
@@ -1424,6 +1430,27 @@ _u_pdate
             (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
     (setq codeium/document/text 'my-codeium/document/text)
     (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
+     (use-package elfeed-tube
+       :straight t ;; or :ensure t
+       :after elfeed
+       :demand t
+       :config
+       ;; (setq elfeed-tube-auto-save-p nil) ; default value
+       ;; (setq elfeed-tube-auto-fetch-p t)  ; default value
+       (elfeed-tube-setup)
+
+       :bind (:map elfeed-show-mode-map
+              ("F" . elfeed-tube-fetch)
+              ([remap save-buffer] . elfeed-tube-save)
+              :map elfeed-search-mode-map
+              ("F" . elfeed-tube-fetch)
+              ([remap save-buffer] . elfeed-tube-save)))
+
+(use-package elfeed-tube-mpv
+  :ensure t ;; or :straight t
+  :bind (:map elfeed-show-mode-map
+              ("C-c C-f" . elfeed-tube-mpv-follow-mode)
+              ("C-c C-w" . elfeed-tube-mpv-where)))
 (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
 
 (autoload 'mixal-mode "mixal-mode" t)
