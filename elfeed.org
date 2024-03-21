@@ -43,7 +43,7 @@
 **** [[https://guix.gnu.org/feeds/blog.atom][Gnu Guix]]            :guix:gnu:
 *** Digital rights
 **** [[https://fightforthefuture.substack.com/feed][Fight for the Future's Touch Grass Newsletter]]
-*** [[https://www.phoronix.com/rss.php][Phoronix - Linux news]]       :linux:
+*** [[https://www.phoronix.com/rss.php][Phoronix - Linux news]]                                       :linux:noisy:
 *** [[https://www.theintrinsicperspective.com/feed][Intrinsic Perspective]]
 ** Programmer blogs                                               :prog_blog:
 *** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
@@ -60,6 +60,7 @@
 *** [[https://gwern.substack.com/feed][Gwern.net]]
 *** [[https://yorickpeterse.com/feed.xml][Yorick Peterse - Inko lang, Gitlab production DB deletion]]
 *** [[https://matklad.github.io/feed.xml][matklad - Alex Kladov]]
+*** [[https://takeonrules.com/index.xml][Take On Rules - Jeremy Friesen]] :emacs:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -83,6 +84,7 @@
 *** [[https://linusekenstam.substack.com/feed][Linus Ekenstam's Inside My Head]]                                   :noisy:
 *** [[https://www.aisnakeoil.com/feed][AI Snake Oil]]
 *** [[https://codeconfessions.substack.com/feed][Confessions of a code addict]]
+*** [[https://heatherbcooper.substack.com/feed][Visually AI - Heather B. Cooper]]
 *** Videos/podcasts                                           :video:podcast:
 **** [[https://www.latent.space/feed][Latent.space]]                                                     :noisy:
 ** Books                                                              :books:
@@ -90,6 +92,9 @@
 *** [[https://scottaaronson.blog/?feed=rss2][Shtetl-optimized - Scott Aaronson's blog]]
 *** [[https://jasonpargin.substack.com/feed][Jason Pargin]]
 *** [[https://crookedtimber.org/feed/][Crooked Timber]]
+*** [[https://www.millersbookreview.com/feed][Miller's Book Review]]
+*** [[https://www.avabear.xyz/feed][Bookbear Express]]
+*** [[https://gregegan.net/feed.rss][Greg Egan]]
 ** Psychology                                                         :psych:
 *** [[https://www.robkhenderson.com/feed][Rob Henderson's Newsletter on human nature, psychology, social class, luxury beliefs, and more]]
 *** [[https://siderea.dreamwidth.org/data/atom][Sibylla Bostoniensis - Everything Unravels, Everything Will Fade]]
@@ -100,11 +105,11 @@
 ** Culture                                                          :culture:
 *** [[https://draliceevans.substack.com/feed][The Great Gender Divergence - Dr Alice Evans]]                   :feminism:
 ** Economics                                                           :econ:
-*** [[https://www.noahpinion.blog/feed][Noahpinion]]
+*** [[https://www.noahpinion.blog/feed][Noahpinion]]                                                        :noisy:
 *** [[https://mattsclancy.substack.com/feed][What's New Under the Sun - Matt Clancy]]
 *** [[https://newsletter.rootsofprogress.org/feed][Roots of Progress by Jason Crawford]]
 *** [[https://www.thediff.co/rss/][The Diff]]
-*** [[https://adamtooze.substack.com/feed][Adam Tooze's Chart Book]]
+*** [[https://adamtooze.substack.com/feed][Adam Tooze's Chart Book]]                                           :noisy:
 *** [[https://www.overcomingbias.com/feed][Overcoming Bias - Robin Hanson]]
 *** [[https://davidgerard.co.uk/blockchain/feed/][David Gerard's Attack of the 50ft blockchain]]
 *** [[https://newsletter.mollywhite.net/feed][Molly White's Newsletter]]
