@@ -60,6 +60,7 @@
 *** [[https://gwern.substack.com/feed][Gwern.net]]
 *** [[https://yorickpeterse.com/feed.xml][Yorick Peterse - Inko lang, Gitlab production DB deletion]]
 *** [[https://matklad.github.io/feed.xml][matklad - Alex Kladov]]
+*** [[https://www.wilfred.me.uk/rss.xml][Wilfred Hughes]]             :emacs:
 *** [[https://takeonrules.com/index.xml][Take On Rules - Jeremy Friesen]] :emacs:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
