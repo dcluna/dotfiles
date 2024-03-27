@@ -46,6 +46,9 @@
     pkgs.xsv
     pkgs.k9s
     pkgs.rbspy
+    pkgs.stern
+    pkgs.llm
+    pkgs.semgrep
   ];
 
   home.file = {
