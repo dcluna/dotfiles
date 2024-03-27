@@ -160,6 +160,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          casual
                                           solaire
                                           elfeed-tube-mpv
                                           discover
@@ -2803,6 +2804,16 @@
                  (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
          (setq codeium/document/text 'my-codeium/document/text)
          (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
+   #+end_src
+
+** Calc
+
+   Taken from https://irreal.org/blog/?p=12065:
+
+   #+begin_src emacs-lisp
+(use-package casual
+  :ensure t
+  :bind (:map calc-mode-map ("C-o" . 'casual-main-menu)))
    #+end_src
 
 ** Elfeed-tube

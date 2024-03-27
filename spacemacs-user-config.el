@@ -1430,6 +1430,9 @@ _u_pdate
             (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
     (setq codeium/document/text 'my-codeium/document/text)
     (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
+(use-package casual
+  :ensure t
+  :bind (:map calc-mode-map ("C-o" . 'casual-main-menu)))
      (use-package elfeed-tube
        :straight t ;; or :ensure t
        :after elfeed
