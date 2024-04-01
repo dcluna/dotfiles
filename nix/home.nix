@@ -49,6 +49,22 @@
     pkgs.stern
     pkgs.llm
     pkgs.semgrep
+    pkgs.mcfly
+    pkgs.ticker
+    pkgs.yamllint
+    pkgs.radare2
+    pkgs.fx
+    pkgs.atuin
+    pkgs.asciinema
+    pkgs.angle-grinder
+    pkgs.lazygit
+    pkgs.curl
+    pkgs.usql
+    pkgs.zoxide
+    pkgs.zplug
+    pkgs.antigen
+    pkgs.octosql
+    pkgs.universal-ctags
   ];
 
   home.file = {
