@@ -16,10 +16,16 @@
 **** [[https://cprss.s3.amazonaws.com/rubyweekly.com.xml][Ruby Weekly]]
 **** [[https://buttondown.email/hotwireweekly/rss][Hotwire Weekly]]                                                 :hotwire:
 **** [[https://newsletter.shortruby.com/feed][Short Ruby]]
+*** Haskell                                                         :haskell:
+**** [[https://haskellweekly.news/newsletter.atom][Haskell Weekly]]
 *** SQL                                                                 :sql:
 **** [[http://feeds.feedburner.com/explainextended][Explain Extended]]
 *** Front-end                                                      :frontend:
 **** [[https://www.htmhell.dev/feed_tips.xml][HTMLHell Tips & Tricks]]                                        :htmlhell:
+**** [[https://webtoolsweekly.com/feed][WebToolsWeekly]]
+*** BSD                                                                 :bsd:
+**** [[https://discoverbsd.com/feeds/posts/default][DiscoverBSD]]
+**** [[https://bsdsec.net/articles.atom][BSDSec]]                                                         :infosec:
 *** Videos/podcasts                                           :video:podcast:
 **** [[https://media.ccc.de/updates.rdf][Media.ccc.de]]                                                     :noisy:
 *** Product management                                         :product_mgmt:
@@ -62,6 +68,10 @@
 *** [[https://matklad.github.io/feed.xml][matklad - Alex Kladov]]
 *** [[https://www.wilfred.me.uk/rss.xml][Wilfred Hughes]]             :emacs:
 *** [[https://takeonrules.com/index.xml][Take On Rules - Jeremy Friesen]] :emacs:
+*** [[https://protesilaos.com/master.xml][Protesilaos Stavrou]]                                           :emacs:phi:
+*** [[https://lcamtuf.substack.com/feed][lcamtuf / Michal Zalewski]] :infosec:
+*** [[https://gynvael.coldwind.pl/rss_en.php][Gynvael Coldwind]]    :infosec:
+*** [[https://nullprogram.com/feed/][Chris Wellons - Null Program]]   :emacs:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
