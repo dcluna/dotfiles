@@ -28,7 +28,7 @@
     pkgs.wget
     pkgs.gnupg
     pkgs.pgmetrics
-    pkgs.spotify-tui
+    # pkgs.spotify-tui
     pkgs.ledger-autosync
     pkgs.hledger
     pkgs.ledger
@@ -71,6 +71,7 @@
     pkgs.starship
     pkgs.exercism
     pkgs.jaq
+    pkgs.pgsync
   ];
 
   home.file = {
