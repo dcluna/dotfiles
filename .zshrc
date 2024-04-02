@@ -3,6 +3,8 @@ export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM="$ZSH/custom"
 export ZSH_DISABLE_COMPFIX="true"
 
+if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/danielluna/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -152,4 +154,3 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/danielluna/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
