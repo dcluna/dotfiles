@@ -65,6 +65,12 @@
     pkgs.antigen
     pkgs.octosql
     pkgs.universal-ctags
+    pkgs.imgcat
+    pkgs.ghq
+    pkgs.yq
+    pkgs.starship
+    pkgs.exercism
+    pkgs.jaq
   ];
 
   home.file = {
