@@ -72,6 +72,9 @@
     pkgs.exercism
     pkgs.jaq
     pkgs.pgsync
+    pkgs.heroku
+    pkgs.btop
+    pkgs.pgformatter
   ];
 
   home.file = {
