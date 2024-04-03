@@ -7,7 +7,7 @@
     [ pkgs.vim
     ];
 
-  nix.settings.experimental-features = [ "nix-command" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # taken from https://github.com/LnL7/nix-darwin/issues/339
   system.activationScripts.preActivation = {
