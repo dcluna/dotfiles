@@ -584,7 +584,7 @@ user code."
   (if (and (require 'server) (fboundp 'server-running-p) (server-running-p "adquick"))
       (progn
         (setq server-name "server"))
-      (load-file (expand-file-name "~/.hammerspoon/spacehammer.el")))
+      (if (file-exists-p "~/.hammerspoon/spacehammer.el") (load-file (expand-file-name "~/.hammerspoon/spacehammer.el"))))
   (setq server-name "adquick")
   (server-start)
   (add-to-list 'package-pinned-packages '(magit . "melpa-stable"))
