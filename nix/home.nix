@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -78,6 +78,10 @@
   ];
 
   home.file = {
+    "persistent-scratch-backups/.keep".text = "";
+
+    ".tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
