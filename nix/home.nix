@@ -84,6 +84,14 @@
 
     ".config/nixpkgs/home.nix".source = ~/dotfiles/nix/home.nix;
     ".config/home-manager/home.nix".source = ~/dotfiles/nix/home.nix;
+    ".zshrc".source = ~/dotfiles/.zshrc;
+    ".psqlrc".source = ~/dotfiles/.psqlrc;
+    ".irbrc".source = ~/dotfiles/.irbrc;
+    ".pryrc".source = ~/dotfiles/.pryrc;
+    ".railsrc".source = ~/dotfiles/.railsrc;
+    ".spacemacs".source = ~/dotfiles/.spacemacs;
+    "spacemacs.el".source = ~/dotfiles/spacemacs.el;
+    "spacemacs-user-config.el".source = ~/dotfiles/spacemacs-user-config.el;
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
