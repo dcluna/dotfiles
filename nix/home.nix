@@ -82,6 +82,9 @@
 
     ".tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
 
+    ".config/nixpkgs/home.nix".source = ~/dotfiles/nix/home.nix;
+    ".config/home-manager/home.nix".source = ~/dotfiles/nix/home.nix;
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
