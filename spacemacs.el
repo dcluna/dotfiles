@@ -188,7 +188,7 @@ call the original function `package-activate'."
    '(
      kubernetes
      openai
-     (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/elfeed.org")))
+     (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/dotfiles/elfeed.org")))
      finance
      ;; (scala :variables scala-backend 'scala-metals)
      imenu-list
@@ -594,4 +594,4 @@ user code."
   ;; (add-to-list 'package-pinned-packages '(async . "melpa-stable"))
 
 (defun dotspacemacs/user-config ()
-  (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/spacemacs-user-config.el")))
+  (load-file (expand-file-name "~/dotfiles/spacemacs-user-config.el")))

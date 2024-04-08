@@ -963,7 +963,7 @@
   (unless slack-teams (load-file "~/.slack-teams.el.gpg")))
 (defun dcl/load-sql-connections ()
   (interactive)
-  (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/sql-connections.el.gpg")))
+  (load-file (expand-file-name "~/dotfiles/sql-connections.el.gpg")))
 
 (if (fboundp 'sqlformat-on-save-mode)
     (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
@@ -1132,10 +1132,10 @@
   (dolist (mode modes)
     (spacemacs/set-leader-keys-for-major-mode mode "os" comint-search-keymap)
     (spacemacs/declare-prefix-for-mode mode "mos" "comint-search")))
-(add-to-list 'load-path "~/.ghq/github.com/dcluna/dotfiles/elisp/")
+(add-to-list 'load-path "~/dotfiles/elisp/")
 
-(if (file-exists-p "~/.ghq/github.com/dcluna/dotfiles/elisp/loaddefs.el")
-    (load-file "~/.ghq/github.com/dcluna/dotfiles/elisp/loaddefs.el"))
+(if (file-exists-p "~/dotfiles/elisp/loaddefs.el")
+    (load-file "~/dotfiles/elisp/loaddefs.el"))
 (let ((dired-mode-visidata-keymap (make-sparse-keymap)))
   (define-key dired-mode-visidata-keymap "n" 'tmux-utils/visidata-open-files-in-new-windows)
   (define-key dired-mode-visidata-keymap "a" 'tmux-utils/visidata-open-all-in-new-window)
@@ -1254,7 +1254,7 @@
 ;;          ((prog-mode text-mode) . org-tanglesync-watch-mode))
 ;;   :custom
 ;;   (org-tanglesync-watch-files '("/Users/danielluna/Projects/AdQuick/notes.org.gpg")))
-(setq org-roam-directory (file-truename "~/.ghq/github.com/dcluna/dotfiles/org-roam"))
+(setq org-roam-directory (file-truename "~/dotfiles/org-roam"))
 (setq org-roam-v2-ack t)
 (use-package org-roam-ui
   :straight

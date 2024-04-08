@@ -18,7 +18,7 @@
     <<spacemacs-user-init>>
 
     (defun dotspacemacs/user-config ()
-      (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/spacemacs-user-config.el")))
+      (load-file (expand-file-name "~/dotfiles/spacemacs-user-config.el")))
   #+END_SRC
 
   #+BEGIN_SRC emacs-lisp :tangle "spacemacs-user-config.el" :noweb yes
@@ -66,7 +66,7 @@
        '(
          kubernetes
          openai
-         (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/elfeed.org")))
+         (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/dotfiles/elfeed.org")))
          finance
          ;; (scala :variables scala-backend 'scala-metals)
          imenu-list
@@ -2039,7 +2039,7 @@
     #+BEGIN_SRC emacs-lisp
       (defun dcl/load-sql-connections ()
         (interactive)
-        (load-file (expand-file-name "~/.ghq/github.com/dcluna/dotfiles/sql-connections.el.gpg")))
+        (load-file (expand-file-name "~/dotfiles/sql-connections.el.gpg")))
 
       (if (fboundp 'sqlformat-on-save-mode)
           (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
@@ -2349,10 +2349,10 @@
     First, we need to add the location of this convenience file to my load-path:
 
     #+begin_src emacs-lisp
-      (add-to-list 'load-path "~/.ghq/github.com/dcluna/dotfiles/elisp/")
+      (add-to-list 'load-path "~/dotfiles/elisp/")
 
-      (if (file-exists-p "~/.ghq/github.com/dcluna/dotfiles/elisp/loaddefs.el")
-          (load-file "~/.ghq/github.com/dcluna/dotfiles/elisp/loaddefs.el"))
+      (if (file-exists-p "~/dotfiles/elisp/loaddefs.el")
+          (load-file "~/dotfiles/elisp/loaddefs.el"))
     #+end_src
 
     #+begin_src emacs-lisp
@@ -2583,7 +2583,7 @@
 ** Org-roam
 
    #+begin_src emacs-lisp
-     (setq org-roam-directory (file-truename "~/.ghq/github.com/dcluna/dotfiles/org-roam"))
+     (setq org-roam-directory (file-truename "~/dotfiles/org-roam"))
      (setq org-roam-v2-ack t)
    #+end_src
 
