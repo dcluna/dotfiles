@@ -216,7 +216,7 @@ static char *gnus-pointer[] = {
    '(powerline-color1 "#1E1E1E")
    '(powerline-color2 "#111111")
    '(rmh-elfeed-org-files
-     '("/Users/danielluna/dotfiles/elfeed.org" "/Users/danielluna/dotfiles/elfeed_private.org"))
+     '("/Users/danielluna/dotfiles/elfeed.org" "/Users/danielluna/dotfiles/elfeed_private.org.gpg"))
    '(rspec-command-options "--format documentation --require pry-rescue/rspec")
    '(rspec-spec-command "rspec")
    '(rspec-use-spring-when-possible t)
