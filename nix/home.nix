@@ -82,8 +82,8 @@
 
     ".tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
 
-    ".config/nixpkgs/home.nix".source = ~/dotfiles/nix/home.nix;
-    ".config/home-manager/home.nix".source = ~/dotfiles/nix/home.nix;
+    # ".config/nixpkgs/home.nix".source = ~/dotfiles/nix/home.nix;
+    # ".config/home-manager/home.nix".source = ~/dotfiles/nix/home.nix;
     ".zshrc".source = ~/dotfiles/.zshrc;
     ".psqlrc".source = ~/dotfiles/.psqlrc;
     ".irbrc".source = ~/dotfiles/.irbrc;
@@ -92,6 +92,15 @@
     ".spacemacs".source = ~/dotfiles/.spacemacs;
     "spacemacs.el".source = ~/dotfiles/spacemacs.el;
     "spacemacs-user-config.el".source = ~/dotfiles/spacemacs-user-config.el;
+
+    ".tmux/plugins/tpm" = {
+      source = pkgs.fetchFromGitHub {
+        owner = "tmux-plugins";
+        repo = "tpm";
+        rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
+        sha256 = "hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
+      };
+    };
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -111,4 +120,18 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  # TODO: migrate from tpm to zplug
+  # programs.zsh = {
+  #   zplug = {
+  #     enable = true;
+  #     plugins = [
+  #       { name = "Morantron/tmux-fingers"; } # Simple plugin installation
+  #       { name = "tmux-plugins/tmux-logging"; } # Simple plugin installation
+  #       { name = "robhurring/tmux-spotify"; } # Simple plugin installation
+  #       { name = "schasse/tmux-jump"; } # Simple plugin installation
+  #       { name = "dracula/tmux"; } # Simple plugin installation
+  #       # { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
+  #     ];
+  #   };
+  # };
 }
