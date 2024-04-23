@@ -314,6 +314,7 @@ set -g @dracula-show-fahrenheit false
 set -g @dracula-show-location false
 set -g @dracula-day-month true
 set -g @dracula-plugins "time"
+set -g @logging-path "/tmp"
 
 # tmux-continuum status
 tmux_conf_theme_status_right="#{continuum_status} | ♫ #{music_status} #{artist}: #{track} | $tmux_conf_theme_status_right"
