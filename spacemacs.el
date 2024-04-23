@@ -581,11 +581,10 @@ user code."
           ("gnu" . "elpa.gnu.org/packages/")
           ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
   (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
-  (if (and (require 'server) (fboundp 'server-running-p) (server-running-p "adquick"))
-      (progn
-        (setq server-name "server"))
-      (if (file-exists-p "~/.hammerspoon/spacehammer.el") (load-file (expand-file-name "~/.hammerspoon/spacehammer.el"))))
-  (setq server-name "adquick")
+  ;; (if (and (require 'server) (fboundp 'server-running-p) (server-running-p "adquick"))
+  ;;     (progn
+  ;;       (setq server-name "server"))
+  ;;     (if (file-exists-p "~/.hammerspoon/spacehammer.el") (load-file (expand-file-name "~/.hammerspoon/spacehammer.el"))))
   (server-start)
   (add-to-list 'package-pinned-packages '(magit . "melpa-stable"))
   (setq package-archive-priorities '(("melpa"    . 5)
