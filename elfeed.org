@@ -140,6 +140,8 @@
 *** [[https://www.jsanilac.com/rss/][J. Sanilac]]
 ** Dirty commie stuff                                               :anticap:
 *** [[https://theluddite.org/feed.rss][TheLuddite.org]]
+*** [[https://movimentorevista.com.br/feed][Revista Movimento]]
+*** [[https://ojoioeotrigo.com.br/feed][O Joio e o Trigo]]
 ** Games                                                              :games:
 *** [[https://steamcommunity.com/groups/GrabFreeGames/rss/][GrabFreeGames]]
 *** [[https://aftermath.site/rss][Aftermath]]                                                         :noisy:
