@@ -75,6 +75,8 @@
     pkgs.heroku
     pkgs.btop
     pkgs.pgformatter
+    pkgs.smug
+    pkgs.gitu
   ];
 
   home.file = {
@@ -83,7 +85,7 @@
     ".tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
 
     # ".config/nixpkgs/home.nix".source = ~/dotfiles/nix/home.nix;
-    # ".config/home-manager/home.nix".source = ~/dotfiles/nix/home.nix;
+    # ".config/home-manager/home.nix".source = $HOME/dotfiles/nix/home.nix;
     ".zshrc".source = ~/dotfiles/.zshrc;
     ".psqlrc".source = ~/dotfiles/.psqlrc;
     ".irbrc".source = ~/dotfiles/.irbrc;
