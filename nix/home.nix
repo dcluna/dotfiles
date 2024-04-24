@@ -77,6 +77,7 @@
     pkgs.pgformatter
     pkgs.smug
     pkgs.gitu
+    pkgs.zellij
   ];
 
   home.file = {
@@ -94,6 +95,7 @@
     ".spacemacs".source = ~/dotfiles/.spacemacs;
     "spacemacs.el".source = ~/dotfiles/spacemacs.el;
     "spacemacs-user-config.el".source = ~/dotfiles/spacemacs-user-config.el;
+    ".config/zellij/config.kdl".source = ~/dotfiles/zellij-config.kdl;
 
     ".tmux/plugins/tpm" = {
       source = pkgs.fetchFromGitHub {
