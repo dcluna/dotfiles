@@ -78,6 +78,7 @@
     pkgs.smug
     pkgs.gitu
     pkgs.zellij
+    pkgs.prettierd
   ];
 
   home.file = {

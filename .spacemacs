@@ -215,6 +215,7 @@ static char *gnus-pointer[] = {
      "~/persistent-scratch-backups/")
    '(powerline-color1 "#1E1E1E")
    '(powerline-color2 "#111111")
+   '(prettier-js-command "prettierd")
    '(rmh-elfeed-org-files
      '("/Users/danielluna/dotfiles/elfeed.org" "/Users/danielluna/dotfiles/elfeed_private.org.gpg"))
    '(rspec-command-options "--format documentation --require pry-rescue/rspec")

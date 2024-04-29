@@ -1286,6 +1286,8 @@
 (gptel-make-anthropic "Claude"          ;Any name you want
   :stream t                             ;Streaming responses
   :key anthropic-api-key)
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+;; (add-hook 'web-mode-hook 'prettier-js-mode)
 (with-eval-after-load 'company
   ;; disable inline previews
   (delq 'company-preview-if-just-one-frontend company-frontends))
