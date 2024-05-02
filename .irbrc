@@ -70,5 +70,4 @@ def trace(filename = '/tmp/trace', event_types = [:call, :return], *matchers)
   result
 end
 
-require 'tracer'
-Tracer.stdout = File.open('/tmp/tracer_output.rb_trace', 'a')
+require "tracer"
