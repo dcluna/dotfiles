@@ -1038,6 +1038,7 @@
 (add-to-list 'auto-minor-mode-alist '("spec\/factories\/.*\.rb$" . rspec-mode))
 (add-to-list 'auto-minor-mode-alist '("data.org.gpg$" . read-only-mode))
 (add-to-list 'auto-minor-mode-alist '("\.s[ac]ss$" . indent-guide-mode))
+(add-to-list 'auto-minor-mode-alist '("\.rb$" . auto-insert-mode))
 (define-key evil-motion-state-map "g]" 'evil-jump-to-tag)
 (evil-global-set-key 'normal (kbd "K") 'newline-and-indent)
 (evil-global-set-key 'normal (kbd "g b") 'browse-url-at-point)
