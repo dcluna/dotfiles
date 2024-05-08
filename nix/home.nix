@@ -79,6 +79,7 @@
     pkgs.gitu
     pkgs.zellij
     pkgs.prettierd
+    pkgs.gnugrep
   ];
 
   home.file = {
