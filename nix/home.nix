@@ -80,6 +80,7 @@
     pkgs.zellij
     pkgs.prettierd
     pkgs.gnugrep
+    pkgs.toxiproxy
   ];
 
   home.file = {
