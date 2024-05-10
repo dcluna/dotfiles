@@ -81,6 +81,7 @@
     pkgs.prettierd
     pkgs.gnugrep
     pkgs.toxiproxy
+    pkgs.trippy
   ];
 
   home.file = {
