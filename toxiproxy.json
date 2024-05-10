@@ -1,0 +1,20 @@
+[
+  {
+    "name": "rails_app_dev",
+    "listen": "[::]:23000",
+    "upstream": "localhost:8081",
+    "enabled": true
+  },
+  {
+    "name": "postgres_dev",
+    "listen": "[::]:25432",
+    "upstream": "localhost:5432",
+    "enabled": true
+  },
+  {
+    "name": "redis_dev",
+    "listen": "[::]:26379",
+    "upstream": "localhost:6379",
+    "enabled": true
+  }
+]

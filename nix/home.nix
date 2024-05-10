@@ -109,6 +109,7 @@
         sha256 = "hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
       };
     };
+    ".config/toxiproxy.json".source = ~/dotfiles/toxiproxy.json;
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
