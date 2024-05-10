@@ -1,0 +1,89 @@
+# ./.tmuxinator.yml
+
+name: adquick
+root: <%= ENV['ADQUICK_DIR'] %>
+
+# Optional tmux socket
+# socket_name: foo
+
+# Note that the pre and post options have been deprecated and will be replaced by
+# project hooks.
+
+# Project hooks
+# Runs on project start, always
+# on_project_start: command
+# Run on project start, the first time
+# on_project_first_start: command
+# Run on project start, after the first time
+# on_project_restart: command
+# Run on project exit ( detaching from tmux session )
+# on_project_exit: command
+# Run on project stop
+# on_project_stop: command
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: editor
+
+# Specifies (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
+# startup_pane: 1
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+windows:
+  - adquick:
+      root: <%= ENV['ADQUICK_DIR'] %>/adquick
+      layout: tiled
+      panes:
+        - eval "$(nodenv init -)"; bundle exec guard -i -d -w . -n f -P rspec
+        - eval "$(nodenv init -)"; ssh-add
+  - top:
+      panes:
+        - htop
+        - btm -b
+        - btop
+  - servers:
+      root: <%= ENV['ADQUICK_DIR'] %>/adquick
+      layout: tiled
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      panes:
+        - redis-server
+        - echo bundle exec rails s -b "ssl://localhost.adquick:3002?key=../adquick_analytics/.certs/localhost.adquick-key.pem&cert=../adquick_analytics/.certs/localhost.adquick.crt&verify_mode=none"
+        - toxiproxy-server --config ~/.config/toxiproxy.json
+        - sleep 5; toxiproxy-cli l
+        - echo yarn start:classic
+        - eval "$(nodenv init -)"; echo yarn start
+        # this does:
+        # - anycable-go --host=localhost --port=3334
+        # - bundle exec anycable --debug
+  - emacs-cli:
+      root: <%= ENV['ADQUICK_DIR'] %>/adquick
+      layout: tiled
+      panes:
+        - sleep 500; emacsclient -nw ./
+  - mitmproxy-rails:
+      root: <%= ENV['ADQUICK_DIR'] %>/adquick
+      layout: tiled
+      panes:
+        - mitmproxy --mode reverse:http://localhost:3000@localhost:8081
+  - mitmproxy-outbound:
+      root: <%= ENV['ADQUICK_DIR'] %>/adquick
+      layout: tiled
+      panes:
+        - mitmproxy
+  - gitdocker:
+      root: <%= ENV['ADQUICK_DIR'] %>/adquick
+      layout: tiled
+      panes:
+        - lazydocker
