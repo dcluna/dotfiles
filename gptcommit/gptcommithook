@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set -o xtrace
+
+gptcommit prepare-commit-msg --commit-msg-file "$1" --commit-source "commit" --commit-sha $(git rev-parse HEAD)

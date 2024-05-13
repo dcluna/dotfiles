@@ -82,6 +82,7 @@
     pkgs.gnugrep
     pkgs.toxiproxy
     pkgs.trippy
+    pkgs.gptcommit
   ];
 
   home.file = {
@@ -100,6 +101,8 @@
     "spacemacs.el".source = ~/dotfiles/spacemacs.el;
     "spacemacs-user-config.el".source = ~/dotfiles/spacemacs-user-config.el;
     ".config/zellij/config.kdl".source = ~/dotfiles/zellij-config.kdl;
+    ".config/gptcommit/config.toml".source = ~/dotfiles/gptcommit/config.toml;
+    ".bin/gptcommithook".source = ~/dotfiles/gptcommit/gptcommithook;
 
     ".tmux/plugins/tpm" = {
       source = pkgs.fetchFromGitHub {
