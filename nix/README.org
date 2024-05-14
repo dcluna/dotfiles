@@ -12,3 +12,50 @@
    #+begin_src shell :dir "./node/"
 nix-shell -p nodePackages.node2nix --command "node2nix -18 -i ./node-packages.json -o ./node-packages.nix"
    #+end_src
+
+** Initial MacOS setup
+
+   #+begin_src text
+       setting up /run via /etc/synthetic.conf...
+     warning: Detected old style nixbld users
+     These can cause migration problems when upgrading to certain macOS versions
+     You can enable the following option to migrate to new style nixbld users
+
+         nix.configureBuildUsers = true;
+
+     error: Unexpected files in /etc, aborting activation
+     The following files have unrecognized content and would be overwritten:
+
+       /etc/bashrc
+
+     Please check there is nothing critical in these files, rename them by adding .before-nix-darwin to the end, and then try again.
+
+    Open '~/.nixpkgs/darwin-configuration.nix' to get started.
+    See the README for more information: https://github.com/LnL7/nix-darwin/blob/master/README.md
+
+    Don't forget to start a new shell or source /etc/static/bashrc.
+   #+end_src
+
+   Issue with the DB creation:
+
+   https://github.com/LnL7/nix-darwin/issues/339
+
+   #+begin_src text
+     Using config values from /run/current-system/sw/bin/pg_config
+     checking for whether -Wl,-rpath,/nix/store/fps2adra8ml3bivh472gngkld5c5vv9h-postgresql-15.6-lib/lib is accepted as LDFLAGS... yes
+     Using libpq from /nix/store/fps2adra8ml3bivh472gngkld5c5vv9h-postgresql-15.6-lib/lib
+     checking for libpq-fe.h... no
+     Can't find the 'libpq-fe.h header
+
+     ~/.rbenv/versions/3.3.0/lib/ruby/gems/3.3.0/extensions/x86_64-darwin-22/3.3.0/pg-1.5.6/mkmf.log
+
+  gem install pg -- --with-pg-include=/path/to/libpq-fe.h/ --with-pg-lib=/path/to/libpq.so/
+   #+end_src
+
+   #+begin_src shell
+bundle config build.pg --with-pg-include=$(brew --prefix libpq)/include/ --with-pg-lib=$(brew --prefix libpq)/lib/
+   #+end_src
+
+** Emacs
+
+   See https://nixos.wiki/wiki/Emacs
