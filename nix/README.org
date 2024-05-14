@@ -1,0 +1,14 @@
+* Nix
+** JS packages
+
+   See https://code-notes.jhuizy.com/add-custom-npm-to-home-manager/
+
+   #+begin_src json :tangle "node/node-packages.json"
+[
+  "opencommit"
+]
+   #+end_src
+
+   #+begin_src shell :dir "./node/"
+nix-shell -p nodePackages.node2nix --command "node2nix -18 -i ./node-packages.json -o ./node-packages.nix"
+   #+end_src

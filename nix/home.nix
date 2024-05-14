@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  extraNodePackages = import ./node/default.nix {};
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -83,6 +86,7 @@
     pkgs.toxiproxy
     pkgs.trippy
     pkgs.gptcommit
+    extraNodePackages.opencommit
   ];
 
   home.file = {
