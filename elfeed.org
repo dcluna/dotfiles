@@ -51,6 +51,7 @@
 **** [[https://fightforthefuture.substack.com/feed][Fight for the Future's Touch Grass Newsletter]]
 *** [[https://www.phoronix.com/rss.php][Phoronix - Linux news]]                                       :linux:noisy:
 *** [[https://www.theintrinsicperspective.com/feed][Intrinsic Perspective]]
+*** [[https://fasterandworse.com/feed][Faster and Worse]]            :design:
 ** Programmer blogs                                               :prog_blog:
 *** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
 *** [[https://drewdevault.com/blog/index.xml][Drew DeVault]]       :sircmpwn:
