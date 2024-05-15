@@ -55,3 +55,7 @@ windows:
         - sleep 5; echo emacs
         # - /usr/local/Cellar/emacs-plus@29/29.0.50/bin/emacs
         - echo mop
+  - newsboat:
+      layout: tiled
+      panes:
+        - newsboat

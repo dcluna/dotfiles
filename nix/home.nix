@@ -87,6 +87,7 @@ in
     pkgs.trippy
     pkgs.gptcommit
     extraNodePackages.opencommit
+    pkgs.newsboat
   ];
 
   home.file = {
