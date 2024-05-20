@@ -81,7 +81,7 @@ windows:
       root: <%= ENV['ADQUICK_DIR'] %>/adquick
       layout: tiled
       panes:
-        - mitmproxy
+        - mitmproxy -p 8090
   - gitdocker:
       root: <%= ENV['ADQUICK_DIR'] %>/adquick
       layout: tiled
