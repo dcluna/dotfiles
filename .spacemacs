@@ -41,6 +41,7 @@ This function is called at the very end of Spacemacs initialization."
         (alpha 85)
         (fullscreen . maximized)))
    '(diary-entry-marker 'font-lock-variable-name-face)
+   '(dired-vc-rename-file t)
    '(docker-command "podman")
    '(docker-compose-command "podman-compose")
    '(emms-mode-line-icon-color "#358d8d")
