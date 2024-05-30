@@ -718,14 +718,17 @@
     (sql-explain-line-or-region)
     (evil-insert-state)))
 
-(defun sql-csv-copy-line-or-region (destination)
+(defun sql-csv-copy-line-or-region (prefix destination)
   "Copies a line/region from the SQL process to a CSV file."
-  (interactive "GCopy to CSV file: ")
-  (let ((start (or (and (region-active-p) (region-beginning))
-                   (line-beginning-position 1)))
-        (end (or (and (region-active-p) (region-end))
-                 (line-beginning-position 2))))
-    (sql-send-string (format "COPY (\n%s\n) TO STDOUT WITH CSV HEADER \\g '%s'" (buffer-substring-no-properties start end) destination))))
+  (interactive "P\nGCopy to CSV file: ")
+  (let* ((start (or (and (region-active-p) (region-beginning))
+                    (line-beginning-position 1)))
+         (end (or (and (region-active-p) (region-end))
+                  (line-beginning-position 2)))
+         (sql-copy-command (format "COPY (\n%s\n) TO STDOUT WITH CSV HEADER \\g '%s'" (buffer-substring-no-properties start end) destination)))
+    (sql-send-string (if (>= (prefix-numeric-value prefix) 4)
+                         (read-string "Command: " sql-copy-command)
+                       sql-copy-command))))
 
 (defun sql-create-temp-view (viewname)
   "Creates a temporary view with `VIEWNAME' with the contents of the active region."
