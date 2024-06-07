@@ -160,6 +160,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          session
                                           osm
                                           casual
                                           solaire
@@ -2826,6 +2827,12 @@
 (use-package casual
   :ensure t
   :bind (:map calc-mode-map ("C-o" . 'casual-main-menu)))
+   #+end_src
+
+** Session
+
+   #+begin_src emacs-lisp
+(require 'session)
    #+end_src
 
 ** Elfeed-tube

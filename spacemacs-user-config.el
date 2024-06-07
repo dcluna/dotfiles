@@ -1439,6 +1439,7 @@ _u_pdate
 (use-package casual
   :ensure t
   :bind (:map calc-mode-map ("C-o" . 'casual-main-menu)))
+(require 'session)
      (use-package elfeed-tube
        :straight t ;; or :ensure t
        :after elfeed

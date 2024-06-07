@@ -224,6 +224,7 @@ static char *gnus-pointer[] = {
    '(rspec-use-spring-when-possible t)
    '(rustic-ansi-faces
      ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
+   '(session-use-package t)
    '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
    '(sml/active-background-color "#98ece8")
    '(sml/active-foreground-color "#424242")
