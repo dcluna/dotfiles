@@ -82,8 +82,11 @@ windows:
       layout: tiled
       panes:
         - mitmproxy -p 8090
-  - gitdocker:
+  - pgcenter:
+      <% replica_url = URI.parse(`grep REPLICA_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
+      <% main_url = URI.parse(`grep ^DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
       root: <%= ENV['ADQUICK_DIR'] %>/adquick
       layout: tiled
       panes:
-        - lazydocker
+        - pgcenter top -h <%= main_url.host %> -U <%= main_url.user %> -d <%= main_url.path[1..-1] %>
+        - pgcenter top -h <%= replica_url.host %> -U <%= replica_url.user %> -d <%= replica_url.path[1..-1] %>
