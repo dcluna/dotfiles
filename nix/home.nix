@@ -88,6 +88,7 @@ in
     pkgs.gptcommit
     extraNodePackages.opencommit
     pkgs.newsboat
+    pkgs.pgcenter
   ];
 
   home.file = {
