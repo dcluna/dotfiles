@@ -73,6 +73,7 @@
 *** [[https://lcamtuf.substack.com/feed][lcamtuf / Michal Zalewski]] :infosec:
 *** [[https://gynvael.coldwind.pl/rss_en.php][Gynvael Coldwind]]    :infosec:
 *** [[https://nullprogram.com/feed/][Chris Wellons - Null Program]]   :emacs:
+*** [[https://www.emacsair.me/feed.xml][Emacsair - Jonas Bernoulli]]  :emacs:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -89,7 +90,10 @@
 *** Data visualization                                              :dataviz:
 **** [[https://thepuddingmail.substack.com/feed][The Pudding]]
 *** Databases                                                            :db:
-**** [[https://cprss.s3.amazonaws.com/postgresweekly.com.xml][Postgres Weekly]]
+**** [[https://cprss.s3.amazonaws.com/postgresweekly.com.xml][Postgres Weekly]]                                               :postgres:
+**** [[https://www.cybertec-postgresql.com/en/feed/][Cybertec PostgreSQL]]                                           :postgres:
+**** [[https://www.enterprisedb.com/blog/rss.xml][EnterpriseDB]]                                                  :postgres:
+**** [[https://www.crunchydata.com/blog/rss.xml][CrunchyData]]     :postgres:
 ** AI                                                                    :ai:
 *** [[https://www.ignorance.ai/feed][Ignorance.ai - A nuanced, no-hype exploration of AI for founders and makers.]]
 *** [[https://aisupremacy.substack.com/feed][AI Supremacy]]                                                      :noisy:
