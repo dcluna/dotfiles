@@ -142,7 +142,7 @@ eval "$(zoxide init zsh)"
 
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+. "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 
 # source asdf
 # . $(brew --prefix asdf)/asdf.sh
