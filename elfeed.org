@@ -74,6 +74,8 @@
 *** [[https://gynvael.coldwind.pl/rss_en.php][Gynvael Coldwind]]    :infosec:
 *** [[https://nullprogram.com/feed/][Chris Wellons - Null Program]]   :emacs:
 *** [[https://www.emacsair.me/feed.xml][Emacsair - Jonas Bernoulli]]  :emacs:
+*** [[https://yosefk.com/blog/feed][Yossi Kreinin]]
+*** [[https://blog.rongarret.info/feeds/posts/default][Ron Garret]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
