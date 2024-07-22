@@ -1,4 +1,4 @@
-\set QUIET on
+\set QUIET 1
 \timing on
 \x auto
 \setenv EDITOR vi
@@ -9,4 +9,4 @@
 \set HISTFILE ~/.psql_history-:DBNAME
 \set PROMPT1 '%n@%M:%>/%~ %x> '
 SET tcp_keepalives_idle = 15;
-\set QUIET off
+\set QUIET 0
