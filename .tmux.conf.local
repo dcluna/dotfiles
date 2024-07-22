@@ -298,6 +298,7 @@ set -g mode-keys vi
 #set -g status-position top
 
 set -g @fingers-key G
+set -g @floax-bind 'F'
 
 # TMUX plugin manager
 set -g @tpm_plugins '          \
@@ -307,6 +308,7 @@ set -g @tpm_plugins '          \
   robhurring/tmux-spotify      \
   schasse/tmux-jump            \
   dracula/tmux                 \
+  omerxx/tmux-floax
 '
 
 set -g @dracula-show-powerline true
