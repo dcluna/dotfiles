@@ -40,6 +40,9 @@
        # Let other names login as themselves
        superuser_map      /^(.*)$     \1
     '';
+    settings = {
+      track_io_timing = true;
+    };
     # ensureDatabases = [ "postgres" ]; # doesnt work on nix-darwin
     # initialScript = pkgs.writeText "backend-initScript" '' # doesnt work on nix-darwin
     #   CREATE ROLE postgres CREATEDB;
