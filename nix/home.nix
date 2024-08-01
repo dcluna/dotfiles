@@ -89,6 +89,7 @@ in
     extraNodePackages.opencommit
     pkgs.newsboat
     pkgs.pgcenter
+    pkgs.awscli2
   ];
 
   home.file = {
