@@ -36,6 +36,23 @@
 **** Hacker News                                                         :hn:
 ***** [[https://hnrss.org/jobs][YC-funded jobs]]                                                     :yc:
 ***** [[https://hnrss.org/whoishiring/jobs][Who is hiring?]]
+**** [[https://elixirjobs.net/rss][Elixir Jobs]]                     :elixir:
+**** [[https://rust.careers/rss][Rust Careers]]                        :rust:
+**** [[https://clojurejobboard.com/rss.xml][ClojureJobBoard]]           :clj:
+**** [[https://authenticjobs.com/?feed=job_feed][AuthenticJobs]]
+**** [[https://4dayweek.io/rss][4 day week]]
+**** [[https://www.freelancermap.com/feeds/projects/int-international.xml][FreelancerMap]]
+**** [[https://www.golangprojects.com/rss.xml][GolangProjects.com]]                                              :golang:
+**** [[https://hasjob.co/feed][Hasjob.co]]
+**** [[https://hackerx.org/feed/][HackerX.org]]
+**** [[https://landing.jobs/feed][LandingJobs]]
+**** [[https://jobspresso.co/feed][Jobspresso.co]]
+**** [[https://larajobs.com/feed][Larajobs.com]]                        :php:
+**** [[https://weworkremotely.com/remote-jobs.rss][WeWorkRemotely.com]]
+**** [[https://remotive.com/remote-jobs/feed][Remotive.com]]
+**** [[https://www.skipthedrive.com/feed/][Skip The Drive]]
+**** [[https://remoteok.com/rss][RemoteOK.com]]
+**** [[https://s3.remote.io/feed/rss.xml][Remote.io]]
 *** Status updates for cloud services                          :status:cloud:
 **** [[https://feeds.feedburner.com/herokustatus][Heroku Status]]
 **** [[https://status.cloud.google.com/en/feed.atom][Google Cloud]]
@@ -76,6 +93,9 @@
 *** [[https://www.emacsair.me/feed.xml][Emacsair - Jonas Bernoulli]]  :emacs:
 *** [[https://yosefk.com/blog/feed][Yossi Kreinin]]
 *** [[https://blog.rongarret.info/feeds/posts/default][Ron Garret]]
+*** [[https://www.baldurbjarnason.com/index.xml][Baldur Bjarnason]]
+*** [[https://raganwald.com/rss][Reginald Braithwaite]]
+*** [[https://world.hey.com/dhh/feed.atom][DHH]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -89,6 +109,7 @@
 *** [[https://www.oneusefulthing.org/feed][One Useful Thing]]
 *** [[https://ploum.net/atom_en.xml][Ploum.net]]                                                           :dev:
 *** [[https://mark-watson.blogspot.com/feeds/posts/default][Mark Watson's AI blog (Lisp-related)]] :lisp:
+*** [[https://dataelixir.com/feed][Data Elixir]]
 *** Data visualization                                              :dataviz:
 **** [[https://thepuddingmail.substack.com/feed][The Pudding]]
 *** Databases                                                            :db:
@@ -150,6 +171,7 @@
 *** [[https://movimentorevista.com.br/feed][Revista Movimento]]
 *** [[https://ojoioeotrigo.com.br/feed][O Joio e o Trigo]]
 *** [[https://ianwrightsite.wordpress.com/rss][Dark Marxism - Ian Wright]]
+*** [[https://redsails.org/rss.xml][RedSails]]                     :redsails:
 ** Games                                                              :games:
 *** [[https://steamcommunity.com/groups/GrabFreeGames/rss/][GrabFreeGames]]
 *** [[https://aftermath.site/rss][Aftermath]]                                                         :noisy:
