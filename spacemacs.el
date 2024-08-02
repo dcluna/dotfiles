@@ -20,6 +20,7 @@
 
 
 (setq straight-packages '(
+                          (lem :fetcher codeberg :repo "martianh/lem.el" :files ("lisp/*.el"))
                           (elfeed-tube :host github :repo "karthink/elfeed-tube" :files ("*.el"))
                           (mastodon-alt :host github :repo "rougier/mastodon-alt" :files ("*.el"))
                           (prism :host github :repo "alphapapa/prism.el" :files ("*.el"))
