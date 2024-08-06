@@ -160,6 +160,19 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          nano-theme
+                                          mindre-theme
+                                          grey-paper-theme
+                                          flexoki-themes
+                                          cloud-theme
+                                          chyla-dark-theme
+                                          chyla-theme
+                                          brutalist-theme
+                                          berrys-theme
+                                          arjen-grey-theme
+                                          aircon-theme
+                                          hima-theme
+                                          helix-theme
                                           session
                                           osm
                                           casual
@@ -302,7 +315,7 @@
 
     (defvar dcl/light-themes
       (dcl/shuffle
-       '(acme twilight-bright hemisu-light apropospriate-light flatui
+       '(greymatters nano-light mindre grey-paper flexoki-themes-light cloud chyla brutalist berrys hima aircon acme twilight-bright hemisu-light apropospriate-light flatui
                          kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                          doom-tomorrow-day majapahit-light plan9 alect-light
                          gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
@@ -313,7 +326,7 @@
 
     (defvar dcl/dark-themes
       (dcl/shuffle
-       '(kaolin-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
+       '(nano-dark flexoki-themes-dark chyla-dark arjen-grey helix kaolin-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
                      kaolin-temple kaolin-galaxy kaolin-ocean kaolin-valley-dark
                      kaolin-mono-dark seti sanityinc-tomorrow-eighties sanityinc-tomorrow-bright
                      sanityinc-tomorrow-blue sanityinc-tomorrow-night labburn sourcerer
