@@ -41,7 +41,7 @@
 **** [[https://clojurejobboard.com/rss.xml][ClojureJobBoard]]           :clj:
 **** [[https://authenticjobs.com/?feed=job_feed][AuthenticJobs]]
 **** [[https://4dayweek.io/rss][4 day week]]
-**** [[https://www.freelancermap.com/feeds/projects/int-international.xml][FreelancerMap]]
+**** [[https://www.freelancermap.com/feeds/projects/int-international.xml][FreelancerMap]]                                                    :noisy:
 **** [[https://www.golangprojects.com/rss.xml][GolangProjects.com]]                                              :golang:
 **** [[https://hasjob.co/feed][Hasjob.co]]
 **** [[https://hackerx.org/feed/][HackerX.org]]
@@ -49,7 +49,7 @@
 **** [[https://jobspresso.co/feed][Jobspresso.co]]
 **** [[https://larajobs.com/feed][Larajobs.com]]                        :php:
 **** [[https://weworkremotely.com/remote-jobs.rss][WeWorkRemotely.com]]
-**** [[https://remotive.com/remote-jobs/feed][Remotive.com]]
+**** [[https://remotive.com/remote-jobs/feed][Remotive.com]]                                                     :noisy:
 **** [[https://www.skipthedrive.com/feed/][Skip The Drive]]
 **** [[https://remoteok.com/rss][RemoteOK.com]]
 **** [[https://s3.remote.io/feed/rss.xml][Remote.io]]
@@ -96,6 +96,7 @@
 *** [[https://www.baldurbjarnason.com/index.xml][Baldur Bjarnason]]
 *** [[https://raganwald.com/rss][Reginald Braithwaite]]
 *** [[https://world.hey.com/dhh/feed.atom][DHH]]
+*** [[https://usesthis.com/feed.atom][UsesThis]]                                                 :usesthis:setup:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -156,6 +157,7 @@
 *** [[https://genuineimpact.substack.com/feed][Genuine Impact - Charting Finance, Investing & Tech]]
 *** [[https://robertreich.substack.com/feed][Robert Reich]]                                                      :noisy:
 *** [[https://backofmind.substack.com/feed][Back of Mind]]
+*** [[https://c4ss.org/feed][C4SS - Center for a Stateless Society]]  :anark:
 ** History
 *** [[https://www.ageofinvention.xyz/feed][Age of Invention by Anton Howes]]
 ** Philosophy                                                           :phi:
