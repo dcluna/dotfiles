@@ -196,20 +196,19 @@ call the original function `package-activate'."
      nixos
      ess
      ipython-notebook
-     react
-     dap
+     ;; react
+     ;; dap
      latex
-     javascript
      lsp
      crystal
-     perl5
+     ;; perl5
      emoji
      (parinfer :variables parinfer-auto-switch-indent-mode t parinfer-auto-switch-indent-mode-when-closing t)
      (ivy :variables ivy-wrap t ivy-height 25 ivy-enable-advanced-buffer-information t)
      rust
      ;; (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
-     (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
-     asm
+     ;; (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
+     ;; asm
      csv
      ;; erc
      docker
@@ -221,8 +220,8 @@ call the original function `package-activate'."
      shell-scripts
      ;; racket
      ;; php
-     elixir
-     erlang
+     ;; elixir
+     ;; erlang
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      ;; restclient
      yaml
@@ -256,8 +255,8 @@ call the original function `package-activate'."
      theming
      themes-megapack
      common-lisp
-     lua
-     (go :variables go-tab-width 4 go-format-before-save t)
+     ;; lua
+     ;; (go :variables go-tab-width 4 go-format-before-save t)
      ;; github
      (org :variables org-enable-github-support t org-enable-reveal-js-support t org-enable-roam-support t org-enable-sticky-header t org-enable-appear-support t)
      ;; ----------------------------------------------------------------
@@ -308,7 +307,7 @@ call the original function `package-activate'."
                                       mastodon
                                       envrc
                                       codegpt
-                                      eat
+                                      ;; eat
                                       (copilot :location (recipe
                                                           :fetcher github
                                                           :repo "zerolfx/copilot.el"
@@ -337,7 +336,7 @@ call the original function `package-activate'."
                                       hydandata-light-theme
                                       github-modern-theme
                                       ;; multishell
-                                      ob-elixir
+                                      ;; ob-elixir
                                       ;; org-jira
                                       (org-rich-yank :location (recipe :fetcher github :repo "unhammer/org-rich-yank" :files ("*.el") :upgrade 't))
                                       ;; ialign
@@ -354,7 +353,7 @@ call the original function `package-activate'."
                                       easy-jekyll
                                       ;; flymake-solidity
                                       ;; solidity-mode
-                                      sx
+                                      ;; sx
                                       ;; ts-comint
                                       ;; vagrant-tramp
                                       ;; ob-php
@@ -363,14 +362,14 @@ call the original function `package-activate'."
                                       evil-rails
                                       evil-easymotion
                                       evil-extra-operator
-                                      realgud
+                                      ;; realgud
                                       ;; realgud-pry
                                       plan9-theme
                                       sourcerer-theme
                                       0xc
                                       ;; fuel
                                       ;; lfe-mode
-                                      x-path-walker
+                                      ;; x-path-walker
                                       ;; pivotal-tracker
                                       suggest
                                       tramp-term
@@ -388,7 +387,7 @@ call the original function `package-activate'."
                                       tldr
                                       rainbow-mode
                                       paredit
-                                      ruby-refactor
+                                      ;; ruby-refactor
                                       ;; nvm
                                       ;; nov
                                       ;; yarn-mode
