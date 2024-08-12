@@ -283,10 +283,10 @@ call the original function `package-activate'."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
-                                      nano-theme
+                                      ;; nano-theme
                                       mindre-theme
                                       grey-paper-theme
-                                      flexoki-themes
+                                      ;; flexoki-themes
                                       cloud-theme
                                       chyla-dark-theme
                                       chyla-theme
@@ -299,12 +299,12 @@ call the original function `package-activate'."
                                       session
                                       osm
                                       casual
-                                      solaire
+                                      ;; solaire
                                       elfeed-tube-mpv
                                       discover
                                       ellama
-                                      catppuccin
-                                      avk-emacs-themes
+                                      catppuccin-theme
+                                      ;; avk-emacs-themes
                                       mastodon
                                       envrc
                                       codegpt
