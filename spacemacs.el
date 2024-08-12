@@ -246,7 +246,8 @@ call the original function `package-activate'."
      (javascript :variables
                  js-indent-level 2)
      (python :variables python-test-runner '(pytest) python-backend 'anaconda)
-     (ruby :variables ruby-enable-enh-ruby-mode t ruby-test-runner 'rspec)
+     (ruby :variables ;; ruby-enable-enh-ruby-mode t
+           ruby-test-runner 'rspec)
      ;; (clojure :variables clojure-enable-fancify-symbols t)
      (colors :variables
              colors-colorize-identifiers 'all)
