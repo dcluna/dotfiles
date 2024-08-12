@@ -188,7 +188,7 @@ call the original function `package-activate'."
    dotspacemacs-configuration-layers
    '(
      kubernetes
-     openai
+     ;; openai
      (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/dotfiles/elfeed.org")))
      finance
      ;; (scala :variables scala-backend 'scala-metals)
