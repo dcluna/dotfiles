@@ -153,7 +153,6 @@ static char *gnus-pointer[] = {
        ("deleted" :foreground "#ff2c4b" :bold t)))
    '(nrepl-message-colors
      '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
-   '(nyan-mode t)
    '(objed-cursor-color "#99324B")
    '(org-agenda-files '("~/org-agenda.org"))
    '(org-babel-load-languages
