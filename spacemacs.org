@@ -2092,6 +2092,29 @@
                                         ("\\section{%s}" . "\\section*{%s}")
                                         ("\\cvitem{%s}" . "\\cvitem{%s}")))
     #+END_SRC
+
+**** Conflict with yasnippet
+
+     Taken from https://orgmode.org/manual/Conflicts.html
+     On <2024-08-13 Ter>
+
+     #+begin_src emacs-lisp
+       ;; (add-hook 'org-mode-hook
+       ;;           (lambda ()
+       ;;             (setq-local yas/trigger-key [tab])
+       ;;             (define-key yas/keymap [tab] 'yas/next-field-or-maybe-expand)))
+
+       (defun yas/org-very-safe-expand ()
+         (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+
+       (add-hook 'org-mode-hook
+                 (lambda ()
+                   (make-variable-buffer-local 'yas/trigger-key)
+                   (setq yas/trigger-key [tab])
+                   (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+                   (define-key yas/keymap [tab] 'yas/next-field)) t)
+     #+end_src
+
 *** Emacspeak
     #+BEGIN_SRC emacs-lisp
   (dcl/enable-emacspeak)
