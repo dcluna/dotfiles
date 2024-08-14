@@ -315,7 +315,7 @@
 
     (defvar dcl/light-themes
       (dcl/shuffle
-       '(greymatters nano-light mindre grey-paper flexoki-themes-light cloud chyla brutalist berrys hima aircon acme twilight-bright hemisu-light apropospriate-light flatui
+       '(greymatters mindre grey-paper cloud chyla brutalist berrys hima aircon acme twilight-bright hemisu-light apropospriate-light flatui
                          kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                          doom-tomorrow-day majapahit-light plan9 alect-light
                          gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
@@ -326,7 +326,7 @@
 
     (defvar dcl/dark-themes
       (dcl/shuffle
-       '(nano-dark flexoki-themes-dark chyla-dark arjen-grey helix kaolin-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
+       '( chyla-dark arjen-grey helix kaolin-dark kaolin-aurora kaolin-bubblegum kaolin-eclipse
                      kaolin-temple kaolin-galaxy kaolin-ocean kaolin-valley-dark
                      kaolin-mono-dark seti sanityinc-tomorrow-eighties sanityinc-tomorrow-bright
                      sanityinc-tomorrow-blue sanityinc-tomorrow-night labburn sourcerer
