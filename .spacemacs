@@ -147,6 +147,7 @@ static char *gnus-pointer[] = {
    '(mini-frame-advice-functions '(read-from-minibuffer read-string))
    '(mini-frame-ignore-commands
      '(eval-expression "edebug-eval-expression" debugger-eval-expression evil-ex yes-or-no-p swiper insert-char))
+   '(native-comp-async-jobs-number 2)
    '(notmuch-search-line-faces
      '(("unread" :foreground "#aeee00")
        ("flagged" :foreground "#0a9dff")
