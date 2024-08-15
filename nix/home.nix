@@ -51,7 +51,6 @@ in
     pkgs.rbspy
     pkgs.stern
     pkgs.llm
-    pkgs.semgrep
     pkgs.mcfly
     pkgs.ticker
     pkgs.yamllint
