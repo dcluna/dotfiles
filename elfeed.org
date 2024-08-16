@@ -32,7 +32,7 @@
 **** [[https://newsletter.posthog.com/feed][Product for Engineers - PostHog Newsletter]]
 **** [[https://vadimkravcenko.com/feed][Vadim Kravcenko - CTO Newsletter]]
 *** Jobs                                                               :jobs:
-**** [[https://jobs.rubyonrails.org/jobs.rss][Rails Jobs Board]]
+**** [[https://jobs.rubyonrails.org/jobs.rss][Rails Jobs Board]]                                                 :rails:
 **** Hacker News                                                         :hn:
 ***** [[https://hnrss.org/jobs][YC-funded jobs]]                                                     :yc:
 ***** [[https://hnrss.org/whoishiring/jobs][Who is hiring?]]
@@ -97,6 +97,7 @@
 *** [[https://raganwald.com/rss][Reginald Braithwaite]]
 *** [[https://world.hey.com/dhh/feed.atom][DHH]]
 *** [[https://usesthis.com/feed.atom][UsesThis]]                                                 :usesthis:setup:
+*** [[https://macwright.com/rss.xml][Tom MacWright]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
