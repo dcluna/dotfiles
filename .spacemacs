@@ -44,6 +44,7 @@ This function is called at the very end of Spacemacs initialization."
    '(dired-vc-rename-file t)
    '(docker-command "podman")
    '(docker-compose-command "podman-compose")
+   '(elfeed-search-filter "@6-months-ago +unread -noisy")
    '(emms-mode-line-icon-color "#358d8d")
    '(emms-mode-line-icon-image-cache
      '(image :type xpm :ascent center :data "/* XPM */
