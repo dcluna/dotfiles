@@ -985,20 +985,20 @@
 (add-to-list 'org-latex-classes '("moderncv" "\\documentclass[12pt,a4paper,sans,unicode]{moderncv}"
                                   ("\\section{%s}" . "\\section*{%s}")
                                   ("\\cvitem{%s}" . "\\cvitem{%s}")))
-;; (add-hook 'org-mode-hook
-;;           (lambda ()
-;;             (setq-local yas/trigger-key [tab])
-;;             (define-key yas/keymap [tab] 'yas/next-field-or-maybe-expand)))
-
 (defun yas/org-very-safe-expand ()
   (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
 
-(add-hook 'org-mode-hook
-          (lambda ()
-            (make-variable-buffer-local 'yas/trigger-key)
-            (setq yas/trigger-key [tab])
-            (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-            (define-key yas/keymap [tab] 'yas/next-field)) t)
+(defun yas/set-org-mode-hook ()
+  (setq-local yas/trigger-key [tab])
+  (define-key yas/keymap [tab] 'yas/next-field-or-maybe-expand))
+
+;; (defun yas/set-org-mode-hook ()
+;;   (make-variable-buffer-local 'yas/trigger-key)
+;;   (setq yas/trigger-key [tab])
+;;   (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+;;   (define-key yas/keymap [tab] 'yas-next-field))
+
+(add-hook 'org-mode-hook #'yas/set-org-mode-hook t)
 (dcl/enable-emacspeak)
 (add-hook 'conf-javaprop-mode-hook '(lambda () (conf-quote-normal nil)))
 ;; (helm-mode 1) ;; for some reason, all the describe-* goodness is not working with Spacemacs v.0.103.2 unless I add this line
