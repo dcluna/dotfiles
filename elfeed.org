@@ -33,6 +33,8 @@
 **** [[https://vadimkravcenko.com/feed][Vadim Kravcenko - CTO Newsletter]]
 *** Jobs                                                               :jobs:
 **** [[https://jobs.rubyonrails.org/jobs.rss][Rails Jobs Board]]                                                 :rails:
+**** [[https://rubyonremote.com/jobs.rss][RubyOnRemote Jobs]]                                           :ruby:rails:
+**** [[https://jobs.gorails.com/jobs.rss][GoRails Job Board]]                                                :rails:
 **** Hacker News                                                         :hn:
 ***** [[https://hnrss.org/jobs][YC-funded jobs]]                                                     :yc:
 ***** [[https://hnrss.org/whoishiring/jobs][Who is hiring?]]
@@ -95,9 +97,10 @@
 *** [[https://blog.rongarret.info/feeds/posts/default][Ron Garret]]
 *** [[https://www.baldurbjarnason.com/index.xml][Baldur Bjarnason]]
 *** [[https://raganwald.com/rss][Reginald Braithwaite]]
-*** [[https://world.hey.com/dhh/feed.atom][DHH]]
+*** [[https://world.hey.com/dhh/feed.atom][DHH]]                                                                :ruby:
 *** [[https://usesthis.com/feed.atom][UsesThis]]                                                 :usesthis:setup:
 *** [[https://macwright.com/rss.xml][Tom MacWright]]
+*** [[https://blog.plover.com/index.rss][MJD - Mark Jason Dominus]]                                       :mjd:perl:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -119,6 +122,7 @@
 **** [[https://www.cybertec-postgresql.com/en/feed/][Cybertec PostgreSQL]]                                           :postgres:
 **** [[https://www.enterprisedb.com/blog/rss.xml][EnterpriseDB]]                                                  :postgres:
 **** [[https://www.crunchydata.com/blog/rss.xml][CrunchyData]]     :postgres:
+**** [[https://buttondown.com/jaffray/rss][Null Bitmap]]
 ** AI                                                                    :ai:
 *** [[https://www.ignorance.ai/feed][Ignorance.ai - A nuanced, no-hype exploration of AI for founders and makers.]]
 *** [[https://aisupremacy.substack.com/feed][AI Supremacy]]                                                      :noisy:
