@@ -14,4 +14,4 @@ end
 # end
 Pry.editor = "emacsclient"
 
-require "tracer/helper"
+# require "tracer/helper"
