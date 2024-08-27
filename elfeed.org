@@ -101,6 +101,7 @@
 *** [[https://usesthis.com/feed.atom][UsesThis]]                                                 :usesthis:setup:
 *** [[https://macwright.com/rss.xml][Tom MacWright]]
 *** [[https://blog.plover.com/index.rss][MJD - Mark Jason Dominus]]                                       :mjd:perl:
+*** [[https://jerf.org/iri/rss.xml][Jeremy Bowers - jerf.org]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -179,6 +180,7 @@
 *** [[https://ojoioeotrigo.com.br/feed][O Joio e o Trigo]]
 *** [[https://ianwrightsite.wordpress.com/rss][Dark Marxism - Ian Wright]]
 *** [[https://redsails.org/rss.xml][RedSails]]                     :redsails:
+*** [[http://jwmason.org/?feed=rss2][J.W. Mason]]
 ** Games                                                              :games:
 *** [[https://steamcommunity.com/groups/GrabFreeGames/rss/][GrabFreeGames]]
 *** [[https://aftermath.site/rss][Aftermath]]                                                         :noisy:
