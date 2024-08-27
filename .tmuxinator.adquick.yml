@@ -44,7 +44,7 @@ windows:
       root: <%= ENV['ADQUICK_DIR'] %>/adquick
       layout: tiled
       panes:
-        - eval "$(nodenv init -)"; bundle exec guard -i -d -w . -n f -P rspec
+        - eval "$(nodenv init -)"; echo bundle exec guard -i -d -w . -n f -P rspec; spring server
         - eval "$(nodenv init -)"; ssh-add
   - top:
       panes:
