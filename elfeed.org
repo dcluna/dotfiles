@@ -102,6 +102,7 @@
 *** [[https://macwright.com/rss.xml][Tom MacWright]]
 *** [[https://blog.plover.com/index.rss][MJD - Mark Jason Dominus]]                                       :mjd:perl:
 *** [[https://jerf.org/iri/rss.xml][Jeremy Bowers - jerf.org]]
+*** [[https://two-wrongs.com/feed][Two Wrongs - Entropic Thoughts]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -133,6 +134,8 @@
 *** [[https://heatherbcooper.substack.com/feed][Visually AI - Heather B. Cooper]]
 *** Videos/podcasts                                           :video:podcast:
 **** [[https://www.latent.space/feed][Latent.space]]                                                     :noisy:
+*** LLM-oriented                                                        :llm:
+**** [[https://magazine.sebastianraschka.com/feed][Ahead of AI - Sebastian Raschka]]                              :prog_blog:
 ** Books                                                              :books:
 *** [[https://astralcodexten.substack.com/feed][AstralCodexTen]]
 *** [[https://scottaaronson.blog/?feed=rss2][Shtetl-optimized - Scott Aaronson's blog]]
@@ -145,6 +148,7 @@
 *** [[https://www.robkhenderson.com/feed][Rob Henderson's Newsletter on human nature, psychology, social class, luxury beliefs, and more]]
 *** [[https://siderea.dreamwidth.org/data/atom][Sibylla Bostoniensis - Everything Unravels, Everything Will Fade]]
 *** [[https://www.afterbabel.com/feed][After Babel - Jonathan Haidt]]
+*** [[https://www.everythingisbullshit.blog/feed][Everything is Bullshit]]
 ** Business / organization                                          :biz:org:
 *** [[https://commoncog.com/rss/][CommonCog - about business and career decision making in a world of constant change]]
 *** [[https://studio.ribbonfarm.com/feed][Ribbonfarm Studio]]
