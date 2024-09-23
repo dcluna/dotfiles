@@ -89,6 +89,7 @@ in
     pkgs.newsboat
     pkgs.pgcenter
     pkgs.awscli2
+    pkgs.toot
   ];
 
   home.file = {
