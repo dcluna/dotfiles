@@ -319,7 +319,7 @@
                          kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                          doom-tomorrow-day majapahit-light plan9 alect-light
                          gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
-                         soft-stone tango-plus avk-daylight
+                         soft-stone tango-plus ;; avk-daylight
                          spacemacs-light solarized-light eink leuven
                          ritchie minimal-light doom-nord-light hydandata-light
                          organic-green)))
@@ -330,7 +330,7 @@
                      kaolin-temple kaolin-galaxy kaolin-ocean kaolin-valley-dark
                      kaolin-mono-dark seti sanityinc-tomorrow-eighties sanityinc-tomorrow-bright
                      sanityinc-tomorrow-blue sanityinc-tomorrow-night labburn sourcerer
-                     avk-darkblue-white avk-darkblue-yellow
+                     ;; avk-darkblue-white avk-darkblue-yellow
                      hickey doom-wilmersdorf
                      moe-dark doom-one granger dark-mint
                      material heroku light-blue spacemacs-dark
