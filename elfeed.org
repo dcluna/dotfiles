@@ -103,10 +103,15 @@
 *** [[https://blog.plover.com/index.rss][MJD - Mark Jason Dominus]]                                       :mjd:perl:
 *** [[https://jerf.org/iri/rss.xml][Jeremy Bowers - jerf.org]]
 *** [[https://two-wrongs.com/feed][Two Wrongs - Entropic Thoughts]]
+*** [[https://berjon.com/feed.atom][Robin Berjon]]
+*** [[https://registerspill.thorstenball.com/feed][RegisterSpill - Thorsten Ball]]
+*** [[https://www.fullstackruby.dev/feed.xml][FullstackRuby - Jared White]]                                        :ruby:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
 *** [[https://natehagens.substack.com/feed][Nate Hagens' The Great Simplification]]
+*** Doom                                                               :doom:
+**** [[https://dothemath.ucsd.edu/rss][DoTheMath]]
 ** Emacs                                                              :emacs:
 *** [[https://www.masteringemacs.org/feed][Mastering Emacs]]
 *** [[https://sachachua.com/blog/category/emacs-news/feed][Emacs News]]
@@ -149,6 +154,7 @@
 *** [[https://siderea.dreamwidth.org/data/atom][Sibylla Bostoniensis - Everything Unravels, Everything Will Fade]]
 *** [[https://www.afterbabel.com/feed][After Babel - Jonathan Haidt]]
 *** [[https://www.everythingisbullshit.blog/feed][Everything is Bullshit]]
+*** [[https://theconvivialsociety.substack.com/feed][The Convivial Society]]
 ** Business / organization                                          :biz:org:
 *** [[https://commoncog.com/rss/][CommonCog - about business and career decision making in a world of constant change]]
 *** [[https://studio.ribbonfarm.com/feed][Ribbonfarm Studio]]
@@ -190,7 +196,8 @@
 *** [[https://aftermath.site/rss][Aftermath]]                                                         :noisy:
 ** Elfeed-tube
 *** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg][Two Minute Papers]]
-
+** Humor                                                              :humor:
+*** [[https://www.mcsweeneys.net/rss][McSweeney’s Internet Tendency]]
 ** Check this stuff out later
 
    https://news.ycombinator.com/item?id=38242510
