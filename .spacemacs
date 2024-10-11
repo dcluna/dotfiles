@@ -107,7 +107,6 @@ static char *gnus-pointer[] = {
 \"###..######.######\",
 \"###########.######\" };") t)
    '(helm-completion-style 'emacs)
-   '(gptel-model "gpt-4o-mini")
    '(helm-ff-keep-cached-candidates nil)
    '(highlight-changes-colors '("#FD5FF0" "#AE81FF"))
    '(highlight-indent-guides-auto-enabled nil)

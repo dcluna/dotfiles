@@ -1301,9 +1301,12 @@
 (when (featurep 'org-ai)
   (org-ai-global-mode 1)
   (add-hook 'org-mode-hook 'org-ai-mode))
-(gptel-make-anthropic "Claude"          ;Any name you want
-  :stream t                             ;Streaming responses
-  :key anthropic-api-key)
+(setq
+  gptel-model "claude-3-5-sonnet-20240620"
+  gptel-backend
+  (gptel-make-anthropic "Claude"          ;Any name you want
+    :stream t                             ;Streaming responses
+    :key anthropic-api-key))
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 ;; (add-hook 'web-mode-hook 'prettier-js-mode)
 (with-eval-after-load 'company
