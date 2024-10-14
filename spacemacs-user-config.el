@@ -1302,6 +1302,8 @@
   (org-ai-global-mode 1)
   (add-hook 'org-mode-hook 'org-ai-mode))
 (setq
+  gptel-default-mode 'org-mode
+  gptel-track-media t
   gptel-model "claude-3-5-sonnet-20240620"
   gptel-backend
   (gptel-make-anthropic "Claude"          ;Any name you want
