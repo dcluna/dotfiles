@@ -191,6 +191,8 @@
 *** [[https://ianwrightsite.wordpress.com/rss][Dark Marxism - Ian Wright]]
 *** [[https://redsails.org/rss.xml][RedSails]]                     :redsails:
 *** [[http://jwmason.org/?feed=rss2][J.W. Mason]]
+*** [[https://blogdaboitempo.com.br/feed][Blog da Boitempo]]                                               :boitempo:
+*** [[https://teoriaerevolucao.pstu.org.br/feed][Teoria e Revolucao (PSTU)]]                                   :pstu:trosko:
 ** Games                                                              :games:
 *** [[https://steamcommunity.com/groups/GrabFreeGames/rss/][GrabFreeGames]]
 *** [[https://aftermath.site/rss][Aftermath]]                                                         :noisy:
