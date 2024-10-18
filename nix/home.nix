@@ -90,6 +90,7 @@ in
     pkgs.pgcenter
     pkgs.awscli2
     pkgs.toot
+    pkgs.tmuxinator
   ];
 
   home.file = {

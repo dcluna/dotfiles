@@ -1,4 +1,5 @@
 # ./.tmuxinator.yml
+<% require 'uri' %>
 
 name: adquick
 root: <%= ENV['ADQUICK_DIR'] %>
@@ -47,9 +48,9 @@ windows:
         - eval "$(nodenv init -)"; echo bundle exec guard -i -d -w . -n f -P rspec; spring server
         - eval "$(nodenv init -)"; ssh-add
   - pgcenter:
-      <% replica_url = URI.parse(`grep REPLICA_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
-      <% main_url = URI.parse(`grep ^DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
-      <% alloy_url = URI.parse(`grep ALLOY_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
+      <% replica_url = ::URI.parse(`grep REPLICA_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
+      <% main_url = ::URI.parse(`grep ^DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
+      <% alloy_url = ::URI.parse(`grep ALLOY_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
       root: <%= ENV['ADQUICK_DIR'] %>/adquick
       layout: tiled
       panes:
@@ -93,8 +94,8 @@ windows:
       panes:
         - mitmproxy -p 8090
   - staging-pgcenter:
-      <% staging_replica_url = URI.parse(`grep REPLICA_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env_adtest.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
-      <% staging_main_url = URI.parse(`grep ^DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env_adtest.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
+      <% staging_replica_url = ::URI.parse(`grep REPLICA_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env_adtest.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
+      <% staging_main_url = ::URI.parse(`grep ^DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env_adtest.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
       root: <%= ENV['ADQUICK_DIR'] %>/adquick
       layout: tiled
       panes:
