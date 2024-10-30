@@ -193,6 +193,11 @@
 *** [[http://jwmason.org/?feed=rss2][J.W. Mason]]
 *** [[https://blogdaboitempo.com.br/feed][Blog da Boitempo]]                                               :boitempo:
 *** [[https://teoriaerevolucao.pstu.org.br/feed][Teoria e Revolucao (PSTU)]]                                   :pstu:trosko:
+*** [[https://jacobin.com.br/feed][Jacobin Brasil]]                                           :jacobin:brasil:
+*** [[https://jacobin.com/feed][Jacobin]]                                                         :jacobin:
+*** [[https://dellsystem.me/atom][Wendy Liu - dellsystem]]
+*** [[https://nicolasdvillarreal.substack.com/feed][Pre-History of an Encounter - Nicolas D. Villarreal]]
+*** [[https://critisticuffs.org/feed.xml][critisticuffs.org]]                                         :critisticuffs:
 ** Games                                                              :games:
 *** [[https://steamcommunity.com/groups/GrabFreeGames/rss/][GrabFreeGames]]
 *** [[https://aftermath.site/rss][Aftermath]]                                                         :noisy:
