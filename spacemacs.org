@@ -2683,6 +2683,16 @@
          :key anthropic-api-key))
    #+end_src
 
+   #+begin_src emacs-lisp
+     (defun gptel-without-purpose-mode (orig-gptel &rest args)
+       "Disable purpose-mode when calling gptel."
+       (purpose-mode -1)
+       (apply orig-gptel args)
+       (purpose-mode))
+
+     (advice-add 'gptel :around #'gptel-without-purpose-mode)
+   #+end_src
+
 ** Prettier
 
 *** JS

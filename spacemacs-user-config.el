@@ -1309,6 +1309,13 @@
   (gptel-make-anthropic "Claude"          ;Any name you want
     :stream t                             ;Streaming responses
     :key anthropic-api-key))
+(defun gptel-without-purpose-mode (orig-gptel &rest args)
+  "Disable purpose-mode when calling gptel."
+  (purpose-mode -1)
+  (apply orig-gptel args)
+  (purpose-mode))
+
+(advice-add 'gptel :around #'gptel-without-purpose-mode)
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 ;; (add-hook 'web-mode-hook 'prettier-js-mode)
 (with-eval-after-load 'company
