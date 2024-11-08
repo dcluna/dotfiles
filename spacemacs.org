@@ -1170,6 +1170,12 @@
       (setq erm-source-dir (straight--repos-dir "enhanced-ruby-mode"))
     #+END_SRC
 
+*** Ruby-mode
+
+    #+begin_src emacs-lisp
+      (add-hook 'ruby-mode-hook #'robe-mode)
+    #+end_src
+
 ** Elisp
    #+BEGIN_SRC emacs-lisp
      ;; creating a tags file from emacs - stolen from https://www.emacswiki.org/emacs/BuildTags

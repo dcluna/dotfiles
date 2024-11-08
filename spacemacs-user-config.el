@@ -335,6 +335,7 @@
           ("Set" .      #x2126)))
   (turn-on-prettify-symbols-mode))
 (setq erm-source-dir (straight--repos-dir "enhanced-ruby-mode"))
+(add-hook 'ruby-mode-hook #'robe-mode)
 ;; creating a tags file from emacs - stolen from https://www.emacswiki.org/emacs/BuildTags
 (defun ew/create-tags (dir-name)
   "Create tags file."
