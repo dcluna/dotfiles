@@ -106,6 +106,14 @@
 *** [[https://berjon.com/feed.atom][Robin Berjon]]
 *** [[https://registerspill.thorstenball.com/feed][RegisterSpill - Thorsten Ball]]
 *** [[https://www.fullstackruby.dev/feed.xml][FullstackRuby - Jared White]]                                        :ruby:
+*** [[https://www.tfeb.org/fragments/feeds/all.atom.xml][tfeb.org]]
+*** [[https://funcall.blogspot.com/feeds/posts/default][Abstract Heresies]]
+*** [[https://pixel-druid.com/feed.rss][Pixel Druid -  Siddharth Bhat]]
+*** [[https://www.benkuhn.net/index.xml][Ben Kuhn]]
+*** [[https://borretti.me/feed.xml][Fernando Borretti]]
+*** [[https://egtheory.wordpress.com/feed/][Theory, Evolution, and Games Group]]
+*** [[https://yoric.github.io/index.xml][David Teller]]
+*** [[https://infrequently.org/feed/][Infrequently Noted - Alex Russell]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
