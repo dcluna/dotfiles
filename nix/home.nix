@@ -91,6 +91,8 @@ in
     pkgs.awscli2
     pkgs.toot
     pkgs.tmuxinator
+    # pkgs.ast-grep
+    pkgs.ffmpeg
   ];
 
   home.file = {
