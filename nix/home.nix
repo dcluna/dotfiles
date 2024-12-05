@@ -92,7 +92,8 @@ in
     pkgs.toot
     pkgs.tmuxinator
     # pkgs.ast-grep
-    pkgs.ffmpeg
+    (pkgs.ffmpeg.override {withWebp = true;})
+    (pkgs.imagemagick.override {libwebpSupport = true;})
   ];
 
   home.file = {
