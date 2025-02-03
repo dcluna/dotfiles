@@ -37,9 +37,9 @@ This function is called at the very end of Spacemacs initialization."
    '(cursor-color "#cccccc")
    '(cursor-type 'bar)
    '(default-frame-alist
-      '((buffer-predicate . spacemacs/useful-buffer-p)
-        (alpha 85)
-        (fullscreen . maximized)))
+     '((buffer-predicate . spacemacs/useful-buffer-p)
+       ;; (alpha 85)
+       (fullscreen . maximized)))
    '(diary-entry-marker 'font-lock-variable-name-face)
    '(dired-vc-rename-file t)
    '(docker-command "podman")

@@ -231,12 +231,12 @@
  (kill-new
   (message (s-chomp
             (shell-command-to-string (format "ruby -r 'active_support/all' -e \"puts '%s'.to_datetime.to_i\"" date))))))
-(defun dcl/haml-special-setup ()
-  (dcl/leader-keys-major-mode
-   '(haml-mode) "od" "debug"
-   '(("p" pmd/print-vars)))
-  (setq-local comment-start "//")
-  (setq-local before-save-hook (add-to-list 'before-save-hook 'whitespace-cleanup)))
+;; (defun dcl/haml-special-setup ()
+;;   (dcl/leader-keys-major-mode
+;;    '(haml-mode) "od" "debug"
+;;    '(("p" pmd/print-vars)))
+;;   (setq-local comment-start "//")
+;;   (setq-local before-save-hook (add-to-list 'before-save-hook 'whitespace-cleanup)))
 (defun dcl-setup-erb-embrace ()
   (when (equal web-mode-engine "erb")
     (embrace-add-pair ?% "<% " " %>")
@@ -263,8 +263,8 @@
   (insert-file-contents "/home/dancluna/dotfiles/pre-eval-code.sass"))
 (defun dcl/coffee-special-setup ()
   (dcl/leader-keys-major-mode
-   '(coffee-mode) "od" "debug"
-   '(("p" pmd/print-vars)))
+   '(coffee-mode) "od" "debug")
+   ;; '(("p" pmd/print-vars))
   (dcl/leader-keys-major-mode
    '(coffee-mode) "ot" "test"
    '(("j"  dcl/run-jasmine-specs)))
@@ -863,6 +863,7 @@
 ;; (require 'magit-lfs)
 
 (require 'magit)
+(require 'magit-popup)
 (magit-wip-mode 1)
 
 (magit-define-popup-action 'magit-log-popup ?w "WIP log" 'magit-wip-log)

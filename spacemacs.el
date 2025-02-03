@@ -53,7 +53,7 @@
                           ;; groovy-mode
                           anaphora
                           exec-path-from-shell
-                          (pmd :type git :host github :repo "dcluna/pmd.el")
+                          ;; (pmd :type git :host github :repo "dcluna/pmd.el")
                           ;; (emacs-direnv  :type git :host github :repo "wbolster/emacs-direnv")
                           rake
                           robe

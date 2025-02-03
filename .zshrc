@@ -66,7 +66,7 @@ if type brew &>/dev/null; then
     FPATH=/usr/local/share/zsh/site-functions:$FPATH
 fi
 
-source $ZSH/oh-my-zsh.sh
+[[ -s "$ZSH/oh-my-zsh.sh" ]] && source $ZSH/oh-my-zsh.sh
 
 for file in `ls ~/dotfiles/.zsh-confs/*.zsh`; do
     source $file
@@ -142,14 +142,14 @@ eval "$(zoxide init zsh)"
 
 
 # The next line updates PATH for the Google Cloud SDK.
-. "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+# . "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 
 # source asdf
 # . $(brew --prefix asdf)/asdf.sh
 # . /usr/local/opt/asdf/asdf.sh
-. /usr/local/opt/asdf/libexec/asdf.sh
+# . /usr/local/opt/asdf/libexec/asdf.sh
 # . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
-. ~/.asdf/plugins/java/set-java-home.zsh
+# . ~/.asdf/plugins/java/set-java-home.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

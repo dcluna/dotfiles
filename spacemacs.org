@@ -212,7 +212,7 @@
                                           grayscale-theme
                                           iodine-theme
                                           hydandata-light-theme
-                                          github-modern-theme
+                                          ;; github-modern-theme
                                           ;; multishell
                                           ;; ob-elixir
                                           ;; org-jira
@@ -315,7 +315,7 @@
 
     (defvar dcl/light-themes
       (dcl/shuffle
-       '(greymatters mindre grey-paper cloud chyla brutalist berrys hima aircon acme twilight-bright hemisu-light apropospriate-light flatui
+       '(mindre grey-paper cloud chyla brutalist berrys hima aircon acme twilight-bright hemisu-light apropospriate-light flatui
                          kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                          doom-tomorrow-day majapahit-light plan9 alect-light
                          gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
@@ -665,7 +665,7 @@
                               ;; groovy-mode
                               anaphora
                               exec-path-from-shell
-                              (pmd :type git :host github :repo "dcluna/pmd.el")
+                              ;; (pmd :type git :host github :repo "dcluna/pmd.el")
                               ;; (emacs-direnv  :type git :host github :repo "wbolster/emacs-direnv")
                               rake
                               robe
@@ -1014,12 +1014,12 @@
 
 *** Haml
     #+BEGIN_SRC emacs-lisp
-      (defun dcl/haml-special-setup ()
-        (dcl/leader-keys-major-mode
-         '(haml-mode) "od" "debug"
-         '(("p" pmd/print-vars)))
-        (setq-local comment-start "//")
-        (setq-local before-save-hook (add-to-list 'before-save-hook 'whitespace-cleanup)))
+      ;; (defun dcl/haml-special-setup ()
+      ;;   (dcl/leader-keys-major-mode
+      ;;    '(haml-mode) "od" "debug"
+      ;;    '(("p" pmd/print-vars)))
+      ;;   (setq-local comment-start "//")
+      ;;   (setq-local before-save-hook (add-to-list 'before-save-hook 'whitespace-cleanup)))
     #+END_SRC
 
 *** ERB
@@ -1063,8 +1063,8 @@
     #+BEGIN_SRC emacs-lisp
       (defun dcl/coffee-special-setup ()
         (dcl/leader-keys-major-mode
-         '(coffee-mode) "od" "debug"
-         '(("p" pmd/print-vars)))
+         '(coffee-mode) "od" "debug")
+         ;; '(("p" pmd/print-vars))
         (dcl/leader-keys-major-mode
          '(coffee-mode) "ot" "test"
          '(("j"  dcl/run-jasmine-specs)))
@@ -1878,6 +1878,7 @@
       ;; (require 'magit-lfs)
 
       (require 'magit)
+      (require 'magit-popup)
       (magit-wip-mode 1)
 
       (magit-define-popup-action 'magit-log-popup ?w "WIP log" 'magit-wip-log)

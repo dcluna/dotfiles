@@ -6,8 +6,10 @@ in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "danielluna";
-  home.homeDirectory = "/Users/danielluna";
+  # home.username = "danielluna";
+  home.username = "dcluna";
+  # home.homeDirectory = "/Users/danielluna";
+  home.homeDirectory = "/home/dcluna";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -22,7 +24,7 @@ in
     pkgs.zoxide
     pkgs.curlie
     (pkgs.visidata.overrideAttrs(super: rec { propagatedBuildInputs = super.propagatedBuildInputs ++ [pkgs.python3Packages.pyarrow]; }))
-    pkgs.xsv
+    # pkgs.xsv
     pkgs.lazydocker
     pkgs.pspg
     pkgs.rufo
@@ -46,7 +48,7 @@ in
     pkgs.pigz
     pkgs.radare2
     pkgs.ripgrep
-    pkgs.xsv
+    # pkgs.xsv
     pkgs.k9s
     pkgs.rbspy
     pkgs.stern
@@ -94,12 +96,12 @@ in
     # pkgs.ast-grep
     (pkgs.ffmpeg.override {withWebp = true;})
     (pkgs.imagemagick.override {libwebpSupport = true;})
+    pkgs.redis
   ];
 
   home.file = {
     "persistent-scratch-backups/.keep".text = "";
 
-    ".tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
 
     # ".config/nixpkgs/home.nix".source = ~/dotfiles/nix/home.nix;
     # ".config/home-manager/home.nix".source = $HOME/dotfiles/nix/home.nix;
@@ -114,19 +116,65 @@ in
     ".config/zellij/config.kdl".source = ~/dotfiles/zellij-config.kdl;
     ".config/gptcommit/config.toml".source = ~/dotfiles/gptcommit/config.toml;
     ".bin/gptcommithook".source = ~/dotfiles/gptcommit/gptcommithook;
+    ".stCommitMsg".text = "";
 
-    ".tmux/plugins/tpm" = {
-      source = pkgs.fetchFromGitHub {
-        owner = "tmux-plugins";
-        repo = "tpm";
-        rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
-        sha256 = "hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
+    # ".tmux/plugins/tpm" = {
+    #   source = pkgs.fetchFromGitHub {
+    #     owner = "tmux-plugins";
+    #     repo = "tpm";
+    #     rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
+    #     sha256 = "hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
+    #   };
+    # };
+    ".tmux" = {
+      source = builtins.fetchGit {
+        url = "git@github.com:gpakosz/.tmux.git";
+        # owner = ".tmux";
+        # repo = "gpakosz";
+        rev = "129d6e7ff3ae6add17f88d6737810bbdaa3a25cf";
+        # sha256 = "1r65pp1gpyrjnkvv820rik34fn8247kpdi828bn35yrnw4dhi32f";
+        # leaveDotGit = true;
       };
     };
+    ".tmux.conf".source = ~/.tmux/.tmux.conf;
+    ".tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
+    # ".config/.tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
     ".config/toxiproxy.json".source = ~/dotfiles/toxiproxy.json;
     "Projects/AdQuick/.tmuxinator.yml".source = ~/dotfiles/.tmuxinator.adquick.yml;
     ".config/tmuxinator/emamux.yml".source = ~/dotfiles/.tmuxinator.emamux.yml;
     ".newsboat/config".source = ~/dotfiles/newsboat/config;
+
+    ".rbenv" = {
+      # source = pkgs.fetchFromGitHub {
+        # owner = "rbenv";
+        # repo = "rbenv";
+        # rev = "v1.3.2";
+        # sha256 = "0zqd3dprfpxv2d44rk4zvq8s3fsmx4v1xwgrmf7j1dpc0phakd9y";
+        # leaveDotGit = true;
+      # };
+      source = builtins.fetchGit {
+        url = "git@github.com:rbenv/rbenv.git";
+        rev = "10e96bfc473c7459a447fbbda12164745a72fd37";
+      };
+      recursive = true;
+    };
+
+    ".rbenv/plugins/ruby-build" = {
+      source = builtins.fetchGit {
+        url = "git@github.com:rbenv/ruby-build.git";
+        rev = "31fa406e7d2f1b6e0f602ebd9c9d4a0645cc927f";
+        # sha256 = "0zqd3dprfpxv2d44rk4zvq8s3fsmx4v1xwgrmf7j1dpc0phakd9y";
+        # leaveDotGit = true;
+      };
+      # source = pkgs.fetchFromGitHub {
+      #   owner = "rbenv";
+      #   repo = "ruby-build";
+      #   rev = "20250130";
+      #   sha256 = "0zqd3dprfpxv2d44rk4zvq8s3fsmx4v1xwgrmf7j1dpc0phakd9y";
+      #   leaveDotGit = true;
+      # };
+      recursive = true;
+    };
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -147,17 +195,37 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # TODO: migrate from tpm to zplug
-  # programs.zsh = {
-  #   zplug = {
-  #     enable = true;
-  #     plugins = [
-  #       { name = "Morantron/tmux-fingers"; } # Simple plugin installation
-  #       { name = "tmux-plugins/tmux-logging"; } # Simple plugin installation
-  #       { name = "robhurring/tmux-spotify"; } # Simple plugin installation
-  #       { name = "schasse/tmux-jump"; } # Simple plugin installation
-  #       { name = "dracula/tmux"; } # Simple plugin installation
-  #       # { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
-  #     ];
-  #   };
-  # };
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    defaultKeymap = "viins";
+    oh-my-zsh = {
+      enable = true;
+    };
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "Morantron/tmux-fingers"; } # Simple plugin installation
+        { name = "tmux-plugins/tmux-logging"; } # Simple plugin installation
+        { name = "robhurring/tmux-spotify"; } # Simple plugin installation
+        { name = "schasse/tmux-jump"; } # Simple plugin installation
+        { name = "dracula/tmux"; } # Simple plugin installation
+        # { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
+      ];
+    };
+  };
+ programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+ };
+
+  programs.direnv = {
+      enable = true;
+      # enableBashIntegration = true; # see note on other shells below
+      nix-direnv.enable = true;
+  };
+
+  # programs.bash.enable = true; # see note on other shells below
 }
