@@ -119,6 +119,7 @@ in
     ".bin/gptcommithook".source = ~/dotfiles/gptcommit/gptcommithook;
     ".stCommitMsg".text = "";
     ".bashrc.d/mise.sh".source = ~/dotfiles/mise.bash;
+    ".bashrc.d/direnv.sh".source = ~/dotfiles/direnv.bash;
 
     # ".tmux/plugins/tpm" = {
     #   source = pkgs.fetchFromGitHub {
