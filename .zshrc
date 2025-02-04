@@ -57,7 +57,7 @@ if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/dan
 # Add wi2gold:$HOME/bin/android-ndk-r10d:$HOME/bin/jdk1.8.0_31/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-plugins=(git ruby rails rake rake-fast rbenv node npm yarn rust osx history-substring-search docker docker-compose pyenv history)
+plugins=(git ruby rails rake rake-fast rbenv node npm yarn rust osx history-substring-search docker docker-compose pyenv history mise)
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 

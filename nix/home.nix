@@ -80,7 +80,7 @@ in
     pkgs.btop
     pkgs.pgformatter
     pkgs.smug
-    pkgs.gitu
+    pkgs.gitui
     pkgs.zellij
     pkgs.prettierd
     pkgs.gnugrep
@@ -97,6 +97,7 @@ in
     (pkgs.ffmpeg.override {withWebp = true;})
     (pkgs.imagemagick.override {libwebpSupport = true;})
     pkgs.redis
+    pkgs.mise
   ];
 
   home.file = {
@@ -117,6 +118,7 @@ in
     ".config/gptcommit/config.toml".source = ~/dotfiles/gptcommit/config.toml;
     ".bin/gptcommithook".source = ~/dotfiles/gptcommit/gptcommithook;
     ".stCommitMsg".text = "";
+    ".bashrc.d/mise.sh".source = ~/dotfiles/mise.bash;
 
     # ".tmux/plugins/tpm" = {
     #   source = pkgs.fetchFromGitHub {
