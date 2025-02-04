@@ -31,7 +31,7 @@ in
     pkgs.lnav
     pkgs.pqrs
     pkgs.wget
-    pkgs.gnupg
+    # pkgs.gnupg
     pkgs.pgmetrics
     # pkgs.spotify-tui
     pkgs.ledger-autosync
