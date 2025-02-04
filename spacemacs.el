@@ -20,6 +20,7 @@
 
 
 (setq straight-packages '(
+                          eshell-atuin
                           (lem :fetcher codeberg :repo "martianh/lem.el" :files ("lisp/*.el"))
                           (elfeed-tube :host github :repo "karthink/elfeed-tube" :files ("*.el"))
                           (mastodon-alt :host github :repo "rougier/mastodon-alt" :files ("*.el"))
@@ -137,7 +138,7 @@ call the original function `package-activate'."
 
 (defvar dcl/light-themes
   (dcl/shuffle
-   '(greymatters mindre grey-paper cloud chyla brutalist berrys hima aircon acme twilight-bright hemisu-light apropospriate-light flatui
+   '(mindre grey-paper cloud chyla brutalist berrys hima aircon acme twilight-bright hemisu-light apropospriate-light flatui
                      kaolin-light kaolin-valley-light sanityinc-solarized-light sanityinc-tomorrow-day
                      doom-tomorrow-day majapahit-light plan9 alect-light
                      gruvbox-light-hard solarized-gruvbox-light moe-light mccarthy
@@ -335,7 +336,7 @@ call the original function `package-activate'."
                                       grayscale-theme
                                       iodine-theme
                                       hydandata-light-theme
-                                      github-modern-theme
+                                      ;; github-modern-theme
                                       ;; multishell
                                       ;; ob-elixir
                                       ;; org-jira
