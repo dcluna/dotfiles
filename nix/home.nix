@@ -120,6 +120,7 @@ in
     ".stCommitMsg".text = "";
     ".bashrc.d/mise.sh".source = ~/dotfiles/mise.bash;
     ".bashrc.d/direnv.sh".source = ~/dotfiles/direnv.bash;
+    ".bashrc.d/atuin.sh".source = ~/dotfiles/atuin.bash;
 
     # ".tmux/plugins/tpm" = {
     #   source = pkgs.fetchFromGitHub {
