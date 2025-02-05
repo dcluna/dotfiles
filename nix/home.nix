@@ -98,6 +98,7 @@ in
     (pkgs.imagemagick.override {libwebpSupport = true;})
     pkgs.redis
     pkgs.mise
+    pkgs.mitmproxy
   ];
 
   home.file = {
