@@ -231,6 +231,7 @@ static char *gnus-pointer[] = {
    '(sml/active-foreground-color "#424242")
    '(sml/inactive-background-color "#4fa8a8")
    '(sml/inactive-foreground-color "#424242")
+   '(sqlformat-command 'pgformatter)
    '(tabbar-background-color "#ffffffffffff")
    '(term-default-bg-color "#fdf6e3")
    '(term-default-fg-color "#657b83")
@@ -301,7 +302,7 @@ static char *gnus-pointer[] = {
    '(xterm-color-names-bright
      ["#fdf6e3" "#cb4b16" "#93a1a1" "#839496" "#657b83" "#6c71c4" "#586e75" "#002b36"])
    '(yas-snippet-dirs
-     '("/Users/danielluna/yasnippets" "/Users/danielluna/.emacs.d/private/snippets/" yas-installed-snippets-dir "/Users/danielluna/.emacs.d/layers/+completion/auto-completion/local/snippets")))
+     '("~/yasnippets" "~/.emacs.d/private/snippets/" yas-installed-snippets-dir "~/.emacs.d/layers/+completion/auto-completion/local/snippets")))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
