@@ -1489,6 +1489,11 @@ _u_pdate
   :bind (:map elfeed-show-mode-map
               ("C-c C-f" . elfeed-tube-mpv-follow-mode)
               ("C-c C-w" . elfeed-tube-mpv-where)))
+(use-package eshell-atuin
+  :straight t
+  :after eshell
+  :config
+  (eshell-atuin-mode))
 (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
 
 (autoload 'mixal-mode "mixal-mode" t)

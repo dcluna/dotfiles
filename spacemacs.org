@@ -2922,6 +2922,18 @@
               ("C-c C-w" . elfeed-tube-mpv-where)))
    #+end_src
 
+** Eshell
+
+*** Eshell-atuin
+
+     #+begin_src emacs-lisp
+       (use-package eshell-atuin
+         :straight t
+         :after eshell
+         :config
+         (eshell-atuin-mode))
+     #+end_src
+
 ** MDK (Mix development kit)
 
    #+begin_src emacs-lisp
