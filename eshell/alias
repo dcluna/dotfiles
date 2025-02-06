@@ -1,3 +1,6 @@
+alias pgsyncdb pgsync --debug --in-batches
+alias pgsyncib pgsync --disable-integrity --in-batches
+alias pgsyncdfb pgsync --disable-integrity --defer-constraints-v2 --in-batches --debug
 alias pgsyncd pgsync --debug
 alias pgsyncdf pgsync --disable-integrity --defer-constraints-v2 --debug
 alias hst eshell-atuin-history
