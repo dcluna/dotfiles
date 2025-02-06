@@ -1,0 +1,3 @@
+alias pgsyncd pgsync --debug
+alias pgsyncdf pgsync --disable-integrity --defer-constraints-v2 --debug
+alias hst eshell-atuin-history

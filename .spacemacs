@@ -69,6 +69,7 @@ static char *note[] = {
 \"#######..#\" };"))
    '(enh-ruby-check-syntax nil)
    '(erc-hide-list '("JOIN" "PART" "QUIT"))
+   '(eshell-aliases-file "~/dotfiles/eshell/alias")
    '(evil-emacs-state-cursor '("#D50000" hbar) t)
    '(evil-escape-key-sequence "jk")
    '(evil-ex-substitute-global t)
