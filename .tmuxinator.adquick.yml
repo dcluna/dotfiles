@@ -76,13 +76,11 @@ windows:
   - top:
       panes:
         - htop
-        - btm -b
         - btop
-  - emacs-cli:
-      root: <%= ENV['ADQUICK_DIR'] %>/adquick
-      layout: tiled
+  - llm:
       panes:
-        - sleep 500; emacsclient -nw ./
+        - nvtop
+        - podman run --replace -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama && podman exec -it ollama ollama run deepseek-r1
   - mitmproxy-rails:
       root: <%= ENV['ADQUICK_DIR'] %>/adquick
       layout: tiled
@@ -101,3 +99,8 @@ windows:
       panes:
         - pgcenter top -h <%= staging_main_url.host %> -U <%= staging_main_url.user %> -d <%= staging_main_url.path[1..-1] %>
         - pgcenter top -h <%= staging_replica_url.host %> -U <%= staging_replica_url.user %> -d <%= staging_replica_url.path[1..-1] %>
+  - emacs-cli:
+      root: <%= ENV['ADQUICK_DIR'] %>/adquick
+      layout: tiled
+      panes:
+        - emacsclient -nw ./
