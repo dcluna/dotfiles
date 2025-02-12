@@ -2682,6 +2682,15 @@
 
    #+begin_src emacs-lisp
      (setq
+      gptel-model 'deepseek-r1:latest
+      gptel-backend (gptel-make-ollama "Ollama"
+                      :host "localhost:11434"
+                      :stream t
+                      :models '(deepseek-r1:latest)))
+   #+end_src
+
+   #+begin_src emacs-lisp
+     (setq
        gptel-default-mode 'org-mode
        gptel-track-media t
        gptel-model "claude-3-5-sonnet-20240620"

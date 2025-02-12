@@ -1304,6 +1304,12 @@
   (org-ai-global-mode 1)
   (add-hook 'org-mode-hook 'org-ai-mode))
 (setq
+ gptel-model 'deepseek-r1:latest
+ gptel-backend (gptel-make-ollama "Ollama"
+                 :host "localhost:11434"
+                 :stream t
+                 :models '(deepseek-r1:latest)))
+(setq
   gptel-default-mode 'org-mode
   gptel-track-media t
   gptel-model "claude-3-5-sonnet-20240620"
