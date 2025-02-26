@@ -1930,7 +1930,7 @@
       (add-hook 'sass-mode-hook 'rainbow-mode)
       (add-hook 'ruby-mode-hook 'dcl/ruby-special-setup)
       (add-hook 'enh-ruby-mode-hook 'dcl/ruby-special-setup)
-      (add-hook 'haml-mode-hook 'dcl/haml-special-setup)
+      ;; (add-hook 'haml-mode-hook 'dcl/haml-special-setup)
       (add-hook 'coffee-mode-hook 'dcl/coffee-special-setup)
       (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
 
@@ -2683,21 +2683,48 @@
    #+begin_src emacs-lisp
      (setq
       gptel-model 'deepseek-r1:latest
-      gptel-backend (gptel-make-ollama "Ollama"
+      gptel-backend (gptel-make-ollama "Deepseek"
                       :host "localhost:11434"
                       :stream t
                       :models '(deepseek-r1:latest)))
+
+     (setq
+      gptel-model 'qwen2.5-coder:32b
+      gptel-backend (gptel-make-ollama "Qwen"
+                      :host "localhost:11434"
+                      :stream t
+                      :models '(qwen2.5-coder:32b)))
    #+end_src
 
    #+begin_src emacs-lisp
+     (setq dcl/gptel-sonnet-3-5
+       (gptel-make-anthropic "Claude 3.5"          ;Any name you want
+         :stream t                             ;Streaming responses
+         :key anthropic-api-key))
+
+     (setq dcl/gptel-sonnet-thinking
+           (gptel-make-anthropic "Claude 3.7 thinking" ;Any name you want
+             :key anthropic-api-key
+             :stream t
+             :models '(claude-3-7-sonnet-20250219)
+             :header (lambda () (when-let* ((key (gptel--get-api-key)))
+                                      `(("x-api-key" . ,key)
+                                        ("anthropic-version" . "2023-06-01")
+                                        ("anthropic-beta" . "pdfs-2024-09-25")
+                                        ("anthropic-beta" . "output-128k-2025-02-19")
+                                        ("anthropic-beta" . "prompt-caching-2024-07-31"))))
+                 :request-params '(:thinking (:type "enabled" :budget_tokens 2048)
+                                         :max_tokens 4096)))
+
      (setq
        gptel-default-mode 'org-mode
        gptel-track-media t
        gptel-model "claude-3-5-sonnet-20240620"
-       gptel-backend
-       (gptel-make-anthropic "Claude"          ;Any name you want
-         :stream t                             ;Streaming responses
-         :key anthropic-api-key))
+       gptel-backend dcl/gptel-sonnet-3-5)
+
+     (setq
+       gptel-backend dcl/gptel-sonnet-thinking
+       gptel-model "claude-3-7-sonnet-20250219")
    #+end_src
 
    #+begin_src emacs-lisp
