@@ -26,6 +26,8 @@
 *** BSD                                                                 :bsd:
 **** [[https://discoverbsd.com/feeds/posts/default][DiscoverBSD]]
 **** [[https://bsdsec.net/articles.atom][BSDSec]]                                                         :infosec:
+*** Fedora                                                           :fedora:
+**** [[https://fedoramagazine.org/feed/][Fedora Magazine]]
 *** Videos/podcasts                                           :video:podcast:
 **** [[https://media.ccc.de/updates.rdf][Media.ccc.de]]                                                     :noisy:
 *** Product management                                         :product_mgmt:
@@ -33,7 +35,7 @@
 **** [[https://vadimkravcenko.com/feed][Vadim Kravcenko - CTO Newsletter]]
 *** Jobs                                                               :jobs:
 **** [[https://jobs.rubyonrails.org/jobs.rss][Rails Jobs Board]]                                                 :rails:
-**** [[https://rubyonremote.com/jobs.rss][RubyOnRemote Jobs]]                                           :ruby:rails:
+**** [[https://rubyonremote.com/jobs.rss][RubyOnRemote Jobs]] :ruby:rails:rubyonremote:
 **** [[https://jobs.gorails.com/jobs.rss][GoRails Job Board]]                                                :rails:
 **** Hacker News                                                         :hn:
 ***** [[https://hnrss.org/jobs][YC-funded jobs]]                                                     :yc:
@@ -50,7 +52,7 @@
 **** [[https://landing.jobs/feed][LandingJobs]]
 **** [[https://jobspresso.co/feed][Jobspresso.co]]
 **** [[https://larajobs.com/feed][Larajobs.com]]                        :php:
-**** [[https://weworkremotely.com/remote-jobs.rss][WeWorkRemotely.com]]
+**** [[https://weworkremotely.com/remote-jobs.rss][WeWorkRemotely.com]]                                      :weworkremotely:
 **** [[https://remotive.com/remote-jobs/feed][Remotive.com]]                                                     :noisy:
 **** [[https://www.skipthedrive.com/feed/][Skip The Drive]]
 **** [[https://remoteok.com/rss][RemoteOK.com]]
