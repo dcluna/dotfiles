@@ -99,6 +99,7 @@ in
     pkgs.redis
     pkgs.mise
     pkgs.mitmproxy
+    pkgs.entr
   ];
 
   home.file = {
