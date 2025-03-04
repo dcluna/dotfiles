@@ -977,6 +977,9 @@
 (evil-define-key 'normal global-map ";" 'evil-execute-in-god-state)
 (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
 (evil-define-key 'hybrid global-map (kbd "C-M-:" ) 'evil-execute-in-god-state)
+
+(use-package god-mode
+  :config (which-key-enable-god-mode-support))
 (add-hook 'org-mode-hook 'auto-fill-mode)
 (unless (boundp 'org-latex-classes)
   (setq org-latex-classes '()))
@@ -1297,6 +1300,7 @@
   (define-key gpt-keymap "g" 'gptel)
   (define-key gpt-keymap "s" 'gptel-send)
   (define-key gpt-keymap "m" 'gptel-menu)
+  (define-key gpt-keymap "a" 'gptel-context-add)
   (evil-leader/set-key "o G" gpt-keymap)
   (spacemacs/declare-prefix "o G" "GPT"))
 (require 'org-ai)
