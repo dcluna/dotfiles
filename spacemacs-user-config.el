@@ -1342,6 +1342,12 @@
 (setq
   gptel-default-mode 'org-mode
   gptel-track-media t
+  gptel-model "ChatGPT"
+  gptel-backend gptel--openai)
+
+(setq
+  gptel-default-mode 'org-mode
+  gptel-track-media t
   gptel-model "claude-3-5-sonnet-20240620"
   gptel-backend dcl/gptel-sonnet-3-5)
 
@@ -1531,6 +1537,10 @@ _u_pdate
   :after eshell
   :config
   (eshell-atuin-mode))
+(use-package lsp-tailwindcss
+ :after lsp-mode
+ :config (setq lsp-tailwindcss-major-modes '(haml-mode rjsx-mode web-mode html-mode css-mode typescript-mode typescript-tsx-mode tsx-ts-mode))
+         (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save))
 (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
 
 (autoload 'mixal-mode "mixal-mode" t)

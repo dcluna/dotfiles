@@ -160,6 +160,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          lsp-tailwindcss
                                           ;; nano-theme
                                           mindre-theme
                                           grey-paper-theme
@@ -2979,6 +2980,17 @@
          :config
          (eshell-atuin-mode))
      #+end_src
+
+
+** LSP
+*** Tailwind CSS
+
+    #+begin_src emacs-lisp
+      (use-package lsp-tailwindcss
+       :after lsp-mode
+       :config (setq lsp-tailwindcss-major-modes '(haml-mode rjsx-mode web-mode html-mode css-mode typescript-mode typescript-tsx-mode tsx-ts-mode))
+               (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save))
+    #+end_src
 
 ** MDK (Mix development kit)
 

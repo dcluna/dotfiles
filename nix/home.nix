@@ -100,6 +100,9 @@ in
     pkgs.mise
     pkgs.mitmproxy
     pkgs.entr
+    pkgs.bore-cli
+    pkgs.rustywind
+    # pkgs.wireproxy
   ];
 
   home.file = {
