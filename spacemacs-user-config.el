@@ -1539,7 +1539,8 @@ _u_pdate
   (eshell-atuin-mode))
 (use-package lsp-tailwindcss
  :after lsp-mode
- :init (setq lsp-tailwindcss-add-on-mode t)
+ :init (setq lsp-tailwindcss-experimental-class-regex ["tw`([^`]*)" "tw=\"([^\"]*)" "tw={\"([^\"}]*)" "tw\\.\\w+`([^`]*)" "tw\\(.*?\\)`([^`]*)"])
+       (setq lsp-tailwindcss-add-on-mode t)
  :config (setq lsp-tailwindcss-major-modes '(haml-mode rjsx-mode web-mode html-mode css-mode typescript-mode typescript-tsx-mode tsx-ts-mode))
          (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save))
 (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
