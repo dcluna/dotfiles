@@ -16,6 +16,8 @@
 **** [[https://cprss.s3.amazonaws.com/rubyweekly.com.xml][Ruby Weekly]]
 **** [[https://buttondown.email/hotwireweekly/rss][Hotwire Weekly]]                                                 :hotwire:
 **** [[https://newsletter.shortruby.com/feed][Short Ruby]]
+**** Rails                                                            :rails:
+***** [[https://boringrails.com/feed.xml][Boring Rails]]
 *** Haskell                                                         :haskell:
 **** [[https://haskellweekly.news/newsletter.atom][Haskell Weekly]]
 *** SQL                                                                 :sql:
@@ -44,19 +46,19 @@
 **** [[https://rust.careers/rss][Rust Careers]]                        :rust:
 **** [[https://clojurejobboard.com/rss.xml][ClojureJobBoard]]           :clj:
 **** [[https://authenticjobs.com/?feed=job_feed][AuthenticJobs]]
-**** [[https://4dayweek.io/rss][4 day week]]
+**** [[https://4dayweek.io/rss][4 day week]]                                                :varied:noisy:
 **** [[https://www.freelancermap.com/feeds/projects/int-international.xml][FreelancerMap]]                                                    :noisy:
 **** [[https://www.golangprojects.com/rss.xml][GolangProjects.com]]                                              :golang:
-**** [[https://hasjob.co/feed][Hasjob.co]]
+**** [[https://hasjob.co/feed][Hasjob.co]]                                                   :lowq:noisy:
 **** [[https://hackerx.org/feed/][HackerX.org]]
-**** [[https://landing.jobs/feed][LandingJobs]]
+**** [[https://landing.jobs/feed][LandingJobs]]                                         :varied:landingjobs:
 **** [[https://jobspresso.co/feed][Jobspresso.co]]
 **** [[https://larajobs.com/feed][Larajobs.com]]                        :php:
 **** [[https://weworkremotely.com/remote-jobs.rss][WeWorkRemotely.com]]                                      :weworkremotely:
 **** [[https://remotive.com/remote-jobs/feed][Remotive.com]]                                                     :noisy:
 **** [[https://www.skipthedrive.com/feed/][Skip The Drive]]
 **** [[https://remoteok.com/rss][RemoteOK.com]]
-**** [[https://s3.remote.io/feed/rss.xml][Remote.io]]
+**** [[https://s3.remote.io/feed/rss.xml][Remote.io]]                                                 :varied:noisy:
 *** Status updates for cloud services                          :status:cloud:
 **** [[https://feeds.feedburner.com/herokustatus][Heroku Status]]
 **** [[https://status.cloud.google.com/en/feed.atom][Google Cloud]]
@@ -73,6 +75,7 @@
 *** [[https://www.phoronix.com/rss.php][Phoronix - Linux news]]                                       :linux:noisy:
 *** [[https://www.theintrinsicperspective.com/feed][Intrinsic Perspective]]
 *** [[https://fasterandworse.com/feed][Faster and Worse]]            :design:
+*** [[https://us5.campaign-archive.com/feed?u=ea228d7061e8bbfa8639666ad&id=aa93122b21][TechProductivity.co]]
 ** Programmer blogs                                               :prog_blog:
 *** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
 *** [[https://drewdevault.com/blog/index.xml][Drew DeVault]]       :sircmpwn:
