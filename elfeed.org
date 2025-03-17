@@ -76,6 +76,7 @@
 *** [[https://www.theintrinsicperspective.com/feed][Intrinsic Perspective]]
 *** [[https://fasterandworse.com/feed][Faster and Worse]]            :design:
 *** [[https://us5.campaign-archive.com/feed?u=ea228d7061e8bbfa8639666ad&id=aa93122b21][TechProductivity.co]]
+*** [[https://spectrum.ieee.org/rss][IEEE Spectrum]]          :ieee:spectrum:
 ** Programmer blogs                                               :prog_blog:
 *** [[https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml][public voit - Karl Voit]]
 *** [[https://drewdevault.com/blog/index.xml][Drew DeVault]]       :sircmpwn:
@@ -199,15 +200,16 @@
 *** [[https://www.jsanilac.com/rss/][J. Sanilac]]
 ** Dirty commie stuff                                               :anticap:
 *** [[https://theluddite.org/feed.rss][TheLuddite.org]]
-*** [[https://movimentorevista.com.br/feed][Revista Movimento]]
-*** [[https://ojoioeotrigo.com.br/feed][O Joio e o Trigo]]
+*** [[https://movimentorevista.com.br/feed][Revista Movimento]]                                                :brasil:
+*** [[https://ojoioeotrigo.com.br/feed][O Joio e o Trigo]]                                                 :brasil:
 *** [[https://ianwrightsite.wordpress.com/rss][Dark Marxism - Ian Wright]]
 *** [[https://redsails.org/rss.xml][RedSails]]                     :redsails:
 *** [[http://jwmason.org/?feed=rss2][J.W. Mason]]
-*** [[https://blogdaboitempo.com.br/feed][Blog da Boitempo]]                                               :boitempo:
-*** [[https://teoriaerevolucao.pstu.org.br/feed][Teoria e Revolucao (PSTU)]]                                   :pstu:trosko:
+*** [[https://blogdaboitempo.com.br/feed][Blog da Boitempo]]                                        :boitempo:brasil:
+*** [[https://teoriaerevolucao.pstu.org.br/feed][Teoria e Revolucao (PSTU)]]                            :pstu:trosko:brasil:
 *** [[https://jacobin.com.br/feed][Jacobin Brasil]]                                           :jacobin:brasil:
 *** [[https://jacobin.com/feed][Jacobin]]                                                         :jacobin:
+*** [[https://editorasundermann.com.br/feed][Editora Sundermann]] :sundermann:
 *** [[https://dellsystem.me/atom][Wendy Liu - dellsystem]]
 *** [[https://nicolasdvillarreal.substack.com/feed][Pre-History of an Encounter - Nicolas D. Villarreal]]
 *** [[https://critisticuffs.org/feed.xml][critisticuffs.org]]                                         :critisticuffs:
@@ -218,6 +220,10 @@
 *** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg][Two Minute Papers]]
 ** Humor                                                              :humor:
 *** [[https://www.mcsweeneys.net/rss][McSweeney’s Internet Tendency]]
+** Brasil                                                            :brasil:
+*** Eventos                                                         :eventos:
+**** [[https://agendametal.com.br/feed][AgendaMetal]]                 :metal:
+**** [[https://xaninhodiscos.com.br/feed][Xaninho Discos]]            :metal:
 ** Check this stuff out later
 
    https://news.ycombinator.com/item?id=38242510
