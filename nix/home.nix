@@ -172,7 +172,7 @@ in
     ".rbenv/plugins/ruby-build" = {
       source = builtins.fetchGit {
         url = "git@github.com:rbenv/ruby-build.git";
-        rev = "31fa406e7d2f1b6e0f602ebd9c9d4a0645cc927f";
+        rev = "cb9c1decb3b7c3c0fcd8a4368bb6a492e631b570";
         # sha256 = "0zqd3dprfpxv2d44rk4zvq8s3fsmx4v1xwgrmf7j1dpc0phakd9y";
         # leaveDotGit = true;
       };
