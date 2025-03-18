@@ -153,6 +153,7 @@ in
     "Projects/AdQuick/.tmuxinator.yml".source = ~/dotfiles/.tmuxinator.adquick.yml;
     ".config/tmuxinator/emamux.yml".source = ~/dotfiles/.tmuxinator.emamux.yml;
     ".newsboat/config".source = ~/dotfiles/newsboat/config;
+    ".bin/eless".source = ~/.eless/eless;
 
     ".rbenv" = {
       # source = pkgs.fetchFromGitHub {
@@ -183,6 +184,14 @@ in
       #   sha256 = "0zqd3dprfpxv2d44rk4zvq8s3fsmx4v1xwgrmf7j1dpc0phakd9y";
       #   leaveDotGit = true;
       # };
+      recursive = true;
+    };
+
+    ".eless" = {
+      source = builtins.fetchGit {
+        url = "git@github.com:kaushalmodi/eless.git";
+        rev = "ee570e8987a34323cb229aa1b8b60b030590c7cf";
+      };
       recursive = true;
     };
 
