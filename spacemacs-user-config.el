@@ -1549,6 +1549,7 @@ _u_pdate
   ;; (add-hook 'emacs-lisp-mode-hook #'compile-angel-on-save-local-mode)
 
   ;; Compiles .el files before they are loaded.
+  (push "\.emacs\.d\/.*\.el" compile-angel-excluded-files-regexps)
   (compile-angel-on-load-mode))
 (use-package claude-code
   :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main"

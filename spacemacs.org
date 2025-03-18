@@ -2997,6 +2997,7 @@
         ;; (add-hook 'emacs-lisp-mode-hook #'compile-angel-on-save-local-mode)
 
         ;; Compiles .el files before they are loaded.
+        (push "\.emacs\.d\/.*\.el" compile-angel-excluded-files-regexps)
         (compile-angel-on-load-mode))
     #+end_src
 ** Claude-code
