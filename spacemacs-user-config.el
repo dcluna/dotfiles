@@ -1537,6 +1537,27 @@ _u_pdate
   :after eshell
   :config
   (eshell-atuin-mode))
+(use-package compile-angel
+  :ensure t
+  :demand t
+  :config
+  ;; Set `compile-angel-verbose' to nil to disable compile-angel messages.
+  ;; (When set to nil, compile-angel won't show which file is being compiled.)
+  (setq compile-angel-verbose t)
+
+  ;; Uncomment the line below to compile automatically when an Elisp file is saved
+  ;; (add-hook 'emacs-lisp-mode-hook #'compile-angel-on-save-local-mode)
+
+  ;; Compiles .el files before they are loaded.
+  (compile-angel-on-load-mode))
+(use-package claude-code
+  :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main"
+                   :files ("*.el" (:exclude "demo.gif")))
+  ;; :bind-keymap
+  ;; ("C-c c" . claude-code-command-map)
+  :hook ((claude-code--start . sm-setup-claude-faces))
+  :config
+  (claude-code-mode))
 (use-package lsp-tailwindcss
  :after lsp-mode
  :init (setq lsp-tailwindcss-experimental-class-regex ["tw`([^`]*)" "tw=\"([^\"]*)" "tw={\"([^\"}]*)" "tw\\.\\w+`([^`]*)" "tw\\(.*?\\)`([^`]*)"])
