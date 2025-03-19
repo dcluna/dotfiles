@@ -3013,6 +3013,21 @@
        :config
        (claude-code-mode))
    #+end_src
+** Forge (Github, Gitlab)
+*** Forge-llm
+    :PROPERTIES:
+    :header-args: :noweb-ref forge-llm :tangle no
+    :END:
+
+    #+begin_src emacs-lisp
+      (use-package forge-llm
+        :straight (:host gitlab :repo "rogs/forge-llm")
+        :after forge
+        :config
+        (require 'llm-claude)
+        (setq forge-llm-llm-provider (make-llm-claude :key anthropic-api-key :chat-model "claude-3-7-sonnet-20250219"))
+        (forge-llm-setup))
+    #+end_src
 
 ** LSP
 *** Tailwind CSS
