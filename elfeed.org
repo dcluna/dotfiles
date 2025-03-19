@@ -60,8 +60,12 @@
 **** [[https://remoteok.com/rss][RemoteOK.com]]
 **** [[https://s3.remote.io/feed/rss.xml][Remote.io]]                                                 :varied:noisy:
 *** Status updates for cloud services                          :status:cloud:
-**** [[https://feeds.feedburner.com/herokustatus][Heroku Status]]
-**** [[https://status.cloud.google.com/en/feed.atom][Google Cloud]]
+**** [[https://feeds.feedburner.com/herokustatus][Heroku Status]]    :heroku:
+**** [[https://status.cloud.google.com/en/feed.atom][Google Cloud]]  :google:
+**** [[https://status.asana.com/history.rss][Asana Status]]           :asana:
+**** [[https://www.githubstatus.com/history.rss][Github Status]]     :github:
+**** [[https://status.figma.com/history.rss][Figma Status]]           :figma:
+**** [[https://status.anthropic.com/history.rss][Anthropic Status]] :anthropic:
 ** Technology                                                          :tech:
 *** [[https://www.technologyreview.com/feed][MIT Technology Review]]  :noisy:
 *** [[https://github.com/readme.rss][Github ReadME]]
