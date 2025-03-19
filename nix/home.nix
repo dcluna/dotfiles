@@ -102,6 +102,7 @@ in
     pkgs.entr
     pkgs.bore-cli
     pkgs.rustywind
+    pkgs.circleci-cli
     # pkgs.wireproxy
   ];
 
