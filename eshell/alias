@@ -1,8 +1,9 @@
-alias ffow find-file-other-window
-alias pgsyncdb pgsync --debug --in-batches
-alias pgsyncib pgsync --disable-integrity --in-batches
-alias pgsyncdfb pgsync --disable-integrity --defer-constraints-v2 --in-batches --debug
-alias pgsyncd pgsync --debug
-alias pgsyncdf pgsync --disable-integrity --defer-constraints-v2 --debug
-alias hst eshell-atuin-history
+alias chromiumspec chromium-browser --remote-debugging-port=9222
 alias chromiumdebug chromium-browser --remote-debugging-port=9222 --auto-open-devtools-for-tabs --network
+alias hst eshell-atuin-history
+alias pgsyncdf pgsync --disable-integrity --defer-constraints-v2 --debug
+alias pgsyncd pgsync --debug
+alias pgsyncdfb pgsync --disable-integrity --defer-constraints-v2 --in-batches --debug
+alias pgsyncib pgsync --disable-integrity --in-batches
+alias pgsyncdb pgsync --debug --in-batches
+alias ffow find-file-other-window
