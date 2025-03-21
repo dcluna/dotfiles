@@ -124,6 +124,9 @@
 *** [[https://egtheory.wordpress.com/feed/][Theory, Evolution, and Games Group]]
 *** [[https://yoric.github.io/index.xml][David Teller]]
 *** [[https://infrequently.org/feed/][Infrequently Noted - Alex Russell]]
+*** [[https://cendyne.dev/feed.xml][Cendyne]]
+*** [[https://simonsafar.com/index.xml][Simon Safar]]
+*** [[https://interconnected.org/home/feed][interconnected.org - Matt Webb]]
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
