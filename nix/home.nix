@@ -103,6 +103,8 @@ in
     pkgs.bore-cli
     pkgs.rustywind
     pkgs.circleci-cli
+    pkgs.git-who
+    pkgs.google-cloud-sdk
     # pkgs.wireproxy
   ];
 
