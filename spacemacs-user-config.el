@@ -1354,6 +1354,7 @@
 (setq
   gptel-backend dcl/gptel-sonnet-thinking
   gptel-cache t
+  ;; gptel-proxy "localhost:8090"
   gptel-model "claude-3-7-sonnet-20250219")
 (defun gptel-without-purpose-mode (orig-gptel &rest args)
   "Disable purpose-mode when calling gptel."

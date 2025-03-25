@@ -208,7 +208,7 @@ call the original function `package-activate'."
      (ivy :variables ivy-wrap t ivy-height 25 ivy-enable-advanced-buffer-information t)
      rust
      ;; (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
-     ;; (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
+     (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
      ;; asm
      csv
      ;; erc
