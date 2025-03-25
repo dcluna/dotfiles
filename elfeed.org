@@ -223,6 +223,8 @@
 ** Games                                                              :games:
 *** [[https://steamcommunity.com/groups/GrabFreeGames/rss/][GrabFreeGames]]
 *** [[https://aftermath.site/rss][Aftermath]]                                                         :noisy:
+*** [[https://www.gog.com/frontpage/rss][GoG]]                                                                 :gog:
+*** [[http://blog.humblebundle.com/rss][Humble Bundle]]       :humble_bundle:
 ** Elfeed-tube
 *** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg][Two Minute Papers]]
 ** Humor                                                              :humor:
