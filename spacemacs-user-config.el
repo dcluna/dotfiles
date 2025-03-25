@@ -1567,6 +1567,7 @@ _u_pdate
   :config
                                         ; Set API_KEY in .bashrc, that will automatically picked up by aider or in elisp
   (setenv "ANTHROPIC_API_KEY" anthropic-api-key)
+  (setenv "OPENAI_API_KEY" openai-key)
                                         ; defun my-get-openrouter-api-key yourself elsewhere for security reasons
   ;; (setenv "OPENROUTER_API_KEY" (my-get-openrouter-api-key))
   :custom
@@ -1575,6 +1576,18 @@ _u_pdate
   (aidermacs-default-model "sonnet")
   (aidermacs-backend 'vterm)
   (aidermacs-show-diff-after-change t))
+(use-package whisper
+  :straight (:type git :host github :repo "natrys/whisper.el" :files ("*.el"))
+  ;; :bind ("C-c r" . whisper-run)
+  :config
+  (spacemacs/set-leader-keys "ow" 'whisper-run)
+  (setq ;; whisper-install-directory "/tmp/"
+   whisper-model "base"
+   whisper-language "en"
+   whisper-translate nil
+   whisper-use-threads (/ (num-processors) 2))
+  (require 'whisper)
+  (require 'org-ai-talk))
 (use-package lsp-tailwindcss
  :after lsp-mode
  :init (setq lsp-tailwindcss-experimental-class-regex ["tw`([^`]*)" "tw=\"([^\"]*)" "tw={\"([^\"}]*)" "tw\\.\\w+`([^`]*)" "tw\\(.*?\\)`([^`]*)"])
