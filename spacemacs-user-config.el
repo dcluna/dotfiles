@@ -1339,6 +1339,23 @@
             :request-params '(:thinking (:type "enabled" :budget_tokens 2048)
                                     :max_tokens 4096)))
 
+(setq dcl/gptel-openrouter
+      (gptel-make-openai "OpenRouter"               ;Any name you want
+        :host "openrouter.ai"
+        :endpoint "/api/v1/chat/completions"
+        :stream t
+        :key (auth-source-pick-first-password :host "openrouter.ai")                   ;can be a function that returns the key
+        :models '(google/gemini-2.5-pro-exp-03-25:free
+                  deepseek/deepseek-r1-zero:free
+                  qwen/qwen2.5-vl-32b-instruct:free
+                  ;; openai/gpt-3.5-turbo
+                  ;; mistralai/mixtral-8x7b-instruct
+                  ;; meta-llama/codellama-34b-instruct
+                  ;; codellama/codellama-70b-instruct
+                  ;; google/palm-2-codechat-bison-32k
+                  ;; google/gemini-pro
+                  )))
+
 (setq
   gptel-default-mode 'org-mode
   gptel-track-media t
@@ -1350,6 +1367,12 @@
   gptel-track-media t
   gptel-model "claude-3-5-sonnet-20240620"
   gptel-backend dcl/gptel-sonnet-3-5)
+
+(setq
+  gptel-backend dcl/gptel-openrouter
+  gptel-cache t
+  gptel-proxy "localhost:8090"
+  gptel-model "google/gemini-2.5-pro-exp-03-25:free")
 
 (setq
   gptel-backend dcl/gptel-sonnet-thinking
