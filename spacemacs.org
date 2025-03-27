@@ -2667,10 +2667,12 @@
 
    #+begin_src emacs-lisp
      (let ((gpt-keymap (make-sparse-keymap)))
-       (define-key gpt-keymap "c" 'chat)
-       (define-key gpt-keymap "u" 'chat-query-user)
-       (define-key gpt-keymap "r" 'chat-query-region)
-       (define-key gpt-keymap "d" 'chat-query-dwim)
+       ;; (define-key gpt-keymap "c" 'chat)
+       ;; (define-key gpt-keymap "u" 'chat-query-user)
+       ;; (define-key gpt-keymap "r" 'chat-query-region)
+       ;; (define-key gpt-keymap "d" 'chat-query-dwim)
+       ;; (define-key gpt-keymap "R" 'gptel-rewrite-menu)
+       (define-key gpt-keymap "r" 'gptel-rewrite)
        (define-key gpt-keymap "g" 'gptel)
        (define-key gpt-keymap "s" 'gptel-send)
        (define-key gpt-keymap "m" 'gptel-menu)
