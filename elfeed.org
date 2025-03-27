@@ -70,6 +70,7 @@
 *** [[https://www.technologyreview.com/feed][MIT Technology Review]]  :noisy:
 *** [[https://github.com/readme.rss][Github ReadME]]
 *** [[https://blog.google/rss][The Keyword by Google]]                                             :noisy:
+*** [[https://techcrunch.com/feed/][TechCrunch]]                 :techcrunch:
 *** Software updates                                               :software:
 **** [[https://nyxt.atlas.engineer/feed][Nyxt]]                        :nyxt:
 **** [[https://gnu.tools/en/blog/feed.xml][Gnu Assembly]]                                                       :gnu:
@@ -127,6 +128,7 @@
 *** [[https://cendyne.dev/feed.xml][Cendyne]]
 *** [[https://simonsafar.com/index.xml][Simon Safar]]
 *** [[https://interconnected.org/home/feed][interconnected.org - Matt Webb]]
+*** [[https://ratfactor.com/atom.xml][Ratfactor - Dave Gauer]]    :ratfactor:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
