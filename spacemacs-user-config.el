@@ -1525,6 +1525,10 @@
                      :description "Maximum size in characters to return (default: 100000)"
                      :optional t))
  :category "web")
+(use-package mcp
+  :straight (:type git :host github :repo "lizqwerscott/mcp.el" :files ("*.el"))
+  :config
+  (require 'mcp-hub))
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 ;; (add-hook 'web-mode-hook 'prettier-js-mode)
 (with-eval-after-load 'company

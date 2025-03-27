@@ -2948,6 +2948,15 @@
        :category "web")
     #+end_src
 
+** MCP.el
+
+    #+begin_src emacs-lisp
+      (use-package mcp
+        :straight (:type git :host github :repo "lizqwerscott/mcp.el" :files ("*.el"))
+        :config
+        (require 'mcp-hub))
+    #+end_src
+
 ** Prettier
 
 *** JS
