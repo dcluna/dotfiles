@@ -2663,7 +2663,7 @@
               org-roam-ui-open-on-start t))
     #+end_src
 
-** GPT
+** GPT / GPTel
 
    #+begin_src emacs-lisp
      (let ((gpt-keymap (make-sparse-keymap)))
@@ -2750,6 +2750,203 @@
 
      (advice-add 'gptel :around #'gptel-without-purpose-mode)
    #+end_src
+
+*** Tools
+
+**** Read buffer
+
+   #+begin_src emacs-lisp
+     (gptel-make-tool
+      :name "read_buffer"                    ; javascript-style snake_case name
+      :function (lambda (buffer)                  ; the function that will run
+                  (unless (buffer-live-p (get-buffer buffer))
+                    (error "error: buffer %s is not live." buffer))
+                  (with-current-buffer  buffer
+                    (buffer-substring-no-properties (point-min) (point-max))))
+      :description "return the contents of an emacs buffer"
+      :args (list '(:name "buffer"
+                          :type string            ; :type value must be a symbol
+                          :description "the name of the buffer whose contents are to be retrieved"))
+      :category "emacs")                     ; An arbitrary label for grouping
+   #+end_src
+
+
+**** Create file
+
+    #+begin_src emacs-lisp
+      (gptel-make-tool
+       :name "create_file"                    ; javascript-style  snake_case name
+       :function (lambda (path filename content)   ; the function that runs
+                   (let ((full-path (expand-file-name filename path)))
+                     (with-temp-buffer
+                       (insert content)
+                       (write-file full-path))
+                     (format "Created file %s in %s" filename path)))
+       :description "Create a new file with the specified content"
+       :args (list '(:name "path"             ; a list of argument specifications
+                           :type string
+                           :description "The directory where to create the file")
+                   '(:name "filename"
+                           :type string
+                           :description "The name of the file to create")
+                   '(:name "content"
+                           :type string
+                           :description "The content to write to the file"))
+       :category "filesystem")
+    #+end_src
+
+**** Make directory (AI-generated)
+
+   #+begin_src emacs-lisp
+     (gptel-make-tool
+      :name "make_directory"                    ; javascript-style snake_case name
+      :function (lambda (path &optional parents)   ; the function that runs
+                  (let ((dir-path (expand-file-name path)))
+                    (condition-case err
+                        (progn
+                          (make-directory dir-path parents)
+                          (format "Created directory %s%s"
+                                  dir-path
+                                  (if parents " (with parents)" "")))
+                      (file-already-exists
+                       (format "Directory %s already exists" dir-path))
+                      (error (format "Error creating directory: %s"
+                                     (error-message-string err))))))
+      :description "Create a new directory at the specified path"
+      :args (list '(:name "path"
+                          :type string
+                          :description "The full path of the directory to create")
+                  '(:name "parents"
+                          :type boolean
+                          :description "Whether to create parent directories if they don't exist"
+                          :optional t))
+      :category "filesystem")
+#+end_src
+
+
+
+**** List directory (AI-generated)
+
+    #+begin_src emacs-lisp
+      (gptel-make-tool
+       :name "list_directory"                    ; javascript-style snake_case name
+       :function (lambda (path &optional include-hidden full-info)
+                   (condition-case err
+                       (let* ((dir-path (expand-file-name path))
+                              (files (directory-files dir-path nil nil include-hidden))
+                              (result-list files))
+                         (when full-info
+                           (setq result-list
+                                 (mapcar (lambda (file)
+                                           (let* ((full-path (expand-file-name file dir-path))
+                                                  (attrs (file-attributes full-path))
+                                                  (type (cond
+                                                         ((eq (car attrs) t) "directory")
+                                                         ((stringp (car attrs)) "symlink")
+                                                         (t "file")))
+                                                  (size (file-attribute-size attrs))
+                                                  (mod-time (format-time-string
+                                                             "%Y-%m-%d %H:%M:%S"
+                                                             (file-attribute-modification-time attrs))))
+                                             (format "%s  %10d  %s  %s"
+                                                     type size mod-time file)))
+                                         files)))
+                         (mapconcat #'identity result-list "\n"))
+                     (file-missing (format "Directory not found: %s" path))
+                     (error (format "Error listing directory: %s"
+                                    (error-message-string err)))))
+       :description "List the contents of a directory"
+       :args (list '(:name "path"
+                           :type string
+                           :description "The path of the directory to list")
+                   '(:name "include_hidden"
+                           :type boolean
+                           :description "Whether to include hidden files (starting with .)"
+                           :optional t)
+                   '(:name "full_info"
+                           :type boolean
+                           :description "Whether to include detailed file information"
+                           :optional t))
+       :category "filesystem")
+    #+end_src
+
+**** Read file
+
+    #+begin_src emacs-lisp
+      (gptel-make-tool
+       :name "read_file"                         ; javascript-style snake_case name
+       :function (lambda (path &optional max-size)
+                   (condition-case err
+                       (let ((file-path (expand-file-name path)))
+                         (if (file-exists-p file-path)
+                             (if (file-directory-p file-path)
+                                 (format "Error: %s is a directory, not a file" file-path)
+                               (with-temp-buffer
+                                 (insert-file-contents file-path)
+                                 (when (and max-size (> (buffer-size) max-size))
+                                   (narrow-to-region (point-min) (+ (point-min) max-size))
+                                   (goto-char (point-max))
+                                   (insert "\n...[content truncated]..."))
+                                 (buffer-string)))
+                           (format "Error: File %s does not exist" file-path)))
+                     (file-error (format "Error reading file: %s"
+                                         (error-message-string err)))
+                     (error (format "Unexpected error: %s"
+                                    (error-message-string err)))))
+       :description "Read the contents of a file at the specified path"
+       :args (list '(:name "path"
+                           :type string
+                           :description "The path of the file to read")
+                   '(:name "max_size"
+                           :type number
+                           :description "Maximum number of characters to read (optional)"
+                           :optional t))
+       :category "filesystem")
+    #+end_src
+
+**** Read url
+
+    #+begin_src emacs-lisp
+      (gptel-make-tool
+       :name "read_url"
+       :function (lambda (url &optional timeout max-size)
+                   (condition-case err
+                       (let* ((timeout-value (or timeout 10))
+                              (max-size-value (or max-size 100000))
+                              (url-request-extra-headers
+                               '(("User-Agent" . "Mozilla/5.0 (compatible; Emacs)")))
+                              (buffer (url-retrieve-synchronously
+                                       url t nil timeout-value))
+                              content)
+                         (if (not buffer)
+                             "Error: Failed to retrieve URL (no response)"
+                           (with-current-buffer buffer
+                             (goto-char (point-min))
+                             (re-search-forward "^$" nil t)
+                             (forward-char)
+                             (setq content (buffer-substring (point) (point-max)))
+                             (when (and max-size (> (length content) max-size-value))
+                               (setq content
+                                     (concat (substring content 0 max-size-value)
+                                             "\n...[content truncated]...")))
+                             (kill-buffer buffer)
+                             content)))
+                     (error (format "Error fetching URL: %s"
+                                    (error-message-string err)))))
+       :description "Fetch content from a URL"
+       :args (list '(:name "url"
+                           :type string
+                           :description "The URL to fetch (must include http:// or https://)")
+                   '(:name "timeout"
+                           :type number
+                           :description "Timeout in seconds (default: 10)"
+                           :optional t)
+                   '(:name "max_size"
+                           :type number
+                           :description "Maximum size in characters to return (default: 100000)"
+                           :optional t))
+       :category "web")
+    #+end_src
 
 ** Prettier
 
