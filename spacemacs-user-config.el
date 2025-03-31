@@ -1738,6 +1738,7 @@ _u_pdate
   :after eshell
   :config
   (eshell-atuin-mode))
+(use-package eshell-z :after eshell :config (require 'eshell-z))
 (use-package compile-angel
   :ensure t
   :demand t

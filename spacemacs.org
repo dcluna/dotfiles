@@ -3223,6 +3223,12 @@
          (eshell-atuin-mode))
      #+end_src
 
+*** Eshell-z
+
+     #+begin_src emacs-lisp
+       (use-package eshell-z :after eshell :config (require 'eshell-z))
+     #+end_src
+
 ** Compile-angel
 
     #+begin_src emacs-lisp
