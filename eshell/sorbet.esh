@@ -1,0 +1,20 @@
+(defun dcl/sorbet-class-check (klass)
+  (progn
+    (ruby-send-string (format "%s.is_a?(Class) ? 'class %s; end' : 'module %s; end'" klass klass klass))
+    (message (kill-new (read (ruby-print-result-value))))))
+
+(defun dcl/sorbet-process-namespace-prefixes (namespace-string)
+  "Call dcl/sorbet-class-check on every prefix of NAMESPACE-STRING.
+For example, with 'Aws::S3::Client', calls the function on 'Aws', 'Aws::S3',
+and 'Aws::S3::Client'."
+  (let* ((components (split-string namespace-string "::"))
+         (prefix ""))
+    (dolist (component components)
+      (setq prefix (if (string-empty-p prefix)
+                       component
+                     (concat prefix "::" component)))
+      (dcl/sorbet-class-check prefix))))
+
+(defun dcl/sorbet-class-check-on-active-region (beg end)
+  (interactive "r")
+  (dcl/sorbet-process-namespace-prefixes (buffer-substring-no-properties beg end)))
