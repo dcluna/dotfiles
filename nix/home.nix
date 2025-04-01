@@ -48,7 +48,7 @@ in
     pkgs.pigz
     pkgs.radare2
     pkgs.ripgrep
-    # pkgs.xsv
+    pkgs.xan
     pkgs.k9s
     pkgs.rbspy
     pkgs.stern
