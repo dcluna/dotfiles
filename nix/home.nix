@@ -38,7 +38,7 @@ in
     pkgs.hledger
     pkgs.ledger
     pkgs.asciinema
-    # pkgs.csvkit
+    pkgs.csvkit
     pkgs.direnv
     pkgs.htop
     pkgs.httpie
@@ -106,6 +106,7 @@ in
     pkgs.git-who
     pkgs.google-cloud-sdk
     # pkgs.wireproxy
+    pkgs.gnuplot
   ];
 
   home.file = {
