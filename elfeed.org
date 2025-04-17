@@ -129,6 +129,8 @@
 *** [[https://simonsafar.com/index.xml][Simon Safar]]
 *** [[https://interconnected.org/home/feed][interconnected.org - Matt Webb]]
 *** [[https://ratfactor.com/atom.xml][Ratfactor - Dave Gauer]]    :ratfactor:
+*** [[https://andrey.eremin.eu/feed/blog/feed.xml][Static Ruby - Andrey Eremin]] :ruby:
+*** [[https://worksonmymachine.substack.com/feed][WorksOnMyMachine]]     :ai:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
@@ -222,6 +224,8 @@
 *** [[https://dellsystem.me/atom][Wendy Liu - dellsystem]]
 *** [[https://nicolasdvillarreal.substack.com/feed][Pre-History of an Encounter - Nicolas D. Villarreal]]
 *** [[https://critisticuffs.org/feed.xml][critisticuffs.org]]                                         :critisticuffs:
+** Space Merchant stuff                                              :adtech:
+*** [[https://www.adexchanger.com/feed][AdExchanger]]
 ** Games                                                              :games:
 *** [[https://steamcommunity.com/groups/GrabFreeGames/rss/][GrabFreeGames]]
 *** [[https://aftermath.site/rss][Aftermath]]                                                         :noisy:
