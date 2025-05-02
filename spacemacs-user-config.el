@@ -380,10 +380,20 @@
   (interactive (list (thing-at-point 'word t)))
   (message (shell-command-to-string (format "date --date @%s" unix-date))))
 
-(defun dcl/emamux-vterm ()
-  (interactive)
-  (vterm "*emamux-vterm*")
-  (vterm-send-string "tmux attach -t emamux"))
+(defun dcl/emamux-vterm (session-name)
+  "Open vterm and attach to specified tmux session.
+Offers completion for existing tmux sessions."
+  (interactive
+   (let* ((sessions-output (shell-command-to-string "tmux list-sessions -F '#{session_name}' 2>/dev/null || echo ''"))
+          (sessions (split-string sessions-output "\n" t))
+          (default "emamux")
+          (prompt (if sessions
+                      "Tmux session: "
+                    "Tmux session (default: emamux): ")))
+     (list (completing-read prompt sessions nil nil nil nil default))))
+  (let ((buffer-name (format "*%s-vterm*" session-name)))
+    (vterm buffer-name)
+    (vterm-send-string (format "tmux attach -t %s" session-name))))
 (defun dcl-set-dotenv (text)
   "Sets environment variables specified in TEXT, one per line."
   (interactive (list (if ( region-active-p )
