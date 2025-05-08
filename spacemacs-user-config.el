@@ -1302,6 +1302,7 @@ Offers completion for existing tmux sessions."
         org-roam-ui-follow t
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
+(autoload 'gptel-context-add "gptel-context")
 (let ((gpt-keymap (make-sparse-keymap)))
   ;; (define-key gpt-keymap "c" 'chat)
   ;; (define-key gpt-keymap "u" 'chat-query-user)

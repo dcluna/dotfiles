@@ -2676,6 +2676,10 @@
 ** GPT / GPTel
 
    #+begin_src emacs-lisp
+     (autoload 'gptel-context-add "gptel-context")
+   #+end_src
+
+   #+begin_src emacs-lisp
      (let ((gpt-keymap (make-sparse-keymap)))
        ;; (define-key gpt-keymap "c" 'chat)
        ;; (define-key gpt-keymap "u" 'chat-query-user)
