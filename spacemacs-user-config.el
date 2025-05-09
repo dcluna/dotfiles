@@ -695,6 +695,7 @@ Offers completion for existing tmux sessions."
   (let ((filename buffer-file-name)
         (root (projectile-project-root)))
     (kill-new (message (replace-regexp-in-string root "" filename)))))
+(autoload 'ivy-ghq-open "ivy-ghq")
 (let ((ghq-keymap (make-sparse-keymap)))
   (define-key ghq-keymap "h" 'ivy-ghq-open)
   (define-key ghq-keymap "g" 'ghq)

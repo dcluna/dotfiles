@@ -1609,6 +1609,10 @@
    #+END_SRC
 ** GHQ
 
+   #+begin_src emacs-lisp
+     (autoload 'ivy-ghq-open "ivy-ghq")
+   #+end_src
+
    #+BEGIN_SRC emacs-lisp
      (let ((ghq-keymap (make-sparse-keymap)))
        (define-key ghq-keymap "h" 'ivy-ghq-open)
