@@ -1,14 +1,14 @@
-alias chromiumdebugnetwork chromium-browser --remote-debugging-port=9222 --auto-open-devtools-for-tabs --network
-alias chromiumdebug chromium-browser --remote-debugging-port=9222
-alias tpa bin/tapioca gem --all -V; bin/tapioca annotations; bin/tapioca dsl -V
-alias sorbet_refresh_errors rm sorbet_errors.txt; srb tc > sorbet_errors.txt 2>&1; grep 'Unable to resolve' sorbet_errors.txt | sed -E 's/.*?(Unable to resolve.*)$/\1/' | sort > #<buffer sorted_constants.txt>; (with-current-buffer (get-buffer "sorbet_errors.txt") (xterm-color-colorize-buffer)); (with-current-buffer (get-buffer "sorted_constants.txt") (spacemacs/uniquify-lines) (xterm-color-colorize-buffer))
-alias ffow find-file-other-window
-alias pgsyncdb pgsync --debug --in-batches
-alias pgsyncib pgsync --disable-integrity --in-batches
-alias pgsyncdfb pgsync --disable-integrity --defer-constraints-v2 --in-batches --debug
-alias pgsyncd pgsync --debug
-alias pgsyncdf pgsync --disable-integrity --defer-constraints-v2 --debug
-alias hst eshell-atuin-history
-alias chromiumspec chromium-browser --remote-debugging-port=9222
-alias localwebserver ruby -rwebrick -eWEBrick::HTTPServer.new(:Port => 8000, :DocumentRoot => Dir.pwd, RequestCallback: Proc.new{|req,res| res['Access-Control-Allow-Origin'] = '*' }).start
+alias chromiumspec chromium-browser --remote-debugging-port=9222 $*
+alias chromiumdebugnetwork chromium-browser --remote-debugging-port=9222 --auto-open-devtools-for-tabs --network $*
+alias chromiumdebug chromium-browser --remote-debugging-port=9222 $*
 alias rbannotate bundle exec annotate -e tests,fixtures,factories,serializers --models $*
+alias localwebserver ruby -rwebrick -eWEBrick::HTTPServer.new(:Port => 8000, :DocumentRoot => Dir.pwd, RequestCallback: Proc.new{|req,res| res['Access-Control-Allow-Origin'] = '*' }).start
+alias hst eshell-atuin-history
+alias pgsyncdf pgsync --disable-integrity --defer-constraints-v2 --debug
+alias pgsyncd pgsync --debug
+alias pgsyncdfb pgsync --disable-integrity --defer-constraints-v2 --in-batches --debug
+alias pgsyncib pgsync --disable-integrity --in-batches
+alias pgsyncdb pgsync --debug --in-batches
+alias ffow find-file-other-window
+alias sorbet_refresh_errors rm sorbet_errors.txt; srb tc > sorbet_errors.txt 2>&1; grep 'Unable to resolve' sorbet_errors.txt | sed -E 's/.*?(Unable to resolve.*)$/\1/' | sort > #<buffer sorted_constants.txt>; (with-current-buffer (get-buffer "sorbet_errors.txt") (xterm-color-colorize-buffer)); (with-current-buffer (get-buffer "sorted_constants.txt") (spacemacs/uniquify-lines) (xterm-color-colorize-buffer))
+alias tpa bin/tapioca gem --all -V; bin/tapioca annotations; bin/tapioca dsl -V
