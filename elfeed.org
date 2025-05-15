@@ -37,7 +37,7 @@
 **** [[https://vadimkravcenko.com/feed][Vadim Kravcenko - CTO Newsletter]]
 *** Jobs                                                               :jobs:
 **** [[https://jobs.rubyonrails.org/jobs.rss][Rails Jobs Board]]                                                 :rails:
-**** [[https://rubyonremote.com/jobs.rss][RubyOnRemote Jobs]] :ruby:rails:rubyonremote:
+**** [[https://rubyonremote.com/jobs.rss][RubyOnRemote Jobs]] :ruby:rails:rubyonremote:elfbroken:
 **** [[https://jobs.gorails.com/jobs.rss][GoRails Job Board]]                                                :rails:
 **** Hacker News                                                         :hn:
 ***** [[https://hnrss.org/jobs][YC-funded jobs]]                                                     :yc:
@@ -131,6 +131,9 @@
 *** [[https://ratfactor.com/atom.xml][Ratfactor - Dave Gauer]]    :ratfactor:
 *** [[https://andrey.eremin.eu/feed/blog/feed.xml][Static Ruby - Andrey Eremin]] :ruby:
 *** [[https://worksonmymachine.substack.com/feed][WorksOnMyMachine]]     :ai:
+*** [[https://thegreatrace.substack.com/feed][The Great Race - Gabriel Weinberg / ddg]] :ddg:
+*** [[https://blog.headius.com/feed][Charles Nutter - JRuby]] :jruby:headius:cnutter:
+*** [[https://gomakethings.com/feed/index.xml][Go Make Things]]    :frontend:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
