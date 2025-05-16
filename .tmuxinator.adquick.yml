@@ -51,12 +51,14 @@ windows:
       <% replica_url = ::URI.parse(`grep REPLICA_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
       <% main_url = ::URI.parse(`grep ^DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
       <% alloy_url = ::URI.parse(`grep ALLOY_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
+      <% pooler_url = ::URI.parse(`grep DATABASE_CONNECTION_POOL_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
       root: <%= ENV['ADQUICK_DIR'] %>/adquick
       layout: tiled
       panes:
         - pgcenter top -h <%= main_url.host %> -U <%= main_url.user %> -d <%= main_url.path[1..-1] %>
         - pgcenter top -h <%= replica_url.host %> -U <%= replica_url.user %> -d <%= replica_url.path[1..-1] %>
         - pgcenter top -h <%= alloy_url.host %> -U <%= alloy_url.user %> -d <%= alloy_url.path[1..-1] %>
+        - pgcenter top -h <%= pooler_url.host %> -U <%= pooler_url.user %> -d <%= pooler_url.path[1..-1] %> -p <%= pooler_url.port %>
   - servers:
       root: <%= ENV['ADQUICK_DIR'] %>/adquick
       layout: tiled
