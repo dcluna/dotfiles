@@ -1321,6 +1321,7 @@ Offers completion for existing tmux sessions."
 (when (featurep 'org-ai)
   (org-ai-global-mode 1)
   (add-hook 'org-mode-hook 'org-ai-mode))
+(require 'gptel-integrations)
 (setq
  gptel-model 'deepseek-r1:latest
  gptel-backend (gptel-make-ollama "Deepseek"

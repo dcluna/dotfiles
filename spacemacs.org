@@ -2707,6 +2707,10 @@
    #+end_src
 
    #+begin_src emacs-lisp
+     (require 'gptel-integrations)
+   #+end_src
+
+   #+begin_src emacs-lisp
      (setq
       gptel-model 'deepseek-r1:latest
       gptel-backend (gptel-make-ollama "Deepseek"
