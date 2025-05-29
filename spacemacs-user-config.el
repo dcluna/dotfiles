@@ -1786,8 +1786,8 @@ _u_pdate
   ;; (setenv "OPENROUTER_API_KEY" (my-get-openrouter-api-key))
   :custom
                                         ; See the Configuration section below
-  (aidermacs-use-architect-mode t)
-  (aidermacs-default-model "sonnet")
+  (aidermacs-use-architect-mode nil)
+  (aidermacs-default-model "openai/o4-mini")
   (aidermacs-backend 'vterm)
   (aidermacs-show-diff-after-change t))
 (use-package whisper
