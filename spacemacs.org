@@ -3299,7 +3299,8 @@
         (aidermacs-use-architect-mode nil)
         (aidermacs-default-model "openai/o4-mini")
         (aidermacs-backend 'vterm)
-        (aidermacs-show-diff-after-change t))
+        (aidermacs-show-diff-after-change t)
+        (evil-leader/set-key "o d" 'aidermacs-transient-menu))
     #+end_src
 ** Whisper.el
 

@@ -1789,7 +1789,8 @@ _u_pdate
   (aidermacs-use-architect-mode nil)
   (aidermacs-default-model "openai/o4-mini")
   (aidermacs-backend 'vterm)
-  (aidermacs-show-diff-after-change t))
+  (aidermacs-show-diff-after-change t)
+  (evil-leader/set-key "o d" 'aidermacs-transient-menu))
 (use-package whisper
   :straight (:type git :host github :repo "natrys/whisper.el" :files ("*.el"))
   ;; :bind ("C-c r" . whisper-run)
