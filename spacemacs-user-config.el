@@ -1778,6 +1778,7 @@ _u_pdate
   :straight (:type git :host github :repo "MatthewZMD/aidermacs" :branch "main"
                    :files ("*.el"))
   :bind (("C-c a" . aidermacs-transient-menu))
+  :init (evil-leader/set-key "o d" 'aidermacs-transient-menu)
   :config
                                         ; Set API_KEY in .bashrc, that will automatically picked up by aider or in elisp
   (setenv "ANTHROPIC_API_KEY" anthropic-api-key)
@@ -1788,9 +1789,10 @@ _u_pdate
                                         ; See the Configuration section below
   (aidermacs-use-architect-mode nil)
   (aidermacs-default-model "openai/o4-mini")
+  (aidermacs-weak-model "openai/o4-mini")
+  (aidermacs-extra-args '("--chat-language English"))
   (aidermacs-backend 'vterm)
-  (aidermacs-show-diff-after-change t)
-  (evil-leader/set-key "o d" 'aidermacs-transient-menu))
+  (aidermacs-show-diff-after-change t))
 (use-package whisper
   :straight (:type git :host github :repo "natrys/whisper.el" :files ("*.el"))
   ;; :bind ("C-c r" . whisper-run)
