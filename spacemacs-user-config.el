@@ -1376,32 +1376,32 @@ Offers completion for existing tmux sessions."
 (setq
   gptel-default-mode 'org-mode
   gptel-track-media t
-  gptel-model "ChatGPT"
+  gptel-model 'gpt-4o-mini
   gptel-backend gptel--openai)
 
 (setq
   gptel-default-mode 'org-mode
   gptel-track-media t
-  gptel-model "claude-3-5-sonnet-20240620"
+  gptel-model 'claude-3-5-sonnet-20240620
   gptel-backend dcl/gptel-sonnet-3-5)
 
 (setq
   gptel-backend dcl/gptel-openrouter
   gptel-cache t
   gptel-proxy "localhost:8090"
-  gptel-model "google/gemini-2.5-pro-exp-03-25:free")
+  gptel-model 'google/gemini-2.5-pro-exp-03-25:free)
 
 (setq
  gptel-backend dcl/gptel-gemini
  gptel-cache t
  gptel-proxy "localhost:8090"
- gptel-model "gemini-2.5-pro-exp-03-25")
+ gptel-model 'gemini-2.5-pro-exp-03-25)
 
 (setq
  gptel-backend dcl/gptel-sonnet-thinking
  gptel-cache t
  ;; gptel-proxy "localhost:8090"
- gptel-model "claude-3-7-sonnet-20250219")
+ gptel-model 'claude-3-7-sonnet-20250219)
 (defun gptel-without-purpose-mode (orig-gptel &rest args)
   "Disable purpose-mode when calling gptel."
   (purpose-mode -1)
