@@ -1790,7 +1790,7 @@ _u_pdate
   (aidermacs-use-architect-mode nil)
   (aidermacs-default-model "openai/o4-mini")
   (aidermacs-weak-model "openai/o4-mini")
-  (aidermacs-extra-args '("--chat-language English"))
+  (aidermacs-extra-args (list "--chat-language English" (format "--api-key openai=%s" openai-key)))
   (aidermacs-backend 'vterm)
   (aidermacs-show-diff-after-change t))
 (use-package whisper
