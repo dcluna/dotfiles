@@ -1792,6 +1792,7 @@ _u_pdate
   (aidermacs-weak-model "openai/o4-mini")
   (aidermacs-extra-args (list "--chat-language English" (format "--api-key openai=%s" openai-key)))
   (aidermacs-backend 'vterm)
+  (aidermacs-watch-files t)
   (aidermacs-show-diff-after-change t))
 (use-package whisper
   :straight (:type git :host github :repo "natrys/whisper.el" :files ("*.el"))
