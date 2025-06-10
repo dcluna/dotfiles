@@ -258,6 +258,7 @@ auto-commits: false
 
 ## Enable/disable watching files for ai coding comments (default: False)
 #watch-files: false
+watch-files: true
 
 ########################
 # Fixing and committing:
