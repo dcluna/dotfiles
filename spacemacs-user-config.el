@@ -1376,13 +1376,8 @@ Offers completion for existing tmux sessions."
 (setq
   gptel-default-mode 'org-mode
   gptel-track-media t
-  gptel-model 'gpt-4o-mini
-  gptel-backend gptel--openai)
-
-(setq
-  gptel-default-mode 'org-mode
-  gptel-track-media t
   gptel-model 'claude-3-5-sonnet-20240620
+  gptel-proxy "localhost:8090"
   gptel-backend dcl/gptel-sonnet-3-5)
 
 (setq
@@ -1400,8 +1395,15 @@ Offers completion for existing tmux sessions."
 (setq
  gptel-backend dcl/gptel-sonnet-thinking
  gptel-cache t
- ;; gptel-proxy "localhost:8090"
+ gptel-proxy "localhost:8090"
  gptel-model 'claude-3-7-sonnet-20250219)
+
+(setq
+ gptel-default-mode 'org-mode
+ gptel-track-media t
+ gptel-model 'gpt-4o-mini
+ gptel-proxy "localhost:8090"
+ gptel-backend gptel--openai)
 (defun gptel-without-purpose-mode (orig-gptel &rest args)
   "Disable purpose-mode when calling gptel."
   (purpose-mode -1)
