@@ -107,6 +107,7 @@ in
     pkgs.google-cloud-sdk
     # pkgs.wireproxy
     pkgs.gnuplot
+    pkgs.watchman
   ];
 
   home.file = {
