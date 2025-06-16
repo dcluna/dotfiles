@@ -1,4 +1,5 @@
 colors: false
+no_tty: true
 
 pre-commit:
   parallel: true
@@ -143,6 +144,7 @@ pre-push:
     tapioca: &tapioca_all
       tags:
         - sorbet
+        - tapioca
       run: |
         bin/tapioca gem --all -V; bin/tapioca annotations; bin/tapioca dsl -V
       runner: zsh
