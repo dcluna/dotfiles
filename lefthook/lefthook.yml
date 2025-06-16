@@ -4,6 +4,9 @@ pre-commit:
   parallel: true
   commands:
     bundle_audit:
+      tags:
+        - security
+        - dependencies
       run: bundle audit
       skip:
         - merge
@@ -17,6 +20,9 @@ pre-commit:
     #     - rebase
 
     flay:
+      tags:
+        - code-quality
+        - duplication
       glob: "*.rb"
       exclude: "Gemfile|db/schema.rb|db/data_schema.rb"
       skip:
@@ -25,6 +31,9 @@ pre-commit:
       run: flay {staged_files}
 
     trailing_whitespace:
+      tags:
+        - formatting
+        - style
       glob: "*"
       exclude: "db/structure.sql|spec/vcr_cassettes/**/*"
       skip:
@@ -33,6 +42,9 @@ pre-commit:
       run: git diff --check {staged_files}
 
     yaml_lint:
+      tags:
+        - linting
+        - style
       glob: "*.{yml,yaml}"
       skip:
         - merge
@@ -41,6 +53,10 @@ pre-commit:
       on_fail: warn
 
     ruby_syntax:
+      tags:
+        - qa
+        - linting
+        - syntax
       glob: "*.rb"
       skip:
         - merge
@@ -48,6 +64,9 @@ pre-commit:
       run: ruby -c {staged_files}
 
     haml_lint:
+      tags:
+        - linting
+        - templates
       glob: "*.haml"
       skip:
         - merge
@@ -55,6 +74,9 @@ pre-commit:
       run: haml-lint {staged_files}
 
     erb_lint:
+      tags:
+        - linting
+        - templates
       glob: "*.erb"
       skip:
         - merge
@@ -62,6 +84,8 @@ pre-commit:
       run: erblint {staged_files}
 
     rubocop-debugger:
+      tags:
+        - qa
       skip:
         - merge
         - rebase
@@ -70,6 +94,9 @@ pre-commit:
         bundle exec rubocop --fail-level warning --raise-cop-error -c .rubocop.yml --only Lint/Debugger {staged_files}
 
     sorbet:
+      tags:
+        - sorbet
+        - qa
       skip:
         - merge
         - rebase
@@ -78,10 +105,16 @@ pre-commit:
 prepare-commit-msg:
   commands:
     gpt_commit:
+      tags:
+        - ai
+        - commit-message
       enabled: false
       run: gptcommithook
 
     opencommit:
+      tags:
+        - ai
+        - commit-message
       enabled: false
       run: opencommit
 
@@ -90,6 +123,9 @@ pre-push:
 
   commands:
     protected_branches:
+      tags:
+        - safety
+        - git
       run: |
         BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
         PROTECTED_BRANCHES="main master develop production"
@@ -99,9 +135,14 @@ pre-push:
         fi
 
     check_structure_sql:
+      tags:
+        - database
+        - schema
       run: ./bin/check-timestamps.sh
 
     tapioca: &tapioca_all
+      tags:
+        - sorbet
       run: |
         bin/tapioca gem --all -V; bin/tapioca annotations; bin/tapioca dsl -V
       runner: zsh
@@ -117,6 +158,9 @@ post-checkout:
       <<: *tapioca_all
 
     index_tags:
+      tags:
+        - tooling
+        - development
       only:
         - *only_master
       run: ctags -R --exclude=.git --exclude=node_modules --exclude=vendor
