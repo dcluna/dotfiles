@@ -1,0 +1,122 @@
+colors: false
+
+pre-commit:
+  parallel: true
+  commands:
+    bundle_audit:
+      run: bundle audit
+      skip:
+        - merge
+        - rebase
+      on_fail: warn
+
+    # fasterer:
+    #   run: fasterer
+    #   skip:
+    #     - merge
+    #     - rebase
+
+    flay:
+      glob: "*.rb"
+      exclude: "Gemfile|db/schema.rb|db/data_schema.rb"
+      skip:
+        - merge
+        - rebase
+      run: flay {staged_files}
+
+    trailing_whitespace:
+      glob: "*"
+      exclude: "db/structure.sql|spec/vcr_cassettes/**/*"
+      skip:
+        - merge
+        - rebase
+      run: git diff --check {staged_files}
+
+    yaml_lint:
+      glob: "*.{yml,yaml}"
+      skip:
+        - merge
+        - rebase
+      run: yamllint {staged_files}
+      on_fail: warn
+
+    ruby_syntax:
+      glob: "*.rb"
+      skip:
+        - merge
+        - rebase
+      run: ruby -c {staged_files}
+
+    haml_lint:
+      glob: "*.haml"
+      skip:
+        - merge
+        - rebase
+      run: haml-lint {staged_files}
+
+    erb_lint:
+      glob: "*.erb"
+      skip:
+        - merge
+        - rebase
+      run: erblint {staged_files}
+
+    rubocop-debugger:
+      skip:
+        - merge
+        - rebase
+      glob: "*.rb"
+      run: |
+        bundle exec rubocop --fail-level warning --raise-cop-error -c .rubocop.yml --only Lint/Debugger {staged_files}
+
+    sorbet:
+      skip:
+        - merge
+        - rebase
+      run: bin/srb tc
+
+prepare-commit-msg:
+  commands:
+    gpt_commit:
+      enabled: false
+      run: gptcommithook
+
+    opencommit:
+      enabled: false
+      run: opencommit
+
+pre-push:
+  parallel: true
+
+  commands:
+    protected_branches:
+      run: |
+        BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+        PROTECTED_BRANCHES="main master develop production"
+        if [[ $PROTECTED_BRANCHES =~ $BRANCH ]]; then
+          echo "Pushing to protected branch '$BRANCH' is not allowed"
+          exit 1
+        fi
+
+    check_structure_sql:
+      run: ./bin/check-timestamps.sh
+
+    tapioca: &tapioca_all
+      run: |
+        bin/tapioca gem --all -V; bin/tapioca annotations; bin/tapioca dsl -V
+      runner: zsh
+
+post-checkout:
+  quiet: true
+  parallel: true
+
+  commands:
+    tapioca:
+      only: &only_master
+        - ref: master
+      <<: *tapioca_all
+
+    index_tags:
+      only:
+        - *only_master
+      run: ctags -R --exclude=.git --exclude=node_modules --exclude=vendor
