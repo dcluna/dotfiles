@@ -227,6 +227,9 @@
 *** [[https://dellsystem.me/atom][Wendy Liu - dellsystem]]
 *** [[https://nicolasdvillarreal.substack.com/feed][Pre-History of an Encounter - Nicolas D. Villarreal]]
 *** [[https://critisticuffs.org/feed.xml][critisticuffs.org]]                                         :critisticuffs:
+*** [[https://dialecticaldispatches.substack.com/feed][Dialectical Dispatches - Yog]] :yog:
+*** [[https://monthlyreview.org/feed][Monthly Review]] :monthlyreview:mreview:
+*** [[https://newleftreview.org/feed][New Left Review]]             :newleft:
 ** Space Merchant stuff                                              :adtech:
 *** [[https://www.adexchanger.com/feed][AdExchanger]]
 ** Games                                                              :games:
