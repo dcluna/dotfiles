@@ -12,7 +12,8 @@ pre-commit:
       skip:
         - merge
         - rebase
-      on_fail: warn
+      only: &only_master
+        - ref: master
 
     # fasterer:
     #   run: fasterer
@@ -105,19 +106,17 @@ pre-commit:
 
 prepare-commit-msg:
   commands:
-    gpt_commit:
-      tags:
-        - ai
-        - commit-message
-      enabled: false
-      run: gptcommithook
+    # gpt_commit:
+    #   tags:
+    #     - ai
+    #     - commit-message
+    #   run: gptcommithook
 
-    opencommit:
-      tags:
-        - ai
-        - commit-message
-      enabled: false
-      run: opencommit
+    # opencommit:
+    #   tags:
+    #     - ai
+    #     - commit-message
+    #   run: opencommit
 
 pre-push:
   parallel: true
@@ -155,8 +154,8 @@ post-checkout:
 
   commands:
     tapioca:
-      only: &only_master
-        - ref: master
+      only:
+        - *only_master
       <<: *tapioca_all
 
     index_tags:
