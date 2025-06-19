@@ -140,12 +140,23 @@ pre-push:
         - schema
       run: ./bin/check-timestamps.sh
 
+    rspec_ignore_in_ci:
+      skip: true
+      run: FDOC=1 FDOC_STAMP="fdoc:consider" bundle exec rspec --tag @ignore_in_ci --format documentation --format progress --profile 10 | tee /tmp/rspec_ignore_in_ci_output.txt
+
     tapioca: &tapioca_all
       tags:
         - sorbet
         - tapioca
       run: |
-        bin/tapioca gem --all -V; bin/tapioca annotations; bin/tapioca dsl -V
+        bin/tapioca gem --all -V
+        bin/tapioca annotations
+        bin/tapioca dsl -V
+        if [[ -n "$(git --no-pager status -s --porcelain sorbet/)" ]]; then
+            printf "Error: Uncommitted changes detected in sorbet/ directory\n"
+            git --no-pager status sorbet/
+            exit 1
+        fi
       runner: zsh
 
 post-checkout:
