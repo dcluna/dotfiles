@@ -3307,6 +3307,19 @@
         (aidermacs-watch-files t)
         (aidermacs-show-diff-after-change t))
     #+end_src
+
+** Claudemacs
+
+    #+begin_src emacs-lisp
+      (use-package claudemacs
+        :straight (:type git :host github :repo "cpoile/claudemacs" :branch "main")
+        :bind (("C-c m" . claudemacs-transient-menu))
+        :init (evil-leader/set-key "o m" 'claudemacs-transient-menu)
+        :custom
+        (claudemacs-prefer-projectile-root t)
+        (claudemacs-m-return-is-submit t))
+    #+end_src
+
 ** Whisper.el
 
     #+begin_src emacs-lisp
