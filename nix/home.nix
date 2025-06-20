@@ -109,6 +109,7 @@ in
     pkgs.gnuplot
     pkgs.watchman
     pkgs.lefthook
+    pkgs.just
   ];
 
   home.file = {
