@@ -3320,6 +3320,18 @@
         (claudemacs-m-return-is-submit t))
     #+end_src
 
+** Just
+
+    #+begin_src emacs-lisp
+      (use-package just-mode :ensure t)
+      (use-package justl
+        :straight (justl :fetcher github :repo "psibi/justl.el")
+        :config (spacemacs/set-leader-keys "oj" 'justl)
+        :ensure t)
+      ;; :custom
+      ;; (justl-executable "/home/sibi/bin/just")
+    #+end_src
+
 ** Whisper.el
 
     #+begin_src emacs-lisp

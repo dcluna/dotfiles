@@ -1796,6 +1796,20 @@ _u_pdate
   (aidermacs-backend 'vterm)
   (aidermacs-watch-files t)
   (aidermacs-show-diff-after-change t))
+(use-package claudemacs
+  :straight (:type git :host github :repo "cpoile/claudemacs" :branch "main")
+  :bind (("C-c m" . claudemacs-transient-menu))
+  :init (evil-leader/set-key "o m" 'claudemacs-transient-menu)
+  :custom
+  (claudemacs-prefer-projectile-root t)
+  (claudemacs-m-return-is-submit t))
+(use-package just-mode :ensure t)
+(use-package justl
+  :straight (justl :fetcher github :repo "psibi/justl.el")
+  :config (spacemacs/set-leader-keys "oj" 'justl)
+  :ensure t)
+;; :custom
+;; (justl-executable "/home/sibi/bin/just")
 (use-package whisper
   :straight (:type git :host github :repo "natrys/whisper.el" :files ("*.el"))
   ;; :bind ("C-c r" . whisper-run)
