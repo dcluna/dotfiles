@@ -110,6 +110,7 @@ in
     pkgs.watchman
     pkgs.lefthook
     pkgs.just
+    pkgs.codex
   ];
 
   home.file = {
