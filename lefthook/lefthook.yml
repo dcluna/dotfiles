@@ -176,3 +176,14 @@ post-checkout:
       only:
         - *only_master
       run: ctags -R --exclude=.git --exclude=node_modules --exclude=vendor
+
+    copy-env-files:
+      # Run only if the checkout is a worktree update
+      tags:
+        - worktree
+      run: |
+        # Detect if this is a worktree checkout
+        if [ "$GIT_WORK_TREE" != "" ]; then
+          # Copy all .env files from parent directory
+          cp "$GIT_DIR/.env*" .
+        fi
