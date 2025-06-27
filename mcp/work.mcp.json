@@ -23,6 +23,15 @@
     "memory": {
       "command": "podman",
       "args": ["run", "-i", "-v", "claude-memory:/app/dist", "--rm", "mcp/memory"]
+    },
+    "sequentialthinking": {
+      "command": "podman",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "mcp/sequentialthinking"
+      ]
     }
   }
 }
