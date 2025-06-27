@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "podman",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--mount",
+        "type=bind,src=/home/dcluna/Projects/AdQuick/adquick,dst=/projects/adquick,ro",
+        "mcp/filesystem",
+        "/projects"
+      ]
+    }
+  }
+}
