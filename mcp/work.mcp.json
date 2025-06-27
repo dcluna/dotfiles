@@ -43,6 +43,10 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "mcp/github"
       ]
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
     }
   }
 }
