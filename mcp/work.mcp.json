@@ -11,6 +11,10 @@
         "mcp/filesystem",
         "/projects"
       ]
+    },
+    "git": {
+      "command": "podman",
+      "args": ["run", "--rm", "-i", "--mount", "type=bind,src=/home/dcluna/Projects/AdQuick/adquick,dst=/home/dcluna/Projects/AdQuick/adquick", "mcp/git"]
     }
   }
 }
