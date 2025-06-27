@@ -19,6 +19,10 @@
     "fetch": {
       "command": "podman",
       "args": ["run", "-i", "--rm", "mcp/fetch"]
+    },
+    "memory": {
+      "command": "podman",
+      "args": ["run", "-i", "-v", "claude-memory:/app/dist", "--rm", "mcp/memory"]
     }
   }
 }
