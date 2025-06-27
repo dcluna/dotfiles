@@ -1769,11 +1769,14 @@ _u_pdate
   (push "\.emacs\.d\/.*\.el" compile-angel-excluded-files-regexps)
   (compile-angel-on-load-mode))
 (use-package claude-code
-  :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main"
-                   :files ("*.el" (:exclude "demo.gif")))
+  :ensure t
+  :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
+  ;; :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main"
+  ;;                  :files ("*.el" (:exclude "demo.gif")))
   ;; :bind-keymap
   ;; ("C-c c" . claude-code-command-map)
   :hook ((claude-code--start . sm-setup-claude-faces))
+  :init (evil-leader/set-key "o m" 'claude-code-transient)
   :config
   (claude-code-mode))
 (use-package aidermacs
@@ -1799,6 +1802,7 @@ _u_pdate
 (use-package claudemacs
   :straight (:type git :host github :repo "cpoile/claudemacs" :branch "main")
   :bind (("C-c m" . claudemacs-transient-menu))
+  :disabled
   :init (evil-leader/set-key "o m" 'claudemacs-transient-menu)
   :custom
   (claudemacs-prefer-projectile-root t)
