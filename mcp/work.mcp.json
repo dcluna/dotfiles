@@ -15,6 +15,10 @@
     "git": {
       "command": "podman",
       "args": ["run", "--rm", "-i", "--mount", "type=bind,src=/home/dcluna/Projects/AdQuick/adquick,dst=/home/dcluna/Projects/AdQuick/adquick", "mcp/git"]
+    },
+    "fetch": {
+      "command": "podman",
+      "args": ["run", "-i", "--rm", "mcp/fetch"]
     }
   }
 }
