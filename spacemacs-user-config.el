@@ -1815,6 +1815,7 @@ _u_pdate
 (use-package justl
   :straight (justl :fetcher github :repo "psibi/justl.el")
   :config (spacemacs/set-leader-keys "oj" 'justl)
+          (evilified-state-evilify-map justl-mode-map :mode justl-mode)
   :ensure t)
 ;; :custom
 ;; (justl-executable "/home/sibi/bin/just")
