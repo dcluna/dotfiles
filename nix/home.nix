@@ -2,6 +2,19 @@
 
 let
   extraNodePackages = import ./node/default.nix {};
+  claudesquad = pkgs.buildGoModule rec {
+    pname = "claude-squad";
+    version = "1.0.8";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "smtg-ai";
+      repo = "claude-squad";
+      tag = "v${version}";
+      hash = "sha256-mzW9Z+QN4EQ3JLFD3uTDT2/c+ZGLzMqngl3o5TVBZN0=";
+    };
+
+    vendorHash = "sha256-BduH6Vu+p5iFe1N5svZRsb9QuFlhf7usBjMsOtRn2nQ=";
+  };
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -113,6 +126,7 @@ in
     pkgs.codex
     pkgs.gh
     pkgs.opencode
+    claudesquad
   ];
 
   home.file = {
