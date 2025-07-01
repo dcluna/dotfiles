@@ -112,6 +112,7 @@ in
     pkgs.just
     # pkgs.codex
     pkgs.gh
+    pkgs.opencode
   ];
 
   home.file = {
