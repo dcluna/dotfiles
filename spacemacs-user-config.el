@@ -1799,6 +1799,10 @@ _u_pdate
   (aidermacs-backend 'vterm)
   (aidermacs-watch-files t)
   (aidermacs-show-diff-after-change t))
+(use-package pgmacs
+  :ensure t
+  :disabled
+  :straight (:type git :host github :repo "emarsden/pgmacs" :branch "main"))
 (use-package claudemacs
   :straight (:type git :host github :repo "cpoile/claudemacs" :branch "main")
   :bind (("C-c m" . claudemacs-transient-menu))

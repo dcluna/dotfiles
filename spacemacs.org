@@ -3310,6 +3310,14 @@
         (aidermacs-watch-files t)
         (aidermacs-show-diff-after-change t))
     #+end_src
+** PGmacs
+
+    #+begin_src emacs-lisp
+      (use-package pgmacs
+        :ensure t
+        :disabled
+        :straight (:type git :host github :repo "emarsden/pgmacs" :branch "main"))
+    #+end_src
 
 ** Claudemacs
 
