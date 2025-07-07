@@ -1782,6 +1782,14 @@ _u_pdate
   ;; Compiles .el files before they are loaded.
   (push "\.emacs\.d\/.*\.el" compile-angel-excluded-files-regexps)
   (compile-angel-on-load-mode))
+(defun my-claude-notify-with-sound (title message)
+  "Display a Linux notification with sound."
+  (when (executable-find "notify-send")
+    (call-process "notify-send" nil nil nil title message))
+  ;; Play sound if paplay is available
+  (when (executable-find "paplay")
+    (call-process "paplay" nil nil nil "/usr/share/sounds/freedesktop/stereo/complete.oga")))
+
 (use-package claude-code
   :ensure t
   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
@@ -1791,6 +1799,7 @@ _u_pdate
   ;; ("C-c c" . claude-code-command-map)
   :hook ((claude-code--start . sm-setup-claude-faces))
   :init (evil-leader/set-key "o m" 'claude-code-transient)
+        (setq claude-code-notification-function #'my-claude-notify-with-sound)
   :config
   (claude-code-mode))
 (use-package aidermacs
