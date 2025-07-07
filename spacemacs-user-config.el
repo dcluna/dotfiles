@@ -624,6 +624,20 @@ Offers completion for existing tmux sessions."
                                   (if (region-active-p)
                                       (list (region-beginning) (region-end))
                                     (list (point))) "-"))))))
+
+(defun dcl/worktree-origin-master ()
+  "Create a new worktree for the origin/master branch under .worktrees/."
+  (interactive)
+  (let ((default-directory (magit-toplevel))
+        (branch-name (read-string "New branch name: ")))
+    (magit-worktree-branch
+     (read-directory-name "Worktree directory: "
+                          default-directory
+                          ".worktrees/"
+                          nil
+                          (concat ".worktrees/" branch-name))
+     branch-name
+     (magit-read-branch-or-commit "Branching from: " "origin/master"))))
 (defun magit-history-checkout ()
   (interactive)
   (magit-checkout (magit-completing-read "Branch: " (magit-history-branches))))
