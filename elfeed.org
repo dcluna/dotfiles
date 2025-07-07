@@ -93,7 +93,7 @@
 *** [[http://100r.co/links/rss.xml][100 Rabbits]]
 *** [[https://journal.miso.town/atom?url=https://kokorobot.ca/site/home.html][Rek Bell]]
 *** [[https://matt.sh/.rss][Matt.sh]]
-*** [[https://catonmat.net/feed][Catonmat.net]]
+*** [[https://catonmat.net/feed][Catonmat.net]]                       :noisy:
 *** [[https://gwern.substack.com/feed][Gwern.net]]
 *** [[https://yorickpeterse.com/feed.xml][Yorick Peterse - Inko lang, Gitlab production DB deletion]]
 *** [[https://matklad.github.io/feed.xml][matklad - Alex Kladov]]
@@ -134,6 +134,7 @@
 *** [[https://thegreatrace.substack.com/feed][The Great Race - Gabriel Weinberg / ddg]] :ddg:
 *** [[https://blog.headius.com/feed][Charles Nutter - JRuby]] :jruby:headius:cnutter:
 *** [[https://gomakethings.com/feed/index.xml][Go Make Things]]    :frontend:
+*** [[https://lucumr.pocoo.org/feed.atom][Armin Renacher]]              :llm:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
