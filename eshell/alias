@@ -1,3 +1,4 @@
+alias check_inotify_limit cat /proc/sys/fs/inotify/max_user_instances
 alias chromiumdebug chromium-browser --remote-debugging-port=9222 $*
 alias chromiumdebugnetwork chromium-browser --remote-debugging-port=9222 --auto-open-devtools-for-tabs --network $*
 alias chromiumspec chromium-browser --remote-debugging-port=9222 $*
@@ -15,3 +16,4 @@ alias sorbet_refresh_errors rm sorbet_errors.txt; srb tc > sorbet_errors.txt 2>&
 alias sorbet_typecheck srb tc
 alias tapiocamissing bin/tapioca todo
 alias tpa bin/tapioca gem --all -V; bin/tapioca annotations; bin/tapioca dsl -V
+alias update_inotify_limit echo $1 | sudo tee /proc/sys/fs/inotify/max_user_instances
