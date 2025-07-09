@@ -1842,6 +1842,19 @@ _u_pdate
   :ensure t)
 ;; :custom
 ;; (justl-executable "/home/sibi/bin/just")
+(use-package flyover
+  :ensure t
+  :hook (flycheck-mode . flyover-mode)
+  :custom
+  (flyover-checkers '(flycheck flymake))
+  (flyover-levels '(error warning info))
+  (flyover-use-theme-colors t)
+  (flyover-debounce-interval 0.2)
+  (flyover-info-icon "🛈")
+  (flyover-warning-icon "⚠")
+  (flyover-error-icon "✘")
+  (flyover-icon-left-padding 0.9)
+  (flyover-icon-right-padding 0.9))
 (use-package whisper
   :straight (:type git :host github :repo "natrys/whisper.el" :files ("*.el"))
   ;; :bind ("C-c r" . whisper-run)

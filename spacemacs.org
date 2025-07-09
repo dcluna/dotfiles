@@ -3368,6 +3368,27 @@
       ;; (justl-executable "/home/sibi/bin/just")
     #+end_src
 
+** Flyover (flymake overlay display)
+
+   https://github.com/konrad1977/flyover
+
+   #+begin_src emacs-lisp
+     (use-package flyover
+       :ensure t
+       :hook (flycheck-mode . flyover-mode)
+       :custom
+       (flyover-checkers '(flycheck flymake))
+       (flyover-levels '(error warning info))
+       (flyover-use-theme-colors t)
+       (flyover-debounce-interval 0.2)
+       (flyover-info-icon "🛈")
+       (flyover-warning-icon "⚠")
+       (flyover-error-icon "✘")
+       (flyover-icon-left-padding 0.9)
+       (flyover-icon-right-padding 0.9))
+   #+end_src
+
+
 ** Whisper.el
 
     #+begin_src emacs-lisp
