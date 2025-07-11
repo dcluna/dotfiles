@@ -633,9 +633,9 @@ Offers completion for existing tmux sessions."
     (magit-worktree-branch
      (read-directory-name "Worktree directory: "
                           default-directory
-                          ".worktrees/"
                           nil
-                          (concat ".worktrees/" branch-name))
+                          nil
+                          branch-name)
      branch-name
      (magit-read-branch-or-commit "Branching from: " "origin/master"))))
 (defun magit-history-checkout ()
