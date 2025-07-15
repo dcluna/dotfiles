@@ -135,6 +135,7 @@
 *** [[https://blog.headius.com/feed][Charles Nutter - JRuby]] :jruby:headius:cnutter:
 *** [[https://gomakethings.com/feed/index.xml][Go Make Things]]    :frontend:
 *** [[https://lucumr.pocoo.org/feed.atom][Armin Renacher]]              :llm:
+*** [[https://xeiaso.net/blog.rss][Xe Iaso]]                         :xeiaso:
 ** Permacomputing                                                  :permacpu:
 *** [[https://solar.lowtechmagazine.com/posts/index.xml][Solar - LowTechMagazine]]
 ** Climate / ecology                                                    :eco:
