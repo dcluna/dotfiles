@@ -95,15 +95,6 @@ pre-commit:
       run: |
         bundle exec rubocop --fail-level warning --raise-cop-error -c .rubocop.yml --only Lint/Debugger {staged_files}
 
-    sorbet:
-      tags:
-        - sorbet
-        - qa
-      skip:
-        - merge
-        - rebase
-      run: bin/srb tc
-
 prepare-commit-msg:
   commands:
     # gpt_commit:
@@ -163,7 +154,7 @@ pre-push:
       runner: zsh
 
 post-checkout:
-  quiet: true
+  quiet: false
   parallel: true
 
   commands:
@@ -179,6 +170,15 @@ post-checkout:
       only:
         - *only_master
       run: ctags -R --exclude=.git --exclude=node_modules --exclude=vendor
+
+    sorbet:
+      tags:
+        - sorbet
+        - qa
+      skip:
+        - merge
+        - rebase
+      run: bin/srb tc
 
     copy-env-files:
       # Run only if the checkout is a worktree update
