@@ -176,7 +176,7 @@ in
     # ".config/.tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
     ".config/toxiproxy.json".source = ~/dotfiles/toxiproxy.json;
     "Projects/AdQuick/.tmuxinator.yml".source = ~/dotfiles/.tmuxinator.adquick.yml;
-    "Projects/AdQuick/adquick/lefthook.yml".source = ~/dotfiles/lefthook/lefthook.yml;
+    "Projects/AdQuick/adquick/lefthook-local.yml".source = ~/dotfiles/lefthook/lefthook.yml;
     "Projects/AdQuick/adquick/.aider.conf.yml".source = ~/dotfiles/aider/.aider.conf.yml;
     ".config/tmuxinator/emamux.yml".source = ~/dotfiles/.tmuxinator.emamux.yml;
     ".newsboat/config".source = ~/dotfiles/newsboat/config;
