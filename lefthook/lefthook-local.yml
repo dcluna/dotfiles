@@ -159,6 +159,8 @@ post-checkout:
 
   jobs:
     - name: sorbet-pipeline
+      only:
+        - *only_master
       group:
         jobs:
           - name: tapioca
