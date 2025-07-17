@@ -1,0 +1,200 @@
+colors: false
+no_tty: true
+
+pre-commit:
+  parallel: true
+  commands:
+    bundle_audit:
+      tags:
+        - security
+        - dependencies
+      run: bundle audit
+      skip:
+        - merge
+        - rebase
+      only: &only_master
+        - ref: master
+
+    # fasterer:
+    #   run: fasterer
+    #   skip:
+    #     - merge
+    #     - rebase
+
+    flay:
+      tags:
+        - code-quality
+        - duplication
+      glob: "*.rb"
+      exclude: "Gemfile|db/schema.rb|db/data_schema.rb"
+      skip:
+        - merge
+        - rebase
+      run: flay {staged_files}
+
+    trailing_whitespace:
+      tags:
+        - formatting
+        - style
+      glob: "*"
+      exclude: "db/structure.sql|spec/vcr_cassettes/**/*"
+      skip:
+        - merge
+        - rebase
+      run: git diff --check {staged_files}
+
+    yaml_lint:
+      tags:
+        - linting
+        - style
+      glob: "*.{yml,yaml}"
+      skip:
+        - merge
+        - rebase
+      run: yamllint {staged_files}
+      on_fail: warn
+
+    ruby_syntax:
+      tags:
+        - qa
+        - linting
+        - syntax
+      glob: "*.rb"
+      skip:
+        - merge
+        - rebase
+      run: ruby -c {staged_files}
+
+    haml_lint:
+      tags:
+        - linting
+        - templates
+      glob: "*.haml"
+      skip:
+        - merge
+        - rebase
+      run: haml-lint {staged_files}
+
+    erb_lint:
+      tags:
+        - linting
+        - templates
+      glob: "*.erb"
+      skip:
+        - merge
+        - rebase
+      run: erblint {staged_files}
+
+    rubocop-debugger:
+      tags:
+        - qa
+      skip:
+        - merge
+        - rebase
+      glob: "*.rb"
+      run: |
+        bundle exec rubocop --fail-level warning --raise-cop-error -c .rubocop.yml --only Lint/Debugger {staged_files}
+
+prepare-commit-msg:
+  commands:
+    # gpt_commit:
+    #   tags:
+    #     - ai
+    #     - commit-message
+    #   run: gptcommithook
+
+    # opencommit:
+    #   tags:
+    #     - ai
+    #     - commit-message
+    #   run: opencommit
+
+pre-push:
+  parallel: true
+
+  commands:
+    protected_branches:
+      tags:
+        - safety
+        - git
+      run: |
+        BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+        PROTECTED_BRANCHES="main master develop production"
+        if [[ $PROTECTED_BRANCHES =~ $BRANCH ]]; then
+          echo "Pushing to protected branch '$BRANCH' is not allowed"
+          exit 1
+        fi
+
+    check_structure_sql:
+      tags:
+        - database
+        - schema
+      run: ./bin/check-timestamps.sh
+
+    rspec_run_pre_push:
+      run: RD_PROF=1 RD_PROF_STAMP="slow" FPROF=flamegraph FPROF_VARS=1 FPROF_THRESHOLD=30 FDOC=1 FDOC_STAMP="fdoc:consider" bundle exec rspec --tag @run_pre_push --format documentation --format progress --profile 10 -o /tmp/rspec_run_pre_push_output.txt
+
+    rspec_ignore_in_ci:
+      skip: true
+      run: FDOC=1 FDOC_STAMP="fdoc:consider" bundle exec rspec --tag @ignore_in_ci --format documentation --format progress --profile 10 | tee /tmp/rspec_ignore_in_ci_output.txt
+
+    tapioca: &tapioca_all
+      tags:
+        - sorbet
+        - tapioca
+      run: |
+        bin/tapioca gem --all -V
+        bin/tapioca annotations
+        bin/tapioca dsl -V
+        if [[ -n "$(git --no-pager status -s --porcelain sorbet/)" ]]; then
+            printf "Error: Uncommitted changes detected in sorbet/ directory\n"
+            git --no-pager status sorbet/
+            exit 1
+        fi
+      runner: zsh
+
+post-checkout:
+  quiet: true
+  parallel: true
+
+  jobs:
+    - name: sorbet-pipeline
+      group:
+        jobs:
+          - name: tapioca
+            <<: *tapioca_all
+          - name: sorbet
+            tags:
+              - sorbet
+              - qa
+            run: bin/srb tc
+
+  commands:
+    index_tags:
+      tags:
+        - tooling
+        - development
+      only:
+        - *only_master
+      run: ctags -R --exclude=.git --exclude=node_modules --exclude=vendor
+
+    lefthook-local-setup:
+      skip: true
+      # Run only if the checkout is a worktree checkout
+      run: |
+        if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
+          cp "$MAIN_GIT_DIR/lefthook-local.yml" .
+        else
+          echo "Not copying lefthook files because ref '{1}' is not a worktree checkout"
+        fi
+
+    copy-env-files:
+      # Run only if the checkout is a worktree update
+      tags:
+        - worktree
+      run: |
+        # Detect if this is a worktree checkout
+        if [ "$GIT_WORK_TREE" != "" ]; then
+          # Copy all .env files from parent directory
+          cp "$GIT_DIR/.env*" .
+        fi
