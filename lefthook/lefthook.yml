@@ -184,7 +184,7 @@ post-checkout:
       skip: true
       # Run only if the checkout is a worktree checkout
       run: |
-        if [ "{1}" -eq 0 ]; then
+        if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
           cp "$MAIN_GIT_DIR/lefthook-local.yml" .
         else
           echo "Not copying lefthook files because ref '{1}' is not a worktree checkout"
