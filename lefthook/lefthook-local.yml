@@ -132,7 +132,10 @@ pre-push:
       run: ./bin/check-timestamps.sh
 
     rspec_run_pre_push:
-      run: RD_PROF=1 RD_PROF_STAMP="slow" FPROF=flamegraph FPROF_VARS=1 FPROF_THRESHOLD=30 FDOC=1 FDOC_STAMP="fdoc:consider" bundle exec rspec --tag @run_pre_push --format documentation --format progress --profile 10 -o /tmp/rspec_run_pre_push_output.txt
+      tags:
+        - flaky_slow_specs
+        - flaky_slow_tests
+      run: RD_PROF=1 RD_PROF_STAMP="slow" FPROF=flamegraph FPROF_VARS=1 FPROF_THRESHOLD=30 FDOC=1 FDOC_STAMP="fdoc:consider" bundle exec rspec --tag @run_pre_push --format documentation --format progress --profile 10 -o /tmp/rspec_run_pre_push_output.txt; emacsclient -n -r /tmp/rspec_run_pre_push_output.txt
 
     rspec_ignore_in_ci:
       skip: true
