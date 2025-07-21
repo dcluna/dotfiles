@@ -125,7 +125,7 @@ in
     pkgs.just
     pkgs.codex
     pkgs.gh
-    pkgs.opencode
+    # pkgs.opencode
     claudesquad
   ];
 
