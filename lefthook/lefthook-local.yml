@@ -202,6 +202,7 @@ post-checkout:
         if [ "$GIT_WORK_TREE" != "" ]; then
           # Copy all .env files from parent directory
           cp "$GIT_DIR/.env*" .
+          cp "$GIT_DIR/.mcp*" .
         fi
 
     build-assets-new-worktree:
