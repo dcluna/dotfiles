@@ -112,6 +112,35 @@ prepare-commit-msg:
 pre-push:
   parallel: true
 
+  jobs:
+    - name: sorbet-pipeline
+      only:
+        - *only_master
+      group:
+        only:
+          - *only_master
+        piped: true
+        jobs:
+          - name: tapioca
+            tags:
+              - sorbet
+              - tapioca
+            run: |
+              bin/tapioca gem --all -V
+              bin/tapioca annotations
+              bin/tapioca dsl -V
+              if [[ -n "$(git --no-pager status -s --porcelain sorbet/)" ]]; then
+                  printf "Error: Uncommitted changes detected in sorbet/ directory\n"
+                  git --no-pager status sorbet/
+                  exit 1
+              fi
+            runner: zsh
+          - name: sorbet
+            tags:
+              - sorbet
+              - qa
+            run: bin/srb tc
+
   commands:
     protected_branches:
       tags:
@@ -141,38 +170,9 @@ pre-push:
       skip: true
       run: FDOC=1 FDOC_STAMP="fdoc:consider" bundle exec rspec --tag @ignore_in_ci --format documentation --format progress --profile 10 | tee /tmp/rspec_ignore_in_ci_output.txt
 
-    tapioca: &tapioca_all
-      tags:
-        - sorbet
-        - tapioca
-      run: |
-        bin/tapioca gem --all -V
-        bin/tapioca annotations
-        bin/tapioca dsl -V
-        if [[ -n "$(git --no-pager status -s --porcelain sorbet/)" ]]; then
-            printf "Error: Uncommitted changes detected in sorbet/ directory\n"
-            git --no-pager status sorbet/
-            exit 1
-        fi
-      runner: zsh
-
 post-checkout:
   quiet: true
   parallel: true
-
-  jobs:
-    - name: sorbet-pipeline
-      only:
-        - *only_master
-      group:
-        jobs:
-          - name: tapioca
-            <<: *tapioca_all
-          - name: sorbet
-            tags:
-              - sorbet
-              - qa
-            run: bin/srb tc
 
   commands:
     index_tags:
