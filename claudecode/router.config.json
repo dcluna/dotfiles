@@ -1,0 +1,28 @@
+{
+  "APIKEY": "${CLAUDE_ROUTER_API_KEY}",
+  "PROXY_URL": "${CLAUDE_ROUTER_PROXY_URL}",
+  "LOG": true,
+  "API_TIMEOUT_MS": "${CLAUDE_ROUTER_API_TIMEOUT_MS}",
+  "Providers": [
+    {
+      "name": "openrouter",
+      "api_base_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key": "${CLAUDE_ROUTER_OPENROUTER_API_KEY}",
+      "models": [
+        "qwen/qwen3-coder:free",
+        "moonshotai/kimi-vl-a3b-thinking:free"
+      ],
+      "transformer": {
+        "use": ["openrouter"]
+      }
+    }
+  ],
+  "Router": {
+    "default": "qwen3-coder:free,kimi-vl-a3b-thinking:free",
+    "background": "qwen3-coder:free,kimi-vl-a3b-thinking:free",
+    "think": "qwen3-coder:free,kimi-vl-a3b-thinking:free",
+    "longContext": "openrouter",
+    "longContextThreshold": 60000,
+    "webSearch": "gemini,gemini-2.5-flash"
+  }
+}
