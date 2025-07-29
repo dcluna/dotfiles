@@ -127,6 +127,7 @@ in
     pkgs.gh
     # pkgs.opencode
     claudesquad
+    somo
   ];
 
   home.file = {
