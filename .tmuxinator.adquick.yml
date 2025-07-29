@@ -94,6 +94,11 @@ windows:
       layout: tiled
       panes:
         - mitmproxy -p 8090
+  - claude-code:
+      root: <%= ENV['ADQUICK_DIR'] %>/adquick
+      layout: tiled
+      panes:
+        - ccm
   - staging-pgcenter:
       <% staging_replica_url = ::URI.parse(`grep ^REPLICA_DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env_adtest.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
       <% staging_main_url = ::URI.parse(`grep ^DATABASE_URL #{File.join(*[ENV['ADQUICK_DIR'], 'adquick', 'heroku_env_adtest.conf'].join('/'))}`.split(/ +/)[1].chomp)  %>
