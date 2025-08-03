@@ -127,7 +127,7 @@ in
     pkgs.gh
     # pkgs.opencode
     claudesquad
-    somo
+    pkgs.somo
   ];
 
   home.file = {
@@ -136,7 +136,7 @@ in
 
     # ".config/nixpkgs/home.nix".source = ~/dotfiles/nix/home.nix;
     # ".config/home-manager/home.nix".source = $HOME/dotfiles/nix/home.nix;
-    ".zshrc".source = ~/dotfiles/.zshrc;
+    # ".zshrc".source = ~/dotfiles/.zshrc;
     ".psqlrc".source = ~/dotfiles/.psqlrc;
     ".irbrc".source = ~/dotfiles/.irbrc;
     ".pryrc".source = ~/dotfiles/.pryrc;
@@ -250,6 +250,7 @@ in
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     defaultKeymap = "viins";
+    initContent = lib.strings.fileContents ~/dotfiles/.zshrc;
     oh-my-zsh = {
       enable = true;
     };
