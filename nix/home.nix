@@ -152,8 +152,8 @@ in
     ".bashrc.d/direnv.sh".source = ~/dotfiles/direnv.bash;
     ".bashrc.d/atuin.sh".source = ~/dotfiles/atuin.bash;
     ".bashrc.d/emacs.sh".source = ~/dotfiles/emacs.bash;
-    ".opencode.json".source = ~/dotfiles/opencode/opencode.json;
-    ".claude-code-router/config.json".source = ~/dotfiles/claudecode/router.json;
+    # ".opencode.json".source = ~/dotfiles/opencode/opencode.json;
+    # ".claude-code-router/config.json".source = ~/dotfiles/claudecode/router.json;
 
     # ".tmux/plugins/tpm" = {
     #   source = pkgs.fetchFromGitHub {
