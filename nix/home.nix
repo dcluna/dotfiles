@@ -244,6 +244,10 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # TODO: migrate from tpm to zplug
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -253,6 +257,25 @@ in
     initContent = lib.strings.fileContents ~/dotfiles/.zshrc;
     oh-my-zsh = {
       enable = true;
+      plugins = [
+        "git"
+        "ruby"
+        "rails"
+        "rake"
+        "rake-fast"
+        "rbenv"
+        "node"
+        "npm"
+        "yarn"
+        "rust"
+        "osx"
+        "history-substring-search"
+        "docker"
+        "docker-compose"
+        "pyenv"
+        "history"
+        "mise"
+      ];
     };
     zplug = {
       enable = true;

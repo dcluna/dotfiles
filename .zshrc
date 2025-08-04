@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-export ZSH_CUSTOM="$ZSH/custom"
-export ZSH_DISABLE_COMPFIX="true"
+# export ZSH=$HOME/.oh-my-zsh
+# export ZSH_CUSTOM="$ZSH/custom"
+# export ZSH_DISABLE_COMPFIX="true"
 
 if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/danielluna/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
@@ -57,7 +57,7 @@ if [ -e /Users/danielluna/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/dan
 # Add wi2gold:$HOME/bin/android-ndk-r10d:$HOME/bin/jdk1.8.0_31/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-plugins=(git ruby rails rake rake-fast rbenv node npm yarn rust osx history-substring-search docker docker-compose pyenv history mise)
+# plugins=(git ruby rails rake rake-fast rbenv node npm yarn rust osx history-substring-search docker docker-compose pyenv history mise)
 # plugins=(git ruby autoenv rails rake rake-fast rvm)
 # plugins=(git ruby)
 
@@ -66,7 +66,7 @@ if type brew &>/dev/null; then
     FPATH=/usr/local/share/zsh/site-functions:$FPATH
 fi
 
-[[ -s "$ZSH/oh-my-zsh.sh" ]] && source $ZSH/oh-my-zsh.sh
+# [[ -s "$ZSH/oh-my-zsh.sh" ]] && source $ZSH/oh-my-zsh.sh
 
 for file in `ls ~/dotfiles/.zsh-confs/*.zsh`; do
     source $file
@@ -132,13 +132,13 @@ if [ -z "$INSIDE_EMACS" ]; then # inside emacs we already have evil
     # bindkey -M vimacs '^s' mcfly-history-widget
 fi
 
-eval "$(atuin init zsh)"
+# eval "$(atuin init zsh)"
 
 eval "$(starship init zsh)"
 
-eval "$(direnv hook zsh)"
+# eval "$(direnv hook zsh)"
 
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"
 
 
 # The next line updates PATH for the Google Cloud SDK.
