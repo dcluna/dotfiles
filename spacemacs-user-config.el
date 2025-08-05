@@ -1597,6 +1597,28 @@ Offers completion for existing tmux sessions."
   (gptel-prompts-update)
   ;; Ensure prompts are updated if prompt files change
   (gptel-prompts-add-update-watchers))
+(use-package macher
+  :straight (:host github :repo "kmontag/macher")
+
+  :custom
+  ;; The org UI has structured navigation and nice content folding.
+  (macher-action-buffer-ui 'org)
+
+  ;; Optional - register macher presets for use with any gptel request.
+  :config
+  (macher-install))
+
+;; Adjust buffer positioning to taste.
+;; (add-to-list
+;;  'display-buffer-alist
+;;  '("\\*macher:.*\\*"
+;;    (display-buffer-in-side-window)
+;;    (side . bottom)))
+;; (add-to-list
+;;  'display-buffer-alist
+;;  '("\\*macher-patch:.*\\*"
+;;    (display-buffer-in-side-window)
+;;    (side . right)))
 (use-package mcp
   :straight (:type git :host github :repo "lizqwerscott/mcp.el" :files ("*.el"))
   :config

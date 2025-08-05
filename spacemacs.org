@@ -3035,6 +3035,35 @@
        (gptel-prompts-add-update-watchers))
    #+end_src
 
+** Macher
+
+   https://github.com/kmontag/macher
+
+   #+begin_src emacs-lisp
+     (use-package macher
+       :straight (:host github :repo "kmontag/macher")
+
+       :custom
+       ;; The org UI has structured navigation and nice content folding.
+       (macher-action-buffer-ui 'org)
+
+       ;; Optional - register macher presets for use with any gptel request.
+       :config
+       (macher-install))
+
+     ;; Adjust buffer positioning to taste.
+     ;; (add-to-list
+     ;;  'display-buffer-alist
+     ;;  '("\\*macher:.*\\*"
+     ;;    (display-buffer-in-side-window)
+     ;;    (side . bottom)))
+     ;; (add-to-list
+     ;;  'display-buffer-alist
+     ;;  '("\\*macher-patch:.*\\*"
+     ;;    (display-buffer-in-side-window)
+     ;;    (side . right)))
+   #+end_src
+
 ** MCP.el
 
     #+begin_src emacs-lisp
