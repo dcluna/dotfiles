@@ -1587,6 +1587,16 @@ Offers completion for existing tmux sessions."
                      :description "Maximum size in characters to return (default: 100000)"
                      :optional t))
  :category "web")
+(use-package gptel-prompts
+  :ensure t
+  :straight (:type git :host github :repo "jwiegley/gptel-prompts" :files ("*.el"))
+  :after (gptel)
+  :demand t
+  :custom (gptel-prompts-directory "~/dotfiles/gptel-prompts/")
+  :config
+  (gptel-prompts-update)
+  ;; Ensure prompts are updated if prompt files change
+  (gptel-prompts-add-update-watchers))
 (use-package mcp
   :straight (:type git :host github :repo "lizqwerscott/mcp.el" :files ("*.el"))
   :config
