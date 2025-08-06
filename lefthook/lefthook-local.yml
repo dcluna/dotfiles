@@ -218,9 +218,18 @@ post-checkout:
       # Run only if the checkout is a worktree update
       tags:
         - worktree
-      skip: true
       run: |
         # Detect if this is a worktree checkout
         if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
-          just build-assets
+          just build-assets &
+        fi
+
+    reindex-ctags-new-worktree:
+      # Run only if the checkout is a worktree update
+      tags:
+        - worktree
+      run: |
+        # Detect if this is a worktree checkout
+        if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
+          just tags &
         fi
