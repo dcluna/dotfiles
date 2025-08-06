@@ -208,6 +208,7 @@ post-checkout:
         # Detect if this is a worktree checkout
         if [ "$GIT_WORK_TREE" != "" ]; then
           # Copy all .env files from parent directory
+          touch .projectile
           cp "$GIT_DIR/.env*" .
           cp "$GIT_DIR/.mcp*" .
         fi
