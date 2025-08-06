@@ -200,23 +200,25 @@ post-checkout:
           echo "Not copying lefthook files because ref '{1}' is not a worktree checkout"
         fi
 
-    copy-main-env-files:
+    copy-env-files:
       # Run only if the checkout is a worktree update
       tags:
         - worktree
       run: |
         # Detect if this is a worktree checkout
-        if [ "$GIT_WORK_TREE" != "" ]; then
+        if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
           # Copy all .env files from parent directory
           touch .projectile
-          cp "$GIT_DIR/.env*" .
-          cp "$GIT_DIR/.mcp*" .
+          cp $MAIN_GIT_DIR/.mcp* .
+          cp $MAIN_GIT_DIR/.env* .
+          direnv allow
         fi
 
     build-assets-new-worktree:
       # Run only if the checkout is a worktree update
       tags:
         - worktree
+      skip: true
       run: |
         # Detect if this is a worktree checkout
         if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
