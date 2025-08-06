@@ -1524,7 +1524,7 @@
                                 default-directory
                                 nil
                                 nil
-                                branch-name)
+                                (concat ".worktrees/" branch-name))
            branch-name
            (magit-read-branch-or-commit "Branching from: " "origin/master"))))
     #+END_SRC
