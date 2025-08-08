@@ -1415,7 +1415,7 @@ Offers completion for existing tmux sessions."
 (setq
  gptel-default-mode 'org-mode
  gptel-track-media t
- gptel-model 'gpt-4o-mini
+ gptel-model 'gpt-5-nano
  gptel-proxy "localhost:8090"
  gptel-backend gptel--openai)
 (defun gptel-without-purpose-mode (orig-gptel &rest args)
