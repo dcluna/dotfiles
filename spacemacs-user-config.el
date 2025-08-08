@@ -1834,6 +1834,11 @@ _u_pdate
         (setq claude-code-notification-function #'my-claude-notify-with-sound)
   :config
   (claude-code-mode))
+(use-package claude-code-ide
+  :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
+  :init (evil-leader/set-key "o k" 'claude-code-ide-menu)
+  :config
+  (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
 (use-package aidermacs
   :straight (:type git :host github :repo "MatthewZMD/aidermacs" :branch "main"
                    :files ("*.el"))

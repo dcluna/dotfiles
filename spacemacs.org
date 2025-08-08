@@ -3354,6 +3354,16 @@
        :config
        (claude-code-mode))
    #+end_src
+** Claude-code-ide
+
+   #+begin_src emacs-lisp
+     (use-package claude-code-ide
+       :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
+       :init (evil-leader/set-key "o k" 'claude-code-ide-menu)
+       :config
+       (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
+   #+end_src
+
 ** Aidermacs
 
     #+begin_src emacs-lisp
