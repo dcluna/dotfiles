@@ -1837,7 +1837,9 @@ _u_pdate
   (monet-mode 1)
   (claude-code-mode))
 (use-package monet
-  :straight (:type git :host github :repo "stevemolitor/monet"))
+  :straight (:type git :host github :repo "stevemolitor/monet")
+  :custom (monet-diff-tool #'monet-ediff-tool)
+          (monet-diff-cleanup-tool #'monet-ediff-cleanup-tool))
   ;; :vc (:url "https://github.com/stevemolitor/monet" :rev :newest)
 (use-package claude-code-ide
   :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
