@@ -1833,7 +1833,12 @@ _u_pdate
   :init (evil-leader/set-key "o m" 'claude-code-transient)
         (setq claude-code-notification-function #'my-claude-notify-with-sound)
   :config
+  (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
+  (monet-mode 1)
   (claude-code-mode))
+(use-package monet
+  :straight (:type git :host github :repo "stevemolitor/monet"))
+  ;; :vc (:url "https://github.com/stevemolitor/monet" :rev :newest)
 (use-package claude-code-ide
   :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
   :init (evil-leader/set-key "o k" 'claude-code-ide-menu)
