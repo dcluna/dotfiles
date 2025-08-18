@@ -1263,7 +1263,7 @@ Offers completion for existing tmux sessions."
   (let* ((set-pane (emamux:set-parameters))
          (tmux-save-buffer-name "emamux-save-buffer")
          (fname (expand-file-name filename))
-         (capture-pane-command (format "capture-pane -t %s -b %s"
+         (capture-pane-command (format "capture-pane -S - -t %s -b %s"
                                        (emamux:target-session)
                                        tmux-save-buffer-name))
          (save-buffer-command (format "save-buffer -b %s %s"
