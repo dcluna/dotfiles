@@ -1258,9 +1258,7 @@ Offers completion for existing tmux sessions."
 (require 'evil-vterm-tmux-navigator)
 (define-key emamux:keymap "n" #'evil-vterm-tmux-navigator-state)
 (defun emamux:save-current-pane-to-file (filename)
-  "Prompt for FILENAME and run:
-   capture-pane -S -; save-buffer <filename>
-on the current emamux runner pane."
+  "Prompt for FILENAME and run: capture-pane -S -; save-buffer <filename> on the current emamux runner pane."
   (interactive (list (read-file-name "Save pane to file: " nil nil nil)))
   (let* ((set-pane (emamux:set-parameters))
          (tmux-save-buffer-name "emamux-save-buffer")
@@ -1272,8 +1270,7 @@ on the current emamux runner pane."
                                       tmux-save-buffer-name
                                       (shell-quote-argument fname))))
     ;; Send the command to the active runner pane
-    (shell-command (format "tmux %s" capture-pane-command))
-    (shell-command (format "tmux %s" save-buffer-command))))
+    (shell-command (format "tmux %s \\; %s" capture-pane-command save-buffer-command))))
 (add-hook 'spacemacs-scratch-mode-hook #'persistent-scratch-autosave-mode)
 (setq popper-keymap (make-sparse-keymap))
 (use-package popper
