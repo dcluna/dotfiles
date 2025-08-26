@@ -1350,6 +1350,7 @@ Offers completion for existing tmux sessions."
   (org-ai-global-mode 1)
   (add-hook 'org-mode-hook 'org-ai-mode))
 (require 'gptel-integrations)
+(setq gptel-org-branching-context t)
 (setq
  gptel-model 'deepseek-r1:latest
  gptel-backend (gptel-make-ollama "Deepseek"
@@ -1836,6 +1837,50 @@ _u_pdate
   (when (executable-find "paplay")
     (call-process "paplay" nil nil nil "/usr/share/sounds/freedesktop/stereo/complete.oga")))
 
+(require 'json)
+
+(defcustom claude-code-hook-log-file "/tmp/claude-code-hook.log"
+  "File to log Claude Code hook events for debugging."
+  :type 'string
+  :group 'claude-code)
+
+(defun my-claude-message-listener (message)
+  "Output Claude MESSAGE to a temporary file for debugging."
+  (let ((tmpfile claude-code-hook-log-file))
+    (with-temp-file tmpfile
+      (insert (format "%S\n" message)))
+    (when (file-exists-p tmpfile)
+      (message "Claude message written to %s" tmpfile))))
+
+(defun my-claude-post-tool-use-cleanup (message)
+  "Run whitespace-cleanup on the file Claude wrote in post-tool-use events."
+  (when (eq (plist-get message :type) 'post-tool-use)
+    (let* ((json-data (plist-get message :json-data))
+           (path
+            (cond
+             ;; If json-data is a string (JSON), try to extract tool_response.file_path
+             ((and (stringp json-data) (fboundp 'json-read-from-string))
+              (let* ((obj (ignore-errors (json-read-from-string json-data)))
+                     (ti (or (plist-get obj :tool_response)
+                             (plist-get obj 'tool_response)
+                             (alist-get 'tool_response obj))))
+                (or (plist-get ti :file_path)
+                    (plist-get ti "file_path"))))
+             ;; If json-data is already Lisp data, try to fetch there
+             (t
+              (let* ((ti (or (plist-get json-data :tool_response)
+                             (plist-get json-data 'tool_response)
+                             (alist-get 'tool_response json-data))))
+                (or (plist-get ti :file_path)
+                    (plist-get ti "file_path"))))))
+           (abs-path path))
+      (when (and abs-path (file-exists-p abs-path))
+        (let ((buf (find-file-noselect abs-path)))
+          (with-current-buffer buf
+            (whitespace-cleanup)
+            (save-buffer))
+          (kill-buffer buf))))))
+
 (use-package claude-code
   :ensure t
   ;; :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
@@ -1843,9 +1888,11 @@ _u_pdate
                    :files ("*.el" (:exclude "demo.gif")))
   ;; :bind-keymap
   ;; ("C-c c" . claude-code-command-map)
-  :hook ((claude-code--start . sm-setup-claude-faces))
+  :hook ((claude-code--start . sm-setup-claude-faces)
+         (claude-code-event . my-claude-post-tool-use-cleanup)
+         (claude-code-event . my-claude-message-listener))
   :init (evil-leader/set-key "o m" 'claude-code-transient)
-        (setq claude-code-notification-function #'my-claude-notify-with-sound)
+  (setq claude-code-notification-function #'my-claude-notify-with-sound)
   :config
   (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
   (monet-mode 1)
