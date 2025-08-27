@@ -1239,6 +1239,10 @@ Offers completion for existing tmux sessions."
 (push
  '("DEPRECATED" . "#cc9393")
  hl-todo-keyword-faces)
+
+(push
+ '("LLM"   . "#1BCF66")
+ hl-todo-keyword-faces)
 (with-eval-after-load 'time
   (setq display-time-world-list (append zoneinfo-style-world-list '(("Etc/GMT0" "UTC")))))
 (setq wakatime-api-key (getenv "WAKATIME_API_KEY"))

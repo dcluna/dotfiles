@@ -2550,6 +2550,10 @@
       (push
        '("DEPRECATED" . "#cc9393")
        hl-todo-keyword-faces)
+
+      (push
+       '("LLM"   . "#1BCF66")
+       hl-todo-keyword-faces)
     #+END_SRC
 
 ** Time zones
