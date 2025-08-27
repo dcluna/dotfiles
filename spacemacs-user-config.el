@@ -1881,8 +1881,7 @@ _u_pdate
         (let ((buf (find-file-noselect abs-path)))
           (with-current-buffer buf
             (whitespace-cleanup)
-            (save-buffer))
-          (kill-buffer buf))))))
+            (save-buffer)))))))
 
 (use-package claude-code
   :ensure t
