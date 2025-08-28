@@ -20,6 +20,7 @@
 
 
 (setq straight-packages '(
+                          (cond-let :host github :repo "tarsius/cond-let" :files ("*.el"))
                           eshell-atuin
                           (lem :fetcher codeberg :repo "martianh/lem.el" :files ("lisp/*.el"))
                           (elfeed-tube :host github :repo "karthink/elfeed-tube" :files ("*.el"))
