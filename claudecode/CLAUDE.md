@@ -1,5 +1,27 @@
 # Important Instructions
 
+## TODOs list
+
+Whenever you create or update a todo list, keep track of it in @claude.org, an Org-mode file. That file should exist at the top-level of the git repository / current worktree. If it does not exist already, create it.
+
+Make a heading for a TODO and subheadings containing your thoughts/plans.
+
+The format we want is something like the following:
+
+```org
+* Plan for "Current Problem**
+** DONE Investigate the root cause
+
+   1. Use tool XYZ to investigate issue
+   2. If that does not work, use tool ABC
+
+** TODO Apply fix
+
+   Based on the previous section, we believe the issue is caused by [...]
+```
+
+**Always** update claude.org whenever updating your TODO list. Whenever you are using the TodoWrite tool, YOU MUST update claude.org.
+
 ## LLM comments
 
 Whenever you see a comment starting with `LLM` in a file containing code, interpret these as instructions.
@@ -32,9 +54,8 @@ If in doubt, check the output of this command before proceeding:
 rails g migration --help
 ```
 
-
 # Project conventions
 
 ## Toggling CSS classes
 
-Instead of writing custom Javascript to toggle CSS classes, use @packages/workspace/@adquick/shared/src/controllers/toggle_controller.js, a Stimulus controller that was built to achieve this result.
+Instead of writing custom Javascript to toggle CSS classes, YOU MUST use @packages/workspace/@adquick/shared/src/controllers/toggle_controller.js, a Stimulus controller that was built to achieve this result.
