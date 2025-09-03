@@ -1851,8 +1851,9 @@ _u_pdate
 (defun my-claude-message-listener (message)
   "Output Claude MESSAGE to a temporary file for debugging."
   (let ((tmpfile claude-code-hook-log-file))
-    (with-temp-file tmpfile
-      (insert (format "%S\n" message)))
+    (with-temp-buffer
+      (insert (format "%S\n" message))
+      (write-region (point-min) (point-max) tmpfile t))
     (when (file-exists-p tmpfile)
       (message "Claude message written to %s" tmpfile))))
 
