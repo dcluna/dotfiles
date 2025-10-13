@@ -4,9 +4,29 @@
     <title>Elfeed Export</title>
   </head>
   <body>
+    <outline xmlUrl="https://www.estrategiaconcursos.com.br/blog/rss" title=""/>
+    <outline xmlUrl="https://xaninhodiscos.com.br/feed" title="XANINHO DISCOS || Sudamerica Arte y Cultura"/>
+    <outline xmlUrl="https://agendametal.com.br/feed" title="Agenda Metal"/>
+    <outline xmlUrl="https://www.mcsweeneys.net/rss" title="McSweeney’s"/>
     <outline xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg" title="Two Minute Papers"/>
+    <outline xmlUrl="http://blog.humblebundle.com/rss" title="Humble Bundle Blog"/>
+    <outline xmlUrl="https://www.gog.com/frontpage/rss" title="GOG.com News"/>
     <outline xmlUrl="https://aftermath.site/rss" title="Aftermath"/>
     <outline xmlUrl="https://steamcommunity.com/groups/GrabFreeGames/rss/" title="GrabFreeGames RSS Feed"/>
+    <outline xmlUrl="https://www.adexchanger.com/feed" title="AdExchanger"/>
+    <outline xmlUrl="https://newleftreview.org/feed" title="New Left Review: current issue"/>
+    <outline xmlUrl="https://monthlyreview.org/feed" title="Monthly Review"/>
+    <outline xmlUrl="https://dialecticaldispatches.substack.com/feed" title="Dialectical Dispatches"/>
+    <outline xmlUrl="https://critisticuffs.org/feed.xml" title="critisticuffs.org"/>
+    <outline xmlUrl="https://nicolasdvillarreal.substack.com/feed" title="Pre-History of an Encounter"/>
+    <outline xmlUrl="https://dellsystem.me/atom" title=""/>
+    <outline xmlUrl="https://editorasundermann.com.br/feed" title="Editora Sundermann"/>
+    <outline xmlUrl="https://jacobin.com/feed" title="Jacobin"/>
+    <outline xmlUrl="https://jacobin.com.br/feed" title="Jacobin Brasil"/>
+    <outline xmlUrl="https://teoriaerevolucao.pstu.org.br/feed" title="Teoria e Revolução"/>
+    <outline xmlUrl="https://blogdaboitempo.com.br/feed" title="Blog da Boitempo"/>
+    <outline xmlUrl="http://jwmason.org/?feed=rss2" title="J. W. Mason"/>
+    <outline xmlUrl="https://redsails.org/rss.xml" title="Red Sails"/>
     <outline xmlUrl="https://ianwrightsite.wordpress.com/rss" title="𝗗𝗔𝗥𝗞 𝗠𝗔𝗥𝗫𝗜𝗦𝗠"/>
     <outline xmlUrl="https://ojoioeotrigo.com.br/feed" title="O Joio e O Trigo"/>
     <outline xmlUrl="https://movimentorevista.com.br/feed" title="Revista Movimento"/>
@@ -17,9 +37,10 @@
     <outline xmlUrl="https://moretothat.com/feed" title="More To That"/>
     <outline xmlUrl="https://fakenous.substack.com/feed" title="Fake Noûs"/>
     <outline xmlUrl="https://www.ageofinvention.xyz/feed" title="Age of Invention, by Anton Howes"/>
+    <outline xmlUrl="https://c4ss.org/feed" title="Center for a Stateless Society"/>
     <outline xmlUrl="https://backofmind.substack.com/feed" title="Dan Davies - &quot;Back of Mind&quot;"/>
     <outline xmlUrl="https://robertreich.substack.com/feed" title="Robert Reich"/>
-    <outline xmlUrl="https://genuineimpact.substack.com/feed" title="Genuine Impact - Charting Finance, Investing &amp; Tech"/>
+    <outline xmlUrl="https://genuineimpact.substack.com/feed" title="Genuine Impact - Because your money deserves better"/>
     <outline xmlUrl="https://daviddfriedman.substack.com/feed" title="David Friedman’s Substack"/>
     <outline xmlUrl="https://newsletter.mollywhite.net/feed" title="Citation Needed"/>
     <outline xmlUrl="https://davidgerard.co.uk/blockchain/feed/" title="Attack of the 50 Foot Blockchain"/>
@@ -30,8 +51,10 @@
     <outline xmlUrl="https://mattsclancy.substack.com/feed" title="What&apos;s New Under the Sun"/>
     <outline xmlUrl="https://www.noahpinion.blog/feed" title="Noahpinion"/>
     <outline xmlUrl="https://draliceevans.substack.com/feed" title="The Great Gender Divergence"/>
-    <outline xmlUrl="https://studio.ribbonfarm.com/feed" title="Ribbonfarm Studio"/>
+    <outline xmlUrl="https://studio.ribbonfarm.com/feed" title=""/>
     <outline xmlUrl="https://commoncog.com/rss/" title="Commoncog"/>
+    <outline xmlUrl="https://theconvivialsociety.substack.com/feed" title="The Convivial Society"/>
+    <outline xmlUrl="https://www.everythingisbullshit.blog/feed" title="Everything Is Bullshit"/>
     <outline xmlUrl="https://www.afterbabel.com/feed" title="After Babel"/>
     <outline xmlUrl="https://siderea.dreamwidth.org/data/atom" title="Sibylla Bostoniensis"/>
     <outline xmlUrl="https://www.robkhenderson.com/feed" title="Rob Henderson&apos;s Newsletter"/>
@@ -42,18 +65,21 @@
     <outline xmlUrl="https://jasonpargin.substack.com/feed" title="Jason Pargin’s Newsletter"/>
     <outline xmlUrl="https://scottaaronson.blog/?feed=rss2" title="Shtetl-Optimized"/>
     <outline xmlUrl="https://astralcodexten.substack.com/feed" title="Astral Codex Ten"/>
-    <outline xmlUrl="https://www.latent.space/feed" title="Latent Space"/>
+    <outline xmlUrl="https://magazine.sebastianraschka.com/feed" title="Ahead of AI"/>
+    <outline xmlUrl="https://www.latent.space/feed" title="Latent.Space"/>
     <outline xmlUrl="https://heatherbcooper.substack.com/feed" title="Visually AI by Heather Cooper"/>
     <outline xmlUrl="https://codeconfessions.substack.com/feed" title="Confessions of a Code Addict"/>
     <outline xmlUrl="https://www.aisnakeoil.com/feed" title="AI Snake Oil"/>
     <outline xmlUrl="https://linusekenstam.substack.com/feed" title="Inside My Head"/>
     <outline xmlUrl="https://aisupremacy.substack.com/feed" title="AI Supremacy"/>
     <outline xmlUrl="https://www.ignorance.ai/feed" title="Artificial Ignorance"/>
+    <outline xmlUrl="https://buttondown.com/jaffray/rss" title="NULL BITMAP by Justin Jaffray"/>
     <outline xmlUrl="https://www.crunchydata.com/blog/rss.xml" title="CrunchyData Blog"/>
     <outline xmlUrl="https://www.enterprisedb.com/blog/rss.xml" title="The Postgres Builders Blog"/>
     <outline xmlUrl="https://www.cybertec-postgresql.com/en/feed/" title="CYBERTEC PostgreSQL | Services &amp; Support"/>
     <outline xmlUrl="https://cprss.s3.amazonaws.com/postgresweekly.com.xml" title="Postgres Weekly"/>
     <outline xmlUrl="https://thepuddingmail.substack.com/feed" title="The Pudding"/>
+    <outline xmlUrl="https://dataelixir.com/feed" title="Data Elixir"/>
     <outline xmlUrl="https://mark-watson.blogspot.com/feeds/posts/default" title="Mark Watson&apos;s artificial intelligence and Lisp hacking blog"/>
     <outline xmlUrl="https://ploum.net/atom_en.xml" title="Ploum.net"/>
     <outline xmlUrl="https://www.oneusefulthing.org/feed" title="One Useful Thing"/>
@@ -61,8 +87,40 @@
     <outline xmlUrl="https://dataanalysis.substack.com/feed" title="Data Analysis Journal"/>
     <outline xmlUrl="https://sachachua.com/blog/category/emacs-news/feed" title="Sacha Chua - category - emacs-news"/>
     <outline xmlUrl="https://www.masteringemacs.org/feed" title="Mastering Emacs"/>
+    <outline xmlUrl="https://dothemath.ucsd.edu/rss" title="Do the Math"/>
     <outline xmlUrl="https://natehagens.substack.com/feed" title="The Great Simplification"/>
     <outline xmlUrl="https://solar.lowtechmagazine.com/posts/index.xml" title="LOW←TECH MAGAZINE English"/>
+    <outline xmlUrl="https://www.geoffreylitt.com/feed.xml" title="Geoffrey Litt"/>
+    <outline xmlUrl="https://xeiaso.net/blog.rss" title="Xe Iaso&apos;s blog"/>
+    <outline xmlUrl="https://lucumr.pocoo.org/feed.atom" title="Armin Ronacher&apos;s Thoughts and Writings"/>
+    <outline xmlUrl="https://gomakethings.com/feed/index.xml" title="Go Make Things"/>
+    <outline xmlUrl="https://blog.headius.com/feed" title="Charles Oliver Nutter"/>
+    <outline xmlUrl="https://thegreatrace.substack.com/feed" title="Gabriel Weinberg"/>
+    <outline xmlUrl="https://worksonmymachine.substack.com/feed" title="Works on My Machine"/>
+    <outline xmlUrl="https://andrey.eremin.eu/feed/blog/feed.xml" title="Andrey Eremin - IT Architect &amp; Consultant"/>
+    <outline xmlUrl="https://ratfactor.com/atom.xml" title="Ratfactor Feed"/>
+    <outline xmlUrl="https://interconnected.org/home/feed" title="Interconnected"/>
+    <outline xmlUrl="https://simonsafar.com/index.xml" title="Simon Safar"/>
+    <outline xmlUrl="https://cendyne.dev/feed.xml" title="Cendyne&apos;s Posts about security, architecture, software, management, and cryptography"/>
+    <outline xmlUrl="https://infrequently.org/feed/" title="Infrequently Noted"/>
+    <outline xmlUrl="https://yoric.github.io/index.xml" title="Il y a du thé renversé au bord de la table !"/>
+    <outline xmlUrl="https://egtheory.wordpress.com/feed/" title="Theory, Evolution, and Games Group"/>
+    <outline xmlUrl="https://borretti.me/feed.xml" title="Fernando Borretti"/>
+    <outline xmlUrl="https://www.benkuhn.net/index.xml" title="benkuhn.net"/>
+    <outline xmlUrl="https://pixel-druid.com/feed.rss" title=""/>
+    <outline xmlUrl="https://funcall.blogspot.com/feeds/posts/default" title="Abstract Heresies"/>
+    <outline xmlUrl="https://www.tfeb.org/fragments/feeds/all.atom.xml" title="Fragments: Fragments"/>
+    <outline xmlUrl="https://www.fullstackruby.dev/feed.xml" title="Fullstack Ruby"/>
+    <outline xmlUrl="https://registerspill.thorstenball.com/feed" title="Register Spill"/>
+    <outline xmlUrl="https://berjon.com/feed.atom" title="Robin Berjon"/>
+    <outline xmlUrl="https://two-wrongs.com/feed" title="Entropic Thoughts"/>
+    <outline xmlUrl="https://jerf.org/iri/rss.xml" title="iRi"/>
+    <outline xmlUrl="https://blog.plover.com/index.rss" title="The Universe of Discourse"/>
+    <outline xmlUrl="https://macwright.com/rss.xml" title="macwright.com"/>
+    <outline xmlUrl="https://usesthis.com/feed.atom" title="Uses This"/>
+    <outline xmlUrl="https://world.hey.com/dhh/feed.atom" title="David Heinemeier Hansson"/>
+    <outline xmlUrl="https://raganwald.com/rss" title="raganwald.com"/>
+    <outline xmlUrl="https://www.baldurbjarnason.com/index.xml" title="Baldur Bjarnason - All Writing"/>
     <outline xmlUrl="https://blog.rongarret.info/feeds/posts/default" title="Rondam Ramblings"/>
     <outline xmlUrl="https://yosefk.com/blog/feed" title="Yossi Kreinin"/>
     <outline xmlUrl="https://www.emacsair.me/feed.xml" title="Emacsair"/>
@@ -81,11 +139,13 @@
     <outline xmlUrl="http://100r.co/links/rss.xml" title="Hundred Rabbits"/>
     <outline xmlUrl="https://www.evanmiller.org/news.xml" title="Evan Miller’s News"/>
     <outline xmlUrl="https://ludic.mataroa.blog/rss/" title="Ludicity"/>
-    <outline xmlUrl="https://www.spakhm.com/feed" title="Zero Credibility"/>
+    <outline xmlUrl="https://www.spakhm.com/feed" title=""/>
     <outline xmlUrl="https://simonwillison.net/atom/everything/" title="Simon Willison&apos;s Weblog"/>
     <outline xmlUrl="https://unixsheikh.com/feed.rss" title="unixdigest.com"/>
     <outline xmlUrl="https://drewdevault.com/blog/index.xml" title="Drew DeVault&apos;s blog"/>
     <outline xmlUrl="https://karl-voit.at/feeds/lazyblorg-all.atom_1.0.links-and-content.xml" title="public voit"/>
+    <outline xmlUrl="https://spectrum.ieee.org/rss" title="IEEE Spectrum"/>
+    <outline xmlUrl="https://us5.campaign-archive.com/feed?u=ea228d7061e8bbfa8639666ad&amp;id=aa93122b21" title="Tech Productivity Archive Feed"/>
     <outline xmlUrl="https://fasterandworse.com/feed" title="Faster and Worse"/>
     <outline xmlUrl="https://www.theintrinsicperspective.com/feed" title="The Intrinsic Perspective"/>
     <outline xmlUrl="https://www.phoronix.com/rss.php" title="Phoronix"/>
@@ -93,27 +153,53 @@
     <outline xmlUrl="https://guix.gnu.org/feeds/blog.atom" title="GNU Guix — Blog"/>
     <outline xmlUrl="https://gnu.tools/en/blog/feed.xml" title="The GNU Assembly"/>
     <outline xmlUrl="https://nyxt.atlas.engineer/feed" title="Nyxt Browser"/>
+    <outline xmlUrl="https://techcrunch.com/feed/" title="TechCrunch"/>
     <outline xmlUrl="https://blog.google/rss" title="The Keyword"/>
     <outline xmlUrl="https://github.com/readme.rss" title="The ReadME Project"/>
     <outline xmlUrl="https://www.technologyreview.com/feed" title="MIT Technology Review"/>
+    <outline xmlUrl="https://status.anthropic.com/history.rss" title="Anthropic Status - Incident History"/>
+    <outline xmlUrl="https://status.figma.com/history.rss" title="Figma Status - Incident History"/>
+    <outline xmlUrl="https://www.githubstatus.com/history.rss" title="GitHub Status - Incident History"/>
+    <outline xmlUrl="https://status.asana.com/history.rss" title="Asana Status - Incident History"/>
     <outline xmlUrl="https://status.cloud.google.com/en/feed.atom" title="Google Cloud Service Health Updates"/>
-    <outline xmlUrl="https://feeds.feedburner.com/herokustatus" title="Heroku Status"/>
-    <outline xmlUrl="https://hnrss.org/whoishiring/jobs" title="Ask HN: Who is hiring? (July 2024)"/>
+    <outline xmlUrl="https://feeds.feedburner.com/herokustatus" title=""/>
+    <outline xmlUrl="https://s3.remote.io/feed/rss.xml" title="Remote.io Jobs"/>
+    <outline xmlUrl="https://remoteok.com/rss" title="Remote OK"/>
+    <outline xmlUrl="https://www.skipthedrive.com/feed/" title="SkipTheDrive"/>
+    <outline xmlUrl="https://remotive.com/remote-jobs/feed" title="Remotive Remote Jobs RSS Feed"/>
+    <outline xmlUrl="https://weworkremotely.com/remote-jobs.rss" title="We Work Remotely: Remote jobs in design, programming, marketing and more"/>
+    <outline xmlUrl="https://larajobs.com/feed" title="LaraJobs"/>
+    <outline xmlUrl="https://jobspresso.co/feed" title="Jobspresso"/>
+    <outline xmlUrl="https://landing.jobs/feed" title="Jobs @ Landing.jobs"/>
+    <outline xmlUrl="https://hackerx.org/feed/" title="HackerX"/>
+    <outline xmlUrl="https://hasjob.co/feed" title="All jobs – Hasjob"/>
+    <outline xmlUrl="https://www.golangprojects.com/rss.xml" title="Golangprojects.com"/>
+    <outline xmlUrl="https://www.freelancermap.com/feeds/projects/int-international.xml" title="Projects - International (int)"/>
+    <outline xmlUrl="https://4dayweek.io/rss" title="4 Day Week"/>
+    <outline xmlUrl="https://authenticjobs.com/?feed=job_feed" title="Authentic Jobs"/>
+    <outline xmlUrl="https://clojurejobboard.com/rss.xml" title="ClojureJobboard.com"/>
+    <outline xmlUrl="https://rust.careers/rss" title="Rust.Careers feed"/>
+    <outline xmlUrl="https://elixirjobs.net/rss" title="Elixir Jobs"/>
+    <outline xmlUrl="https://hnrss.org/whoishiring/jobs" title="Ask HN: Who is hiring? (September 2025)"/>
     <outline xmlUrl="https://hnrss.org/jobs" title="Hacker News: Jobs"/>
+    <outline xmlUrl="https://jobs.gorails.com/jobs.rss" title="Ruby on Rails Job Board RSS Feed"/>
+    <outline xmlUrl="https://rubyonremote.com/jobs.rss" title="RubyOnRemote"/>
     <outline xmlUrl="https://jobs.rubyonrails.org/jobs.rss" title="Rails Job Board"/>
     <outline xmlUrl="https://vadimkravcenko.com/feed" title="Vadim Kravcenko"/>
     <outline xmlUrl="https://newsletter.posthog.com/feed" title="Product for Engineers"/>
     <outline xmlUrl="https://media.ccc.de/updates.rdf" title="Chaos Computer Club - last 100 events feed"/>
+    <outline xmlUrl="https://fedoramagazine.org/feed/" title="Fedora Magazine"/>
     <outline xmlUrl="https://bsdsec.net/articles.atom" title="BSDSec"/>
     <outline xmlUrl="https://discoverbsd.com/feeds/posts/default" title="DiscoverBSD - The BSD community linklog"/>
     <outline xmlUrl="https://webtoolsweekly.com/feed" title="Web Tools Weekly"/>
     <outline xmlUrl="https://www.htmhell.dev/feed_tips.xml" title="HTMHell Tips &amp; Tricks"/>
     <outline xmlUrl="http://feeds.feedburner.com/explainextended" title="EXPLAIN EXTENDED"/>
     <outline xmlUrl="https://haskellweekly.news/newsletter.atom" title="Haskell Weekly"/>
-    <outline xmlUrl="https://newsletter.shortruby.com/feed" title="Short Ruby Newsletter"/>
+    <outline xmlUrl="https://boringrails.com/feed.xml" title="Boring Rails: Skip the bullshit and ship fast |"/>
+    <outline xmlUrl="https://newsletter.shortruby.com/feed" title=""/>
     <outline xmlUrl="https://buttondown.email/hotwireweekly/rss" title="Hotwire Weekly"/>
     <outline xmlUrl="https://cprss.s3.amazonaws.com/rubyweekly.com.xml" title="Ruby Weekly"/>
-    <outline xmlUrl="https://programmingdigest.net/digests/feed.rss" title="Programming Digest"/>
+    <outline xmlUrl="https://programmingdigest.net/digests/feed.rss" title=""/>
     <outline xmlUrl="https://andrewkelley.me/rss.xml" title="Andrew Kelley"/>
     <outline xmlUrl="https://badsoftwareadvice.substack.com/feed" title="Bad Software Advice"/>
     <outline xmlUrl="https://changelog.com/news/feed" title="Changelog News"/>

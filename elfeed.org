@@ -57,7 +57,7 @@
 **** [[https://weworkremotely.com/remote-jobs.rss][WeWorkRemotely.com]]                                      :weworkremotely:
 **** [[https://remotive.com/remote-jobs/feed][Remotive.com]]                                                     :noisy:
 **** [[https://www.skipthedrive.com/feed/][Skip The Drive]]
-**** [[https://remoteok.com/rss][RemoteOK.com]]
+**** [[https://remoteok.com/rss][RemoteOK.com]]                                                  :remoteok:
 **** [[https://s3.remote.io/feed/rss.xml][Remote.io]]                                                 :varied:noisy:
 *** Status updates for cloud services                          :status:cloud:
 **** [[https://feeds.feedburner.com/herokustatus][Heroku Status]]    :heroku:
@@ -248,6 +248,8 @@
 *** Eventos                                                         :eventos:
 **** [[https://agendametal.com.br/feed][AgendaMetal]]                 :metal:
 **** [[https://xaninhodiscos.com.br/feed][Xaninho Discos]]            :metal:
+*** Concursos                                                     :concursos:
+**** [[https://www.estrategiaconcursos.com.br/blog/rss][Estratégia Concursos]]                                        :estrategia:
 ** Check this stuff out later
 
    https://news.ycombinator.com/item?id=38242510
