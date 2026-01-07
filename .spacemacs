@@ -4,7 +4,7 @@
 
 ;;; I HATE this, but spacemacs does weird stuff with org when loading. Best case scenario is just load my tangled file and not forget to tangle it after meaningful changes.
 ;; (org-babel-load-file "~/dotfiles/spacemacs.org")
-(load-file "~/dotfiles/spacemacs.el")
+(load-file "~/spacemacs.el")
 
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.

@@ -314,10 +314,10 @@ call the original function `package-activate'."
                                       envrc
                                       codegpt
                                       ;; eat
-                                      (copilot :location (recipe
-                                                          :fetcher github
-                                                          :repo "zerolfx/copilot.el"
-                                                          :files ("*.el" "dist")))
+                                      ;; (copilot :location (recipe
+                                      ;;                     :fetcher github
+                                      ;;                     :repo "zerolfx/copilot.el"
+                                      ;;                     :files ("*.el" "dist")))
                                       evil-god-state
                                       popper
                                       ;; persistent-scratch
@@ -399,21 +399,21 @@ call the original function `package-activate'."
                                       ;; yarn-mode
                                       package-lint
                                       flycheck-package
-                                      (doom-snippets
-                                       :location (recipe :repo "hlissner/doom-snippets"
-                                                         :fetcher github
-                                                         :files ("*")))
+                                      ;; (doom-snippets
+                                      ;;  :location (recipe :repo "hlissner/doom-snippets"
+                                      ;;                    :fetcher github
+                                      ;;                    :files ("*")))
 
-                                      (yasnippet-ruby-mode
-                                       :location (recipe :repo "bmaland/yasnippet-ruby-mode"
-                                                         :fetcher github
-                                                         :files ("*")))
+                                      ;; (yasnippet-ruby-mode
+                                      ;;  :location (recipe :repo "bmaland/yasnippet-ruby-mode"
+                                      ;;                    :fetcher github
+                                      ;;                    :files ("*")))
 
-                                      (exercism
-                                       :location (recipe :repo "canweriotnow/exercism-emacs"
-                                                         :fetcher github
-                                                         :files ("*.el"))
-                                       :upgrade 't)
+                                      ;; (exercism
+                                      ;;  :location (recipe :repo "canweriotnow/exercism-emacs"
+                                      ;;                    :fetcher github
+                                      ;;                    :files ("*.el"))
+                                      ;;  :upgrade 't)
                                       (reek
                                        :location (recipe :repo "hanmoi-choi/reek-emacs"
                                                          :fetcher github
