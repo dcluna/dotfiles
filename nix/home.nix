@@ -22,7 +22,8 @@ in
   # home.username = "danielluna";
   home.username = "dcluna";
   # home.homeDirectory = "/Users/danielluna";
-  home.homeDirectory = "/home/dcluna";
+  # home.homeDirectory = "/home/daniel.luna";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${config.home.username}" else "/home/${config.home.username}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -40,12 +41,11 @@ in
     # pkgs.xsv
     pkgs.lazydocker
     pkgs.pspg
-    pkgs.rufo
     pkgs.lnav
-    pkgs.pqrs
+    # pkgs.pqrs
     pkgs.wget
     # pkgs.gnupg
-    pkgs.pgmetrics
+    # pkgs.pgmetrics
     # pkgs.spotify-tui
     pkgs.ledger-autosync
     pkgs.hledger
@@ -88,7 +88,6 @@ in
     pkgs.starship
     pkgs.exercism
     pkgs.jaq
-    pkgs.pgsync
     pkgs.heroku
     pkgs.btop
     pkgs.pgformatter
@@ -106,6 +105,7 @@ in
     pkgs.awscli2
     pkgs.toot
     pkgs.tmuxinator
+    pkgs.tmux
     # pkgs.ast-grep
     (pkgs.ffmpeg.override {withWebp = true;})
     (pkgs.imagemagick.override {libwebpSupport = true;})
@@ -125,35 +125,42 @@ in
     pkgs.just
     pkgs.codex
     pkgs.gh
-    # pkgs.opencode
+    pkgs.opencode
     claudesquad
     pkgs.somo
+  ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+    pkgs.rufo
+    pkgs.pgsync
   ];
 
   home.file = {
     "persistent-scratch-backups/.keep".text = "";
 
 
-    # ".config/nixpkgs/home.nix".source = ~/dotfiles/nix/home.nix;
+    # ".config/nixpkgs/home.nix".source = ./nix/home.nix;
     # ".config/home-manager/home.nix".source = $HOME/dotfiles/nix/home.nix;
-    # ".zshrc".source = ~/dotfiles/.zshrc;
-    ".psqlrc".source = ~/dotfiles/.psqlrc;
-    ".irbrc".source = ~/dotfiles/.irbrc;
-    ".pryrc".source = ~/dotfiles/.pryrc;
-    ".railsrc".source = ~/dotfiles/.railsrc;
-    ".spacemacs".source = ~/dotfiles/.spacemacs;
-    "spacemacs.el".source = ~/dotfiles/spacemacs.el;
-    "spacemacs-user-config.el".source = ~/dotfiles/spacemacs-user-config.el;
-    ".config/zellij/config.kdl".source = ~/dotfiles/zellij-config.kdl;
-    ".config/gptcommit/config.toml".source = ~/dotfiles/gptcommit/config.toml;
-    ".bin/gptcommithook".source = ~/dotfiles/gptcommit/gptcommithook;
+    # ".zshrc".source = ./.zshrc;
+    ".psqlrc".source = ../.psqlrc;
+    ".irbrc".source = ../.irbrc;
+    ".pryrc".source = ../.pryrc;
+    ".railsrc".source = ../.railsrc;
+    ".spacemacs".source = ../.spacemacs;
+    "spacemacs.el".source = ../spacemacs.el;
+    "spacemacs-user-config.el".source = ../spacemacs-user-config.el;
+    ".config/zellij/config.kdl".source = ../zellij-config.kdl;
+    ".config/gptcommit/config.toml".source = ../gptcommit/config.toml;
+    ".bin/gptcommithook".source = ../gptcommit/gptcommithook;
     ".stCommitMsg".text = "";
-    ".bashrc.d/mise.sh".source = ~/dotfiles/mise.bash;
-    ".bashrc.d/direnv.sh".source = ~/dotfiles/direnv.bash;
-    ".bashrc.d/atuin.sh".source = ~/dotfiles/atuin.bash;
-    ".bashrc.d/emacs.sh".source = ~/dotfiles/emacs.bash;
-    # ".opencode.json".source = ~/dotfiles/opencode/opencode.json;
-    # ".claude-code-router/config.json".source = ~/dotfiles/claudecode/router.json;
+    ".zsh-confs" = {
+      source = ../.zsh-confs;
+      recursive = true;
+    };
+    ".bashrc.d/mise.sh".source = ../mise.bash;
+    ".bashrc.d/direnv.sh".source = ../direnv.bash;
+    ".bashrc.d/atuin.sh".source = ../atuin.bash;
+    ".bashrc.d/emacs.sh".source = ../emacs.bash;
+    ".opencode.json".source = ../opencode/opencode.json;
+    # ".claude-code-router/config.json".source = ./claudecode/router.json;
 
     # ".tmux/plugins/tpm" = {
     #   source = pkgs.fetchFromGitHub {
@@ -166,23 +173,25 @@ in
     ".tmux" = {
       source = builtins.fetchGit {
         url = "git@github.com:gpakosz/.tmux.git";
+        ref = "master";
         # owner = ".tmux";
         # repo = "gpakosz";
-        rev = "129d6e7ff3ae6add17f88d6737810bbdaa3a25cf";
+        # rev = "129d6e7ff3ae6add17f88d6737810bbdaa3a25cf";
+        rev = "87dcd13a28aeb5f18baee630e24b3f5765ae3a4f";
         # sha256 = "1r65pp1gpyrjnkvv820rik34fn8247kpdi828bn35yrnw4dhi32f";
         # leaveDotGit = true;
       };
     };
-    ".tmux.conf".source = ~/.tmux/.tmux.conf;
-    ".tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
+    ".tmux.conf".source = ../.tmux.conf;
+    ".tmux.conf.local".source = ../.tmux.conf.local;
     # ".config/.tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
-    ".config/toxiproxy.json".source = ~/dotfiles/toxiproxy.json;
-    "Projects/AdQuick/.tmuxinator.yml".source = ~/dotfiles/.tmuxinator.adquick.yml;
+    # ".config/toxiproxy.json".source = ~/dotfiles/toxiproxy.json;
+    # "Projects/AdQuick/.tmuxinator.yml".source = ~/dotfiles/.tmuxinator.adquick.yml;
     # "Projects/AdQuick/adquick/lefthook.yml".source = ~/dotfiles/lefthook/lefthook.yml;
-    "Projects/AdQuick/adquick/lefthook-local.yml".source = ~/dotfiles/lefthook/lefthook-local.yml;
-    "Projects/AdQuick/adquick/.aider.conf.yml".source = ~/dotfiles/aider/.aider.conf.yml;
-    ".config/tmuxinator/emamux.yml".source = ~/dotfiles/.tmuxinator.emamux.yml;
-    ".newsboat/config".source = ~/dotfiles/newsboat/config;
+    # "Projects/AdQuick/adquick/lefthook-local.yml".source = ~/dotfiles/lefthook/lefthook-local.yml;
+    # "Projects/AdQuick/adquick/.aider.conf.yml".source = ~/dotfiles/aider/.aider.conf.yml;
+    # ".config/tmuxinator/emamux.yml".source = ~/dotfiles/.tmuxinator.emamux.yml;
+    # ".newsboat/config".source = ~/dotfiles/newsboat/config;
     ".bin/eless".source = ~/.eless/eless;
 
     ".rbenv" = {
@@ -255,7 +264,7 @@ in
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     defaultKeymap = "viins";
-    initContent = lib.strings.fileContents ~/dotfiles/.zshrc;
+    initContent = lib.strings.fileContents ../.zshrc;
     oh-my-zsh = {
       enable = true;
       plugins = [

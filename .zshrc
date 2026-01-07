@@ -68,7 +68,7 @@ fi
 
 # [[ -s "$ZSH/oh-my-zsh.sh" ]] && source $ZSH/oh-my-zsh.sh
 
-for file in `ls ~/dotfiles/.zsh-confs/*.zsh`; do
+for file in `ls ~/.zsh-confs/*.zsh`; do
     source $file
 done
 

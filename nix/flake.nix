@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of dcluna";
+  description = "Home Manager configuration of daniel.luna";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -12,7 +12,8 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      system = "x86_64-linux";
+      # system = "x86_64-linux";
+      system = builtins.currentSystem;
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       homeConfigurations."dcluna" = home-manager.lib.homeManagerConfiguration {
@@ -20,8 +21,8 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        # modules = [ ./home.nix ];
-        modules = [ /home/dcluna/dotfiles/nix/home.nix ];
+        modules = [ ./home.nix ];
+        # modules = [ /home/daniel.luna/dotfiles/nix/home.nix ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
