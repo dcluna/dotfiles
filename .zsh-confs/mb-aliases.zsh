@@ -1,0 +1,1 @@
+alias awslogin="saml2aws login --browser-autofill --skip-prompt --force"
