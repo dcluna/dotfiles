@@ -63,6 +63,7 @@ in
     pkgs.ripgrep
     pkgs.xan
     pkgs.k9s
+    pkgs.kubectx
     pkgs.rbspy
     pkgs.stern
     pkgs.llm
@@ -105,7 +106,7 @@ in
     pkgs.awscli2
     pkgs.toot
     pkgs.tmuxinator
-    pkgs.tmux
+    # pkgs.tmux
     # pkgs.ast-grep
     (pkgs.ffmpeg.override {withWebp = true;})
     (pkgs.imagemagick.override {libwebpSupport = true;})
