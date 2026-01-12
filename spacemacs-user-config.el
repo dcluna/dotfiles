@@ -993,7 +993,9 @@ Offers completion for existing tmux sessions."
   (unless slack-teams (load-file "~/.slack-teams.el.gpg")))
 (defun dcl/load-sql-connections ()
   (interactive)
-  (load-file (expand-file-name "~/dotfiles/sql-connections.el.gpg")))
+  (let ((sql-connection-file-name (expand-file-name "~/dotfiles/sql-connections.el.gpg")))
+    (if (file-exists-p sql-connection-file-name)
+      (load-file sql-connection-file-name))))
 
 (if (fboundp 'sqlformat-on-save-mode)
     (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))

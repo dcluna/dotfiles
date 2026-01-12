@@ -18,7 +18,7 @@
     <<spacemacs-user-init>>
 
     (defun dotspacemacs/user-config ()
-      (load-file (expand-file-name "~/dotfiles/spacemacs-user-config.el")))
+      (load-file (expand-file-name "~/spacemacs-user-config.el")))
   #+END_SRC
 
   #+BEGIN_SRC emacs-lisp :tangle "spacemacs-user-config.el" :noweb yes
@@ -2098,7 +2098,9 @@
     #+BEGIN_SRC emacs-lisp
       (defun dcl/load-sql-connections ()
         (interactive)
-        (load-file (expand-file-name "~/dotfiles/sql-connections.el.gpg")))
+        (let ((sql-connection-file-name (expand-file-name "~/dotfiles/sql-connections.el.gpg")))
+          (if (file-exists-p sql-connection-file-name)
+            (load-file sql-connection-file-name))))
 
       (if (fboundp 'sqlformat-on-save-mode)
           (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
