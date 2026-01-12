@@ -1261,8 +1261,9 @@ Offers completion for existing tmux sessions."
   (define-key emamux:keymap "z" #'emamux:zoom-runner)
   (define-key emamux:keymap "l" #'dcl/emamux:send-line)
   (spacemacs/declare-prefix "o e" "emamux"))
-(require 'evil-vterm-tmux-navigator)
-(define-key emamux:keymap "n" #'evil-vterm-tmux-navigator-state)
+(when (featurep 'evil-vterm-tmux-navigator)
+  (require 'evil-vterm-tmux-navigator)
+  (define-key emamux:keymap "n" #'evil-vterm-tmux-navigator-state))
 (defun emamux:save-current-pane-to-file (filename)
   "Prompt for FILENAME and run: capture-pane -S -; save-buffer <filename> on the current emamux runner pane."
   (interactive (list (read-file-name "Save pane to file: " nil nil nil)))
@@ -1370,6 +1371,9 @@ Offers completion for existing tmux sessions."
                  :host "localhost:11434"
                  :stream t
                  :models '(qwen2.5-coder:32b)))
+(defvar openai-key nil "Openai API key")
+(defvar anthropic-api-key nil "Anthropic API key")
+
 (setq dcl/gptel-sonnet-3-5
   (gptel-make-anthropic "Claude 3.5"          ;Any name you want
     :stream t                             ;Streaming responses
@@ -1656,7 +1660,12 @@ Offers completion for existing tmux sessions."
   (define-key copilot-completion-map (kbd "C-j") 'copilot-accept-completion)
   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion))
 
-(add-hook 'prog-mode-hook 'copilot-mode)
+(use-package copilot
+  :vc (:url "https://github.com/copilot-emacs/copilot.el"
+            :rev :newest
+            :branch "main")
+  :config
+  (add-hook 'prog-mode-hook 'copilot-mode))
 
 (define-key evil-insert-state-map (kbd "C-<tab>") 'copilot-accept-completion-by-word)
 (define-key evil-insert-state-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
