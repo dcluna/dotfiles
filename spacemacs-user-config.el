@@ -860,6 +860,8 @@ Offers completion for existing tmux sessions."
   (setq-local truncate-lines nil))
 
 (add-hook 'magit-status-mode-hook 'dcl/disable-truncate-lines-in-magit-status)
+(use-package diff-hl
+  :ensure t)
 (setq erc-join-buffer 'bury)
 (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#offsec" "#corelan" "#ruby" "#RubyOnRails")))
 (setq erc-prompt-for-password nil)

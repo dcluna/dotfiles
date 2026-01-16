@@ -1859,6 +1859,12 @@
 
       (add-hook 'magit-status-mode-hook 'dcl/disable-truncate-lines-in-magit-status)
     #+end_src
+** Diff-hl mode
+
+    #+begin_src emacs-lisp
+      (use-package diff-hl
+        :ensure t)
+    #+end_src
 
 ** ERC
    #+BEGIN_SRC emacs-lisp
