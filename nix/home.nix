@@ -129,6 +129,7 @@ in
     pkgs.opencode
     claudesquad
     pkgs.somo
+    pkgs.difftastic
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
