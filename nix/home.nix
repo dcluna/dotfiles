@@ -131,6 +131,7 @@ in
     pkgs.somo
     pkgs.difftastic
     pkgs.mergiraf
+    pkgs.fzf
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
