@@ -130,6 +130,7 @@ in
     claudesquad
     pkgs.somo
     pkgs.difftastic
+    pkgs.mergiraf
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
