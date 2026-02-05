@@ -161,6 +161,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          difftastic
                                           flyover
                                           compile-angel
                                           lsp-tailwindcss
@@ -3583,6 +3584,14 @@
         (setq forge-llm-llm-provider (make-llm-claude :key anthropic-api-key :chat-model "claude-3-7-sonnet-20250219"))
         (forge-llm-setup))
     #+end_src
+** Difftastic
+
+   #+begin_src emacs-lisp
+     (use-package difftastic
+        :defer t
+        :ensure t
+        :init (difftastic-bindings-mode))
+   #+end_src
 
 ** LSP
 *** Tailwind CSS

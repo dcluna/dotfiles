@@ -1992,6 +1992,10 @@ _u_pdate
    whisper-use-threads (/ (num-processors) 2))
   (require 'whisper)
   (require 'org-ai-talk))
+(use-package difftastic
+   :defer t
+   :ensure t
+   :init (difftastic-bindings-mode))
 (use-package lsp-tailwindcss
  :after lsp-mode
  :init (setq lsp-tailwindcss-experimental-class-regex ["tw`([^`]*)" "tw=\"([^\"]*)" "tw={\"([^\"}]*)" "tw\\.\\w+`([^`]*)" "tw\\(.*?\\)`([^`]*)"])
