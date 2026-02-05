@@ -1,0 +1,39 @@
+source ~/.intellimacs/spacemacs.vim
+
+" (Optional) Enable other Intellimacs modules
+source ~/.intellimacs/extra.vim
+source ~/.intellimacs/major.vim
+source ~/.intellimacs/hybrid.vim
+
+" (Optional) Enable which-key plugin
+source ~/.intellimacs/which-key.vim
+
+" (Optional) My own vim commands
+" nnoremap Y y$
+
+" (Optional) Comma for major mode
+nmap , <leader>m
+vmap , <leader>m
+
+" (Optional) Add/edit actions
+" nnoremap <leader>gl    :action Vcs.Show.Log<CR>
+" vnoremap <leader>gl    :action Vcs.Show.Log<CR>
+let g:WhichKeyDesc_GitVcs_Vcs_GitLink = "<leader>gvc copy git link"
+nnoremap <leader>gvc    :action uk.co.ben_gibson.git.link.ui.actions.menu.CopyAction<CR>
+vnoremap <leader>gvc    :action uk.co.ben_gibson.git.link.ui.actions.menu.CopyAction<CR>
+
+let g:WhichKeyDesc_ReSharper_Goto_Implementation = "gM Go to Implementation"
+nnoremap gM :action ReSharperGotoImplementation<CR>
+
+let g:WhichKeyDesc_Rider_Show_IncomingCalls = "<leader>si Show Incoming Calls"
+nnoremap <leader>si    :action RiderShowIncomingCalls<CR>
+
+let g:WhichKeyDesc_Rider_Show_OutgoingCalls = "<leader>so Show Outgoing Calls"
+nnoremap <leader>so    :action RiderShowOutgoingCalls<CR>
+
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'machakann/vim-highlightedyank'
+
+set functiontextobj # provides text movement for functions/methods: if, af
+set ideajoin
