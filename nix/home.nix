@@ -253,6 +253,20 @@ in
     # '';
   };
 
+  home.activation.ensureEmacsDirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -d "$HOME/.emacs.d" ]; then
+      ${pkgs.git}/bin/git clone https://github.com/plexus/chemacs2.git "$HOME/.emacs.d"
+    fi
+
+    if [ ! -d "$HOME/.emacs.spacemacs" ]; then
+      ${pkgs.git}/bin/git clone https://github.com/syl20bnr/spacemacs.git "$HOME/.emacs.spacemacs"
+    fi
+
+    if [ ! -d "$HOME/.emacs-kick" ]; then
+      ${pkgs.git}/bin/git clone https://github.com/LionyxML/emacs-kick.git "$HOME/.emacs-kick"
+    fi
+  '';
+
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
