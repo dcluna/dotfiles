@@ -148,6 +148,8 @@ in
     ".irbrc".source = ../.irbrc;
     ".pryrc".source = ../.pryrc;
     ".railsrc".source = ../.railsrc;
+    ".emacs-profiles.el".source = ../.emacs-profiles.el;
+    ".emacs-profile".source = ../.emacs-profile;
     ".spacemacs".source = ../.spacemacs;
     "spacemacs.el".source = ../spacemacs.el;
     "spacemacs-user-config.el".source = ../spacemacs-user-config.el;
