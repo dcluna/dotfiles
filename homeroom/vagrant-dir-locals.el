@@ -27,6 +27,15 @@
                                      "\\)"
                                      " ?[0-9:]* ?[\\]>*\"'/`] *"
                                      "\\)")))
+               (rspec-use-vagrant-when-possible . t)
+               (rspec-vagrant-cwd . "/vagrant/api/")
+               (eval . (progn
+                         (defun vagrant-devenv-api--rspec-vagrant-p-advice (orig-fn)
+                           "Look for Vagrantfile in parent directories, not just project root."
+                           (and rspec-use-vagrant-when-possible
+                                (locate-dominating-file default-directory "Vagrantfile")))
+                         (advice-add 'rspec-vagrant-p :around
+                                     #'vagrant-devenv-api--rspec-vagrant-p-advice)))
                (eval . (progn
                          (defun vagrant-devenv-api--bundle-command-advice (orig-fn cmd)
                            "Wrap bundle-command to run inside the Vagrant container."
