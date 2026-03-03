@@ -3,6 +3,7 @@
 
 ((ruby-mode . ((projectile-rails-custom-console-command . "vagrant ssh -c \"cd /vagrant/api && bundle exec rails c\"")
                (robe-ruby-path . "/vagrant/.robe-lib")
+               (robe-port . "33315")
                (eval . (setq inf-ruby-first-prompt-pattern
                              (concat "\\("
                                      "^\\([[0-9]+] \\)?"
@@ -27,6 +28,8 @@
                                      "\\)"
                                      " ?[0-9:]* ?[\\]>*\"'/`] *"
                                      "\\)")))
+               (eval . (setq inf-ruby-breakpoint-pattern
+                             "\\[[0-9]+\\] [a-z0-9_-]+(#<[^>]+>)> *"))
                (rspec-use-vagrant-when-possible . t)
                (rspec-vagrant-cwd . "/vagrant/api/")
                (eval . (progn
