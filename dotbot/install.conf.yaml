@@ -1,0 +1,69 @@
+# dotbot configuration
+# Generated from nix/home.nix patterns
+
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean:
+    - "~"
+
+# Empty placeholder files
+- create:
+    - ~/persistent-scratch-backups
+- shell:
+    - command: touch ~/persistent-scratch-backups/.keep
+      description: Create persistent-scratch-backups/.keep placeholder
+    - command: touch ~/.stCommitMsg
+      description: Create empty .stCommitMsg
+
+# Simple symlinks
+- link:
+    ~/.psqlrc: .psqlrc
+    ~/.irbrc: .irbrc
+    ~/.pryrc: .pryrc
+    ~/.railsrc: .railsrc
+    ~/.emacs-profiles.el: .emacs-profiles.el
+    ~/.emacs-profile: .emacs-profile
+    ~/.spacemacs: .spacemacs
+    ~/spacemacs.el: spacemacs.el
+    ~/spacemacs-user-config.el: spacemacs-user-config.el
+    ~/.config/zellij/config.kdl: zellij-config.kdl
+    ~/.config/gptcommit/config.toml: gptcommit/config.toml
+    ~/.bin/gptcommithook: gptcommit/gptcommithook
+    ~/.tmux.conf: .tmux.conf
+    ~/.tmux.conf.local: .tmux.conf.local
+    ~/.bashrc.d/mise.sh: mise.bash
+    ~/.bashrc.d/direnv.sh: direnv.bash
+    ~/.bashrc.d/atuin.sh: atuin.bash
+    ~/.bashrc.d/emacs.sh: emacs.bash
+    ~/.opencode.json: opencode/opencode.json
+
+    # Recursive directory link
+    ~/.zsh-confs: .zsh-confs
+
+# Git-cloned repositories
+- shell:
+    - command: "[ -d ~/.rbenv ] || git clone https://github.com/rbenv/rbenv.git ~/.rbenv"
+      description: Clone rbenv
+      stdout: true
+      stderr: true
+    - command: "[ -d ~/.eless ] || git clone https://github.com/kaushalmodi/eless.git ~/.eless"
+      description: Clone eless
+      stdout: true
+      stderr: true
+
+# Emacs activation clones (idempotent)
+    - command: "[ -d ~/.emacs.d ] || git clone https://github.com/plexus/chemacs2.git ~/.emacs.d"
+      description: Clone chemacs2 into ~/.emacs.d
+      stdout: true
+      stderr: true
+    - command: "[ -d ~/.emacs.spacemacs ] || git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.spacemacs"
+      description: Clone spacemacs
+      stdout: true
+      stderr: true
+    - command: "[ -d ~/.emacs-kick ] || git clone https://github.com/LionyxML/emacs-kick.git ~/.emacs-kick"
+      description: Clone emacs-kick
+      stdout: true
+      stderr: true
