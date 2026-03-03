@@ -161,6 +161,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          mise
                                           difftastic
                                           flyover
                                           compile-angel
@@ -189,7 +190,7 @@
                                           ;; avk-emacs-themes
                                           mastodon
                                           envrc
-                                          codegpt
+                                          ;; codegpt
                                           ;; eat
                                           ;; (copilot :location (recipe
                                           ;;                     :fetcher github
@@ -3061,16 +3062,16 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
 ** GPTel-prompts
 
    #+begin_src emacs-lisp
-     (use-package gptel-prompts
-       :ensure t
-       :straight (:type git :host github :repo "jwiegley/gptel-prompts" :files ("*.el"))
-       :after (gptel)
-       :demand t
-       :custom (gptel-prompts-directory "~/dotfiles/gptel-prompts/")
-       :config
-       (gptel-prompts-update)
-       ;; Ensure prompts are updated if prompt files change
-       (gptel-prompts-add-update-watchers))
+     ;; (use-package gptel-prompts
+     ;;   :ensure t
+     ;;   :straight (:type git :host github :repo "jwiegley/gptel-prompts" :files ("*.el"))
+     ;;   :after (gptel)
+     ;;   :demand t
+     ;;   :custom (gptel-prompts-directory "~/ghq/dcluna/dotfiles/gptel-prompts/")
+     ;;   :config
+     ;;   (gptel-prompts-update)
+     ;;   ;; Ensure prompts are updated if prompt files change
+     ;;   (gptel-prompts-add-update-watchers))
    #+end_src
 
 ** Macher

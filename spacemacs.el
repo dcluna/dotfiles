@@ -286,6 +286,7 @@ call the original function `package-activate'."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages `(
+                                      mise
                                       difftastic
                                       flyover
                                       compile-angel
@@ -314,7 +315,7 @@ call the original function `package-activate'."
                                       ;; avk-emacs-themes
                                       mastodon
                                       envrc
-                                      codegpt
+                                      ;; codegpt
                                       ;; eat
                                       ;; (copilot :location (recipe
                                       ;;                     :fetcher github
