@@ -638,34 +638,32 @@ Offers completion for existing tmux sessions."
                           (concat ".worktrees/" branch-name))
      branch-name
      (magit-read-branch-or-commit "Branching from: " "origin/master"))))
-(defun magit-history-checkout ()
-  (interactive)
-  (magit-checkout (magit-completing-read "Branch: " (magit-history-branches))))
+      (defun magit-history-checkout ()
+        (interactive)
+        (magit-checkout (magit-completing-read "Branch: " (magit-history-branches))))
 
-(defun magit-history-branches ()
-  (let ((i 1)
-        (history-item nil)
-        (current-item 'none)
-        (current-branch (magit-rev-parse "--abbrev-ref" "HEAD"))
-        (stop nil)
-        (branch-list nil))
-    (while (not stop)
-      (setq history-item (format "@{-%d}" i))
-      (setq current-item (magit-rev-parse "--abbrev-ref" history-item))
-      (cond ((not (equalp history-item current-item))
-             (if (and current-item (not (equalp current-item current-branch)))
-                 (add-to-list 'branch-list current-item t)))
-            (t (setq stop t)))
-      (setq i (1+ i)))
-    branch-list))
+      (defun magit-history-branches ()
+        "Return a list of previously checked-out branches (most recent first).
+Uses a single `git reflog` call instead of per-entry rev-parse."
+        (let ((current-branch (magit-get-current-branch))
+              (seen (make-hash-table :test #'equal))
+              (branch-list nil))
+          (dolist (line (magit-git-lines "reflog" "--format=%gs"))
+            (when (string-match "^checkout: moving from .* to \\(.+\\)" line)
+              (let ((branch (match-string 1 line)))
+                (when (and (not (equal branch current-branch))
+                           (not (gethash branch seen)))
+                  (puthash branch t seen)
+                  (push branch branch-list)))))
+          (nreverse branch-list)))
 
-;;; todo: add this to spacemacs, or magit, or wherever this is defined
-(defun dcl/set-fill-column-magit-commit-mode ()
-  ;; magit always complains that 'line is too big' w/ the old fill-column values (72, I think). I set this to something a little smaller
-  (setq fill-column 52))
+      ;;; todo: add this to spacemacs, or magit, or wherever this is defined
+      (defun dcl/set-fill-column-magit-commit-mode ()
+        ;; magit always complains that 'line is too big' w/ the old fill-column values (72, I think). I set this to something a little smaller
+        (setq fill-column 52))
 
-(with-eval-after-load 'magit
-  (define-key magit-mode-map (kbd "%") 'magit-worktree))
+      (with-eval-after-load 'magit
+        (define-key magit-mode-map (kbd "%") 'magit-worktree))
 (defun dcl/eshell-pipe-to-buffer (buffer-name)
   (interactive "sBuffer name: ")
   (insert (format " > #<buffer %s>" buffer-name)))

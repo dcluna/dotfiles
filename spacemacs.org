@@ -1538,21 +1538,19 @@
         (magit-checkout (magit-completing-read "Branch: " (magit-history-branches))))
 
       (defun magit-history-branches ()
-        (let ((i 1)
-              (history-item nil)
-              (current-item 'none)
-              (current-branch (magit-rev-parse "--abbrev-ref" "HEAD"))
-              (stop nil)
+        "Return a list of previously checked-out branches (most recent first).
+Uses a single `git reflog` call instead of per-entry rev-parse."
+        (let ((current-branch (magit-get-current-branch))
+              (seen (make-hash-table :test #'equal))
               (branch-list nil))
-          (while (not stop)
-            (setq history-item (format "@{-%d}" i))
-            (setq current-item (magit-rev-parse "--abbrev-ref" history-item))
-            (cond ((not (equalp history-item current-item))
-                   (if (and current-item (not (equalp current-item current-branch)))
-                       (add-to-list 'branch-list current-item t)))
-                  (t (setq stop t)))
-            (setq i (1+ i)))
-          branch-list))
+          (dolist (line (magit-git-lines "reflog" "--format=%gs"))
+            (when (string-match "^checkout: moving from .* to \\(.+\\)" line)
+              (let ((branch (match-string 1 line)))
+                (when (and (not (equal branch current-branch))
+                           (not (gethash branch seen)))
+                  (puthash branch t seen)
+                  (push branch branch-list)))))
+          (nreverse branch-list)))
 
       ;;; todo: add this to spacemacs, or magit, or wherever this is defined
       (defun dcl/set-fill-column-magit-commit-mode ()
