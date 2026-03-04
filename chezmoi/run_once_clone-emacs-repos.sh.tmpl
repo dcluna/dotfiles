@@ -1,0 +1,20 @@
+#!/bin/bash
+# Clone emacs directories if they don't already exist
+# Generated from nix/home.nix home.activation.ensureEmacsDirs
+
+set -euo pipefail
+
+if [ ! -d "$HOME/.emacs.d" ]; then
+  echo "Cloning chemacs2 into ~/.emacs.d ..."
+  git clone https://github.com/plexus/chemacs2.git "$HOME/.emacs.d"
+fi
+
+if [ ! -d "$HOME/.emacs.spacemacs" ]; then
+  echo "Cloning spacemacs into ~/.emacs.spacemacs ..."
+  git clone https://github.com/syl20bnr/spacemacs.git "$HOME/.emacs.spacemacs"
+fi
+
+if [ ! -d "$HOME/.emacs-kick" ]; then
+  echo "Cloning emacs-kick into ~/.emacs-kick ..."
+  git clone https://github.com/LionyxML/emacs-kick.git "$HOME/.emacs-kick"
+fi

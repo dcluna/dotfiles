@@ -1,0 +1,12 @@
+# External git repositories managed by chezmoi
+# Generated from nix/home.nix patterns
+
+[".rbenv"]
+  type = "git-repo"
+  url = "https://github.com/rbenv/rbenv.git"
+  refreshPeriod = "168h" # 1 week
+
+[".eless"]
+  type = "git-repo"
+  url = "https://github.com/kaushalmodi/eless.git"
+  refreshPeriod = "168h"
