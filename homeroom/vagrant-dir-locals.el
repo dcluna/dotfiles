@@ -87,6 +87,14 @@ Uses `robe-vagrant-path-mappings' alist to find a matching prefix."
                          (advice-add 'robe-find-file :around
                                      #'vagrant-devenv--robe-find-file-advice)))
                (eval . (progn
+                         (defun vagrant-devenv-api--irb-needs-nomultiline-p-advice (orig-fn &rest args)
+                           "Skip `inf-ruby--irb-needs-nomultiline-p' unless using IRB (ruby/yarv)."
+                           (if (member inf-ruby-default-implementation '("ruby" "yarv"))
+                               (apply orig-fn args)
+                             nil))
+                         (advice-add 'inf-ruby--irb-needs-nomultiline-p :around
+                                     #'vagrant-devenv-api--irb-needs-nomultiline-p-advice)))
+               (eval . (progn
                          (defun vagrant-devenv-api--bundle-command-advice (orig-fn cmd)
                            "Wrap bundle-command to run inside the Vagrant container.
 When called with a prefix argument (C-u), prompt whether to use Vagrant."
