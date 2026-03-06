@@ -1,7 +1,11 @@
 ;;; Directory Local Variables         -*- no-byte-compile: t; -*-
 ;;; For more information see (info "(emacs) Directory Variables")
 
-((ruby-mode . ((projectile-rails-custom-console-command . "vagrant ssh -c \"cd /vagrant/api && direnv exec . bundle exec rails c\"")
+((ruby-mode . ((eval . (setq projectile-rails-custom-console-command
+                             (let ((project-name (file-name-nondirectory
+                                                  (directory-file-name
+                                                   (locate-dominating-file default-directory "Gemfile")))))
+                               (format "vagrant ssh -c \"cd /vagrant/%s && direnv exec . bundle exec rails c\"" project-name))))
                (robe-ruby-path . "/vagrant/.robe-lib")
                (robe-port . "33315")
                (eval . (setq inf-ruby-first-prompt-pattern
@@ -31,7 +35,11 @@
                (eval . (setq inf-ruby-breakpoint-pattern
                              "\\[[0-9]+\\] [a-z0-9_-]+(#<[^>]+>)> *"))
                (rspec-use-vagrant-when-possible . t)
-               (rspec-vagrant-cwd . "/vagrant/api/")
+               (eval . (setq rspec-vagrant-cwd
+                             (format "/vagrant/%s/"
+                                     (file-name-nondirectory
+                                      (directory-file-name
+                                       (locate-dominating-file default-directory "Gemfile"))))))
                (eval . (progn
                          (defun vagrant-devenv-api--rspec-vagrant-p-advice (orig-fn)
                            "Look for Vagrantfile in parent directories, not just project root."
@@ -83,9 +91,13 @@ Uses `robe-vagrant-path-mappings' alist to find a matching prefix."
                            "Wrap bundle-command to run inside the Vagrant container."
                            (let ((vagrantfile-dir (locate-dominating-file default-directory "Vagrantfile")))
                              (if vagrantfile-dir
-                                 (let ((default-directory vagrantfile-dir)
-                                       (vagrant-cmd (format "vagrant ssh -c \"cd /vagrant/api && %s\""
-                                                            (replace-regexp-in-string "\"" "\\\\\"" cmd))))
+                                 (let* ((project-name (file-name-nondirectory
+                                                       (directory-file-name
+                                                        (locate-dominating-file default-directory "Gemfile"))))
+                                        (default-directory vagrantfile-dir)
+                                        (vagrant-cmd (format "vagrant ssh -c \"cd /vagrant/%s && %s\""
+                                                             project-name
+                                                             (replace-regexp-in-string "\"" "\\\\\"" cmd))))
                                    (funcall orig-fn vagrant-cmd))
                                (funcall orig-fn cmd))))
                          (advice-add 'bundle-command :around
