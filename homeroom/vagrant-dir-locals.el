@@ -88,9 +88,12 @@ Uses `robe-vagrant-path-mappings' alist to find a matching prefix."
                                      #'vagrant-devenv--robe-find-file-advice)))
                (eval . (progn
                          (defun vagrant-devenv-api--bundle-command-advice (orig-fn cmd)
-                           "Wrap bundle-command to run inside the Vagrant container."
+                           "Wrap bundle-command to run inside the Vagrant container.
+When called with a prefix argument (C-u), prompt whether to use Vagrant."
                            (let ((vagrantfile-dir (locate-dominating-file default-directory "Vagrantfile")))
-                             (if vagrantfile-dir
+                             (if (and vagrantfile-dir
+                                      (or (not current-prefix-arg)
+                                          (y-or-n-p "Run inside Vagrant? ")))
                                  (let* ((project-name (file-name-nondirectory
                                                        (directory-file-name
                                                         (locate-dominating-file default-directory "Gemfile"))))
