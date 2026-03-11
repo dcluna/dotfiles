@@ -1338,6 +1338,7 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
         org-roam-ui-follow t
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
+(spacemacs/declare-prefix "o l" "LLM")
 (autoload 'gptel-context-add "gptel-context")
 (let ((gpt-keymap (make-sparse-keymap)))
   ;; (define-key gpt-keymap "c" 'chat)
@@ -1909,7 +1910,7 @@ _u_pdate
   :hook ((claude-code--start . sm-setup-claude-faces)
          (claude-code-event . my-claude-post-tool-use-cleanup)
          (claude-code-event . my-claude-message-listener))
-  :init (evil-leader/set-key "o m" 'claude-code-transient)
+  :init (evil-leader/set-key "o l m" 'claude-code-transient)
   (setq claude-code-notification-function #'my-claude-notify-with-sound)
   :config
   (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
@@ -1957,6 +1958,22 @@ _u_pdate
   :custom
   (claudemacs-prefer-projectile-root t)
   (claudemacs-m-return-is-submit t))
+(use-package ai-code
+  :ensure t
+  :bind (("C-c m" . ai-code-menu))
+  :init (evil-leader/set-key "o l a" 'ai-code-menu)
+  :config
+  (ai-code-set-backend 'claude-code)
+  (setq ai-code-backends-infra-terminal-backend 'eat) ;; config for native CLI backends. for external backends such as agent-shell, claude-code-ide.el and claude-code.el, please check their own config
+  ;; Optional: Enable @ file completion in comments and AI sessions
+  (ai-code-prompt-filepath-completion-mode 1)
+  ;; Optional: Ask AI to run test after code changes, for a tighter build-test loop
+  (setq ai-code-auto-test-type 'ask-me)
+  ;; Optional: In AI session buffers, SPC in Evil normal state triggers the prompt-enter UI
+  ;; (with-eval-after-load 'evil (ai-code-backends-infra-evil-setup))
+  ;; Optional: Set up Magit integration for AI commands in Magit popups
+  (with-eval-after-load 'magit
+    (ai-code-magit-setup-transients)))
 (use-package just-mode :ensure t)
 (use-package justl
   :straight (justl :fetcher github :repo "psibi/justl.el")
