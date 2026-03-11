@@ -1,0 +1,144 @@
+colors: false
+no_tty: true
+
+pre-commit:
+  parallel: true
+  commands:
+    bundle_audit:
+      tags:
+        - security
+        - dependencies
+      run: bundle audit
+      skip:
+        - merge
+        - rebase
+      only: &only_master
+        - ref: master
+
+    flay:
+      tags:
+        - code-quality
+        - duplication
+      glob: "*.rb"
+      exclude: "Gemfile|db/schema.rb|db/data_schema.rb"
+      skip:
+        - merge
+        - rebase
+      run: flay {staged_files}
+
+    trailing_whitespace:
+      tags:
+        - formatting
+        - style
+      glob: "*"
+      exclude: "db/structure.sql|spec/vcr_cassettes/**/*"
+      skip:
+        - merge
+        - rebase
+      run: git diff --check {staged_files}
+
+    yaml_lint:
+      tags:
+        - linting
+        - style
+      glob: "*.{yml,yaml}"
+      skip:
+        - merge
+        - rebase
+      run: yamllint {staged_files}
+      on_fail: warn
+
+    ruby_syntax:
+      tags:
+        - qa
+        - linting
+        - syntax
+      glob: "*.rb"
+      skip:
+        - merge
+        - rebase
+      run: ruby -c {staged_files}
+
+    rubocop-debugger:
+      tags:
+        - qa
+      skip:
+        - merge
+        - rebase
+      glob: "*.rb"
+      run: |
+        bundle exec rubocop --fail-level warning --raise-cop-error -c .rubocop.yml --only Lint/Debugger {staged_files}
+
+prepare-commit-msg:
+  commands:
+    # gpt_commit:
+    #   tags:
+    #     - ai
+    #     - commit-message
+    #   run: gptcommithook
+
+    # opencommit:
+    #   tags:
+    #     - ai
+    #     - commit-message
+    #   run: opencommit
+
+pre-push:
+  parallel: true
+
+  commands:
+    protected_branches:
+      tags:
+        - safety
+        - git
+      run: |
+        BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+        PROTECTED_BRANCHES="main master develop production"
+        if [[ $PROTECTED_BRANCHES =~ $BRANCH ]]; then
+          echo "Pushing to protected branch '$BRANCH' is not allowed"
+          exit 1
+        fi
+
+    check_structure_sql:
+      tags:
+        - database
+        - schema
+      run: ./bin/check-timestamps.sh
+
+post-checkout:
+  quiet: true
+  parallel: true
+
+  commands:
+    index_tags:
+      tags:
+        - tooling
+        - development
+      only:
+        - *only_master
+      run: ctags -R --exclude=.git --exclude=node_modules --exclude=vendor
+
+    lefthook-local-setup:
+      skip: true
+      # Run only if the checkout is a worktree checkout
+      run: |
+        if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
+          ln -s $LEFTHOOK_LOCAL_LOCATION
+        else
+          echo "Not copying lefthook files because ref '{1}' is not a worktree checkout"
+        fi
+
+    copy-env-files:
+      # Run only if the checkout is a worktree update
+      tags:
+        - worktree
+      run: |
+        # Detect if this is a worktree checkout
+        if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
+          # Copy all .env files from parent directory
+          touch .projectile
+          cp $MAIN_GIT_DIR/.mcp* .
+          cp $MAIN_GIT_DIR/.env* .
+          cp $MAIN_GIT_DIR/config/application.yml .
+          direnv allow
+        fi
