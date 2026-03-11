@@ -311,12 +311,16 @@ call the original function `package-activate'."
                                       elfeed-tube-mpv
                                       discover
                                       ellama
+                                      ai-code
+                                      agent-shell
+                                      acp
+                                      shell-maker
                                       catppuccin-theme
                                       ;; avk-emacs-themes
                                       mastodon
                                       envrc
                                       ;; codegpt
-                                      ;; eat
+                                      eat
                                       ;; (copilot :location (recipe
                                       ;;                     :fetcher github
                                       ;;                     :repo "zerolfx/copilot.el"
