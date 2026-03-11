@@ -2,6 +2,8 @@
 
 let
   extraNodePackages = import ./node/default.nix {};
+  dotfiles = "${config.home.homeDirectory}/ghq/github.com/dcluna/dotfiles";
+  mkSymlink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
   claudesquad = pkgs.buildGoModule rec {
     pname = "claude-squad";
     version = "1.0.8";
@@ -148,11 +150,11 @@ in
     ".irbrc".source = ../.irbrc;
     ".pryrc".source = ../.pryrc;
     ".railsrc".source = ../.railsrc;
-    ".emacs-profiles.el".source = ../.emacs-profiles.el;
-    ".emacs-profile".source = ../.emacs-profile;
-    ".spacemacs".source = ../.spacemacs;
-    "spacemacs.el".source = ../spacemacs.el;
-    "spacemacs-user-config.el".source = ../spacemacs-user-config.el;
+    ".emacs-profiles.el".source = mkSymlink ".emacs-profiles.el";
+    ".emacs-profile".source = mkSymlink ".emacs-profile";
+    ".spacemacs".source = mkSymlink ".spacemacs";
+    "spacemacs.el".source = mkSymlink "spacemacs.el";
+    "spacemacs-user-config.el".source = mkSymlink "spacemacs-user-config.el";
     ".config/zellij/config.kdl".source = ../zellij-config.kdl;
     ".config/gptcommit/config.toml".source = ../gptcommit/config.toml;
     ".bin/gptcommithook".source = ../gptcommit/gptcommithook;
