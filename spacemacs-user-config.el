@@ -1958,6 +1958,30 @@ _u_pdate
   :custom
   (claudemacs-prefer-projectile-root t)
   (claudemacs-m-return-is-submit t))
+(use-package agent-shell
+  :ensure t
+  :ensure-system-package
+  ;; Add agent installation configs here
+  ((claude . "brew install claude-code")
+   (claude-agent-acp . "npm install -g @zed-industries/claude-agent-acp")
+   (codex . "brew install codex")
+   (codex-acp . "npm install -g @zed-industries/codex-acp"))
+  :config
+  ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
+  (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
+  (evil-define-key 'normal agent-shell-mode-map (kbd "RET") #'comint-send-input)
+
+  ;; Configure *agent-shell-diff* buffers to start in Emacs state
+  (add-hook 'diff-mode-hook
+            (lambda ()
+              (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
+                (evil-emacs-state)))))
+;; :config
+;; ;; For login-based authentication (default):
+;; (setq agent-shell-anthropic-authentication
+;;       (agent-shell-anthropic-make-authentication :login t))
+;; (setq agent-shell-openai-authentication
+;;       (agent-shell-openai-make-authentication :login t)))
 (use-package ai-code
   :ensure t
   :bind (("C-c m" . ai-code-menu))
