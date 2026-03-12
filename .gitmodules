@@ -1,3 +1,6 @@
 [submodule "adquick-scripts"]
 	path = scripts/adquick-scripts
 	url = git@github.com:dcluna/adquick-scripts.git
+[submodule ".claude/skills/rspec-guide"]
+	path = .claude/skills/rspec-guide
+	url = https://github.com/AlexeyMatskevich/rspec-guide.git
