@@ -1984,6 +1984,29 @@ _u_pdate
 ;;       (agent-shell-openai-make-authentication :login t)))
 (use-package agent-review
   :straight (:type git :host github :repo "nineluj/agent-review"))
+(use-package knockknock
+  :straight (:host github :repo "konrad1977/knockknock"))
+(use-package agent-shell-attention
+  :straight (:host github :repo "ultronozm/agent-shell-attention.el")
+  :after agent-shell
+  ;; :demand
+  ;; :bind (("C-z a" . agent-shell-attention-jump))
+  :config
+  (require 'knockknock)
+  (setopt agent-shell-attention-notify-function
+          (lambda (_buffer title body)
+            (knockknock-notify
+            :title title
+            :message body
+            :icon "nf-cod-bot"
+            :duration 5)))
+  (setopt agent-shell-attention-render-function
+          #'agent-shell-attention-render-active)
+  (setopt agent-shell-attention-indicator-location 'global-mode-string)
+  (agent-shell-attention-mode))
+(use-package agent-shell-manager
+     :straight (:host github :repo "jethrokuan/agent-shell-manager")
+     :config (evilified-state-evilify-map agent-shell-manager-mode-map :mode agent-shell-manager-mode))
 (use-package ai-code
   :ensure t
   :bind (("C-c m" . ai-code-menu))

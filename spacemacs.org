@@ -3565,6 +3565,45 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
        :straight (:type git :host github :repo "nineluj/agent-review"))
    #+end_src
 
+*** Agent-shell-attention
+
+**** Dependency: knockknock
+
+#+begin_src emacs-lisp
+(use-package knockknock
+  :straight (:host github :repo "konrad1977/knockknock"))
+#+end_src
+
+**** Agent-shell-attention installation
+   #+begin_src emacs-lisp
+     (use-package agent-shell-attention
+       :straight (:host github :repo "ultronozm/agent-shell-attention.el")
+       :after agent-shell
+       ;; :demand
+       ;; :bind (("C-z a" . agent-shell-attention-jump))
+       :config
+       (require 'knockknock)
+       (setopt agent-shell-attention-notify-function
+               (lambda (_buffer title body)
+                 (knockknock-notify
+                 :title title
+                 :message body
+                 :icon "nf-cod-bot"
+                 :duration 5)))
+       (setopt agent-shell-attention-render-function
+               #'agent-shell-attention-render-active)
+       (setopt agent-shell-attention-indicator-location 'global-mode-string)
+       (agent-shell-attention-mode))
+   #+end_src
+
+*** Agent-shell-manager
+
+#+begin_src emacs-lisp
+  (use-package agent-shell-manager
+       :straight (:host github :repo "jethrokuan/agent-shell-manager")
+       :config (evilified-state-evilify-map agent-shell-manager-mode-map :mode agent-shell-manager-mode))
+#+end_src
+
 ** AI Code interface
 
     #+begin_src emacs-lisp
