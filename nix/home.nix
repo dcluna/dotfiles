@@ -155,6 +155,7 @@ in
     ".spacemacs".source = mkSymlink ".spacemacs";
     "spacemacs.el".source = mkSymlink "spacemacs.el";
     "spacemacs-user-config.el".source = mkSymlink "spacemacs-user-config.el";
+    ".claude/CLAUDE.md".source = mkSymlink ".claude/CLAUDE.md";
     ".config/zellij/config.kdl".source = ../zellij-config.kdl;
     ".config/gptcommit/config.toml".source = ../gptcommit/config.toml;
     ".bin/gptcommithook".source = ../gptcommit/gptcommithook;

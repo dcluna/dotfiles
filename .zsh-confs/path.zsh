@@ -65,3 +65,5 @@ export AMDAPPSDKROOT="/mnt/lmde/home/dcluna/AMDAPPSDK-3.0"
 export PATH="$HOME/code/lastpass-cli:$PATH"
 
 export WINEARCH="win32"
+
+export PATH="$HOME/.emacs.spacemacs/straight/repos/meta-agent-shell/bin:$PATH"
