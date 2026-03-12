@@ -3558,6 +3558,13 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
      ;;       (agent-shell-openai-make-authentication :login t)))
    #+end_src
 
+*** Agent-review
+
+   #+begin_src emacs-lisp
+     (use-package agent-review
+       :straight (:type git :host github :repo "nineluj/agent-review"))
+   #+end_src
+
 ** AI Code interface
 
     #+begin_src emacs-lisp

@@ -1982,6 +1982,8 @@ _u_pdate
 ;;       (agent-shell-anthropic-make-authentication :login t))
 ;; (setq agent-shell-openai-authentication
 ;;       (agent-shell-openai-make-authentication :login t)))
+(use-package agent-review
+  :straight (:type git :host github :repo "nineluj/agent-review"))
 (use-package ai-code
   :ensure t
   :bind (("C-c m" . ai-code-menu))
