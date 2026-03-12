@@ -139,6 +139,7 @@ post-checkout:
           touch .projectile
           cp $MAIN_GIT_DIR/.mcp* .
           cp $MAIN_GIT_DIR/.env* .
-          cp $MAIN_GIT_DIR/config/application.yml .
+          cp $MAIN_GIT_DIR/config/application.yml ./config/application.yml
+          ln -s $MAIN_GIT_DIR/.dir-locals.el .
           direnv allow
         fi
