@@ -2734,6 +2734,8 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
 
    #+begin_src emacs-lisp
      (spacemacs/declare-prefix "o l" "LLM")
+
+     (defvar llm-agent-keymap (make-sparse-keymap) "Keymap for custom LLM-related commands.")
    #+end_src
 
 ** GPT / GPTel
@@ -3602,6 +3604,8 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
   (use-package agent-shell-manager
        :straight (:host github :repo "jethrokuan/agent-shell-manager")
        :config (evilified-state-evilify-map agent-shell-manager-mode-map :mode agent-shell-manager-mode))
+
+  (define-key llm-agent-keymap "t" #'agent-shell-manager-toggle)
 #+end_src
 
 *** Meta-agent-shell
@@ -3615,13 +3619,13 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
     (setq meta-agent-shell-start-function #'agent-shell)  ; or your custom start function
 
     (let ((meta-agent-keymap (make-sparse-keymap)))
-      (define-key meta-agent-keymap "m" #'meta-agent-shell-start)
-      (define-key meta-agent-keymap "d" #'meta-agent-shell-jump-to-dispatcher)
-      (define-key meta-agent-keymap "h" #'meta-agent-shell-heartbeat-start)
-      (define-key meta-agent-keymap "H" #'meta-agent-shell-heartbeat-stop)
-      (define-key meta-agent-keymap "s" #'meta-agent-shell-heartbeat-send-now)
-      (define-key meta-agent-keymap "!" #'meta-agent-shell-big-red-button)
-      (evil-leader/set-key "o l m" meta-agent-keymap)
+      (define-key llm-agent-keymap "m" #'meta-agent-shell-start)
+      (define-key llm-agent-keymap "d" #'meta-agent-shell-jump-to-dispatcher)
+      (define-key llm-agent-keymap "h" #'meta-agent-shell-heartbeat-start)
+      (define-key llm-agent-keymap "H" #'meta-agent-shell-heartbeat-stop)
+      (define-key llm-agent-keymap "s" #'meta-agent-shell-heartbeat-send-now)
+      (define-key llm-agent-keymap "!" #'meta-agent-shell-big-red-button)
+      (evil-leader/set-key "o l m" llm-agent-keymap)
       (spacemacs/declare-prefix "o l m" "meta-agent")))
 #+end_src
 
