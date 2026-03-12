@@ -1910,7 +1910,7 @@ _u_pdate
   :hook ((claude-code--start . sm-setup-claude-faces)
          (claude-code-event . my-claude-post-tool-use-cleanup)
          (claude-code-event . my-claude-message-listener))
-  :init (evil-leader/set-key "o l m" 'claude-code-transient)
+  :init (evil-leader/set-key "o l c" 'claude-code-transient)
   (setq claude-code-notification-function #'my-claude-notify-with-sound)
   :config
   (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
@@ -2007,6 +2007,22 @@ _u_pdate
 (use-package agent-shell-manager
      :straight (:host github :repo "jethrokuan/agent-shell-manager")
      :config (evilified-state-evilify-map agent-shell-manager-mode-map :mode agent-shell-manager-mode))
+(use-package meta-agent-shell
+  :straight (:host github :repo "ElleNajt/meta-agent-shell" :files ("*"))
+  :after agent-shell
+  :config
+  (setq meta-agent-shell-heartbeat-file "~/heartbeat.org")
+  (setq meta-agent-shell-start-function #'agent-shell)  ; or your custom start function
+
+  (let ((meta-agent-keymap (make-sparse-keymap)))
+    (define-key meta-agent-keymap "m" #'meta-agent-shell-start)
+    (define-key meta-agent-keymap "d" #'meta-agent-shell-jump-to-dispatcher)
+    (define-key meta-agent-keymap "h" #'meta-agent-shell-heartbeat-start)
+    (define-key meta-agent-keymap "H" #'meta-agent-shell-heartbeat-stop)
+    (define-key meta-agent-keymap "s" #'meta-agent-shell-heartbeat-send-now)
+    (define-key meta-agent-keymap "!" #'meta-agent-shell-big-red-button)
+    (evil-leader/set-key "o l m" meta-agent-keymap)
+    (spacemacs/declare-prefix "o l m" "meta-agent")))
 (use-package ai-code
   :ensure t
   :bind (("C-c m" . ai-code-menu))

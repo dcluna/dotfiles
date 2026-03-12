@@ -3454,7 +3454,7 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
        :hook ((claude-code--start . sm-setup-claude-faces)
               (claude-code-event . my-claude-post-tool-use-cleanup)
               (claude-code-event . my-claude-message-listener))
-       :init (evil-leader/set-key "o l m" 'claude-code-transient)
+       :init (evil-leader/set-key "o l c" 'claude-code-transient)
        (setq claude-code-notification-function #'my-claude-notify-with-sound)
        :config
        (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
@@ -3612,20 +3612,17 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
     :after agent-shell
     :config
     (setq meta-agent-shell-heartbeat-file "~/heartbeat.org")
-    (setq meta-agent-shell-start-function #'agent-shell))  ; or your custom start function
+    (setq meta-agent-shell-start-function #'agent-shell)  ; or your custom start function
 
-    ;; Recommended keybindings under SPC o m
-    ;; Unbind existing SPC o m (mu4e in Doom) first if needed
-    ;; (define-key doom-leader-map "om" nil)
-    ;; (map! :leader
-    ;;       (:prefix ("o m" . "meta-agent")
-    ;;        :desc "Meta-agent session" "m" #'meta-agent-shell-start
-    ;;        :desc "Project dispatcher" "d" #'meta-agent-shell-jump-to-dispatcher
-    ;;        :desc "Start heartbeat" "h" #'meta-agent-shell-heartbeat-start
-    ;;        :desc "Stop heartbeat" "H" #'meta-agent-shell-heartbeat-stop
-    ;;        :desc "Send heartbeat now" "s" #'meta-agent-shell-heartbeat-send-now
-    ;;        :desc "STOP ALL AGENTS" "!" #'meta-agent-shell-big-red-button))
-
+    (let ((meta-agent-keymap (make-sparse-keymap)))
+      (define-key meta-agent-keymap "m" #'meta-agent-shell-start)
+      (define-key meta-agent-keymap "d" #'meta-agent-shell-jump-to-dispatcher)
+      (define-key meta-agent-keymap "h" #'meta-agent-shell-heartbeat-start)
+      (define-key meta-agent-keymap "H" #'meta-agent-shell-heartbeat-stop)
+      (define-key meta-agent-keymap "s" #'meta-agent-shell-heartbeat-send-now)
+      (define-key meta-agent-keymap "!" #'meta-agent-shell-big-red-button)
+      (evil-leader/set-key "o l m" meta-agent-keymap)
+      (spacemacs/declare-prefix "o l m" "meta-agent")))
 #+end_src
 
 ** AI Code interface
