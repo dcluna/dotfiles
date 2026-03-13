@@ -4,3 +4,6 @@
 [submodule ".claude/skills/rspec-guide"]
 	path = .claude/skills/rspec-guide
 	url = https://github.com/AlexeyMatskevich/rspec-guide.git
+[submodule "docs/superpowers"]
+	path = docs/superpowers
+	url = /Users/danielluna/ghq/github.com/dcluna/superpowers-docs
