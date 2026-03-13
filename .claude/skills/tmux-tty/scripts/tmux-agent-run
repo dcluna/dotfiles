@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SESSION="claude-agents"
+WINDOW=""
+TIMEOUT=30
+WAIT_FOR=""
+SEND_ONLY=false
+
+usage() {
+  cat <<'USAGE'
+Usage: tmux-agent-run [--session NAME] [--window NAME] [--timeout SECS] [--wait-for PATTERN] [--send-only] COMMAND...
+
+  --session NAME     Tmux session name (default: claude-agents)
+  --window NAME      Window name in <tool>:<context> format (required)
+  --timeout SECS     Max seconds to wait for output (default: 30)
+  --wait-for PATTERN ERE regex to wait for instead of sentinel
+  --send-only        Send keys without waiting for output
+USAGE
+  exit 2
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --session)  SESSION="$2"; shift 2 ;;
+    --window)   WINDOW="$2"; shift 2 ;;
+    --timeout)  TIMEOUT="$2"; shift 2 ;;
+    --wait-for) WAIT_FOR="$2"; shift 2 ;;
+    --send-only) SEND_ONLY=true; shift ;;
+    --help|-h)  usage ;;
+    --)         shift; break ;;
+    -*)         echo "Unknown flag: $1" >&2; usage ;;
+    *)          break ;;
+  esac
+done
+
+if [[ -z "$WINDOW" ]]; then
+  echo "Error: --window is required" >&2
+  usage
+fi
+
+if [[ $# -eq 0 ]]; then
+  echo "Error: COMMAND is required" >&2
+  usage
+fi
+
+COMMAND="$*"
