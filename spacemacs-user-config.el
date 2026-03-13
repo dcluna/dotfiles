@@ -1091,7 +1091,7 @@ Returns the file path as a string.  Caches config in
                                      (mapcar #'car sql-connection-alist)
                                      nil t))
          (conn-entry (cdr (assoc-string conn-name sql-connection-alist t)))
-         (product (or (cadr (assq 'sql-product conn-entry)) 'postgres))
+         (product (or (eval (cadr (assq 'sql-product conn-entry))) 'postgres))
          (engine (dcl/claude-query-log--engine-for-product product))
          (slug (dcl/claude-query-log--slugify topic))
          (date-str (format-time-string "%Y-%m-%d"))
