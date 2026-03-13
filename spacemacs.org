@@ -2794,12 +2794,15 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
      (defun dcl/vagrant-shell--shell (cmd)
        "Open a `shell' buffer running CMD in the vagrant container."
        (let ((buf (dcl/vagrant-shell--buffer-name "shell")))
+         (when (and (get-buffer buf) (not (get-buffer-process buf)))
+           (kill-buffer buf))
          (shell buf)
          (comint-send-string (get-buffer-process buf) (concat cmd "\n"))))
 
      (defun dcl/vagrant-shell--term (cmd)
        "Open an `ansi-term' running CMD in the vagrant container."
-       (let ((buf (ansi-term "/bin/sh" "vagrant-term")))
+       (let* ((term-name (dcl/vagrant-shell--buffer-name "term"))
+              (buf (ansi-term "/bin/sh" term-name)))
          (with-current-buffer buf
            (term-send-raw-string (concat cmd "\n")))))
 
@@ -2821,12 +2824,10 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
 
      (defun dcl/vagrant-shell--multishell (cmd)
        "Open a shell via `multishell' running CMD in the vagrant container."
-       (let* ((project (file-name-nondirectory
-                        (directory-file-name (dcl/vagrant-dir))))
-              (name (format "vagrant-%s" project)))
+       (let* ((name (dcl/vagrant-shell--buffer-name "multishell")))
          (multishell-pop-to-shell nil name)
-         (comint-send-string (get-buffer-process (current-buffer))
-                             (concat cmd "\n"))))
+         (when-let ((proc (get-buffer-process (current-buffer))))
+           (comint-send-string proc (concat cmd "\n")))))
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
@@ -2860,11 +2861,8 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
           ("s" "shell" dcl/vagrant-shell-shell)
           ("t" "term" dcl/vagrant-shell-term)]
          ["Optional"
-          :if (lambda () (featurep 'vterm))
-          ("v" "vterm" dcl/vagrant-shell-vterm)]
-         ["  "
-          :if (lambda () (featurep 'multishell))
-          ("m" "multishell" dcl/vagrant-shell-multishell)]))
+          ("v" "vterm" dcl/vagrant-shell-vterm :if (lambda () (featurep 'vterm)))
+          ("m" "multishell" dcl/vagrant-shell-multishell :if (lambda () (featurep 'multishell)))]))
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
