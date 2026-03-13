@@ -44,7 +44,7 @@
                          (defun vagrant-devenv-api--rspec-vagrant-p-advice (orig-fn)
                            "Look for Vagrantfile in parent directories, not just project root."
                            (and rspec-use-vagrant-when-possible
-                                (locate-dominating-file default-directory "Vagrantfile")))
+                                (dcl/vagrant-dir)))
                          (advice-add 'rspec-vagrant-p :around
                                      #'vagrant-devenv-api--rspec-vagrant-p-advice)))
                (eval . (progn
@@ -101,7 +101,7 @@ Uses `robe-vagrant-path-mappings' alist to find a matching prefix."
                          (defun vagrant-devenv-api--bundle-command-advice (orig-fn cmd)
                            "Wrap bundle-command to run inside the Vagrant container.
 When called with a prefix argument (C-u), prompt whether to use Vagrant."
-                           (let ((vagrantfile-dir (locate-dominating-file default-directory "Vagrantfile")))
+                           (let ((vagrantfile-dir (dcl/vagrant-dir)))
                              (if (and vagrantfile-dir
                                       (or (not current-prefix-arg)
                                           (y-or-n-p "Run inside Vagrant? ")))
