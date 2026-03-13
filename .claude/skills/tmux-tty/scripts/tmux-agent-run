@@ -45,3 +45,30 @@ if [[ $# -eq 0 ]]; then
 fi
 
 COMMAND="$*"
+
+# --- Session & Window Management ---
+
+ensure_session() {
+  if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+    tmux new-session -d -s "$SESSION"
+  fi
+}
+
+# Returns 0 if window was created (new), 1 if it already existed (reuse)
+ensure_window() {
+  if tmux list-windows -t "$SESSION" -F '#{window_name}' | grep -qxF "$WINDOW"; then
+    return 1  # exists, reuse
+  else
+    tmux new-window -t "$SESSION" -n "$WINDOW"
+    return 0  # newly created
+  fi
+}
+
+TARGET="$SESSION:$WINDOW"
+
+ensure_session
+if ensure_window; then
+  WINDOW_CREATED=true
+else
+  WINDOW_CREATED=false
+fi
