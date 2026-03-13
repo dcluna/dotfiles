@@ -2711,6 +2711,24 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
        :config (envrc-global-mode))
    #+END_SRC
 
+** Vagrant
+
+   #+BEGIN_SRC emacs-lisp
+     (defun dcl/vagrant-dir ()
+       "Return the directory containing the nearest Vagrantfile, or nil."
+       (when-let ((dir (locate-dominating-file default-directory "Vagrantfile")))
+         (expand-file-name dir)))
+
+     (defun dcl/vagrant-relative-path (&optional dir)
+       "Return the /vagrant/... equivalent of DIR (defaults to `default-directory').
+     Returns nil if not inside a vagrant project."
+       (when-let ((vagrant-dir (dcl/vagrant-dir)))
+         (let ((rel (file-relative-name (or dir default-directory) vagrant-dir)))
+           (if (string= rel ".")
+               "/vagrant/"
+             (concat "/vagrant/" (file-name-as-directory rel))))))
+   #+END_SRC
+
 ** Exec-path-from-shell
 
    #+BEGIN_SRC emacs-lisp
