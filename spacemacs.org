@@ -2729,6 +2729,24 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
              (concat "/vagrant/" (file-name-as-directory rel))))))
    #+END_SRC
 
+   #+BEGIN_SRC emacs-lisp
+     (with-eval-after-load 'envrc
+       (define-advice envrc-allow (:after () vagrant-direnv-sync)
+         "Sync direnv allow to vagrant container when applicable."
+         (condition-case-unless-debug err
+             (when-let ((env-dir (envrc--find-env-dir)))
+               (let ((default-directory env-dir))
+                 (when-let ((vagrant-dir (dcl/vagrant-dir)))
+                   (when (executable-find "vagrant")
+                     (let* ((rel-path (dcl/vagrant-relative-path env-dir))
+                            (default-directory vagrant-dir))
+                       (start-process "vagrant-direnv-sync" nil
+                                      "vagrant" "ssh" "-c"
+                                      (format "cd %s && direnv allow"
+                                              (shell-quote-argument rel-path))))))))
+           (error (message "vagrant-direnv-sync: %s" (error-message-string err))))))
+   #+END_SRC
+
 ** Exec-path-from-shell
 
    #+BEGIN_SRC emacs-lisp
