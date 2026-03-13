@@ -104,7 +104,7 @@ When called with a prefix argument (C-u), prompt whether to use Vagrant."
                                       (or (not current-prefix-arg)
                                           (y-or-n-p "Run inside Vagrant? ")))
                                  (let* ((rel-path (dcl/vagrant-relative-path
-                                  (locate-dominating-file default-directory "Gemfile")))
+                                                   (locate-dominating-file default-directory "Gemfile")))
                                         (default-directory vagrantfile-dir)
                                         (vagrant-cmd (format "vagrant ssh -c \"cd %s && %s\""
                                                              (shell-quote-argument rel-path)
