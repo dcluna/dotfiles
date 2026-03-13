@@ -2829,6 +2829,52 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
                              (concat cmd "\n"))))
    #+END_SRC
 
+   #+BEGIN_SRC emacs-lisp
+     (defun dcl/vagrant-shell-menu ()
+       "Show a menu to select a vagrant shell backend."
+       (interactive)
+       (unless (dcl/vagrant-dir)
+         (user-error "Not in a vagrant project (no Vagrantfile found)"))
+       (if (featurep 'transient)
+           (call-interactively #'dcl/vagrant-shell-transient)
+         (dcl/vagrant-shell--completing-read)))
+
+     (defun dcl/vagrant-shell--completing-read ()
+       "Prompt for a vagrant shell backend via `completing-read'."
+       (let* ((backends (dcl/vagrant-shell--available-backends))
+              (choice (completing-read "Vagrant shell backend: "
+                                       (mapcar #'car backends) nil t)))
+         (dcl/vagrant-shell--run choice)))
+
+     (defun dcl/vagrant-shell-eshell () (interactive) (dcl/vagrant-shell--run "eshell"))
+     (defun dcl/vagrant-shell-shell () (interactive) (dcl/vagrant-shell--run "shell"))
+     (defun dcl/vagrant-shell-term () (interactive) (dcl/vagrant-shell--run "term"))
+     (defun dcl/vagrant-shell-vterm () (interactive) (dcl/vagrant-shell--run "vterm"))
+     (defun dcl/vagrant-shell-multishell () (interactive) (dcl/vagrant-shell--run "multishell"))
+
+     (with-eval-after-load 'transient
+       (transient-define-prefix dcl/vagrant-shell-transient ()
+         "Open a terminal inside the vagrant container."
+         ["Vagrant Shell"
+          ("e" "eshell" dcl/vagrant-shell-eshell)
+          ("s" "shell" dcl/vagrant-shell-shell)
+          ("t" "term" dcl/vagrant-shell-term)]
+         ["Optional"
+          :if (lambda () (featurep 'vterm))
+          ("v" "vterm" dcl/vagrant-shell-vterm)]
+         ["  "
+          :if (lambda () (featurep 'multishell))
+          ("m" "multishell" dcl/vagrant-shell-multishell)]))
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (defvar dcl/vagrant-keymap (make-sparse-keymap)
+       "Keymap for vagrant commands under SPC o V.")
+     (define-key dcl/vagrant-keymap "s" #'dcl/vagrant-shell-menu)
+     (evil-leader/set-key "o V" dcl/vagrant-keymap)
+     (spacemacs/declare-prefix "o V" "vagrant")
+   #+END_SRC
+
 ** Exec-path-from-shell
 
    #+BEGIN_SRC emacs-lisp
