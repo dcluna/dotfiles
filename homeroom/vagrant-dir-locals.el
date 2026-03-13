@@ -94,6 +94,9 @@ Uses `robe-vagrant-path-mappings' alist to find a matching prefix."
                              nil))
                          (advice-add 'inf-ruby--irb-needs-nomultiline-p :around
                                      #'vagrant-devenv-api--irb-needs-nomultiline-p-advice)))
+               (eval . (dcl/add-sql-connections-from-env
+                        '(("PGSYNC_READER_DB_URL" . "follower_db")
+                          ("LOCAL_DB" . "vagrant-dashboard"))))
                (eval . (progn
                          (defun vagrant-devenv-api--bundle-command-advice (orig-fn cmd)
                            "Wrap bundle-command to run inside the Vagrant container.

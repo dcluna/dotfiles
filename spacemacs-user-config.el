@@ -991,6 +991,48 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
 (setq nov-text-width 200)
 (defadvice slack-start (before load-slack-teams)
   (unless slack-teams (load-file "~/.slack-teams.el.gpg")))
+(defun dcl/parse-postgres-uri (uri &optional name)
+  "Parse a postgres URI into an sql-connection-alist entry.
+URI should be like \"postgres://user:pass@host:port/dbname\".
+Optional NAME overrides the connection name (defaults to dbname).
+Returns a list suitable for pushing onto `sql-connection-alist'."
+  (when (string-match
+         "postgres\\(?:ql\\)?://\\([^:]*\\):\\([^@]*\\)@\\([^:]*\\):\\([0-9]+\\)/\\(.*\\)"
+         uri)
+    (let ((user (match-string 1 uri))
+          (password (match-string 2 uri))
+          (server (match-string 3 uri))
+          (port (string-to-number (match-string 4 uri)))
+          (database (match-string 5 uri)))
+      `(,(or name database)
+        (sql-product 'postgres)
+        (sql-user ,user)
+        (sql-password ,password)
+        (sql-server ,server)
+        (sql-port ,port)
+        (sql-database ,database)))))
+
+(defun dcl/add-sql-connection-from-uri (uri &optional name)
+  "Parse a postgres URI and add it to `sql-connection-alist'.
+Optional NAME overrides the connection name (defaults to dbname).
+If an entry with the same name already exists, it is replaced."
+  (interactive "sPostgres URI: ")
+  (if-let ((entry (dcl/parse-postgres-uri uri name)))
+      (progn
+        (setq sql-connection-alist
+              (cons entry (assoc-delete-all (car entry) sql-connection-alist)))
+        (message "Added SQL connection: %s" (car entry)))
+    (error "Could not parse URI: %s" uri)))
+
+(defun dcl/add-sql-connections-from-env (env-alist)
+  "Add SQL connections from environment variables.
+ENV-ALIST is a list of (ENV-VAR . CONNECTION-NAME) pairs.
+Each env var is checked with `getenv'; if set, the URI is parsed
+and added to `sql-connection-alist' with the given name."
+  (dolist (pair env-alist)
+    (when-let ((uri (getenv (car pair))))
+      (dcl/add-sql-connection-from-uri uri (cdr pair)))))
+
 (defun dcl/load-sql-connections ()
   (interactive)
   (let ((sql-connection-file-name (expand-file-name "~/dotfiles/sql-connections.el.gpg")))
