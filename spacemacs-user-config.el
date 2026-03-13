@@ -1043,6 +1043,158 @@ and added to `sql-connection-alist' with the given name."
     (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
 
 (dcl/load-sql-connections)
+;;; Claude query log — org-babel SQL query logging
+(defvar dcl/claude-query-log-dir "~/Projects/"
+  "Base directory for query log org files.")
+
+(defvar dcl/claude-query-log-enabled t
+  "When nil, Claude will not attempt to log queries to org files.")
+
+(defvar dcl/claude-query-log--current-session nil
+  "Internal cache for the active query log session.
+Plist with :file, :connection, :engine keys.  Set by `dcl/claude-query-log-setup',
+read by `dcl/claude-query-log-current'.  Do not set manually.")
+
+(defvar dcl/claude-query-log-engine-alist
+  '((postgres . "postgresql")
+    (mysql . "mysql")
+    (sqlite . "sqlite")
+    (ms . "mssql")
+    (oracle . "oracle"))
+  "Mapping from `sql-product' symbols to org-babel :engine strings.
+Falls back to (symbol-name sql-product) for unmapped products.")
+
+(defun dcl/claude-query-log--slugify (str)
+  "Slugify STR: downcase, replace spaces/underscores with hyphens,
+strip non-alphanumeric-non-hyphen chars, collapse consecutive hyphens."
+  (let ((s (downcase str)))
+    (setq s (replace-regexp-in-string "[_ ]+" "-" s))
+    (setq s (replace-regexp-in-string "[^a-z0-9-]" "" s))
+    (setq s (replace-regexp-in-string "-\\{2,\\}" "-" s))
+    (setq s (replace-regexp-in-string "^-\\|-$" "" s))
+    s))
+
+(defun dcl/claude-query-log--engine-for-product (product)
+  "Map a `sql-product' symbol to an org-babel :engine string."
+  (or (cdr (assq product dcl/claude-query-log-engine-alist))
+      (symbol-name product)))
+
+(defun dcl/claude-query-log-setup ()
+  "Set up a new query log file.  Prompts for topic and SQL connection.
+Returns the file path as a string.  Caches config in
+`dcl/claude-query-log--current-session'."
+  (interactive)
+  (when (null sql-connection-alist)
+    (error "sql-connection-alist is empty — configure connections first"))
+  (let* ((topic (read-string "Query log topic: "))
+         (conn-name (completing-read "SQL connection: "
+                                     (mapcar #'car sql-connection-alist)
+                                     nil t))
+         (conn-entry (cdr (assoc-string conn-name sql-connection-alist t)))
+         (product (or (cadr (assq 'sql-product conn-entry)) 'postgres))
+         (engine (dcl/claude-query-log--engine-for-product product))
+         (slug (dcl/claude-query-log--slugify topic))
+         (date-str (format-time-string "%Y-%m-%d"))
+         (filename (expand-file-name
+                    (format "%s-%s.org" date-str slug)
+                    dcl/claude-query-log-dir))
+         (new-file-p (not (file-exists-p filename))))
+    (when new-file-p
+      (make-directory (file-name-directory filename) t)
+      (with-temp-file filename
+        (insert (format "#+title: %s\n#+date: %s\n\n" topic date-str))))
+    (setq dcl/claude-query-log--current-session
+          (list :file filename
+                :connection conn-name
+                :engine engine))
+    (message "Query log: %s (connection: %s, engine: %s)" filename conn-name engine)
+    filename))
+
+(defun dcl/claude-query-log-current ()
+  "Return the current query log session config, or nil."
+  dcl/claude-query-log--current-session)
+
+(defun dcl/claude-query-log--humanize (name)
+  "Humanize a snake_case or kebab-case NAME into a Title Case heading."
+  (capitalize (replace-regexp-in-string "[-_]" " " name)))
+
+(defun dcl/claude-query-log--find-insertion-point ()
+  "Return the buffer position where a new query block should be inserted.
+This is before the first org heading (line matching `^\\*'),
+or after all `#+' directives and trailing blank lines if no headings exist."
+  (save-excursion
+    (goto-char (point-min))
+    (if (re-search-forward "^\\*" nil t)
+        (line-beginning-position)
+      ;; No headings: skip past #+directives and blank lines
+      (goto-char (point-min))
+      (while (and (not (eobp))
+                  (looking-at "^\\(#\\+\\|[[:space:]]*$\\)"))
+        (forward-line 1))
+      (point))))
+
+(defun dcl/claude-query-log--read-temp-file (path)
+  "Read contents of PATH, ensuring a trailing newline."
+  (with-temp-buffer
+    (insert-file-contents path)
+    (let ((s (buffer-string)))
+      (if (string-suffix-p "\n" s) s (concat s "\n")))))
+
+(defun dcl/claude-query-log--build-block (query-name description sql-temp-file &optional results-temp-file)
+  "Build an org query block string.
+QUERY-NAME is a snake_case identifier.  DESCRIPTION is a brief explanation.
+SQL-TEMP-FILE is the path to the SQL body.  Optional RESULTS-TEMP-FILE
+is the path to an org table of results."
+  (let* ((session (or (dcl/claude-query-log-current)
+                      (progn (dcl/claude-query-log-setup)
+                             (dcl/claude-query-log-current))))
+         (conn (plist-get session :connection))
+         (engine (plist-get session :engine))
+         (sql (dcl/claude-query-log--read-temp-file sql-temp-file))
+         (heading (dcl/claude-query-log--humanize query-name))
+         (block (concat "* " heading "\n\n"
+                        description "\n\n"
+                        "#+name: " query-name "\n"
+                        "#+header: :engine \"" engine "\"\n"
+                        "#+header: :dbconnection \"" conn "\"\n"
+                        "#+begin_src sql :tangle \"/tmp/" query-name ".sql\"\n"
+                        sql
+                        "#+end_src\n\n")))
+    (if results-temp-file
+        (let ((results (dcl/claude-query-log--read-temp-file results-temp-file)))
+          (concat block "#+RESULTS: " query-name "\n" results "\n"))
+      block)))
+
+(defun dcl/claude-query-log-append (query-name description sql-temp-file)
+  "Append a query block to the current query log file.
+QUERY-NAME is a snake_case identifier.
+DESCRIPTION is a brief explanation.
+SQL-TEMP-FILE is the path to a temp file containing the SQL body.
+Returns the log file path."
+  (let* ((session (or (dcl/claude-query-log-current)
+                      (progn (dcl/claude-query-log-setup)
+                             (dcl/claude-query-log-current))))
+         (file (plist-get session :file))
+         (block (dcl/claude-query-log--build-block query-name description sql-temp-file)))
+    (with-current-buffer (find-file-noselect file)
+      (goto-char (dcl/claude-query-log--find-insertion-point))
+      (insert block)
+      (save-buffer))
+    file))
+
+(defun dcl/claude-query-log-append-with-results (query-name description sql-temp-file results-temp-file)
+  "Like `dcl/claude-query-log-append' but also inserts a #+RESULTS block.
+RESULTS-TEMP-FILE is the path to a temp file containing an org table."
+  (let* ((session (or (dcl/claude-query-log-current)
+                      (progn (dcl/claude-query-log-setup)
+                             (dcl/claude-query-log-current))))
+         (file (plist-get session :file))
+         (block (dcl/claude-query-log--build-block query-name description sql-temp-file results-temp-file)))
+    (with-current-buffer (find-file-noselect file)
+      (goto-char (dcl/claude-query-log--find-insertion-point))
+      (insert block)
+      (save-buffer))
+    file))
 (evil-define-key 'normal global-map ";" 'evil-execute-in-god-state)
 (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
 (evil-define-key 'hybrid global-map (kbd "C-M-:" ) 'evil-execute-in-god-state)
