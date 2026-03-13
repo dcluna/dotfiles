@@ -64,7 +64,8 @@ ensure_window() {
   fi
 }
 
-TARGET="$SESSION:$WINDOW"
+# Use '=' prefix for exact window name matching (avoids issues with colons in window names)
+TARGET="$SESSION:=$WINDOW"
 
 ensure_session
 if ensure_window; then
@@ -72,3 +73,81 @@ if ensure_window; then
 else
   WINDOW_CREATED=false
 fi
+
+# --- Execution Modes ---
+
+SENTINEL_ID="$(uuidgen 2>/dev/null || cat /proc/sys/kernel/random/uuid 2>/dev/null || echo $$-$RANDOM)"
+SENTINEL="__AGENT_DONE_${SENTINEL_ID}"
+START_MARKER="__AGENT_START_${SENTINEL_ID}__"
+
+# Max iterations: TIMEOUT / 0.3, computed as integer (rounded up)
+MAX_ITERS=$(( (TIMEOUT * 10 + 2) / 3 ))
+
+capture_pane() {
+  tmux capture-pane -t "$TARGET" -p -S -
+}
+
+# Extract output between START_MARKER and SENTINEL, parse exit code
+extract_output() {
+  local captured="$1"
+  # Get lines between the actual echoed start marker (standalone line) and the
+  # sentinel with exit code. We anchor patterns to avoid matching the raw typed
+  # command lines that also contain these strings.
+  echo "$captured" | sed -n "/^${START_MARKER}$/,/${SENTINEL}_[0-9]*__/{/^${START_MARKER}$/d;/${SENTINEL}_[0-9]*__/d;p;}"
+}
+
+parse_exit_code() {
+  local captured="$1"
+  # Extract the number between the final _ and __ in the sentinel line
+  echo "$captured" | grep -oE "${SENTINEL}_[0-9]+__" | head -1 | sed "s/.*_\([0-9]*\)__/\1/"
+}
+
+poll_for_sentinel() {
+  local i=0
+  while (( i < MAX_ITERS )); do
+    local captured
+    captured="$(capture_pane)"
+    if echo "$captured" | grep -qE "${SENTINEL}_[0-9]+__"; then
+      extract_output "$captured"
+      local ec
+      ec="$(parse_exit_code "$captured")"
+      return "${ec:-0}"
+    fi
+    sleep 0.3
+    (( i++ ))
+  done
+  # Timeout — print what we have to stdout (per spec)
+  capture_pane
+  return 1
+}
+
+if [[ "$SEND_ONLY" == true ]]; then
+  # Send-only mode: send keys and exit immediately
+  tmux send-keys -t "$TARGET" -- "$COMMAND" Enter
+  exit 0
+fi
+
+if [[ -n "$WAIT_FOR" ]]; then
+  # Wait-for mode: send command, poll for pattern
+  tmux send-keys -t "$TARGET" -- "$COMMAND" Enter
+  i=0
+  while (( i < MAX_ITERS )); do
+    captured="$(capture_pane)"
+    if echo "$captured" | grep -qE "$WAIT_FOR"; then
+      echo "$captured"
+      exit 0
+    fi
+    sleep 0.3
+    (( i++ ))
+  done
+  # Timeout — print what we have to stdout (per spec)
+  capture_pane
+  exit 1
+fi
+
+# Normal sentinel mode: emit start marker, then wrapped command with sentinel
+tmux send-keys -t "$TARGET" -- "echo ${START_MARKER}" Enter
+WRAPPED="{ ${COMMAND} ; }; __ec=\$?; echo ${SENTINEL}_\${__ec}__"
+tmux send-keys -t "$TARGET" -- "$WRAPPED" Enter
+poll_for_sentinel
+exit $?
