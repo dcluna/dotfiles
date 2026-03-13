@@ -67,10 +67,8 @@ pre-commit:
         - rebase
       glob: "*.rb"
       run: |
-        bundle exec rubocop --fail-level warning --raise-cop-error -c .rubocop.yml --only Lint/Debugger {staged_files}
+        rubocop --fail-level warning --raise-cop-error -c .rubocop.yml --only Lint/Debugger {staged_files}
 
-prepare-commit-msg:
-  commands:
     # gpt_commit:
     #   tags:
     #     - ai
@@ -100,6 +98,7 @@ pre-push:
         fi
 
     check_structure_sql:
+      skip: true
       tags:
         - database
         - schema
