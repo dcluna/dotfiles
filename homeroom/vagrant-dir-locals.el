@@ -2,10 +2,10 @@
 ;;; For more information see (info "(emacs) Directory Variables")
 
 ((ruby-mode . ((eval . (setq projectile-rails-custom-console-command
-                             (let ((project-name (file-name-nondirectory
-                                                  (directory-file-name
-                                                   (locate-dominating-file default-directory "Gemfile")))))
-                               (format "vagrant ssh -c \"cd /vagrant/%s && direnv exec . bundle exec rails c\"" project-name))))
+                             (let ((rel-path (dcl/vagrant-relative-path
+                                              (locate-dominating-file default-directory "Gemfile"))))
+                               (format "vagrant ssh -c \"cd %s && direnv exec . bundle exec rails c\""
+                                       (shell-quote-argument rel-path)))))
                (robe-ruby-path . "/vagrant/.robe-lib")
                (robe-port . "33315")
                (eval . (setq inf-ruby-first-prompt-pattern
@@ -36,10 +36,8 @@
                              "\\[[0-9]+\\] [a-z0-9_-]+(#<[^>]+>)> *"))
                (rspec-use-vagrant-when-possible . t)
                (eval . (setq rspec-vagrant-cwd
-                             (format "/vagrant/%s/"
-                                     (file-name-nondirectory
-                                      (directory-file-name
-                                       (locate-dominating-file default-directory "Gemfile"))))))
+                             (dcl/vagrant-relative-path
+                              (locate-dominating-file default-directory "Gemfile"))))
                (eval . (progn
                          (defun vagrant-devenv-api--rspec-vagrant-p-advice (orig-fn)
                            "Look for Vagrantfile in parent directories, not just project root."
@@ -105,12 +103,11 @@ When called with a prefix argument (C-u), prompt whether to use Vagrant."
                              (if (and vagrantfile-dir
                                       (or (not current-prefix-arg)
                                           (y-or-n-p "Run inside Vagrant? ")))
-                                 (let* ((project-name (file-name-nondirectory
-                                                       (directory-file-name
-                                                        (locate-dominating-file default-directory "Gemfile"))))
+                                 (let* ((rel-path (dcl/vagrant-relative-path
+                                  (locate-dominating-file default-directory "Gemfile")))
                                         (default-directory vagrantfile-dir)
-                                        (vagrant-cmd (format "vagrant ssh -c \"cd /vagrant/%s && %s\""
-                                                             project-name
+                                        (vagrant-cmd (format "vagrant ssh -c \"cd %s && %s\""
+                                                             (shell-quote-argument rel-path)
                                                              (replace-regexp-in-string "\"" "\\\\\"" cmd))))
                                    (funcall orig-fn vagrant-cmd))
                                (funcall orig-fn cmd))))
