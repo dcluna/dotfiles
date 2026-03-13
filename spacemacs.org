@@ -2747,6 +2747,88 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
            (error (message "vagrant-direnv-sync: %s" (error-message-string err))))))
    #+END_SRC
 
+   #+BEGIN_SRC emacs-lisp
+     (defvar dcl/vagrant-shell-backends
+       '(("eshell"     . dcl/vagrant-shell--eshell)
+         ("shell"      . dcl/vagrant-shell--shell)
+         ("vterm"      . dcl/vagrant-shell--vterm)
+         ("term"       . dcl/vagrant-shell--term)
+         ("multishell" . dcl/vagrant-shell--multishell))
+       "Alist of (NAME . FUNCTION) for vagrant shell backends.")
+
+     (defun dcl/vagrant-shell--available-backends ()
+       "Return filtered alist of backends whose packages are available."
+       (seq-filter
+        (lambda (entry)
+          (pcase (car entry)
+            ("vterm" (featurep 'vterm))
+            ("multishell" (featurep 'multishell))
+            (_ t)))
+        dcl/vagrant-shell-backends))
+
+     (defun dcl/vagrant-shell--run (backend-name)
+       "Open a vagrant shell using BACKEND-NAME.
+     Note: backends receive a single CMD argument (not two as the spec says).
+     The vagrant-dir is already set as `default-directory' by this dispatcher."
+       (let ((vagrant-dir (dcl/vagrant-dir)))
+         (unless vagrant-dir
+           (user-error "Not in a vagrant project (no Vagrantfile found)"))
+         (let* ((rel-path (dcl/vagrant-relative-path))
+                (cmd (format "vagrant ssh -- -t \"cd %s && exec \\$SHELL -l\""
+                             (shell-quote-argument rel-path)))
+                (backend-fn (alist-get backend-name dcl/vagrant-shell-backends
+                                       nil nil #'string=))
+                (default-directory vagrant-dir))
+           (unless backend-fn
+             (user-error "Unknown vagrant shell backend: %s" backend-name))
+           (funcall backend-fn cmd))))
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (defun dcl/vagrant-shell--buffer-name (type)
+       "Return a buffer name like *vagrant-TYPE:project-name*."
+       (let ((project (file-name-nondirectory
+                       (directory-file-name (dcl/vagrant-dir)))))
+         (format "*vagrant-%s:%s*" type project)))
+
+     (defun dcl/vagrant-shell--shell (cmd)
+       "Open a `shell' buffer running CMD in the vagrant container."
+       (let ((buf (dcl/vagrant-shell--buffer-name "shell")))
+         (shell buf)
+         (comint-send-string (get-buffer-process buf) (concat cmd "\n"))))
+
+     (defun dcl/vagrant-shell--term (cmd)
+       "Open an `ansi-term' running CMD in the vagrant container."
+       (let ((buf (ansi-term "/bin/sh" "vagrant-term")))
+         (with-current-buffer buf
+           (term-send-raw-string (concat cmd "\n")))))
+
+     (defun dcl/vagrant-shell--eshell (cmd)
+       "Open an `eshell' buffer and run CMD."
+       (let ((eshell-buffer-name (dcl/vagrant-shell--buffer-name "eshell")))
+         (eshell)
+         (goto-char (point-max))
+         (eshell-kill-input)
+         (insert cmd)
+         (eshell-send-input)))
+
+     (defun dcl/vagrant-shell--vterm (cmd)
+       "Open a `vterm' buffer running CMD in the vagrant container."
+       (let ((vterm-buffer-name (dcl/vagrant-shell--buffer-name "vterm")))
+         (vterm)
+         (vterm-send-string cmd)
+         (vterm-send-return)))
+
+     (defun dcl/vagrant-shell--multishell (cmd)
+       "Open a shell via `multishell' running CMD in the vagrant container."
+       (let* ((project (file-name-nondirectory
+                        (directory-file-name (dcl/vagrant-dir))))
+              (name (format "vagrant-%s" project)))
+         (multishell-pop-to-shell nil name)
+         (comint-send-string (get-buffer-process (current-buffer))
+                             (concat cmd "\n"))))
+   #+END_SRC
+
 ** Exec-path-from-shell
 
    #+BEGIN_SRC emacs-lisp
