@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  extraNodePackages = import ./node/default.nix {};
+  # extraNodePackages = import ./node/default.nix {};
   dotfiles = "${config.home.homeDirectory}/ghq/github.com/dcluna/dotfiles";
   mkSymlink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
   claudesquad = pkgs.buildGoModule rec {
@@ -21,8 +21,8 @@ in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  # home.username = "danielluna";
-  home.username = "dcluna";
+  home.username = "danielluna";
+  # home.username = "dcluna";
   # home.homeDirectory = "/Users/danielluna";
   # home.homeDirectory = "/home/daniel.luna";
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${config.home.username}" else "/home/${config.home.username}";
@@ -102,8 +102,8 @@ in
     pkgs.toxiproxy
     pkgs.trippy
     pkgs.gptcommit
-    extraNodePackages.opencommit
-    pkgs.newsboat
+    # extraNodePackages.opencommit
+    # pkgs.newsboat
     pkgs.pgcenter
     pkgs.awscli2
     pkgs.toot
@@ -134,6 +134,8 @@ in
     pkgs.difftastic
     pkgs.mergiraf
     pkgs.fzf
+    pkgs.ast-grep
+    pkgs.bat
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
@@ -162,6 +164,7 @@ in
     ".config/zellij/config.kdl".source = ../zellij-config.kdl;
     ".config/gptcommit/config.toml".source = ../gptcommit/config.toml;
     ".bin/gptcommithook".source = ../gptcommit/gptcommithook;
+    ".bin/tmux-agent-run".source = mkSymlink ".claude/skills/tmux-tty/scripts/tmux-agent-run";
     ".stCommitMsg".text = "";
     ".zsh-confs" = {
       source = ../.zsh-confs;
@@ -182,20 +185,20 @@ in
     #     sha256 = "hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
     #   };
     # };
-    ".tmux" = {
-      source = builtins.fetchGit {
-        url = "git@github.com:gpakosz/.tmux.git";
-        ref = "master";
-        # owner = ".tmux";
-        # repo = "gpakosz";
-        # rev = "129d6e7ff3ae6add17f88d6737810bbdaa3a25cf";
-        rev = "87dcd13a28aeb5f18baee630e24b3f5765ae3a4f";
-        # sha256 = "1r65pp1gpyrjnkvv820rik34fn8247kpdi828bn35yrnw4dhi32f";
-        # leaveDotGit = true;
-      };
-    };
-    ".tmux.conf".source = ../.tmux.conf;
-    ".tmux.conf.local".source = ../.tmux.conf.local;
+    # ".tmux" = {
+    #   source = builtins.fetchGit {
+    #     url = "git@github.com:gpakosz/.tmux.git";
+    #     ref = "master";
+    #     # owner = ".tmux";
+    #     # repo = "gpakosz";
+    #     # rev = "129d6e7ff3ae6add17f88d6737810bbdaa3a25cf";
+    #     rev = "87dcd13a28aeb5f18baee630e24b3f5765ae3a4f";
+    #     # sha256 = "1r65pp1gpyrjnkvv820rik34fn8247kpdi828bn35yrnw4dhi32f";
+    #     # leaveDotGit = true;
+    #   };
+    # };
+    # ".tmux.conf".source = ../.tmux.conf;
+    # ".tmux.conf.local".source = ../.tmux.conf.local;
     # ".config/.tmux.conf.local".source = ~/dotfiles/.tmux.conf.local;
     # ".config/toxiproxy.json".source = ~/dotfiles/toxiproxy.json;
     # "Projects/AdQuick/.tmuxinator.yml".source = ~/dotfiles/.tmuxinator.adquick.yml;
@@ -204,7 +207,6 @@ in
     # "Projects/AdQuick/adquick/.aider.conf.yml".source = ~/dotfiles/aider/.aider.conf.yml;
     # ".config/tmuxinator/emamux.yml".source = ~/dotfiles/.tmuxinator.emamux.yml;
     # ".newsboat/config".source = ~/dotfiles/newsboat/config;
-    ".bin/eless".source = ~/.eless/eless;
 
     ".rbenv" = {
       # source = pkgs.fetchFromGitHub {
@@ -221,23 +223,23 @@ in
       recursive = true;
     };
 
-    ".rbenv/plugins/ruby-build" = {
-      source = builtins.fetchGit {
-        url = "git@github.com:rbenv/ruby-build.git";
-        rev = "876cdf3b11f50f842489e160ce32f8ff17eb2723";
-        # https://github.com/rbenv/ruby-build/commit/876cdf3b11f50f842489e160ce32f8ff17eb2723
-        # sha256 = "0zqd3dprfpxv2d44rk4zvq8s3fsmx4v1xwgrmf7j1dpc0phakd9y";
-        # leaveDotGit = true;
-      };
-      # source = pkgs.fetchFromGitHub {
-      #   owner = "rbenv";
-      #   repo = "ruby-build";
-      #   rev = "20250130";
-      #   sha256 = "0zqd3dprfpxv2d44rk4zvq8s3fsmx4v1xwgrmf7j1dpc0phakd9y";
-      #   leaveDotGit = true;
+    # ".rbenv/plugins/ruby-build" = {
+      # source = builtins.fetchGit {
+        # url = "git@github.com:rbenv/ruby-build.git";
+        # rev = "876cdf3b11f50f842489e160ce32f8ff17eb2723";
+        # # https://github.com/rbenv/ruby-build/commit/876cdf3b11f50f842489e160ce32f8ff17eb2723
+        # # sha256 = "0zqd3dprfpxv2d44rk4zvq8s3fsmx4v1xwgrmf7j1dpc0phakd9y";
+        # # leaveDotGit = true;
       # };
-      recursive = true;
-    };
+      # # source = pkgs.fetchFromGitHub {
+      # #   owner = "rbenv";
+      # #   repo = "ruby-build";
+      # #   rev = "20250130";
+      # #   sha256 = "0zqd3dprfpxv2d44rk4zvq8s3fsmx4v1xwgrmf7j1dpc0phakd9y";
+      # #   leaveDotGit = true;
+      # # };
+      # recursive = true;
+    # };
 
     ".eless" = {
       source = builtins.fetchGit {
@@ -246,6 +248,7 @@ in
       };
       recursive = true;
     };
+    # ".bin/eless".source = ~/.eless/eless;
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
