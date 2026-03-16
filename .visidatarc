@@ -8,6 +8,7 @@ from geopy.distance import geodesic
 options.clipboard_copy_cmd = "pbcopy"
 options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"
 options.disp_float_fmt = '{:.08f}'
+options.clean_names = True
 
 def gsub(str, regex, repl):
   re.sub(regex, repl, str)
