@@ -1585,9 +1585,18 @@ command to execute."
     ["Optional"
      ("v" "vterm" dcl/vagrant-shell-vterm :if (lambda () (featurep 'vterm)))
      ("m" "multishell" dcl/vagrant-shell-multishell :if (lambda () (featurep 'multishell)))]))
+(defun dcl/vagrant-copy-path ()
+  "Copy the /vagrant/... equivalent of `default-directory' to the kill ring."
+  (interactive)
+  (if-let ((path (dcl/vagrant-relative-path)))
+      (progn
+        (kill-new path)
+        (message "Copied: %s" path))
+    (user-error "Not in a vagrant project (no Vagrantfile found)")))
 (defvar dcl/vagrant-keymap (make-sparse-keymap)
   "Keymap for vagrant commands under SPC o V.")
 (define-key dcl/vagrant-keymap "s" #'dcl/vagrant-shell-menu)
+(define-key dcl/vagrant-keymap "y" #'dcl/vagrant-copy-path)
 (evil-leader/set-key "o V" dcl/vagrant-keymap)
 (spacemacs/declare-prefix "o V" "vagrant")
 (when (memq window-system '(mac ns x))
