@@ -1415,6 +1415,148 @@ RESULTS-TEMP-FILE is the path to a temp file containing an org table."
 ;;   (direnv-mode))
 (use-package envrc
   :config (envrc-global-mode))
+(defun dcl/vagrant-dir ()
+  "Return the directory containing the nearest Vagrantfile, or nil."
+  (when-let ((dir (locate-dominating-file default-directory "Vagrantfile")))
+    (expand-file-name dir)))
+
+(defun dcl/vagrant-relative-path (&optional dir)
+  "Return the /vagrant/... equivalent of DIR (defaults to `default-directory').
+Returns nil if not inside a vagrant project."
+  (when-let ((vagrant-dir (dcl/vagrant-dir)))
+    (let ((rel (file-relative-name (or dir default-directory) vagrant-dir)))
+      (if (string= rel ".")
+          "/vagrant/"
+        (concat "/vagrant/" (file-name-as-directory rel))))))
+(with-eval-after-load 'envrc
+  (define-advice envrc-allow (:after () vagrant-direnv-sync)
+    "Sync direnv allow to vagrant container when applicable."
+    (condition-case-unless-debug err
+        (when-let ((env-dir (envrc--find-env-dir)))
+          (let ((default-directory env-dir))
+            (when-let ((vagrant-dir (dcl/vagrant-dir)))
+              (when (executable-find "vagrant")
+                (let* ((rel-path (dcl/vagrant-relative-path env-dir))
+                       (default-directory vagrant-dir))
+                  (start-process "vagrant-direnv-sync" nil
+                                 "vagrant" "ssh" "-c"
+                                 (format "cd %s && direnv allow"
+                                         (shell-quote-argument rel-path))))))))
+      (error (message "vagrant-direnv-sync: %s" (error-message-string err))))))
+(defvar dcl/vagrant-shell-backends
+  '(("eshell"     . dcl/vagrant-shell--eshell)
+    ("shell"      . dcl/vagrant-shell--shell)
+    ("vterm"      . dcl/vagrant-shell--vterm)
+    ("term"       . dcl/vagrant-shell--term)
+    ("multishell" . dcl/vagrant-shell--multishell))
+  "Alist of (NAME . FUNCTION) for vagrant shell backends.")
+
+(defun dcl/vagrant-shell--available-backends ()
+  "Return filtered alist of backends whose packages are available."
+  (seq-filter
+   (lambda (entry)
+     (pcase (car entry)
+       ("vterm" (featurep 'vterm))
+       ("multishell" (featurep 'multishell))
+       (_ t)))
+   dcl/vagrant-shell-backends))
+
+(defun dcl/vagrant-shell--run (backend-name)
+  "Open a vagrant shell using BACKEND-NAME.
+Note: backends receive a single CMD argument (not two as the spec says).
+The vagrant-dir is already set as `default-directory' by this dispatcher."
+  (let ((vagrant-dir (dcl/vagrant-dir)))
+    (unless vagrant-dir
+      (user-error "Not in a vagrant project (no Vagrantfile found)"))
+    (let* ((rel-path (dcl/vagrant-relative-path))
+           (cmd (format "vagrant ssh -- -t \"cd %s && exec \\$SHELL -l\""
+                        (shell-quote-argument rel-path)))
+           (backend-fn (alist-get backend-name dcl/vagrant-shell-backends
+                                  nil nil #'string=))
+           (default-directory vagrant-dir))
+      (unless backend-fn
+        (user-error "Unknown vagrant shell backend: %s" backend-name))
+      (funcall backend-fn cmd))))
+(defun dcl/vagrant-shell--buffer-name (type)
+  "Return a buffer name like *vagrant-TYPE:project-name*."
+  (let ((project (file-name-nondirectory
+                  (directory-file-name (dcl/vagrant-dir)))))
+    (format "*vagrant-%s:%s*" type project)))
+
+(defun dcl/vagrant-shell--shell (cmd)
+  "Open a `shell' buffer running CMD in the vagrant container."
+  (let ((buf (dcl/vagrant-shell--buffer-name "shell")))
+    (when (and (get-buffer buf) (not (get-buffer-process buf)))
+      (kill-buffer buf))
+    (shell buf)
+    (comint-send-string (get-buffer-process buf) (concat cmd "\n"))))
+
+(defun dcl/vagrant-shell--term (cmd)
+  "Open an `ansi-term' running CMD in the vagrant container."
+  (let* ((term-name (dcl/vagrant-shell--buffer-name "term"))
+         (buf (ansi-term "/bin/sh" term-name)))
+    (with-current-buffer buf
+      (term-send-raw-string (concat cmd "\n")))))
+
+(defun dcl/vagrant-shell--eshell (cmd)
+  "Open an `eshell' buffer and run CMD."
+  (let ((eshell-buffer-name (dcl/vagrant-shell--buffer-name "eshell")))
+    (eshell)
+    (goto-char (point-max))
+    (eshell-kill-input)
+    (insert cmd)
+    (eshell-send-input)))
+
+(defun dcl/vagrant-shell--vterm (cmd)
+  "Open a `vterm' buffer running CMD in the vagrant container."
+  (let ((vterm-buffer-name (dcl/vagrant-shell--buffer-name "vterm")))
+    (vterm)
+    (vterm-send-string cmd)
+    (vterm-send-return)))
+
+(defun dcl/vagrant-shell--multishell (cmd)
+  "Open a shell via `multishell' running CMD in the vagrant container."
+  (let* ((name (dcl/vagrant-shell--buffer-name "multishell")))
+    (multishell-pop-to-shell nil name)
+    (when-let ((proc (get-buffer-process (current-buffer))))
+      (comint-send-string proc (concat cmd "\n")))))
+(defun dcl/vagrant-shell-menu ()
+  "Show a menu to select a vagrant shell backend."
+  (interactive)
+  (unless (dcl/vagrant-dir)
+    (user-error "Not in a vagrant project (no Vagrantfile found)"))
+  (if (featurep 'transient)
+      (call-interactively #'dcl/vagrant-shell-transient)
+    (dcl/vagrant-shell--completing-read)))
+
+(defun dcl/vagrant-shell--completing-read ()
+  "Prompt for a vagrant shell backend via `completing-read'."
+  (let* ((backends (dcl/vagrant-shell--available-backends))
+         (choice (completing-read "Vagrant shell backend: "
+                                  (mapcar #'car backends) nil t)))
+    (dcl/vagrant-shell--run choice)))
+
+(defun dcl/vagrant-shell-eshell () (interactive) (dcl/vagrant-shell--run "eshell"))
+(defun dcl/vagrant-shell-shell () (interactive) (dcl/vagrant-shell--run "shell"))
+(defun dcl/vagrant-shell-term () (interactive) (dcl/vagrant-shell--run "term"))
+(defun dcl/vagrant-shell-vterm () (interactive) (dcl/vagrant-shell--run "vterm"))
+(defun dcl/vagrant-shell-multishell () (interactive) (dcl/vagrant-shell--run "multishell"))
+
+(with-eval-after-load 'transient
+  (transient-define-prefix dcl/vagrant-shell-transient ()
+    "Open a terminal inside the vagrant container."
+    ["Vagrant Shell"
+     ("e" "eshell" dcl/vagrant-shell-eshell)
+     ("s" "shell" dcl/vagrant-shell-shell)
+     ("t" "term" dcl/vagrant-shell-term)]
+    ["Optional"
+     ("v" "vterm" dcl/vagrant-shell-vterm :if (lambda () (featurep 'vterm)))
+     ("m" "multishell" dcl/vagrant-shell-multishell :if (lambda () (featurep 'multishell)))]))
+(defvar dcl/vagrant-keymap (make-sparse-keymap)
+  "Keymap for vagrant commands under SPC o V.")
+(define-key dcl/vagrant-keymap "s" #'dcl/vagrant-shell-menu)
+(evil-leader/set-key "o V" dcl/vagrant-keymap)
+(spacemacs/declare-prefix "o V" "vagrant")
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 (defun helm-comint-input-ring-action (candidate)
