@@ -152,6 +152,7 @@ in
     ".irbrc".source = ../.irbrc;
     ".pryrc".source = ../.pryrc;
     ".railsrc".source = ../.railsrc;
+    ".visidatarc".source = mkSymlink ".visidatarc";
     ".emacs-profiles.el".source = mkSymlink ".emacs-profiles.el";
     ".emacs-profile".source = mkSymlink ".emacs-profile";
     ".spacemacs".source = mkSymlink ".spacemacs";
