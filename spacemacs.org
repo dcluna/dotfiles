@@ -4055,6 +4055,19 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
           (ai-code-magit-setup-transients)))
     #+end_src
 
+** Nix Home Manager
+
+    #+begin_src emacs-lisp
+      (defun dotfiles/home-manager-switch ()
+        "Run home-manager switch from the dotfiles directory."
+        (interactive)
+        (let ((default-directory "~/ghq/github.com/dcluna/dotfiles/"))
+          (async-shell-command "nix run home-manager/master -- switch -f nix/home.nix -b backup"
+                               "*home-manager-switch*" "*home-manager-switch-errors*")))
+
+      (evil-leader/set-key "ohs" 'dotfiles/home-manager-switch)
+    #+end_src
+
 ** Just
 
     #+begin_src emacs-lisp

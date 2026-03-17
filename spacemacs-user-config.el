@@ -2421,6 +2421,14 @@ _u_pdate
   ;; Optional: Set up Magit integration for AI commands in Magit popups
   (with-eval-after-load 'magit
     (ai-code-magit-setup-transients)))
+(defun dotfiles/home-manager-switch ()
+  "Run home-manager switch from the dotfiles directory."
+  (interactive)
+  (let ((default-directory "~/ghq/github.com/dcluna/dotfiles/"))
+    (async-shell-command "nix run home-manager/master -- switch -f nix/home.nix -b backup"
+                         "*home-manager-switch*" "*home-manager-switch-errors*")))
+
+(evil-leader/set-key "ohs" 'dotfiles/home-manager-switch)
 (use-package just-mode :ensure t)
 (use-package justl
   :straight (justl :fetcher github :repo "psibi/justl.el")
