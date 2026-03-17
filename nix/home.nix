@@ -136,6 +136,8 @@ in
     pkgs.fzf
     pkgs.ast-grep
     pkgs.bat
+    pkgs.doggo
+    pkgs.netlify-cli
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
