@@ -59,6 +59,15 @@ pre-commit:
         - rebase
       run: ruby -c {staged_files}
 
+    no_specs_in_app:
+      tags:
+        - qa
+        - rails
+      skip:
+        - merge
+        - rebase
+      run: check-no-specs-in-app
+
     rubocop-debugger:
       tags:
         - qa
