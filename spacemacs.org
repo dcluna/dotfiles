@@ -1763,6 +1763,41 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
            (message "Forge sections on"))))
    #+end_src
 
+** Org-babel noweb/env-var conversion
+   #+begin_src emacs-lisp
+     (defun dcl/env-var-to-noweb (beg end)
+       "Convert $ENV_VAR to <<env_var>> noweb reference in region or at point."
+       (interactive
+        (if (use-region-p)
+            (list (region-beginning) (region-end))
+          (let ((bounds (bounds-of-thing-at-point 'symbol)))
+            (list (1- (car bounds)) (cdr bounds)))))
+       (let* ((text (buffer-substring-no-properties beg end))
+              (replacement (replace-regexp-in-string
+                            "\\$\\([A-Z_][A-Z0-9_]*\\)"
+                            (lambda (match)
+                              (concat "<<" (downcase (match-string 1 match)) ">>"))
+                            text)))
+         (delete-region beg end)
+         (insert replacement)))
+
+     (defun dcl/noweb-to-env-var (beg end)
+       "Convert <<noweb_ref>> to $NOWEB_REF env var in region or at point."
+       (interactive
+        (if (use-region-p)
+            (list (region-beginning) (region-end))
+          (let ((bounds (bounds-of-thing-at-point 'symbol)))
+            (list (- (car bounds) 2) (+ (cdr bounds) 2)))))
+       (let* ((text (buffer-substring-no-properties beg end))
+              (replacement (replace-regexp-in-string
+                            "<<\\([a-z_][a-z0-9_]*\\)>>"
+                            (lambda (match)
+                              (concat "$" (upcase (match-string 1 match))))
+                            text)))
+         (delete-region beg end)
+         (insert replacement)))
+   #+end_src
+
 * Auto modes
   :PROPERTIES:
   :header-args: :noweb-ref auto-modes :tangle no
@@ -1796,6 +1831,12 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
 
   (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "ots" 'dcl/toggle-ts-and-js-file)
   (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ots" 'dcl/toggle-ts-and-js-file)
+
+  ;; SPC o x i — noweb/env-var inflection
+  (spacemacs/declare-prefix "oxi" "noweb inflection")
+  (spacemacs/set-leader-keys
+    "oxie" 'dcl/env-var-to-noweb
+    "oxin" 'dcl/noweb-to-env-var)
   #+END_SRC
 * Configuration
   :PROPERTIES:

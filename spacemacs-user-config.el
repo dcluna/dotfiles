@@ -813,6 +813,37 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
       (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-pullreqs nil t)
       (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-issues   nil t)
       (message "Forge sections on"))))
+(defun dcl/env-var-to-noweb (beg end)
+  "Convert $ENV_VAR to <<env_var>> noweb reference in region or at point."
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (let ((bounds (bounds-of-thing-at-point 'symbol)))
+       (list (1- (car bounds)) (cdr bounds)))))
+  (let* ((text (buffer-substring-no-properties beg end))
+         (replacement (replace-regexp-in-string
+                       "\\$\\([A-Z_][A-Z0-9_]*\\)"
+                       (lambda (match)
+                         (concat "<<" (downcase (match-string 1 match)) ">>"))
+                       text)))
+    (delete-region beg end)
+    (insert replacement)))
+
+(defun dcl/noweb-to-env-var (beg end)
+  "Convert <<noweb_ref>> to $NOWEB_REF env var in region or at point."
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (let ((bounds (bounds-of-thing-at-point 'symbol)))
+       (list (- (car bounds) 2) (+ (cdr bounds) 2)))))
+  (let* ((text (buffer-substring-no-properties beg end))
+         (replacement (replace-regexp-in-string
+                       "<<\\([a-z_][a-z0-9_]*\\)>>"
+                       (lambda (match)
+                         (concat "$" (upcase (match-string 1 match))))
+                       text)))
+    (delete-region beg end)
+    (insert replacement)))
 
 ;;auto-modes
 (add-to-list 'auto-mode-alist '("messages_ccodk_default.txt" . conf-javaprop-mode))
@@ -837,6 +868,12 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
 
 (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "ots" 'dcl/toggle-ts-and-js-file)
 (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ots" 'dcl/toggle-ts-and-js-file)
+
+;; SPC o x i — noweb/env-var inflection
+(spacemacs/declare-prefix "oxi" "noweb inflection")
+(spacemacs/set-leader-keys
+  "oxie" 'dcl/env-var-to-noweb
+  "oxin" 'dcl/noweb-to-env-var)
 
 ;; configuration
 (setq backup-by-copying t backup-directory-alist '(("." . "~/.saves")) delete-old-versions t kept-new-versions 6 kept-old-versions 2 version-control t)
