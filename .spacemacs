@@ -148,6 +148,7 @@ static char *gnus-pointer[] = {
    '(main-line-color2 "#111111")
    '(main-line-separator-style 'chamfer)
    '(mastodon-auth-source-file "~/.authinfo.gpg")
+   '(meta-agent-shell-start-function 'meta-agent-shell--start-agent)
    '(mini-frame-advice-functions '(read-from-minibuffer read-string))
    '(mini-frame-ignore-commands
      '(eval-expression "edebug-eval-expression" debugger-eval-expression evil-ex yes-or-no-p swiper insert-char))
