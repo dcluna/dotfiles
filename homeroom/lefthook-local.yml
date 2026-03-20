@@ -78,6 +78,8 @@ pre-commit:
       run: |
         rubocop --fail-level warning --raise-cop-error -c .rubocop.yml --only Lint/Debugger {staged_files}
 
+# prepare-commit-msg:
+#   commands:
     # gpt_commit:
     #   tags:
     #     - ai
