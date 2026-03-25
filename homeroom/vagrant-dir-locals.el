@@ -33,7 +33,7 @@
                                      " ?[0-9:]* ?[\\]>*\"'/`] *"
                                      "\\)")))
                (eval . (setq inf-ruby-breakpoint-pattern
-                             "\\[[0-9]+\\] [a-z0-9_-]+(#<[^>]+>)> *"))
+                             "\\[[0-9]+\\] [a-z0-9_-]+(\\(?:#<[^>]+>\\|[A-Za-z0-9_:]+\\))> *"))
                (rspec-use-vagrant-when-possible . t)
                (eval . (setq rspec-vagrant-cwd
                              (dcl/vagrant-relative-path
