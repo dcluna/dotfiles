@@ -138,6 +138,9 @@ in
     pkgs.bat
     pkgs.doggo
     pkgs.netlify-cli
+    pkgs.sentry-cli
+    pkgs.oauth2c
+    pkgs.pandoc
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
