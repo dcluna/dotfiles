@@ -2447,7 +2447,7 @@ _u_pdate
   :bind (("C-c m" . ai-code-menu))
   :init (evil-leader/set-key "o l a" 'ai-code-menu)
   :config
-  (ai-code-set-backend 'claude-code)
+  (ai-code-set-backend 'agent-shell)
   (setq ai-code-backends-infra-terminal-backend 'eat) ;; config for native CLI backends. for external backends such as agent-shell, claude-code-ide.el and claude-code.el, please check their own config
   ;; Optional: Enable @ file completion in comments and AI sessions
   (ai-code-prompt-filepath-completion-mode 1)
