@@ -2421,6 +2421,9 @@ _u_pdate
           #'agent-shell-attention-render-active)
   (setopt agent-shell-attention-indicator-location 'global-mode-string)
   (agent-shell-attention-mode))
+(use-package agent-shell-bookmark
+  :straight (:host github :repo "dcluna/agent-shell-bookmark")
+  :after agent-shell)
 (use-package agent-shell-manager
      :straight (:host github :repo "jethrokuan/agent-shell-manager")
      :config (evilified-state-evilify-map agent-shell-manager-mode-map :mode agent-shell-manager-mode))

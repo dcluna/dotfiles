@@ -4044,6 +4044,14 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
        (agent-shell-attention-mode))
    #+end_src
 
+*** Agent-shell-bookmark
+
+#+begin_src emacs-lisp
+  (use-package agent-shell-bookmark
+    :straight (:host github :repo "dcluna/agent-shell-bookmark")
+    :after agent-shell)
+#+end_src
+
 *** Agent-shell-manager
 
 #+begin_src emacs-lisp
