@@ -42,6 +42,7 @@ pre-commit:
         - linting
         - style
       glob: "*.{yml,yaml}"
+      exclude: "spec/cassettes/**"
       skip:
         - merge
         - rebase
