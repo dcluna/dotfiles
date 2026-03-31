@@ -127,6 +127,28 @@ pre-push:
         - schema
       run: ./bin/check-timestamps.sh
 
+  jobs:
+    - name: plan_doc_check
+      group:
+        piped: true
+        jobs:
+          - name: plan_file_exists
+            tags: [documentation, safety]
+            skip:
+              - ref: master
+              - ref: main
+              - ref: develop
+              - ref: production
+            run: homeroom/check-plan-exists.sh
+          - name: plan_file_current
+            tags: [documentation, ai]
+            skip:
+              - ref: master
+              - ref: main
+              - ref: develop
+              - ref: production
+            run: homeroom/check-plan-coverage.sh
+
 post-checkout:
   quiet: true
   parallel: true
