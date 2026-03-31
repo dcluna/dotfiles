@@ -134,7 +134,7 @@ pre-push:
         jobs:
           - name: plan_file_exists
             tags: [documentation, safety]
-            skip:
+            skip: &skip_protected
               - ref: master
               - ref: main
               - ref: develop
@@ -142,11 +142,7 @@ pre-push:
             run: homeroom/check-plan-exists.sh
           - name: plan_file_current
             tags: [documentation, ai]
-            skip:
-              - ref: master
-              - ref: main
-              - ref: develop
-              - ref: production
+            skip: *skip_protected
             run: homeroom/check-plan-coverage.sh
 
 post-checkout:
