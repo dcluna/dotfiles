@@ -33,7 +33,34 @@ git diff <base-branch>...HEAD
 
 Review the commits and diff to understand what changed and why.
 
-### 2. Draft the PR description
+### 2. Check for plan docs
+
+Plan docs may still exist on disk, or may have been `git rm`'d after implementation. Check both cases:
+
+```bash
+MERGE_BASE=$(git merge-base <base-branch> HEAD)
+
+# Case 1: plan docs still exist in working tree
+LIVE_PLANS=$(git diff --name-only --diff-filter=A "$MERGE_BASE" HEAD -- docs/plans/)
+
+# Case 2: plan docs were added then deleted in this branch
+# Look for files that were added (A) at some point but are now deleted (D)
+DELETED_PLANS=$(git log --diff-filter=A --name-only --pretty=format: "$MERGE_BASE"..HEAD -- docs/plans/ | sort -u)
+```
+
+For **live plans**, read them directly with `cat`.
+
+For **deleted plans**, find the last commit where each file existed and read it from that commit:
+
+```bash
+# For each deleted plan file, find the commit just before deletion
+LAST_COMMIT=$(git log --diff-filter=D -1 --format="%H" -- "docs/plans/<filename>")
+git show "$LAST_COMMIT^:docs/plans/<filename>"
+```
+
+If plan docs are found (live or deleted), read their contents — they contain the author's intent and should inform the PR description. Reference them in the description using permalink URLs so reviewers can find the full context even after the files are removed from the branch.
+
+### 3. Draft the PR description
 
 Write the PR content to a temp file. Use this structure:
 
@@ -41,6 +68,13 @@ Write the PR content to a temp file. Use this structure:
 ## Summary
 
 <1-3 sentence overview of what this PR does and why>
+
+## Plan
+
+<If plan docs exist, link them. Use relative links for live files, or
+GitHub blob permalinks for deleted files, e.g.:>
+- [Plan doc title](docs/plans/filename.md)
+- [Plan doc title](https://github.com/<owner>/<repo>/blob/<commit-sha>/docs/plans/filename.md) *(removed from branch)*
 
 ## Changes
 
@@ -51,7 +85,7 @@ Write the PR content to a temp file. Use this structure:
 <How to test these changes, or note if tests are included>
 ```
 
-Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
+Omit the Plan section if no plan docs are found. Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
 
 #### Writing style
 
@@ -60,7 +94,7 @@ Adapt the structure to the project's PR conventions if visible in git log or exi
 - **Reference ticket numbers** — include ticket references like `[T10092]` when present in commit messages.
 - **Keep it scannable** — a reviewer should understand the PR's scope in 30 seconds. Use bold for feature names, one-line bullets for smaller fixes.
 
-### 3. Insert into the Emacs buffer
+### 4. Insert into the Emacs buffer
 
 Write the description to a temp file, then use `emacsclient` to insert it into the Forge buffer:
 
@@ -83,7 +117,7 @@ For **new PRs** (`new-pullreq` buffer): The buffer typically has a title line at
 
 For **existing PRs** (editing): The buffer contains the current description. Replace or append as appropriate based on user instructions.
 
-### 4. Do NOT submit
+### 5. Do NOT submit
 
 Never call `forge-post-submit` or any equivalent. The user reviews and submits manually.
 
