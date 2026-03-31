@@ -56,14 +56,22 @@ $PLAN_CONTENTS
 --- DIFF ---
 $DIFF_CONTENTS"
 
-# Invoke the agent (timeout after 2 minutes, pipe prompt via stdin for ARG_MAX safety)
+# Invoke the agent (pipe prompt via stdin for ARG_MAX safety)
 AGENT_TIMEOUT="${PLAN_CHECK_AGENT_TIMEOUT:-120}"
 echo "Running plan coverage check with $AGENT_CMD..."
-AGENT_OUTPUT=$(echo "$PROMPT" | timeout "$AGENT_TIMEOUT" $AGENT_CMD $AGENT_FLAGS 2>&1) || {
-  echo "ERROR: Agent command failed (exit $?):"
-  echo "$AGENT_OUTPUT"
-  exit 1
-}
+if command -v timeout >/dev/null 2>&1; then
+  AGENT_OUTPUT=$(echo "$PROMPT" | timeout "$AGENT_TIMEOUT" $AGENT_CMD $AGENT_FLAGS 2>&1) || {
+    echo "ERROR: Agent command failed:"
+    echo "$AGENT_OUTPUT"
+    exit 1
+  }
+else
+  AGENT_OUTPUT=$(echo "$PROMPT" | $AGENT_CMD $AGENT_FLAGS 2>&1) || {
+    echo "ERROR: Agent command failed:"
+    echo "$AGENT_OUTPUT"
+    exit 1
+  }
+fi
 
 # Check result (strict match: line must be exactly "PASS")
 if echo "$AGENT_OUTPUT" | grep -qx "PASS"; then
