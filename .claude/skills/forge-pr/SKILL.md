@@ -51,7 +51,14 @@ Write the PR content to a temp file. Use this structure:
 <How to test these changes, or note if tests are included>
 ```
 
-Adapt the structure to the project's PR conventions if visible in git log or existing PRs. Keep it concise but informative.
+Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
+
+#### Writing style
+
+- **Summarize, don't enumerate** — describe the intent and scope of changes rather than listing every file or line modified. Group related changes into concise bullet points.
+- **Reference PRs by number** — when commit messages include PR numbers (e.g. `(#3744)`), include them in the description as `#3744` so GitHub auto-links them. Extract PR numbers from `git log` output.
+- **Reference ticket numbers** — include ticket references like `[T10092]` when present in commit messages.
+- **Keep it scannable** — a reviewer should understand the PR's scope in 30 seconds. Use bold for feature names, one-line bullets for smaller fixes.
 
 ### 3. Insert into the Emacs buffer
 
