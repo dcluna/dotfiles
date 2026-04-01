@@ -86,6 +86,40 @@ When you have query results to include, format them as an org table:
 | value3  | value4  |
 ```
 
+## One query per src block
+
+**Each `#+begin_src sql` block must contain exactly one SQL statement.** This is critical for org-babel: `C-c C-c` executes the entire block, so multiple statements in one block produce confusing results or errors.
+
+When you have multiple related queries (e.g., comparing different slices of the same data), log each as a **separate call** to `dcl/claude-query-log-append` with its own `query_name`, description, and temp file. Each gets its own org heading.
+
+**Wrong** — three SELECTs in one block:
+```
+* Coverage Comparison
+#+begin_src sql
+SELECT count(*) AS set_a FROM ...;
+SELECT count(*) AS set_b FROM ...;
+SELECT count(*) AS overlap FROM ...;
+#+end_src
+```
+
+**Right** — one SELECT per block:
+```
+* Coverage Set A
+#+begin_src sql
+SELECT count(*) AS set_a FROM ...;
+#+end_src
+
+* Coverage Set B
+#+begin_src sql
+SELECT count(*) AS set_b FROM ...;
+#+end_src
+
+* Coverage Overlap
+#+begin_src sql
+SELECT count(*) AS overlap FROM ...;
+#+end_src
+```
+
 ## Important
 
 - **Never read connection credentials.** You only need connection names, not passwords or hostnames.
