@@ -172,6 +172,8 @@ in
     ".bin/gptcommithook".source = ../gptcommit/gptcommithook;
     ".bin/tmux-agent-run".source = mkSymlink ".claude/skills/tmux-tty/scripts/tmux-agent-run";
     ".bin/check-no-specs-in-app".source = mkSymlink "homeroom/check-no-specs-in-app.sh";
+    ".bin/check-plan-exists".source = mkSymlink "homeroom/check-plan-exists.sh";
+    ".bin/check-plan-coverage".source = mkSymlink "homeroom/check-plan-coverage.sh";
     ".stCommitMsg".text = "";
     ".zsh-confs" = {
       source = ../.zsh-confs;

@@ -2,13 +2,22 @@
 # Checks that the branch includes at least one new file in docs/plans/
 set -euo pipefail
 
-# Detect default branch
-if git rev-parse --verify main >/dev/null 2>&1; then
-  DEFAULT_BRANCH="main"
-elif git rev-parse --verify master >/dev/null 2>&1; then
-  DEFAULT_BRANCH="master"
+# Detect default branch from remote HEAD, then fall back to common names
+DEFAULT_BRANCH=""
+REMOTE_HEAD=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||')
+if [ -n "$REMOTE_HEAD" ] && git rev-parse --verify "$REMOTE_HEAD" >/dev/null 2>&1; then
+  DEFAULT_BRANCH="$REMOTE_HEAD"
 else
-  echo "ERROR: Could not detect default branch (tried main, master)"
+  for candidate in main master develop; do
+    if git rev-parse --verify "$candidate" >/dev/null 2>&1; then
+      DEFAULT_BRANCH="$candidate"
+      break
+    fi
+  done
+fi
+
+if [ -z "$DEFAULT_BRANCH" ]; then
+  echo "ERROR: Could not detect default branch (tried origin/HEAD, main, master, develop)"
   exit 1
 fi
 

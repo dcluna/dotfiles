@@ -139,11 +139,11 @@ pre-push:
               - ref: main
               - ref: develop
               - ref: production
-            run: homeroom/check-plan-exists.sh
+            run: check-plan-exists
           - name: plan_file_current
             tags: [documentation, ai]
             skip: *skip_protected
-            run: homeroom/check-plan-coverage.sh
+            run: check-plan-coverage
 
 post-checkout:
   quiet: true
@@ -179,7 +179,16 @@ post-checkout:
           touch .projectile
           cp $MAIN_GIT_DIR/.mcp* .
           cp $MAIN_GIT_DIR/.env* .
-          cp $MAIN_GIT_DIR/config/application.yml ./config/application.yml
-          ln -s $MAIN_GIT_DIR/.dir-locals.el .
           direnv allow
+          cp $MAIN_GIT_DIR/config/application.yml ./config/application.yml
+          ln -s $MAIN_GIT_DIR/.dir-locals.el .dir-locals.el
+          direnv allow
+          # Also allow direnv in the corresponding vagrant folder
+          VAGRANT_DIR=$(cd "$MAIN_GIT_DIR" && while [ "$PWD" != "/" ]; do
+            if [ -f Vagrantfile ]; then echo "$PWD"; break; fi
+            cd ..
+          done)
+          if [ -n "$VAGRANT_DIR" ]; then
+            (cd "$VAGRANT_DIR" && direnv allow)
+          fi
         fi
