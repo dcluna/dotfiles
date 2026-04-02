@@ -117,7 +117,20 @@ GitHub blob permalinks for deleted files, e.g.:>
 
 ## Changes
 
-<Bulleted list of notable changes, grouped logically>
+<Group related changes under bold topic headers. Each header names
+a logical component or area of change, followed by bullet points
+with specifics. Example:
+
+**Auth middleware**
+- Replaced session-token storage with encrypted JWT
+- Added rate limiting on `/login` endpoint
+
+**User model**
+- New `verified_at` timestamp column with migration
+- `verified?` / `pending?` scopes
+
+For small PRs (1-2 logical groups), a flat list with bold leads is fine.
+For larger PRs, always use the header-then-bullets structure.>
 
 ## Testing
 
@@ -128,7 +141,8 @@ Omit the Plan section if no plan docs are found. Omit the Architecture / Flow se
 
 #### Writing style
 
-- **Summarize, don't enumerate** — describe the intent and scope of changes rather than listing every file or line modified. Group related changes into concise bullet points.
+- **Summarize, don't enumerate** — describe the intent and scope of changes rather than listing every file or line modified.
+- **Group under topic headers** — use standalone **bold headers** (not bold-within-bullet) to name each logical component, then bullet the specifics underneath. Do NOT flatten everything into a single-level bullet list with bold leads — that becomes a wall of text on larger PRs.
 - **Reference PRs by number** — when commit messages include PR numbers (e.g. `(#3744)`), include them in the description as `#3744` so GitHub auto-links them. Extract PR numbers from `git log` output.
 - **Reference ticket numbers** — include ticket references like `[T10092]` when present in commit messages.
 - **Keep it scannable** — a reviewer should understand the PR's scope in 30 seconds. Use bold for feature names, one-line bullets for smaller fixes.
