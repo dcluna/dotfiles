@@ -69,6 +69,45 @@ Write the PR content to a temp file. Use this structure:
 
 <1-3 sentence overview of what this PR does and why>
 
+## Architecture / Flow
+
+<ASCII diagram showing the main flows, data paths, or component relationships
+introduced or modified by this PR. Use box-drawing characters or simple ASCII art.
+Focus on how the pieces connect — not every file, just the key abstractions.>
+
+Example styles (pick whichever fits):
+
+  Component diagram:
+    ┌──────────┐     ┌───────────┐     ┌──────────┐
+    │ Frontend  │────▶│ API Layer │────▶│ Database  │
+    └──────────┘     └───────────┘     └──────────┘
+
+  Flow diagram:
+    User request
+        │
+        ▼
+    Auth middleware ──▶ reject 401
+        │
+        ▼
+    Route handler ──▶ response
+
+  Layered:
+    ┌─────────────────────────────┐
+    │       Public API            │
+    ├─────────────────────────────┤
+    │    Service Layer            │
+    ├─────────────────────────────┤
+    │    Data Access              │
+    └─────────────────────────────┘
+
+Keep diagrams compact (under 20 lines). Show relationships and data flow,
+not just boxes with file names — the diagram should convey something the
+bulleted Changes list cannot.
+
+Omit this section ONLY for trivial PRs (single-file typo fix, config bump,
+dependency update with no architectural change). If the PR touches 3+ files
+or introduces new components, include a diagram.
+
 ## Plan
 
 <If plan docs exist, link them. Use relative links for live files, or
@@ -85,7 +124,7 @@ GitHub blob permalinks for deleted files, e.g.:>
 <How to test these changes, or note if tests are included>
 ```
 
-Omit the Plan section if no plan docs are found. Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
+Omit the Plan section if no plan docs are found. Omit the Architecture / Flow section only for trivial PRs (single-file typo, config bump). Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
 
 #### Writing style
 
