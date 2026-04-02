@@ -90,6 +90,18 @@ pre-commit:
       run: |
         rubocop --raise-cop-error --only Rails/EagerEvaluationLogMessage {staged_files}
 
+    rubocop-documentation:
+      tags:
+        - qa
+        - documentation
+      skip:
+        - merge
+        - rebase
+      glob: "*.rb"
+      exclude: "spec/**/*.rb"
+      run: |
+        rubocop --raise-cop-error --only Style/Documentation --force-default-config {staged_files}
+
 # prepare-commit-msg:
 #   commands:
     # gpt_commit:
