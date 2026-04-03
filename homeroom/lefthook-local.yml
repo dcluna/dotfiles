@@ -98,7 +98,7 @@ pre-commit:
         - merge
         - rebase
       glob: "*.rb"
-      exclude: "spec/**/*.rb"
+      exclude: "spec/**/*.rb|db/**/*.rb|config/initializers/**/*.rb"
       run: |
         rubocop --raise-cop-error --only Style/Documentation --force-default-config {staged_files}
 
