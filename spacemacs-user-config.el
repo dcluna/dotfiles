@@ -2083,7 +2083,7 @@ command to execute."
             :rev :newest
             :branch "main")
   :config
-  (add-hook 'prog-mode-hook 'copilot-mode))
+  (remove-hook 'prog-mode-hook 'copilot-mode))
 
 (define-key evil-insert-state-map (kbd "C-<tab>") 'copilot-accept-completion-by-word)
 (define-key evil-insert-state-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
