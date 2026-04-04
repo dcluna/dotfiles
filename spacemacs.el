@@ -192,7 +192,7 @@ call the original function `package-activate'."
      windows-scripts
      kubernetes
      ;; openai
-     (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/dotfiles/elfeed.org")))
+     ;; (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/dotfiles/elfeed.org")))
      finance
      ;; (scala :variables scala-backend 'scala-metals)
      imenu-list
@@ -210,7 +210,7 @@ call the original function `package-activate'."
      (ivy :variables ivy-wrap t ivy-height 25 ivy-enable-advanced-buffer-information t)
      rust
      ;; (mu4e :variables mu4e-installation-path "~/code/mu/mu4e" mu4e-maildir "~/.StackBuildersMaildir")
-     (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10)
+     (ranger :variables ranger-show-preview t ranger-cleanup-on-disable t ranger-ignored-extensions '("mkv" "iso" "mp4") ranger-max-preview-size 10 ranger-override-dired nil)
      ;; asm
      csv
      ;; erc
@@ -254,8 +254,8 @@ call the original function `package-activate'."
      ;; (clojure :variables clojure-enable-fancify-symbols t)
      (colors :variables
              colors-colorize-identifiers 'all)
-             ;; colors-enable-nyan-cat-progress-bar (display-graphic-p)
-             ;; nyan-minimum-window-width 64)
+     ;; colors-enable-nyan-cat-progress-bar (display-graphic-p)
+     ;; nyan-minimum-window-width 64)
      theming
      themes-megapack
      common-lisp
@@ -430,7 +430,7 @@ call the original function `package-activate'."
                                        :upgrade 't)
                                       evil-embrace
                                       editorconfig)
-                                      ;; wsd-mode
+   ;; wsd-mode
 
 
    ;; A list of packages and/or extensions that will not be install and loaded.
