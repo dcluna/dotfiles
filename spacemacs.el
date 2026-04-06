@@ -20,6 +20,9 @@
 
 
 (setq straight-packages '(
+                          agent-shell
+                          shell-maker
+                          acp
                           (cond-let :host github :repo "tarsius/cond-let" :files ("*.el"))
                           eshell-atuin
                           (lem :fetcher codeberg :repo "martianh/lem.el" :files ("lisp/*.el"))
