@@ -153,7 +153,7 @@ in
     # ".config/nixpkgs/home.nix".source = ./nix/home.nix;
     # ".config/home-manager/home.nix".source = $HOME/dotfiles/nix/home.nix;
     # ".zshrc".source = ./.zshrc;
-    ".psqlrc".source = ../.psqlrc;
+    ".psqlrc".source = mkSymlink ".psqlrc";
     ".irbrc".source = ../.irbrc;
     ".pryrc".source = ../.pryrc;
     ".railsrc".source = ../.railsrc;

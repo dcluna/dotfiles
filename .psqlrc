@@ -7,6 +7,6 @@
 \pset linestyle unicode
 \pset null 'ø'
 \set HISTFILE ~/.psql_history-:DBNAME
-\set PROMPT1 '%n@%M:%>/%~ %x> '
+\set PROMPT1 '[%`date "+%Y-%m-%d %H:%M:%S"`] %n@%M:%>/%~ %x> '
 SET tcp_keepalives_idle = 15;
 \set QUIET 0
