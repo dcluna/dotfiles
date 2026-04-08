@@ -1497,8 +1497,8 @@
                  (replace-regexp-in-string "git@github.com:" "https://www.github.com/"
                                            (replace-regexp-in-string "\.git$" "" (magit-get "remote.origin.url")))
                  base
-                 (git/get-branch-url)
-                 )))
+                 (git/get-branch-url))))
+
 
       (defun github/copy-branch-url ()
         "Copies the current branch's url on Github. Does not check if it actually exists before copying."
@@ -1508,8 +1508,8 @@
           (format "%s/tree/%s"
                   (replace-regexp-in-string "git@github.com:" "https://github.com/"
                                             (replace-regexp-in-string "\.git$" "" (magit-get "remote.origin.url")))
-                  (git/get-branch-url)
-                  ))))
+                  (git/get-branch-url)))))
+
 
       (defun github/copy-file-url (curbranch)
         (interactive (list (magit-read-branch "Branch: ")))
@@ -1540,6 +1540,76 @@
                                 (concat ".worktrees/" branch-name))
            branch-name
            (magit-read-branch-or-commit "Branching from: " "origin/master"))))
+
+      (defun dcl/worktree-entries ()
+        "Return a list of plists describing each git worktree.
+      Each plist has :branch and :directory keys."
+        (let* ((default-directory (magit-toplevel))
+               (raw-lines (magit-git-lines "worktree" "list" "--porcelain"))
+               (worktrees nil)
+               (current nil))
+          (dolist (line raw-lines)
+            (cond
+             ((string-prefix-p "worktree " line)
+              (when current
+                (unless (plist-get current :branch)
+                  (plist-put current :branch "(unknown)"))
+                (push current worktrees))
+              (setq current (list :directory (substring line 9))))
+             ((string-prefix-p "branch " line)
+              (plist-put current :branch
+                         (replace-regexp-in-string "^refs/heads/" "" (substring line 7))))
+             ((string-equal "detached" line)
+              (plist-put current :branch "(detached HEAD)"))
+             ((string-equal "bare" line)
+              (plist-put current :branch "(bare)"))))
+          (when current
+            (unless (plist-get current :branch)
+              (plist-put current :branch "(unknown)"))
+            (push current worktrees))
+          (nreverse worktrees)))
+
+      (defun dcl/worktree-list ()
+        "Display all git worktrees for the current repository in a buffer.
+      Shows branch name and directory in columns. Press RET or click to visit."
+        (interactive)
+        (let* ((worktrees (dcl/worktree-entries))
+               (max-branch (apply #'max (mapcar (lambda (wt) (length (plist-get wt :branch))) worktrees)))
+               (branch-width (max 12 (+ max-branch 2)))
+               (buf (get-buffer-create "*Worktrees*")))
+          (with-current-buffer buf
+            (let ((inhibit-read-only t))
+              (erase-buffer)
+              (insert (format (format "%%-%ds  %%s\n" branch-width) "Branch" "Directory"))
+              (insert (make-string (+ branch-width 2 40) ?-))
+              (insert "\n")
+              (dolist (wt worktrees)
+                (let ((start (point))
+                      (dir (plist-get wt :directory))
+                      (branch (plist-get wt :branch)))
+                  (insert (format (format "%%-%ds  %%s\n" branch-width) branch dir))
+                  (put-text-property start (point) 'worktree-dir dir))))
+            (goto-char (point-min))
+            (forward-line 2)
+            (setq buffer-read-only t)
+            (local-set-key (kbd "RET") #'dcl/worktree-list--visit)
+            (local-set-key (kbd "q") #'quit-window)
+            (local-set-key [mouse-1] #'dcl/worktree-list--click))
+          (pop-to-buffer buf)))
+
+      (defun dcl/worktree-list--visit ()
+        "Visit the worktree directory on the current line."
+        (interactive)
+        (when-let ((dir (get-text-property (line-beginning-position) 'worktree-dir)))
+          (dired dir)))
+
+      (defun dcl/worktree-list--click (event)
+        "Visit the worktree directory clicked on."
+        (interactive "e")
+        (let ((pos (posn-point (event-end event))))
+          (when pos
+            (goto-char pos)
+            (dcl/worktree-list--visit))))
     #+END_SRC
 
     #+BEGIN_SRC emacs-lisp
