@@ -1358,6 +1358,12 @@ RESULTS-TEMP-FILE is the path to a temp file containing an org table."
 (defvar dcl-yas-snippets-dir (expand-file-name "yasnippets" "~/") "Personal yasnippets directory")
 (setq yas--default-user-snippets-dir dcl-yas-snippets-dir)
 (add-to-list 'yas-snippet-dirs dcl-yas-snippets-dir)
+(defun dcl/yas-timezone-names ()
+  "Return a list of IANA timezone names from the system zoneinfo database."
+  (split-string
+   (shell-command-to-string
+    "awk '/^[^#]/ {print $3}' /usr/share/zoneinfo/zone.tab")
+   "\n" t))
 ;; (add-hook 'yas-before-expand-snippet-hook 'evil-normal-state)
 (setq aya-persist-snippets-dir dcl-yas-snippets-dir)
 (let ((custom-yas-keymap (make-sparse-keymap)))

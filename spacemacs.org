@@ -2559,6 +2559,17 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
      (add-to-list 'yas-snippet-dirs dcl-yas-snippets-dir)
     #+END_SRC
 
+*** Timezone completion helper
+
+    #+BEGIN_SRC emacs-lisp
+      (defun dcl/yas-timezone-names ()
+        "Return a list of IANA timezone names from the system zoneinfo database."
+        (split-string
+         (shell-command-to-string
+          "awk '/^[^#]/ {print $3}' /usr/share/zoneinfo/zone.tab")
+         "\n" t))
+    #+END_SRC
+
     The following gets us in normal mode upon snippet expansion - easier if/when
     we want to change something:
 
