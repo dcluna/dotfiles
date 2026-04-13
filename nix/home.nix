@@ -141,7 +141,6 @@ in
     pkgs.sentry-cli
     pkgs.oauth2c
     pkgs.pandoc
-    pkgs.superhtml
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync

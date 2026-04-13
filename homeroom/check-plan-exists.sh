@@ -5,28 +5,6 @@ set -euo pipefail
 # Read per-worktree mode (default: enforce)
 PLAN_DOC_MODE=$(git config plan-doc.mode 2>/dev/null || echo "enforce")
 
-# Detect default branch from remote HEAD, then fall back to common names
-DEFAULT_BRANCH=""
-REMOTE_HEAD=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||')
-if [ -n "$REMOTE_HEAD" ] && git rev-parse --verify "$REMOTE_HEAD" >/dev/null 2>&1; then
-  DEFAULT_BRANCH="$REMOTE_HEAD"
-else
-  for candidate in main master develop; do
-    if git rev-parse --verify "$candidate" >/dev/null 2>&1; then
-      DEFAULT_BRANCH="$candidate"
-      break
-    fi
-  done
-fi
-
-if [ -z "$DEFAULT_BRANCH" ]; then
-  echo "ERROR: Could not detect default branch (tried origin/HEAD, main, master, develop)"
-  exit 1
-fi
-
-# Find merge base
-MERGE_BASE=$(git merge-base "$DEFAULT_BRANCH" HEAD)
-
 if [ "$PLAN_DOC_MODE" = "clean" ]; then
   # In clean mode: ensure NO plan docs exist in the branch
   # Check for any docs/plans/ files that are tracked in HEAD
@@ -48,7 +26,27 @@ MSG
   exit 0
 fi
 
-# --- enforce mode (original logic below) ---
+# Detect default branch from remote HEAD, then fall back to common names
+DEFAULT_BRANCH=""
+REMOTE_HEAD=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||')
+if [ -n "$REMOTE_HEAD" ] && git rev-parse --verify "$REMOTE_HEAD" >/dev/null 2>&1; then
+  DEFAULT_BRANCH="$REMOTE_HEAD"
+else
+  for candidate in main master develop; do
+    if git rev-parse --verify "$candidate" >/dev/null 2>&1; then
+      DEFAULT_BRANCH="$candidate"
+      break
+    fi
+  done
+fi
+
+if [ -z "$DEFAULT_BRANCH" ]; then
+  echo "ERROR: Could not detect default branch (tried origin/HEAD, main, master, develop)"
+  exit 1
+fi
+
+# Find merge base
+MERGE_BASE=$(git merge-base "$DEFAULT_BRANCH" HEAD)
 
 # Check for new files in docs/plans/
 NEW_PLANS=$(git diff --name-only --diff-filter=A "$MERGE_BASE" HEAD -- docs/plans/)
