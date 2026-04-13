@@ -724,7 +724,7 @@ Requires the current directory to be inside a git repository."
                             "true")
             (shell-command "git config extensions.worktreeConfig true"))
           (shell-command (format "git config --worktree plan-doc.mode %s" new-mode))
-          (message "Plan doc mode: %s → %s" current new-mode)))
+          (message "Plan doc mode: %s → %s [%s]" current new-mode (abbreviate-file-name default-directory))))
       (defun magit-history-checkout ()
         (interactive)
         (magit-checkout (magit-completing-read "Branch: " (magit-history-branches))))
