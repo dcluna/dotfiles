@@ -156,6 +156,10 @@ pre-push:
             tags: [documentation, ai]
             skip: *skip_protected
             run: check-plan-coverage
+          - name: no_plan_file_exists
+            tags: [documentation, safety]
+            skip: *skip_protected
+            run: check-no-plan-exists
 
 post-checkout:
   quiet: true

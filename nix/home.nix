@@ -174,6 +174,7 @@ in
     ".bin/check-no-specs-in-app".source = mkSymlink "homeroom/check-no-specs-in-app.sh";
     ".bin/check-plan-exists".source = mkSymlink "homeroom/check-plan-exists.sh";
     ".bin/check-plan-coverage".source = mkSymlink "homeroom/check-plan-coverage.sh";
+    ".bin/check-no-plan-exists".source = mkSymlink "homeroom/check-no-plan-exists.sh";
     ".bin/plan-doc-mode".source = mkSymlink "homeroom/plan-doc-mode.sh";
     ".stCommitMsg".text = "";
     ".zsh-confs" = {

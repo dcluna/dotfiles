@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Checks that the branch includes at least one new file in docs/plans/
-# Only runs in enforce mode (default). Skips in clean mode.
+# Ensures no new plan docs were added on this branch.
+# Only runs in clean mode. Skips in enforce mode (default).
 set -euo pipefail
 
 PLAN_DOC_MODE=$(git config plan-doc.mode 2>/dev/null || echo "enforce")
-[ "$PLAN_DOC_MODE" != "enforce" ] && exit 0
+[ "$PLAN_DOC_MODE" != "clean" ] && exit 0
 
 # Detect default branch from remote HEAD, then fall back to common names
 DEFAULT_BRANCH=""
@@ -28,20 +28,19 @@ fi
 # Find merge base
 MERGE_BASE=$(git merge-base "$DEFAULT_BRANCH" HEAD)
 
-# Check for new files in docs/plans/
-NEW_PLANS=$(git diff --name-only --diff-filter=A "$MERGE_BASE" HEAD -- docs/plans/)
+# Check for plan docs added on this branch (ignore ones already on base)
+BRANCH_PLANS=$(git diff --name-only --diff-filter=A "$MERGE_BASE" HEAD -- docs/plans/)
 
-if [ -z "$NEW_PLANS" ]; then
-  cat <<'MSG'
-ERROR: No plan document found in docs/plans/
+if [ -n "$BRANCH_PLANS" ]; then
+  cat <<MSG
+ERROR: Plan documents added on this branch must be removed before pushing (mode: clean)
 
-Every feature branch must include a new plan file in docs/plans/
-that describes what this PR does and why.
+The following plan docs were added on this branch and must be removed:
+$BRANCH_PLANS
 
-Add a plan file and commit it before pushing.
+Run: git rm $BRANCH_PLANS && git commit -m "Remove plan docs before merge"
 MSG
   exit 1
 fi
 
-echo "Found plan document(s):"
-echo "$NEW_PLANS"
+echo "Clean mode: no branch-added plan documents. PASS."
