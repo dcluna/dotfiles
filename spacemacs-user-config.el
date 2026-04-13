@@ -560,154 +560,171 @@ Offers completion for existing tmux sessions."
 (defun dcl/evil-ex-run-current-line (arg)
   (interactive "p")
   (dcl/many-times-interactive-command arg var (evil-ex (concat "! " (current-line)))))
-(defun dcl/magit-branch-rebase ()
-  (interactive)
-  (let ((curbranch (magit-name-branch "HEAD"))
-        (var 0)
-        (created nil))
-    (while (and (not created) (< var 10))
-      (let ((branch-name (format "%s_before_rebase%s"
-                                 curbranch
-                                 (if (> var 0)
-                                     (format "_%d" var)
-                                   ""))))
-        (when (not (magit-branch-p branch-name))
-          (magit-branch branch-name curbranch)
-          (message (concat "Created branch " branch-name))
-          (setq created t)))
-      (setq var (1+ var)))
-    (unless created
-      (message "before-rebase branch was not created, remove a few of them"))))
+      (defun dcl/magit-branch-rebase ()
+        (interactive)
+        (let ((curbranch (magit-name-branch "HEAD"))
+              (var 0)
+              (created nil))
+          (while (and (not created) (< var 10))
+            (let ((branch-name (format "%s_before_rebase%s"
+                                       curbranch
+                                       (if (> var 0)
+                                           (format "_%d" var)
+                                         ""))))
+              (when (not (magit-branch-p branch-name))
+                (magit-branch branch-name curbranch)
+                (message (concat "Created branch " branch-name))
+                (setq created t)))
+            (setq var (1+ var)))
+          (unless created
+            (message "before-rebase branch was not created, remove a few of them"))))
 
-(defun git/get-branch-url ()
-  "Returns the name of the remote branch, without 'origin'."
-  (replace-regexp-in-string
-   "^origin\/"
-   ""
-   (substring-no-properties (magit-get-push-branch))))
+      (defun git/get-branch-url ()
+        "Returns the name of the remote branch, without 'origin'."
+        (replace-regexp-in-string
+         "^origin\/"
+         ""
+         (substring-no-properties (magit-get-push-branch))))
 
-;; taken from http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html
-(defun endless/visit-pull-request-url (base)
-  "visit the current branch's pr on github and compares it against BASE."
-  (interactive (list (magit-read-other-branch-or-commit "Compare with")))
-  (browse-url
-   (format "%s/compare/%s...%s"
-           (replace-regexp-in-string "git@github.com:" "https://www.github.com/"
-                                     (replace-regexp-in-string "\.git$" "" (magit-get "remote.origin.url")))
-           base
-           (git/get-branch-url))))
-
-
-(defun github/copy-branch-url ()
-  "Copies the current branch's url on Github. Does not check if it actually exists before copying."
-  (interactive)
-  (message
-   (kill-new
-    (format "%s/tree/%s"
-            (replace-regexp-in-string "git@github.com:" "https://github.com/"
-                                      (replace-regexp-in-string "\.git$" "" (magit-get "remote.origin.url")))
-            (git/get-branch-url)))))
+      ;; taken from http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html
+      (defun endless/visit-pull-request-url (base)
+        "visit the current branch's pr on github and compares it against BASE."
+        (interactive (list (magit-read-other-branch-or-commit "Compare with")))
+        (browse-url
+         (format "%s/compare/%s...%s"
+                 (replace-regexp-in-string "git@github.com:" "https://www.github.com/"
+                                           (replace-regexp-in-string "\.git$" "" (magit-get "remote.origin.url")))
+                 base
+                 (git/get-branch-url))))
 
 
-(defun github/copy-file-url (curbranch)
-  (interactive (list (magit-read-branch "Branch: ")))
-  (let* ((toplevel (replace-regexp-in-string "\/$" "" (magit-toplevel)))
-         (curbranch (or curbranch (magit-get-current-branch)))
-         (pathtofile (replace-regexp-in-string (regexp-quote toplevel) "" (buffer-file-name))))
-    (message
-     ;; format: $REMOTE-URL/blob/$BRANCH/$PATHTOFILE
-     (kill-new (format "%s/blob/%s%s#%s"
-                       (replace-regexp-in-string "\.git$" "" (magit-get "remote.origin.url"))
-                       curbranch
-                       pathtofile
-                       (mapconcat (lambda (pos) (format "L%s" (line-number-at-pos pos)))
-                                  (if (region-active-p)
-                                      (list (region-beginning) (region-end))
-                                    (list (point))) "-"))))))
+      (defun github/copy-branch-url ()
+        "Copies the current branch's url on Github. Does not check if it actually exists before copying."
+        (interactive)
+        (message
+         (kill-new
+          (format "%s/tree/%s"
+                  (replace-regexp-in-string "git@github.com:" "https://github.com/"
+                                            (replace-regexp-in-string "\.git$" "" (magit-get "remote.origin.url")))
+                  (git/get-branch-url)))))
 
-(defun dcl/worktree-origin-master ()
-  "Create a new worktree for the origin/master branch under .worktrees/."
-  (interactive)
-  (let ((default-directory (magit-toplevel))
-        (branch-name (read-string "New branch name: ")))
-    (magit-worktree-branch
-     (read-directory-name "Worktree directory: "
-                          default-directory
-                          nil
-                          nil
-                          (concat ".worktrees/" branch-name))
-     branch-name
-     (magit-read-branch-or-commit "Branching from: " "origin/master"))))
 
-(defun dcl/worktree-entries ()
-  "Return a list of plists describing each git worktree.
-Each plist has :branch and :directory keys."
-  (let* ((default-directory (magit-toplevel))
-         (raw-lines (magit-git-lines "worktree" "list" "--porcelain"))
-         (worktrees nil)
-         (current nil))
-    (dolist (line raw-lines)
-      (cond
-       ((string-prefix-p "worktree " line)
-        (when current
-          (unless (plist-get current :branch)
-            (plist-put current :branch "(unknown)"))
-          (push current worktrees))
-        (setq current (list :directory (substring line 9))))
-       ((string-prefix-p "branch " line)
-        (plist-put current :branch
-                   (replace-regexp-in-string "^refs/heads/" "" (substring line 7))))
-       ((string-equal "detached" line)
-        (plist-put current :branch "(detached HEAD)"))
-       ((string-equal "bare" line)
-        (plist-put current :branch "(bare)"))))
-    (when current
-      (unless (plist-get current :branch)
-        (plist-put current :branch "(unknown)"))
-      (push current worktrees))
-    (nreverse worktrees)))
+      (defun github/copy-file-url (curbranch)
+        (interactive (list (magit-read-branch "Branch: ")))
+        (let* ((toplevel (replace-regexp-in-string "\/$" "" (magit-toplevel)))
+               (curbranch (or curbranch (magit-get-current-branch)))
+               (pathtofile (replace-regexp-in-string (regexp-quote toplevel) "" (buffer-file-name))))
+          (message
+           ;; format: $REMOTE-URL/blob/$BRANCH/$PATHTOFILE
+           (kill-new (format "%s/blob/%s%s#%s"
+                             (replace-regexp-in-string "\.git$" "" (magit-get "remote.origin.url"))
+                             curbranch
+                             pathtofile
+                             (mapconcat (lambda (pos) (format "L%s" (line-number-at-pos pos)))
+                                        (if (region-active-p)
+                                            (list (region-beginning) (region-end))
+                                          (list (point))) "-"))))))
 
-(defun dcl/worktree-list ()
-  "Display all git worktrees for the current repository in a buffer.
-Shows branch name and directory in columns. Press RET or click to visit."
-  (interactive)
-  (let* ((worktrees (dcl/worktree-entries))
-         (max-branch (apply #'max (mapcar (lambda (wt) (length (plist-get wt :branch))) worktrees)))
-         (branch-width (max 12 (+ max-branch 2)))
-         (buf (get-buffer-create "*Worktrees*")))
-    (with-current-buffer buf
-      (let ((inhibit-read-only t))
-        (erase-buffer)
-        (insert (format (format "%%-%ds  %%s\n" branch-width) "Branch" "Directory"))
-        (insert (make-string (+ branch-width 2 40) ?-))
-        (insert "\n")
-        (dolist (wt worktrees)
-          (let ((start (point))
-                (dir (plist-get wt :directory))
-                (branch (plist-get wt :branch)))
-            (insert (format (format "%%-%ds  %%s\n" branch-width) branch dir))
-            (put-text-property start (point) 'worktree-dir dir))))
-      (goto-char (point-min))
-      (forward-line 2)
-      (setq buffer-read-only t)
-      (local-set-key (kbd "RET") #'dcl/worktree-list--visit)
-      (local-set-key (kbd "q") #'quit-window)
-      (local-set-key [mouse-1] #'dcl/worktree-list--click))
-    (pop-to-buffer buf)))
+      (defun dcl/worktree-origin-master ()
+        "Create a new worktree for the origin/master branch under .worktrees/."
+        (interactive)
+        (let ((default-directory (magit-toplevel))
+              (branch-name (read-string "New branch name: ")))
+          (magit-worktree-branch
+           (read-directory-name "Worktree directory: "
+                                default-directory
+                                nil
+                                nil
+                                (concat ".worktrees/" branch-name))
+           branch-name
+           (magit-read-branch-or-commit "Branching from: " "origin/master"))))
 
-(defun dcl/worktree-list--visit ()
-  "Visit the worktree directory on the current line."
-  (interactive)
-  (when-let ((dir (get-text-property (line-beginning-position) 'worktree-dir)))
-    (dired dir)))
+      (defun dcl/worktree-entries ()
+        "Return a list of plists describing each git worktree.
+      Each plist has :branch and :directory keys."
+        (let* ((default-directory (magit-toplevel))
+               (raw-lines (magit-git-lines "worktree" "list" "--porcelain"))
+               (worktrees nil)
+               (current nil))
+          (dolist (line raw-lines)
+            (cond
+             ((string-prefix-p "worktree " line)
+              (when current
+                (unless (plist-get current :branch)
+                  (plist-put current :branch "(unknown)"))
+                (push current worktrees))
+              (setq current (list :directory (substring line 9))))
+             ((string-prefix-p "branch " line)
+              (plist-put current :branch
+                         (replace-regexp-in-string "^refs/heads/" "" (substring line 7))))
+             ((string-equal "detached" line)
+              (plist-put current :branch "(detached HEAD)"))
+             ((string-equal "bare" line)
+              (plist-put current :branch "(bare)"))))
+          (when current
+            (unless (plist-get current :branch)
+              (plist-put current :branch "(unknown)"))
+            (push current worktrees))
+          (nreverse worktrees)))
 
-(defun dcl/worktree-list--click (event)
-  "Visit the worktree directory clicked on."
-  (interactive "e")
-  (let ((pos (posn-point (event-end event))))
-    (when pos
-      (goto-char pos)
-      (dcl/worktree-list--visit))))
+      (defun dcl/worktree-list ()
+        "Display all git worktrees for the current repository in a buffer.
+      Shows branch name and directory in columns. Press RET or click to visit."
+        (interactive)
+        (let* ((worktrees (dcl/worktree-entries))
+               (max-branch (apply #'max (mapcar (lambda (wt) (length (plist-get wt :branch))) worktrees)))
+               (branch-width (max 12 (+ max-branch 2)))
+               (buf (get-buffer-create "*Worktrees*")))
+          (with-current-buffer buf
+            (let ((inhibit-read-only t))
+              (erase-buffer)
+              (insert (format (format "%%-%ds  %%s\n" branch-width) "Branch" "Directory"))
+              (insert (make-string (+ branch-width 2 40) ?-))
+              (insert "\n")
+              (dolist (wt worktrees)
+                (let ((start (point))
+                      (dir (plist-get wt :directory))
+                      (branch (plist-get wt :branch)))
+                  (insert (format (format "%%-%ds  %%s\n" branch-width) branch dir))
+                  (put-text-property start (point) 'worktree-dir dir))))
+            (goto-char (point-min))
+            (forward-line 2)
+            (setq buffer-read-only t)
+            (local-set-key (kbd "RET") #'dcl/worktree-list--visit)
+            (local-set-key (kbd "q") #'quit-window)
+            (local-set-key [mouse-1] #'dcl/worktree-list--click))
+          (pop-to-buffer buf)))
+
+      (defun dcl/worktree-list--visit ()
+        "Visit the worktree directory on the current line."
+        (interactive)
+        (when-let ((dir (get-text-property (line-beginning-position) 'worktree-dir)))
+          (dired dir)))
+
+      (defun dcl/worktree-list--click (event)
+        "Visit the worktree directory clicked on."
+        (interactive "e")
+        (let ((pos (posn-point (event-end event))))
+          (when pos
+            (goto-char pos)
+            (dcl/worktree-list--visit))))
+
+      (defun dcl/plan-doc-toggle-mode ()
+        "Toggle plan-doc mode between enforce and clean for the current worktree.
+Requires the current directory to be inside a git repository."
+        (interactive)
+        (let* ((default-directory (or (magit-toplevel) default-directory))
+               (current (string-trim
+                         (shell-command-to-string "git config plan-doc.mode 2>/dev/null || echo enforce")))
+               (new-mode (if (string= current "clean") "enforce" "clean")))
+          ;; Ensure worktreeConfig extension is enabled
+          (unless (string= (string-trim
+                             (shell-command-to-string
+                              "git config extensions.worktreeConfig 2>/dev/null"))
+                            "true")
+            (shell-command "git config extensions.worktreeConfig true"))
+          (shell-command (format "git config --worktree plan-doc.mode %s" new-mode))
+          (message "Plan doc mode: %s → %s" current new-mode)))
       (defun magit-history-checkout ()
         (interactive)
         (magit-checkout (magit-completing-read "Branch: " (magit-history-branches))))

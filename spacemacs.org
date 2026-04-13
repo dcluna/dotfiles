@@ -1611,6 +1611,23 @@
           (when pos
             (goto-char pos)
             (dcl/worktree-list--visit))))
+
+      (defun dcl/plan-doc-toggle-mode ()
+        "Toggle plan-doc mode between enforce and clean for the current worktree.
+Requires the current directory to be inside a git repository."
+        (interactive)
+        (let* ((default-directory (or (magit-toplevel) default-directory))
+               (current (string-trim
+                         (shell-command-to-string "git config plan-doc.mode 2>/dev/null || echo enforce")))
+               (new-mode (if (string= current "clean") "enforce" "clean")))
+          ;; Ensure worktreeConfig extension is enabled
+          (unless (string= (string-trim
+                             (shell-command-to-string
+                              "git config extensions.worktreeConfig 2>/dev/null"))
+                            "true")
+            (shell-command "git config extensions.worktreeConfig true"))
+          (shell-command (format "git config --worktree plan-doc.mode %s" new-mode))
+          (message "Plan doc mode: %s → %s" current new-mode)))
     #+END_SRC
 
     #+BEGIN_SRC emacs-lisp
