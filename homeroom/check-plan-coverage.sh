@@ -3,6 +3,14 @@
 # Uses an AI agent CLI (configurable via env vars) to compare plan vs diff.
 set -euo pipefail
 
+# Read per-worktree mode (default: enforce)
+PLAN_DOC_MODE=$(git config plan-doc.mode 2>/dev/null || echo "enforce")
+
+if [ "$PLAN_DOC_MODE" = "clean" ]; then
+  echo "Clean mode: skipping plan coverage check."
+  exit 0
+fi
+
 AGENT_CMD="${PLAN_CHECK_AGENT:-claude}"
 AGENT_FLAGS="${PLAN_CHECK_AGENT_FLAGS:--p}"
 
