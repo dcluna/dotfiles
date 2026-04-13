@@ -5,27 +5,6 @@ set -euo pipefail
 # Read per-worktree mode (default: enforce)
 PLAN_DOC_MODE=$(git config plan-doc.mode 2>/dev/null || echo "enforce")
 
-if [ "$PLAN_DOC_MODE" = "clean" ]; then
-  # In clean mode: ensure NO plan docs exist in the branch
-  # Check for any docs/plans/ files that are tracked in HEAD
-  TRACKED_PLANS=$(git ls-tree -r --name-only HEAD -- docs/plans/ 2>/dev/null || true)
-
-  if [ -n "$TRACKED_PLANS" ]; then
-    cat <<MSG
-ERROR: Plan documents still tracked in git (mode: clean)
-
-The following plan docs must be removed before pushing:
-$TRACKED_PLANS
-
-Run: git rm docs/plans/* && git commit -m "Remove plan docs before merge"
-MSG
-    exit 1
-  fi
-
-  echo "Clean mode: no plan documents in git. PASS."
-  exit 0
-fi
-
 # Detect default branch from remote HEAD, then fall back to common names
 DEFAULT_BRANCH=""
 REMOTE_HEAD=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||')
@@ -47,6 +26,27 @@ fi
 
 # Find merge base
 MERGE_BASE=$(git merge-base "$DEFAULT_BRANCH" HEAD)
+
+if [ "$PLAN_DOC_MODE" = "clean" ]; then
+  # In clean mode: ensure no NEW plan docs were added on this branch
+  # (docs already on the base branch are ignored)
+  BRANCH_PLANS=$(git diff --name-only --diff-filter=A "$MERGE_BASE" HEAD -- docs/plans/)
+
+  if [ -n "$BRANCH_PLANS" ]; then
+    cat <<MSG
+ERROR: Plan documents added on this branch must be removed before pushing (mode: clean)
+
+The following plan docs were added on this branch and must be removed:
+$BRANCH_PLANS
+
+Run: git rm $BRANCH_PLANS && git commit -m "Remove plan docs before merge"
+MSG
+    exit 1
+  fi
+
+  echo "Clean mode: no branch-added plan documents in git. PASS."
+  exit 0
+fi
 
 # Check for new files in docs/plans/
 NEW_PLANS=$(git diff --name-only --diff-filter=A "$MERGE_BASE" HEAD -- docs/plans/)
