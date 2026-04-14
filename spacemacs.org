@@ -645,6 +645,7 @@
 
 
     (setq straight-packages '(
+                              (majutsu :host github :repo "0WD0/majutsu")
                               agent-shell
                               shell-maker
                               acp
@@ -4292,6 +4293,12 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
         :defer t
         :ensure t
         :init (difftastic-bindings-mode))
+   #+end_src
+** Majutsu (Magit for jujutsu/jj)
+
+   #+begin_src emacs-lisp
+     (use-package majutsu
+       :straight (:host github :repo "0WD0/majutsu"))
    #+end_src
 
 ** LSP

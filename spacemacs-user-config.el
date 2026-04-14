@@ -2599,6 +2599,8 @@ _u_pdate
    :defer t
    :ensure t
    :init (difftastic-bindings-mode))
+(use-package majutsu
+  :straight (:host github :repo "0WD0/majutsu"))
 (use-package lsp-tailwindcss
  :after lsp-mode
  :init (setq lsp-tailwindcss-experimental-class-regex ["tw`([^`]*)" "tw=\"([^\"]*)" "tw={\"([^\"}]*)" "tw\\.\\w+`([^`]*)" "tw\\(.*?\\)`([^`]*)"])

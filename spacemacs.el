@@ -20,6 +20,7 @@
 
 
 (setq straight-packages '(
+                          (majutsu :host github :repo "0WD0/majutsu")
                           agent-shell
                           shell-maker
                           acp
