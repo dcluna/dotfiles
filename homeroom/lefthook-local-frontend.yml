@@ -1,0 +1,109 @@
+colors: false
+no_tty: true
+
+pre-commit:
+  parallel: true
+  commands:
+    prettier:
+      tags:
+        - formatting
+        - style
+      glob: "*.{ts,tsx,js,jsx,json,gql,graphql}"
+      exclude: "src/app2/api/graphql.ts|src/app2/api/type-metadata.ts|**/generated/*.generated.tsx|src/app2/api/account/clientVersion.ts"
+      skip:
+        - merge
+        - rebase
+      run: npx prettier --check {staged_files}
+
+    eslint:
+      tags:
+        - linting
+        - code-quality
+      glob: "*.{js,jsx}"
+      exclude: "node_modules/**"
+      skip:
+        - merge
+        - rebase
+      run: npx eslint {staged_files}
+
+    tslint:
+      tags:
+        - linting
+        - code-quality
+      glob: "*.{ts,tsx}"
+      exclude: "src/app2/api/graphql.ts|src/app2/api/type-metadata.ts|**/generated/*.generated.tsx|src/app2/api/account/clientVersion.ts"
+      skip:
+        - merge
+        - rebase
+      run: npx tslint -c tslint.json {staged_files}
+
+    trailing_whitespace:
+      tags:
+        - formatting
+        - style
+      glob: "*"
+      exclude: "node_modules/**|dist/**|*.generated.tsx"
+      skip:
+        - merge
+        - rebase
+      run: git diff --check {staged_files}
+
+    no_debugger:
+      tags:
+        - qa
+      glob: "*.{ts,tsx,js,jsx}"
+      skip:
+        - merge
+        - rebase
+      run: |
+        if grep -nE '\bdebugger\b' {staged_files}; then
+          echo "Found debugger statements in staged files"
+          exit 1
+        fi
+
+    no_console_log:
+      tags:
+        - qa
+      glob: "*.{ts,tsx}"
+      exclude: "src/app2/api/urql.ts|**/generated/*.generated.tsx"
+      skip:
+        - merge
+        - rebase
+      run: |
+        if grep -nE '\bconsole\.(log|debug)\b' {staged_files}; then
+          echo "Found console.log/debug statements in staged files"
+          exit 1
+        fi
+      on_fail: warn
+
+    yaml_lint:
+      tags:
+        - linting
+        - style
+      glob: "*.{yml,yaml}"
+      skip:
+        - merge
+        - rebase
+      run: yamllint {staged_files}
+      on_fail: warn
+
+pre-push:
+  parallel: true
+  commands:
+    protected_branches:
+      tags:
+        - safety
+        - git
+      run: |
+        BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+        PROTECTED_BRANCHES="main master develop release"
+        if [[ $PROTECTED_BRANCHES =~ $BRANCH ]]; then
+          echo "Pushing to protected branch '$BRANCH' is not allowed"
+          exit 1
+        fi
+
+    typecheck:
+      tags:
+        - qa
+        - types
+      run: npx tsc --noEmit
