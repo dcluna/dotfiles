@@ -107,3 +107,52 @@ pre-push:
         - qa
         - types
       run: npx tsc --noEmit
+
+post-checkout:
+  quiet: true
+  commands:
+    bootstrap-lefthook-local:
+      run: |
+        git_dir="$(git rev-parse --git-dir)"
+        git_common_dir="$(git rev-parse --git-common-dir)"
+
+        if [ "$git_dir" = "$git_common_dir" ]; then
+          exit 0
+        fi
+
+        main_checkout_dir="$(dirname "$git_common_dir")"
+        source_local_config="$main_checkout_dir/lefthook-local.yml"
+
+        if [ ! -e "$source_local_config" ]; then
+          exit 0
+        fi
+
+        if [ ! -e lefthook-local.yml ]; then
+          ln -s "$source_local_config" lefthook-local.yml
+        fi
+
+        if [ "$LEFTHOOK_BOOTSTRAPPED_POST_CHECKOUT" != "1" ]; then
+          export LEFTHOOK_BOOTSTRAPPED_POST_CHECKOUT=1
+          lefthook run post-checkout {1} {2} {3}
+        fi
+
+    copy-env-files:
+      tags:
+        - worktree
+      run: |
+        if [ ! -e "$MAIN_GIT_DIR" ]; then
+          exit 0
+        fi
+
+        git_dir="$(git rev-parse --git-dir)"
+        git_common_dir="$(git rev-parse --git-common-dir)"
+
+        if [ "$git_dir" = "$git_common_dir" ]; then
+          exit 0
+        fi
+
+        cp "$MAIN_GIT_DIR/.env"* . 2>/dev/null || true
+        cp "$MAIN_GIT_DIR/.mcp"* . 2>/dev/null || true
+        if command -v direnv &>/dev/null; then
+          direnv allow
+        fi
