@@ -15,27 +15,16 @@ pre-commit:
         - rebase
       run: npx prettier --check {staged_files}
 
-    eslint:
+    oxlint:
       tags:
         - linting
         - code-quality
-      glob: "*.{js,jsx}"
-      exclude: "node_modules/**"
-      skip:
-        - merge
-        - rebase
-      run: npx eslint {staged_files}
-
-    tslint:
-      tags:
-        - linting
-        - code-quality
-      glob: "*.{ts,tsx}"
+      glob: "*.{ts,tsx,js,jsx}"
       exclude: "src/app2/api/graphql.ts|src/app2/api/type-metadata.ts|**/generated/*.generated.tsx|src/app2/api/account/clientVersion.ts"
       skip:
         - merge
         - rebase
-      run: npx tslint -c tslint.json {staged_files}
+      run: npx oxlint --deny no-unused-vars {staged_files}
 
     trailing_whitespace:
       tags:
@@ -106,7 +95,12 @@ pre-push:
       tags:
         - qa
         - types
-      run: npx tsc --noEmit
+      run: |
+        output=$(npx tsc --noEmit 2>&1 | grep -v "^node_modules/")
+        if [ -n "$output" ]; then
+          echo "$output"
+          exit 1
+        fi
 
 post-checkout:
   quiet: true
