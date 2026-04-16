@@ -69,6 +69,26 @@ pre-commit:
         - rebase
       run: check-no-specs-in-app
 
+    flipper_outside_model:
+      tags:
+        - qa
+        - flipper
+      skip:
+        - merge
+        - rebase
+      glob: "*.rb"
+      run: ast-grep scan --rule "$DOTFILES_DIR/ast-grep/rules/flipper-outside-model.yml" --globs {staged_files}
+
+    rails_logger_block_form:
+      tags:
+        - qa
+        - rails
+      skip:
+        - merge
+        - rebase
+      glob: "*.rb"
+      run: ast-grep scan --rule "$DOTFILES_DIR/ast-grep/rules/rails-logger-block-form.yml" --globs {staged_files}
+
     rubocop-debugger:
       tags:
         - qa

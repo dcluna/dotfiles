@@ -1,0 +1,18 @@
+id: flipper-outside-model
+language: ruby
+severity: error
+ignores:
+  - app/models/**/*.rb
+message: >-
+  Flipper.enabled? should not be called outside app/models/.
+  Delegate to a model method instead (e.g., site.some_flag?).
+rule:
+  all:
+    - kind: call
+    - has:
+        kind: constant
+        regex: "^Flipper$"
+        stopBy: end
+    - has:
+        field: method
+        regex: "^enabled"

@@ -1,0 +1,33 @@
+id: rails-logger-block-form
+language: ruby
+severity: error
+message: >-
+  Use block form for Rails.logger calls to avoid unnecessary string
+  interpolation when the log level is suppressed.
+  BAD:  Rails.logger.info("msg")
+  GOOD: Rails.logger.info { "msg" }
+rule:
+  all:
+    - kind: call
+    - has:
+        field: receiver
+        kind: call
+        all:
+          - has:
+              field: receiver
+              kind: constant
+              regex: "^Rails$"
+          - has:
+              field: method
+              regex: "^logger$"
+    - has:
+        field: method
+        regex: "^(debug|info|warn|error|fatal)$"
+    - has:
+        field: arguments
+        kind: argument_list
+    - not:
+        has:
+          field: block
+          kind: block
+          stopBy: end
