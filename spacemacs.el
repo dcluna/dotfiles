@@ -193,7 +193,8 @@ call the original function `package-activate'."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     windows-scripts
+     vagrant
+     ;; windows-scripts
      kubernetes
      ;; openai
      ;; (elfeed :variables rmh-elfeed-org-files (list (expand-file-name "~/dotfiles/elfeed.org")))
