@@ -141,6 +141,7 @@ in
     pkgs.sentry-cli
     pkgs.oauth2c
     pkgs.pandoc
+    pkgs.jujutsu
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
