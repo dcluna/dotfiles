@@ -31,15 +31,11 @@ Any time you write a SQL query in conversation — whether or not you execute it
    ```
    If this returns `nil`, skip logging silently for the rest of the conversation.
 
-2. If enabled, ask the user: **"Want me to log queries to an org file?"**
-
-3. If yes, call setup:
+2. If enabled, call setup immediately — do NOT ask the user in chat first:
    ```bash
    emacsclient --eval '(dcl/claude-query-log-setup)'
    ```
-   This prompts the user in Emacs for a topic and connection. If it returns a file path, setup succeeded. If it errors (user cancelled with C-g), note this and retry on the next query.
-
-4. If the user says no, skip logging for the conversation. If they later ask to start logging, call setup.
+   This prompts the user in Emacs for a topic and connection. If it returns a file path, setup succeeded. If the user cancels in Emacs (C-g), treat that as "no" for this query and retry on the next query.
 
 ### Every query (after setup succeeds)
 
