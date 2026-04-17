@@ -29,7 +29,7 @@ fi
 MERGE_BASE=$(git merge-base "$DEFAULT_BRANCH" HEAD)
 
 # Check for plan docs added on this branch (ignore ones already on base)
-BRANCH_PLANS=$(git diff --name-only --diff-filter=A "$MERGE_BASE" HEAD -- docs/plans/)
+BRANCH_PLANS=$(git diff --name-only --diff-filter=A "$MERGE_BASE" HEAD -- docs/)
 
 if [ -n "$BRANCH_PLANS" ]; then
   cat <<MSG
