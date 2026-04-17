@@ -32,3 +32,17 @@ function jsonl_to_json() {
 function json_to_jsonl() {
     jq -c '.[]' "$1"
 }
+
+# Show files under docs/ added only in the current branch
+function git-docs-added() {
+    local base current
+    current=$(git branch --show-current) || return 1
+    base=$(git config --get "branch.${current}.merge" 2>/dev/null | sed 's|refs/heads/||')
+    if [[ -z "$base" ]]; then
+        for b in develop main master; do
+            git rev-parse --verify "$b" &>/dev/null && base=$b && break
+        done
+    fi
+    [[ -z "$base" ]] && echo "Could not determine base branch" >&2 && return 1
+    git diff --name-only --diff-filter=A "$(git merge-base HEAD "$base")" HEAD -- docs/
+}
