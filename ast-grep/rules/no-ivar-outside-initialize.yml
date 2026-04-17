@@ -1,0 +1,14 @@
+id: no-ivar-outside-initialize
+language: ruby
+rule:
+  kind: instance_variable
+  not:
+    inside:
+      kind: method
+      has:
+        field: name
+        regex: "^initialize$"
+        stopBy: end
+      stopBy: end
+message: "Use reader/accessor methods instead of instance variables outside initialize"
+severity: error
