@@ -1,0 +1,14 @@
+id: no-dump-db-metadata
+language: ruby
+severity: error
+files:
+  - spec/**/*_spec.rb
+message: >-
+  Remove dump_db metadata from specs before committing — it is a debugging
+  aid, not for CI.
+rule:
+  kind: pair
+  has:
+    kind: hash_key_symbol
+    regex: "^dump_db$"
+    stopBy: end
