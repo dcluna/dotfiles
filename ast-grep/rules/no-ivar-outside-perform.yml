@@ -1,6 +1,6 @@
-id: no-ivar-outside-initialize
+id: no-ivar-outside-perform
 language: ruby
-ignores:
+files:
   - app/workers/**/*.rb
   - app/jobs/**/*.rb
 rule:
@@ -10,8 +10,8 @@ rule:
       kind: method
       has:
         field: name
-        regex: "^initialize$"
+        regex: "^(initialize|perform)$"
         stopBy: end
       stopBy: end
-message: "Use reader/accessor methods instead of instance variables outside initialize"
+message: "Use reader/accessor methods instead of instance variables outside initialize/perform"
 severity: error
