@@ -1,5 +1,7 @@
 id: no-ivar-outside-initialize
 language: ruby
+files:
+  - app/**/*.rb
 ignores:
   - app/workers/**/*.rb
   - app/jobs/**/*.rb
