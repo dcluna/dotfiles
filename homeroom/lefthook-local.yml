@@ -89,6 +89,16 @@ pre-commit:
       glob: "*.rb"
       run: ast-grep scan --rule "$DOTFILES_DIR/ast-grep/rules/no-ivar-outside-initialize.yml" --globs {staged_files}
 
+    no_ivar_outside_perform:
+      tags:
+        - qa
+        - code-quality
+      skip:
+        - merge
+        - rebase
+      glob: "*.rb"
+      run: ast-grep scan --rule "$DOTFILES_DIR/ast-grep/rules/no-ivar-outside-perform.yml" --globs {staged_files}
+
     no_dump_db_metadata:
       tags:
         - qa
