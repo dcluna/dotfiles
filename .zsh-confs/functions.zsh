@@ -46,7 +46,9 @@ function git-branch-files() {
         esac
     done
 
+    local inferred=0
     if [[ -z "$base" ]]; then
+        inferred=1
         local current
         current=$(git branch --show-current) || return 1
         base=$(git config --get "branch.${current}.merge" 2>/dev/null | sed 's|refs/heads/||')
@@ -57,6 +59,7 @@ function git-branch-files() {
         fi
     fi
     [[ -z "$base" ]] && echo "Could not determine base branch" >&2 && return 1
+    (( inferred )) && echo "Using merge base: $base" >&2
 
     local -a diff_args=(--name-only)
     [[ -n "$filter" ]] && diff_args+=(--diff-filter="$filter")
