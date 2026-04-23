@@ -162,6 +162,7 @@
        ;; packages then consider to create a layer, you can also put the
        ;; configuration in `dotspacemacs/config'.
        dotspacemacs-additional-packages `(
+                                          comment-dwim-2
                                           magit-tbdiff
                                           just-mode
                                           copilot
@@ -4301,6 +4302,14 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
      (use-package majutsu
        :straight (:host github :repo "0WD0/majutsu"))
    #+end_src
+** Comment-dwim-2
+
+    #+begin_src emacs-lisp
+      (use-package comment-dwim-2
+        :ensure t
+        :bind
+        ("M-;" . comment-dwim-2))
+    #+end_src
 
 ** LSP
 *** Tailwind CSS
