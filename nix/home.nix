@@ -286,6 +286,10 @@ in
     if [ ! -d "$HOME/.emacs-kick" ]; then
       ${pkgs.git}/bin/git clone https://github.com/LionyxML/emacs-kick.git "$HOME/.emacs-kick"
     fi
+
+    if [ ! -d "$HOME/.emacs-meow-kick" ]; then
+      ${pkgs.git}/bin/git clone https://github.com/dcluna/emacs-meow-kick.git "$HOME/.emacs-meow-kick"
+    fi
   '';
 
   home.sessionVariables = {
