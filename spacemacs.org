@@ -2068,6 +2068,35 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
 
       (setq magit-section-initial-visibility-alist '((untracked . hide)
                                                      (stashes . hide)))
+
+      (defcustom dcl/protected-branches '("master" "main" "develop" "staging" "production")
+        "Branches that `magit-push-matching' should never push."
+        :type '(repeat string)
+        :group 'magit)
+
+      (defun dcl/magit-push-matching (remote &optional args)
+        "Like `magit-push-matching' but skips protected branches."
+        (interactive (list (magit-read-remote "Push matching branches to" nil t)
+                           (magit-push-arguments)))
+        (let* ((local-branches (magit-list-local-branch-names))
+               (remote-branches (magit-list-remote-branch-names remote))
+               (remote-stripped (mapcar (lambda (b)
+                                         (string-remove-prefix (concat remote "/") b))
+                                       remote-branches))
+               (matching (seq-intersection local-branches remote-stripped))
+               (safe (seq-remove (lambda (b) (member b dcl/protected-branches)) matching))
+               (skipped (seq-intersection matching dcl/protected-branches)))
+          (when skipped
+            (message "Skipping protected branches: %s" (string-join skipped ", ")))
+          (if safe
+              (progn
+                (run-hooks 'magit-credential-hook)
+                (magit-run-git-async "push" "-v" args remote
+                                     (mapcar (lambda (b) (format "refs/heads/%s:refs/heads/%s" b b))
+                                             safe)))
+            (user-error "No non-protected matching branches to push"))))
+
+      (advice-add 'magit-push-matching :override #'dcl/magit-push-matching)
     #+END_SRC
 
 ** Major modes
