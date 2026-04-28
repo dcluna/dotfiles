@@ -17,6 +17,19 @@ let
 
     vendorHash = "sha256-BduH6Vu+p5iFe1N5svZRsb9QuFlhf7usBjMsOtRn2nQ=";
   };
+  oauth2c-raw = pkgs.buildGoModule {
+    pname = "oauth2c";
+    version = "0-unstable-print-raw-json";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "dcluna";
+      repo = "oauth2c";
+      rev = "print-raw-json";
+      hash = "sha256-PCoFkfuo9MIetZSLeJhpgs+uggcIgcjg31CA7UBkNJw=";
+    };
+
+    vendorHash = "sha256-ivxir80E7Gs/oYJ2BkVHyT3xw0aUI837pD7b1D5v5eE=";
+  };
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -139,7 +152,7 @@ in
     pkgs.doggo
     pkgs.netlify-cli
     pkgs.sentry-cli
-    pkgs.oauth2c
+    oauth2c-raw
     pkgs.pandoc
     pkgs.jujutsu
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
