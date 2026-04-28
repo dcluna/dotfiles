@@ -155,6 +155,7 @@ in
     oauth2c-raw
     pkgs.pandoc
     pkgs.jujutsu
+    pkgs.pi-coding-agent
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync

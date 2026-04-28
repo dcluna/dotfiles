@@ -12,20 +12,15 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      # system = "x86_64-linux";
-      system = builtins.currentSystem;
-      pkgs = nixpkgs.legacyPackages.${system};
+      mkHome = system:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [ ./home.nix ];
+        };
     in {
-      homeConfigurations."dcluna" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-        # modules = [ /home/daniel.luna/dotfiles/nix/home.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+      homeConfigurations = {
+        dcluna-mac = mkHome "aarch64-darwin";
+        dcluna-linux = mkHome "x86_64-linux";
       };
     };
 }

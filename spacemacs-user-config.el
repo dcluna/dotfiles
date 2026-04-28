@@ -2584,10 +2584,14 @@ _u_pdate
   (with-eval-after-load 'magit
     (ai-code-magit-setup-transients)))
 (defun dotfiles/home-manager-switch ()
-  "Run home-manager switch from the dotfiles directory."
+  "Run home-manager switch using the current system flake from the dotfiles directory."
   (interactive)
-  (let ((default-directory "~/ghq/github.com/dcluna/dotfiles/"))
-    (async-shell-command "nix run home-manager/master -- switch -f nix/home.nix -b backup"
+  (let ((default-directory "~/ghq/github.com/dcluna/dotfiles/")
+        (flake-target (pcase system-type
+                        ('darwin "dcluna-mac")
+                        ('gnu/linux "dcluna-linux")
+                        (_ (user-error "Unsupported system type: %s" system-type)))))
+    (async-shell-command (format "home-manager switch --flake ./nix#%s -b backup" flake-target)
                          "*home-manager-switch*" "*home-manager-switch-errors*")))
 
 (evil-leader/set-key "ohs" 'dotfiles/home-manager-switch)
