@@ -19,13 +19,13 @@ let
   };
   oauth2c-raw = pkgs.buildGoModule {
     pname = "oauth2c";
-    version = "0-unstable-print-raw-json";
+    version = "0-unstable-token-response-extra-fields";
 
     src = pkgs.fetchFromGitHub {
-      owner = "dcluna";
+      owner = "SecureAuthCorp";
       repo = "oauth2c";
-      rev = "print-raw-json";
-      hash = "sha256-PCoFkfuo9MIetZSLeJhpgs+uggcIgcjg31CA7UBkNJw=";
+      rev = "token-response-extra-fields";
+      hash = "sha256-9oTCfOhFGngWhZ+1FGB17p78IxU4LyvI4J5C4bYsYfM=";
     };
 
     vendorHash = "sha256-ivxir80E7Gs/oYJ2BkVHyT3xw0aUI837pD7b1D5v5eE=";
