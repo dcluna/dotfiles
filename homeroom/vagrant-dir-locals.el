@@ -106,7 +106,7 @@ When called with a prefix argument (C-u), prompt whether to use Vagrant."
                                  (let* ((rel-path (dcl/vagrant-relative-path
                                                    (locate-dominating-file default-directory "Gemfile")))
                                         (default-directory vagrantfile-dir)
-                                        (vagrant-cmd (format "vagrant ssh -c \"cd %s && %s\""
+                                        (vagrant-cmd (format "vagrant ssh -c \"cd %s && direnv exec . %s\""
                                                              (shell-quote-argument rel-path)
                                                              (replace-regexp-in-string "\"" "\\\\\"" cmd))))
                                    (funcall orig-fn vagrant-cmd))
