@@ -2514,7 +2514,30 @@ _u_pdate
   (add-hook 'diff-mode-hook
             (lambda ()
               (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
-                (evil-emacs-state)))))
+                (evil-emacs-state))))
+
+  ;; Redirect .agent-shell/ data for projects under a configured
+  ;; directory to a separate transcripts directory.
+  (defcustom dcl/agent-shell-projects-dir (expand-file-name "~/Projects/")
+    "Root directory whose projects get transcript redirection."
+    :type 'directory
+    :group 'agent-shell)
+
+  (defcustom dcl/agent-shell-transcripts-dir (expand-file-name "~/Projects/homeroom-transcripts/")
+    "Directory where redirected .agent-shell/ data is stored."
+    :type 'directory
+    :group 'agent-shell)
+
+  (defun dcl/agent-shell-dot-subdir-redirected (subdir)
+    "Resolve agent-shell SUBDIR, redirecting projects to `dcl/agent-shell-transcripts-dir'."
+    (let ((cwd (agent-shell-cwd)))
+      (if (string-prefix-p dcl/agent-shell-projects-dir cwd)
+          (let ((project-name (file-name-nondirectory (directory-file-name cwd))))
+            (expand-file-name (file-name-concat project-name ".agent-shell" subdir)
+                              dcl/agent-shell-transcripts-dir))
+        (agent-shell--dot-subdir-in-repo subdir))))
+
+  (setopt agent-shell-dot-subdir-function #'dcl/agent-shell-dot-subdir-redirected))
 ;; :config
 ;; ;; For login-based authentication (default):
 ;; (setq agent-shell-anthropic-authentication
