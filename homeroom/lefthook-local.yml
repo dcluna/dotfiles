@@ -244,6 +244,9 @@ post-checkout:
           touch .projectile
           cp $MAIN_GIT_DIR/.mcp* .
           cp $MAIN_GIT_DIR/.env* .
+          # Rewrite API_DIR in .envrc to match this worktree's dirname
+          WORKTREE_BASENAME=$(basename "$PWD")
+          sed -i '' "s|export API_DIR=\"/vagrant/api\"|export API_DIR=\"/vagrant/${WORKTREE_BASENAME}\"|" .envrc
           direnv allow
           cp $MAIN_GIT_DIR/config/application.yml ./config/application.yml
           ln -s $MAIN_GIT_DIR/.dir-locals.el .dir-locals.el
