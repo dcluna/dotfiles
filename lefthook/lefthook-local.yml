@@ -95,7 +95,7 @@ pre-commit:
         - merge
         - rebase
       glob: "*.rb"
-      run: rubocop --require "$DOTFILES_DIR/rubocop/cops/no_complex_initialize_assignment.rb" --only CustomCops/NoComplexInitializeAssignment {staged_files}
+      run: rubocop --require "$DOTFILES_DIR/rubocop/cops/no_complex_initialize_assignment.rb" --config ~/.config/rubocop/config.yml {staged_files}
 
     rubocop-debugger:
       tags:
