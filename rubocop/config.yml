@@ -9,6 +9,14 @@ CustomCops/NoComplexInitializeAssignment:
   Include:
     - "app/**/*.rb"
 
+CustomCops/NoIvarOutsideEntryMethod:
+  Enabled: true
+  EntryMethods:
+    - initialize
+    - perform
+  Include:
+    - "app/**/*.rb"
+
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   EnforcedStyle: space
