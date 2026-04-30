@@ -13,5 +13,5 @@ rule:
         regex: "^(initialize|perform)$"
         stopBy: end
       stopBy: end
-message: "Use reader/accessor methods instead of instance variables outside initialize/perform"
+message: "Use reader/accessor methods instead of instance variables outside initialize/perform. Exception: memoization patterns like `def foo; @foo ||= ...; end` where the ivar matches the method name are acceptable and do not need correction."
 severity: error
