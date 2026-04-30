@@ -201,6 +201,7 @@ in
     ".bashrc.d/atuin.sh".source = ../atuin.bash;
     ".bashrc.d/emacs.sh".source = ../emacs.bash;
     ".opencode.json".source = ../opencode/opencode.json;
+    ".config/rubocop/config.yml".source = mkSymlink "rubocop/config.yml";
     # ".claude-code-router/config.json".source = ./claudecode/router.json;
 
     # ".tmux/plugins/tpm" = {

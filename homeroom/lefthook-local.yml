@@ -118,6 +118,16 @@ pre-commit:
       glob: "*.rb"
       run: ast-grep scan --rule "$DOTFILES_DIR/ast-grep/rules/rails-logger-block-form.yml" --globs {staged_files}
 
+    no_complex_initialize_assignment:
+      tags:
+        - qa
+        - code-quality
+      skip:
+        - merge
+        - rebase
+      glob: "*.rb"
+      run: rubocop --require "$DOTFILES_DIR/rubocop/cops/no_complex_initialize_assignment.rb" --only CustomCops/NoComplexInitializeAssignment {staged_files}
+
     rubocop-debugger:
       tags:
         - qa

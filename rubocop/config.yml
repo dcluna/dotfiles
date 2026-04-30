@@ -1,0 +1,4 @@
+CustomCops/NoComplexInitializeAssignment:
+  Enabled: true
+  Include:
+    - "app/**/*.rb"

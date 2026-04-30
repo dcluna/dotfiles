@@ -87,6 +87,16 @@ pre-commit:
       run: erb_lint -a {staged_files}
       stage_fixed: true
 
+    no_complex_initialize_assignment:
+      tags:
+        - qa
+        - code-quality
+      skip:
+        - merge
+        - rebase
+      glob: "*.rb"
+      run: rubocop --require "$DOTFILES_DIR/rubocop/cops/no_complex_initialize_assignment.rb" --only CustomCops/NoComplexInitializeAssignment {staged_files}
+
     rubocop-debugger:
       tags:
         - qa
