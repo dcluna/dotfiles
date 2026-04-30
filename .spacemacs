@@ -228,6 +228,8 @@ static char *gnus-pointer[] = {
    '(rspec-command-options "--format documentation --require pry-rescue/rspec")
    '(rspec-spec-command "rspec")
    '(rspec-use-spring-when-possible t)
+   '(rubocop-autocorrect-command
+     "rubocop -a --config ~/.config/rubocop/config.yml --require $DOTFILES_DIR/rubocop/cops/no_complex_initialize_assignment.rb --format emacs")
    '(rustic-ansi-faces
      ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
    '(session-use-package t)

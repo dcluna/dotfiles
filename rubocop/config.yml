@@ -2,3 +2,15 @@ CustomCops/NoComplexInitializeAssignment:
   Enabled: true
   Include:
     - "app/**/*.rb"
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+  EnforcedStyle: space
+
+Layout/SpaceInsideBlockBraces:
+  Enabled: true
+  EnforcedStyle: space
+
+Layout/SpaceBeforeBlockBraces:
+  Enabled: true
+  EnforcedStyle: space
