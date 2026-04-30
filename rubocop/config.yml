@@ -17,6 +17,12 @@ CustomCops/NoIvarOutsideEntryMethod:
   Include:
     - "app/**/*.rb"
 
+CustomCops/RescueRequiresReraise:
+  Enabled: true
+  RaiseGuard: "TestOnlyBehavior.raise_errors?"
+  Include:
+    - "app/**/*.rb"
+
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   EnforcedStyle: space
