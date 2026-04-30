@@ -67,3 +67,5 @@ export PATH="$HOME/code/lastpass-cli:$PATH"
 export WINEARCH="win32"
 
 export PATH="$HOME/.emacs.spacemacs/straight/repos/meta-agent-shell/bin:$PATH"
+
+export DOTFILES_DIR="$HOME/ghq/github.com/dcluna/dotfiles"
