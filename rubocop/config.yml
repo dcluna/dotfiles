@@ -1,3 +1,6 @@
+inherit_from:
+  - config.local.yml
+
 AllCops:
   DisabledByDefault: true
 
