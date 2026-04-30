@@ -89,7 +89,10 @@ module CustomCops
       # Simple literal types
       return true if ALLOWED_RHS_TYPES.include?(rhs.type)
 
-      # Local variable reference (ideally matching a parameter)
+      # Empty array [] or empty hash {}
+      return true if %i[array hash].include?(rhs.type) && rhs.children.empty?
+
+      # Local variable reference matching a parameter
       if rhs.type == :lvar
         return true if param_names.include?(rhs.children[0])
       end

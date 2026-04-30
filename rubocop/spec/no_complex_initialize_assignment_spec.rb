@@ -48,6 +48,52 @@ RSpec.describe CustomCops::NoComplexInitializeAssignment do
     end
   end
 
+  context "when initialize assigns empty array or hash" do
+    it "allows empty array" do
+      expect_no_offenses(<<~RUBY)
+        class Foo
+          def initialize(bar)
+            @bar = bar
+            @items = []
+          end
+        end
+      RUBY
+    end
+
+    it "allows empty hash" do
+      expect_no_offenses(<<~RUBY)
+        class Foo
+          def initialize(bar)
+            @bar = bar
+            @opts = {}
+          end
+        end
+      RUBY
+    end
+
+    it "flags non-empty array" do
+      expect_offense(<<~RUBY)
+        class Foo
+          def initialize(bar)
+            @defaults = [1, 2, 3]
+            ^^^^^^^^^^^^^^^^^^^^^ Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+          end
+        end
+      RUBY
+    end
+
+    it "flags non-empty hash" do
+      expect_offense(<<~RUBY)
+        class Foo
+          def initialize(bar)
+            @defaults = { foo: "bar" }
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+          end
+        end
+      RUBY
+    end
+  end
+
   context "when initialize has a conditional default" do
     it "registers an offense for || default" do
       expect_offense(<<~RUBY)
