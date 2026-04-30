@@ -1,3 +1,6 @@
+AllCops:
+  DisabledByDefault: true
+
 CustomCops/NoComplexInitializeAssignment:
   Enabled: true
   Include:
