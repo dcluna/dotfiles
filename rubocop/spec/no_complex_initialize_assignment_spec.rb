@@ -8,7 +8,13 @@ require_relative "../cops/no_complex_initialize_assignment"
 RSpec.describe CustomCops::NoComplexInitializeAssignment do
   include RuboCop::RSpec::ExpectOffense
 
-  let(:config) { RuboCop::Config.new }
+  let(:cop_config) do
+    { "Methods" => methods_list }
+  end
+  let(:methods_list) { ["initialize"] }
+  let(:config) do
+    RuboCop::Config.new("CustomCops/NoComplexInitializeAssignment" => cop_config)
+  end
 
   subject(:cop) { described_class.new(config) }
 
@@ -48,7 +54,7 @@ RSpec.describe CustomCops::NoComplexInitializeAssignment do
         class Foo
           def initialize(opts)
             @opts = opts || {}
-            ^^^^^^^^^^^^^^^^^^ CustomCops/NoComplexInitializeAssignment: Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+            ^^^^^^^^^^^^^^^^^^ Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
           end
         end
       RUBY
@@ -61,7 +67,7 @@ RSpec.describe CustomCops::NoComplexInitializeAssignment do
         class Foo
           def initialize(id)
             @record = id.present? ? Record.find(id) : nil
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ CustomCops/NoComplexInitializeAssignment: Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
           end
         end
       RUBY
@@ -74,7 +80,7 @@ RSpec.describe CustomCops::NoComplexInitializeAssignment do
         class Foo
           def initialize(id)
             @record = Record.find(id)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^ CustomCops/NoComplexInitializeAssignment: Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+            ^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
           end
         end
       RUBY
@@ -85,7 +91,7 @@ RSpec.describe CustomCops::NoComplexInitializeAssignment do
         class Foo
           def initialize(name)
             @logger = Logger.new(name)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^ CustomCops/NoComplexInitializeAssignment: Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
           end
         end
       RUBY
@@ -137,7 +143,7 @@ RSpec.describe CustomCops::NoComplexInitializeAssignment do
           def initialize(name, opts)
             @name = name
             @opts = opts || {}
-            ^^^^^^^^^^^^^^^^^^ CustomCops/NoComplexInitializeAssignment: Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+            ^^^^^^^^^^^^^^^^^^ Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
           end
         end
       RUBY
@@ -151,7 +157,55 @@ RSpec.describe CustomCops::NoComplexInitializeAssignment do
           def initialize(name)
             computed = name.upcase
             @upper_name = computed
-            ^^^^^^^^^^^^^^^^^^^^^^ CustomCops/NoComplexInitializeAssignment: Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+            ^^^^^^^^^^^^^^^^^^^^^^ Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+          end
+        end
+      RUBY
+    end
+  end
+
+  context "when Methods includes perform" do
+    let(:methods_list) { ["initialize", "perform"] }
+
+    it "flags complex assignments in perform" do
+      expect_offense(<<~RUBY)
+        class MyWorker
+          def perform(user_id)
+            @user = User.find(user_id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid complex expressions in perform ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+          end
+        end
+      RUBY
+    end
+
+    it "allows direct assignments in perform" do
+      expect_no_offenses(<<~RUBY)
+        class MyWorker
+          def perform(user_id)
+            @user_id = user_id
+          end
+        end
+      RUBY
+    end
+
+    it "still flags initialize too" do
+      expect_offense(<<~RUBY)
+        class MyWorker
+          def initialize(opts)
+            @opts = opts || {}
+            ^^^^^^^^^^^^^^^^^^ Avoid complex expressions in initialize ivar assignments. Use direct assignment (`@foo = foo`) and move logic to memoized methods.
+          end
+        end
+      RUBY
+    end
+  end
+
+  context "when Methods is default (initialize only)" do
+    it "does not flag perform" do
+      expect_no_offenses(<<~RUBY)
+        class MyWorker
+          def perform(user_id)
+            @user = User.find(user_id)
           end
         end
       RUBY

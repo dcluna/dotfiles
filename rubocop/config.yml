@@ -3,6 +3,9 @@ AllCops:
 
 CustomCops/NoComplexInitializeAssignment:
   Enabled: true
+  Methods:
+    - initialize
+    - perform
   Include:
     - "app/**/*.rb"
 
