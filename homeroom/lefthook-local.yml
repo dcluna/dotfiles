@@ -118,7 +118,7 @@ pre-commit:
       glob: "*.rb"
       run: ast-grep scan --rule "$DOTFILES_DIR/ast-grep/rules/rails-logger-block-form.yml" --globs {staged_files}
 
-    no_complex_initialize_assignment:
+    rubocop_user_preferences:
       tags:
         - qa
         - code-quality
