@@ -4439,8 +4439,10 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
      (define-key dcl/ediff-scripts-map (kbd "m") #'dcl/ediff-resolve-schema-migrations)
 
      (defun dcl/ediff-setup-scripts-keymap ()
-       "Bind @ to the custom ediff scripts prefix map."
-       (define-key ediff-mode-map (kbd "@") dcl/ediff-scripts-map))
+       "Bind @ to the custom ediff scripts prefix map and show in help."
+       (define-key ediff-mode-map (kbd "@") dcl/ediff-scripts-map)
+       (setq ediff-long-help-message-tail
+             "\nCustom Scripts (@ prefix):\n  @ m  resolve schema_migrations\n"))
 
      (add-hook 'ediff-startup-hook #'dcl/ediff-setup-scripts-keymap)
    #+end_src
