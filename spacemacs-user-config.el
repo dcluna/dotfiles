@@ -2667,6 +2667,77 @@ _u_pdate
        (setq lsp-tailwindcss-add-on-mode t)
  :config (setq lsp-tailwindcss-major-modes '(haml-mode rjsx-mode web-mode html-mode css-mode typescript-mode typescript-tsx-mode tsx-ts-mode))
          (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save))
+(defvar dcl/ediff-scripts-map (make-sparse-keymap "Ediff scripts")
+  "Prefix keymap for custom ediff resolve scripts.")
+
+(defvar dcl/resolve-migrations-script
+  (expand-file-name (format "%s/scripts/resolve_schema_migrations.rb" (getenv "DOTFILES_DIR")))
+  "Path to the resolve_schema_migrations.rb script.")
+
+(defun dcl/ediff--project-root-from-buffer (buffer)
+  "Get the project root from BUFFER via projectile."
+  (with-current-buffer buffer
+    (projectile-project-root)))
+
+(defun dcl/resolve-migrations--run (input project-root)
+  "Pipe INPUT through resolve_schema_migrations.rb for PROJECT-ROOT.
+Returns the script output as a string."
+  (let ((resolved (with-temp-buffer
+                    (insert input)
+                    (call-process-region
+                     (point-min) (point-max)
+                     "ruby" t t nil
+                     dcl/resolve-migrations-script
+                     (expand-file-name project-root))
+                    (string-trim (buffer-string)))))
+    (when (string-empty-p resolved)
+      (user-error "resolve_schema_migrations.rb produced no output"))
+    resolved))
+
+(defun dcl/resolve-migrations--display (resolved)
+  "Show RESOLVED output in *migration-resolve* buffer."
+  (let ((review-buf (get-buffer-create "*migration-resolve*")))
+    (with-current-buffer review-buf
+      (erase-buffer)
+      (insert resolved)
+      (goto-char (point-min)))
+    (display-buffer review-buf)
+    (message "Resolved migrations shown in *migration-resolve*. Copy what you need.")))
+
+(defun dcl/ediff-resolve-schema-migrations ()
+  "Merge schema_migrations from current ediff diff region and show in *migration-resolve*."
+  (interactive)
+  (let* ((diff-num ediff-current-difference)
+         (region-a (ediff-get-region-contents diff-num 'A ediff-control-buffer))
+         (region-b (ediff-get-region-contents diff-num 'B ediff-control-buffer))
+         (buf-a (ediff-get-buffer 'A))
+         (buf-b (ediff-get-buffer 'B))
+         (project-root (or (dcl/ediff--project-root-from-buffer buf-a)
+                           (dcl/ediff--project-root-from-buffer buf-b)
+                           default-directory))
+         (combined (concat region-a "\n" region-b)))
+    (when (string-empty-p (string-trim combined))
+      (user-error "Current diff region is empty"))
+    (dcl/resolve-migrations--display
+     (dcl/resolve-migrations--run combined project-root))))
+
+(defun dcl/resolve-schema-migrations-region (beg end)
+  "Run resolve_schema_migrations.rb on the active region and show in *migration-resolve*."
+  (interactive "r")
+  (let ((input (buffer-substring-no-properties beg end))
+        (project-root (projectile-project-root)))
+    (dcl/resolve-migrations--display
+     (dcl/resolve-migrations--run input project-root))))
+
+(define-key dcl/ediff-scripts-map (kbd "m") #'dcl/ediff-resolve-schema-migrations)
+
+(defun dcl/ediff-setup-scripts-keymap ()
+  "Bind @ to the custom ediff scripts prefix map and show in help."
+  (define-key ediff-mode-map (kbd "@") dcl/ediff-scripts-map)
+  (setq ediff-long-help-message-tail
+        "\nCustom Scripts (@ prefix):\n  @ m  resolve schema_migrations\n"))
+
+(add-hook 'ediff-startup-hook #'dcl/ediff-setup-scripts-keymap)
 (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
 
 (autoload 'mixal-mode "mixal-mode" t)
