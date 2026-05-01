@@ -126,7 +126,7 @@ pre-commit:
         - merge
         - rebase
       glob: "*.rb"
-      run: rubocop --require "$DOTFILES_DIR/rubocop/cops/no_complex_initialize_assignment.rb" --require "$DOTFILES_DIR/rubocop/cops/no_ivar_outside_entry_method.rb" --require "$DOTFILES_DIR/rubocop/cops/rescue_requires_reraise.rb" --config ~/.config/rubocop/config.yml {staged_files}
+      run: rubocop --require "$DOTFILES_DIR/rubocop/cops/no_complex_initialize_assignment.rb" --require "$DOTFILES_DIR/rubocop/cops/no_ivar_outside_entry_method.rb" --require "$DOTFILES_DIR/rubocop/cops/rescue_requires_reraise.rb" --require "$DOTFILES_DIR/rubocop/cops/no_instance_variable_get_set.rb" --config ~/.config/rubocop/config.yml {staged_files}
 
     rubocop-debugger:
       tags:
