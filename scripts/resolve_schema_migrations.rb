@@ -21,11 +21,18 @@
 
 require "pathname"
 
-migrate_dir = Pathname.new(ARGV[0] || "db/migrate")
+given_path = Pathname.new(ARGV[0] || ".")
+migrate_dir = if (given_path / "db" / "migrate").directory?
+                given_path / "db" / "migrate"
+              elsif given_path.directory? && given_path.basename.to_s == "migrate"
+                given_path
+              else
+                given_path
+              end
 
 unless migrate_dir.directory?
   warn "Migration directory not found: #{migrate_dir}"
-  warn "Pass the path as first argument or run from Rails root."
+  warn "Pass a Rails root or db/migrate path as first argument."
   exit 1
 end
 
