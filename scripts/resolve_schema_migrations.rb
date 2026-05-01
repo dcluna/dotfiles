@@ -20,6 +20,12 @@
 #   The migrate directory defaults to db/migrate in the current working directory.
 
 require "pathname"
+require "optparse"
+
+apply_mode = false
+OptionParser.new do |opts|
+  opts.on("--apply", "Output only the sorted INSERT block (no mapping)") { apply_mode = true }
+end.parse!
 
 given_path = Pathname.new(ARGV[0] || ".")
 migrate_dir = if (given_path / "db" / "migrate").directory?
@@ -53,16 +59,16 @@ file_by_id = migration_files.each_with_object({}) do |fname, h|
   end
 end
 
-# Print mapping
-ids.each do |id|
-  file = file_by_id[id]
-  status = file || "** NO MATCHING FILE **"
-  puts "#{id} | #{status}"
+unless apply_mode
+  ids.each do |id|
+    file = file_by_id[id]
+    status = file || "** NO MATCHING FILE **"
+    puts "#{id} | #{status}"
+  end
+  puts "---"
 end
 
-# Print sorted INSERT block
 sorted = ids.sort
-puts "---"
 sorted.each_with_index do |id, i|
   suffix = i == sorted.length - 1 ? ";" : ","
   puts "('#{id}')#{suffix}"

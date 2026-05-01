@@ -4379,6 +4379,69 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
                (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save))
     #+end_src
 
+** Ediff: auto-resolve structure.sql migration conflicts
+
+   When ediff opens a =structure.sql= file, pressing =M= grabs the current
+   diff region from buffers A and B, merges and sorts the migration entries
+   via the Ruby script, and displays the result in =*migration-resolve*=
+   for manual pasting.
+
+   #+begin_src emacs-lisp
+     (defvar dcl/resolve-migrations-script
+       (expand-file-name (format "%s/scripts/resolve_schema_migrations.rb" (getenv "DOTFILES_DIR")))
+       "Path to the resolve_schema_migrations.rb script.")
+
+     (defun dcl/ediff--project-root-from-buffer (buffer)
+       "Get the project root from BUFFER via projectile."
+       (with-current-buffer buffer
+         (projectile-project-root)))
+
+     (defun dcl/ediff-resolve-schema-migrations ()
+       "Merge schema_migrations from current ediff diff region and show in *migration-resolve*.
+     Grabs the current diff region from buffers A and B, pipes combined text through
+     resolve_schema_migrations.rb, and displays the result for manual pasting."
+       (interactive)
+       (let* ((diff-num ediff-current-difference)
+              (region-a (ediff-get-region-contents diff-num 'A ediff-control-buffer))
+              (region-b (ediff-get-region-contents diff-num 'B ediff-control-buffer))
+              (buf-a (ediff-get-buffer 'A))
+              (buf-b (ediff-get-buffer 'B))
+              (project-root (or (dcl/ediff--project-root-from-buffer buf-a)
+                                (dcl/ediff--project-root-from-buffer buf-b)
+                                default-directory))
+              (combined (concat region-a "\n" region-b)))
+         (when (string-empty-p (string-trim combined))
+           (user-error "Current diff region is empty"))
+         (let ((resolved (with-temp-buffer
+                           (insert combined)
+                           (call-process-region
+                            (point-min) (point-max)
+                            "ruby" t t nil
+                            dcl/resolve-migrations-script
+                            (expand-file-name project-root))
+                           (string-trim (buffer-string)))))
+           (when (string-empty-p resolved)
+             (user-error "resolve_schema_migrations.rb produced no output"))
+           (let ((review-buf (get-buffer-create "*migration-resolve*")))
+             (with-current-buffer review-buf
+               (erase-buffer)
+               (insert resolved)
+               (goto-char (point-min)))
+             (display-buffer review-buf)
+             (message "Resolved migrations shown in *migration-resolve*. Copy what you need.")))))
+
+     (defun dcl/ediff-maybe-add-migration-key ()
+       "Add 'M' key to ediff keymap when editing structure.sql."
+       (when (and ediff-buffer-A
+                  (buffer-file-name ediff-buffer-A)
+                  (string-match-p "structure\\.sql"
+                                  (buffer-file-name ediff-buffer-A)))
+         (define-key ediff-mode-map (kbd "M")
+                     #'dcl/ediff-resolve-schema-migrations)))
+
+     (add-hook 'ediff-keymap-setup-hook #'dcl/ediff-maybe-add-migration-key)
+   #+end_src
+
 ** MDK (Mix development kit)
 
    #+begin_src emacs-lisp
