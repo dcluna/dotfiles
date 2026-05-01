@@ -32,6 +32,9 @@ CustomCops/RescueRequiresReraise:
   Include:
     - "app/**/*.rb"
 
+CustomCops/NoInstanceVariableGetSet:
+  Enabled: true
+
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   EnforcedStyle: space
