@@ -18,7 +18,7 @@ RSpec.describe CustomCops::PreferWithVersioning do
     it "registers an offense" do
       expect_offense(<<~RUBY)
         PaperTrail.enabled = true
-        ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block instead of manually setting `PaperTrail.enabled=`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
+        ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block or `versioning: true` metadata instead of manually setting `PaperTrail.enabled=`. Example: `with_versioning { ... }` or `it '...', versioning: true do ... end`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
       RUBY
     end
   end
@@ -27,7 +27,7 @@ RSpec.describe CustomCops::PreferWithVersioning do
     it "registers an offense" do
       expect_offense(<<~RUBY)
         PaperTrail.enabled = false
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block instead of manually setting `PaperTrail.enabled=`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block or `versioning: true` metadata instead of manually setting `PaperTrail.enabled=`. Example: `with_versioning { ... }` or `it '...', versioning: true do ... end`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
       RUBY
     end
   end
@@ -36,10 +36,10 @@ RSpec.describe CustomCops::PreferWithVersioning do
     it "registers offenses on both assignments" do
       expect_offense(<<~RUBY)
         PaperTrail.enabled = true
-        ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block instead of manually setting `PaperTrail.enabled=`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
+        ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block or `versioning: true` metadata instead of manually setting `PaperTrail.enabled=`. Example: `with_versioning { ... }` or `it '...', versioning: true do ... end`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
         do_something
         PaperTrail.enabled = false
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block instead of manually setting `PaperTrail.enabled=`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block or `versioning: true` metadata instead of manually setting `PaperTrail.enabled=`. Example: `with_versioning { ... }` or `it '...', versioning: true do ... end`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
       RUBY
     end
   end
@@ -49,7 +49,7 @@ RSpec.describe CustomCops::PreferWithVersioning do
       expect_offense(<<~RUBY)
         it "does something" do
           PaperTrail.enabled = true
-          ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block instead of manually setting `PaperTrail.enabled=`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
+          ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `with_versioning` block or `versioning: true` metadata instead of manually setting `PaperTrail.enabled=`. Example: `with_versioning { ... }` or `it '...', versioning: true do ... end`. See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec
           do_something
         end
       RUBY

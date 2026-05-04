@@ -25,7 +25,9 @@ module CustomCops
   #   end
   #
   class PreferWithVersioning < RuboCop::Cop::Base
-    MSG = "Use `with_versioning` block instead of manually setting `PaperTrail.enabled=`. " \
+    MSG = "Use `with_versioning` block or `versioning: true` metadata instead of manually setting " \
+          "`PaperTrail.enabled=`. " \
+          "Example: `with_versioning { ... }` or `it '...', versioning: true do ... end`. " \
           "See https://github.com/paper-trail-gem/paper_trail?tab=readme-ov-file#7b-rspec"
 
     # @!method paper_trail_enabled_assignment?(node)
