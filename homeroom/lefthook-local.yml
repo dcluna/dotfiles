@@ -106,7 +106,7 @@ pre-commit:
         - merge
         - rebase
       glob: "*.rb"
-      run: rubocop --require "$DOTFILES_DIR/rubocop/cops/no_complex_initialize_assignment.rb" --require "$DOTFILES_DIR/rubocop/cops/no_ivar_outside_entry_method.rb" --require "$DOTFILES_DIR/rubocop/cops/rescue_requires_reraise.rb" --require "$DOTFILES_DIR/rubocop/cops/no_instance_variable_get_set.rb" --require "$DOTFILES_DIR/rubocop/cops/prefer_travel_to_block.rb" --config ~/.config/rubocop/config.yml {staged_files}
+      run: rubocop --require "$DOTFILES_DIR/rubocop/cops/no_complex_initialize_assignment.rb" --require "$DOTFILES_DIR/rubocop/cops/no_ivar_outside_entry_method.rb" --require "$DOTFILES_DIR/rubocop/cops/rescue_requires_reraise.rb" --require "$DOTFILES_DIR/rubocop/cops/no_instance_variable_get_set.rb" --require "$DOTFILES_DIR/rubocop/cops/prefer_travel_to_block.rb" --require "$DOTFILES_DIR/rubocop/cops/prefer_with_versioning.rb" --config ~/.config/rubocop/config.yml {staged_files}
 
     rubocop-debugger:
       tags:
@@ -234,9 +234,6 @@ post-checkout:
           touch .projectile
           cp $MAIN_GIT_DIR/.mcp* .
           cp $MAIN_GIT_DIR/.env* .
-          # Rewrite API_DIR in .envrc to match this worktree's dirname
-          WORKTREE_BASENAME=$(basename "$PWD")
-          sed -i '' "s|export API_DIR=\"/vagrant/api\"|export API_DIR=\"/vagrant/${WORKTREE_BASENAME}\"|" .envrc
           direnv allow
           cp $MAIN_GIT_DIR/config/application.yml ./config/application.yml
           ln -s $MAIN_GIT_DIR/.dir-locals.el .dir-locals.el
@@ -249,4 +246,7 @@ post-checkout:
           if [ -n "$VAGRANT_DIR" ]; then
             (cd "$VAGRANT_DIR" && direnv allow)
           fi
+          # Rewrite API_DIR in .envrc to match this worktree's dirname
+          WORKTREE_BASENAME=$(basename "$PWD")
+          sed -i '' "s|export API_DIR=\"/vagrant/api\"|export API_DIR=\"/vagrant/${WORKTREE_BASENAME}\"|" .envrc
         fi

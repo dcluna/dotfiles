@@ -7,6 +7,8 @@ AllCops:
 Layout/DotPosition:
   Enabled: true
   EnforcedStyle: trailing
+  Exclude:
+    - "spec/**/*_spec.rb"
 
 Style/BlockDelimiters:
   Enabled: true
@@ -41,6 +43,11 @@ CustomCops/NoInstanceVariableGetSet:
 
 CustomCops/PreferTravelToBlock:
   Enabled: true
+
+CustomCops/PreferWithVersioning:
+  Enabled: true
+  Include:
+    - "spec/**/*_spec.rb"
 
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
