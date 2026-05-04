@@ -4,6 +4,10 @@ inherit_from:
 AllCops:
   DisabledByDefault: true
 
+Layout/DotPosition:
+  Enabled: true
+  EnforcedStyle: trailing
+
 Style/BlockDelimiters:
   Enabled: true
 
