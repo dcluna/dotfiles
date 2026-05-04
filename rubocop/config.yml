@@ -39,6 +39,9 @@ CustomCops/RescueRequiresReraise:
 CustomCops/NoInstanceVariableGetSet:
   Enabled: true
 
+CustomCops/PreferTravelToBlock:
+  Enabled: true
+
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   EnforcedStyle: space
