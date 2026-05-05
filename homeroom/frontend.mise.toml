@@ -1,3 +1,4 @@
 [tools]
 node = "20.9.0"
+"npm:prettier" = { version = "3.8.3", bin = "prettier" }
 "github:oxc-project/oxc" = { version = "latest", bin = "oxlint", asset_pattern = "oxlint-*-darwin.tar.gz" }

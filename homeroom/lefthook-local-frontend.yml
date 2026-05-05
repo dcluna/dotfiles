@@ -13,7 +13,7 @@ pre-commit:
       skip:
         - merge
         - rebase
-      run: npx prettier --check {staged_files}
+      run: mise exec node@latest -- prettier --check {staged_files}
 
     oxlint:
       tags:
@@ -24,7 +24,7 @@ pre-commit:
       skip:
         - merge
         - rebase
-      run: npx oxlint --deny no-unused-vars {staged_files}
+      run: oxlint --deny no-unused-vars {staged_files}
 
     trailing_whitespace:
       tags:
