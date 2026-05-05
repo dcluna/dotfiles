@@ -140,7 +140,7 @@ in
     pkgs.watchman
     pkgs.lefthook
     pkgs.just
-    pkgs.codex
+    # pkgs.codex
     pkgs.gh
     pkgs.opencode
     claudesquad
