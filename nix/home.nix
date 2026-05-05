@@ -307,6 +307,12 @@ in
     fi
   '';
 
+  home.activation.installTpm = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+      PATH="${pkgs.openssh}/bin:$PATH" ${pkgs.git}/bin/git clone git@github.com:tmux-plugins/tpm.git "$HOME/.tmux/plugins/tpm"
+    fi
+  '';
+
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
