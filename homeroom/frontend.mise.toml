@@ -1,0 +1,3 @@
+[tools]
+node = "20.9.0"
+"github:oxc-project/oxc" = { version = "latest", bin = "oxlint", asset_pattern = "oxlint-*-darwin.tar.gz" }
