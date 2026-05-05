@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, tmux35pkgs, ... }:
 
 let
   # extraNodePackages = import ./node/default.nix {};
@@ -120,8 +120,9 @@ in
     pkgs.pgcenter
     pkgs.awscli2
     pkgs.toot
-    pkgs.tmuxinator
-    # pkgs.tmux
+    # pkgs.tmuxinator
+    tmux35pkgs.tmux
+    # (pkgs.tmux.overrideAttrs (super: rec {version = "3.5";})
     # pkgs.ast-grep
     (pkgs.ffmpeg.override {withWebp = true;})
     (pkgs.imagemagick.override {libwebpSupport = true;})
@@ -205,11 +206,12 @@ in
     # ".claude-code-router/config.json".source = ./claudecode/router.json;
 
     # ".tmux/plugins/tpm" = {
-    #   source = pkgs.fetchFromGitHub {
-    #     owner = "tmux-plugins";
-    #     repo = "tpm";
+    #   source = builtins.fetchGit {
+    #     url = "git@github.com:tmux-plugins/tpm.git";
+    #     # owner = "tmux-plugins";
+    #     # repo = "tpm";
     #     rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
-    #     sha256 = "hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
+    #     # sha256 = "hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
     #   };
     # };
     # ".tmux" = {
