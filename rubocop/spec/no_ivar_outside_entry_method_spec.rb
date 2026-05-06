@@ -88,6 +88,26 @@ RSpec.describe CustomCops::NoIvarOutsideEntryMethod do
         end
       RUBY
     end
+
+    it "allows @importable inside def importable?" do
+      expect_no_offenses(<<~RUBY)
+        class Foo
+          def importable?
+            @importable ||= parent_data.present?
+          end
+        end
+      RUBY
+    end
+
+    it "allows @save inside def save!" do
+      expect_no_offenses(<<~RUBY)
+        class Foo
+          def save!
+            @save ||= persist_record
+          end
+        end
+      RUBY
+    end
   end
 
   context "when ivar name does not match method name" do

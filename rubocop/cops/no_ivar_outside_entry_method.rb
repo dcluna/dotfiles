@@ -75,7 +75,8 @@ module CustomCops
 
     def memoization_pattern?(ivar_node, method_name)
       ivar_name = ivar_name_for(ivar_node)
-      ivar_name == method_name
+      # Strip ? and ! from method name — these can't appear in ivar names
+      ivar_name == method_name.to_s.chomp("?").chomp("!").to_sym
     end
 
     def ivar_name_for(node)
