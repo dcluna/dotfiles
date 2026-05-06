@@ -13,7 +13,10 @@ pre-commit:
       skip:
         - merge
         - rebase
-      run: mise exec node@latest -- prettier --check {staged_files}
+      env:
+        PAGER: "/bin/cat"
+        NO_COLOR: "1"
+      run: mise exec node@latest -- prettier --no-color --check {staged_files}
 
     oxlint:
       tags:
@@ -24,7 +27,7 @@ pre-commit:
       skip:
         - merge
         - rebase
-      run: oxlint --deny no-unused-vars {staged_files}
+      run: mise exec -- oxlint --deny no-unused-vars {staged_files}
 
     trailing_whitespace:
       tags:
