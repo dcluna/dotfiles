@@ -1,6 +1,8 @@
 colors: false
 no_tty: true
 
+glob_matcher: doublestar
+
 pre-commit:
   parallel: true
   commands:
@@ -8,13 +10,20 @@ pre-commit:
       tags:
         - formatting
         - style
-      glob: "*.{ts,tsx,js,jsx,json,gql,graphql}"
-      exclude: "src/app2/api/graphql.ts|src/app2/api/type-metadata.ts|**/generated/*.generated.tsx|src/app2/api/account/clientVersion.ts"
+      glob: "**/*.{ts,tsx,js,jsx,json,gql,graphql}"
+      exclude:
+        - 'src/app2/api/graphql.ts'
+        - 'src/app2/api/type-metadata.ts'
+        - '**/generated/*.generated.tsx'
+        - '**/generated/*.generated.ts'
+        - '**/generated/index.ts'
+        - 'src/app2/api/account/clientVersion.ts'
       skip:
         - merge
         - rebase
       env:
         PAGER: "/bin/cat"
+        GIT_PAGER: "/bin/cat"
         NO_COLOR: "1"
       run: mise exec node@latest -- prettier --no-color --check {staged_files}
 
@@ -22,19 +31,49 @@ pre-commit:
       tags:
         - linting
         - code-quality
-      glob: "*.{ts,tsx,js,jsx}"
-      exclude: "src/app2/api/graphql.ts|src/app2/api/type-metadata.ts|**/generated/*.generated.tsx|src/app2/api/account/clientVersion.ts"
+      glob: "**/*.{ts,tsx,js,jsx}"
+      exclude:
+        - 'src/app2/api/graphql.ts'
+        - 'src/app2/api/type-metadata.ts'
+        - '**/generated/*.generated.tsx'
+        - '**/generated/*.generated.ts'
+        - '**/generated/index.ts'
+        - 'src/app2/api/account/clientVersion.ts'
       skip:
         - merge
         - rebase
       run: mise exec -- oxlint --deny no-unused-vars {staged_files}
 
+    eslint:
+      tags:
+        - formatting
+        - style
+      glob: "**/*.{ts,tsx,js,jsx,json,gql,graphql}"
+      exclude:
+        - 'src/app2/api/graphql.ts'
+        - 'src/app2/api/type-metadata\.ts'
+        - '**/generated/**/*.generated.tsx'
+        - '**/generated/**/*.generated.ts'
+        - '**/generated/index.ts'
+        - 'src/app2/api/account/clientVersion.ts'
+      skip:
+        - merge
+        - rebase
+      env:
+        PAGER: "/bin/cat"
+        GIT_PAGER: "/bin/cat"
+        NO_COLOR: "1"
+      run: yarn run eslint-baseline {staged_files}
+
     trailing_whitespace:
       tags:
         - formatting
         - style
-      glob: "*"
-      exclude: "node_modules/**|dist/**|*.generated.tsx"
+      glob: "**/*"
+      exclude:
+        - 'node_modules/**'
+        - 'dist/**'
+        - '**/*.generated.tsx'
       skip:
         - merge
         - rebase
@@ -43,7 +82,7 @@ pre-commit:
     no_debugger:
       tags:
         - qa
-      glob: "*.{ts,tsx,js,jsx}"
+      glob: "**/*.{ts,tsx,js,jsx}"
       skip:
         - merge
         - rebase
@@ -56,8 +95,10 @@ pre-commit:
     no_console_log:
       tags:
         - qa
-      glob: "*.{ts,tsx}"
-      exclude: "src/app2/api/urql.ts|**/generated/*.generated.tsx"
+      glob: "**/*.{ts,tsx}"
+      exclude:
+        - 'src/app2/api/urql.ts'
+        - '**/generated/*.generated.tsx'
       skip:
         - merge
         - rebase
@@ -72,7 +113,7 @@ pre-commit:
       tags:
         - linting
         - style
-      glob: "*.{yml,yaml}"
+      glob: "**/*.{yml,yaml}"
       skip:
         - merge
         - rebase
