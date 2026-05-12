@@ -1,5 +1,8 @@
 colors: false
 no_tty: true
+output:
+  - summary
+  - execution
 
 pre-commit:
   parallel: true
@@ -249,4 +252,15 @@ post-checkout:
           # Rewrite API_DIR in .envrc to match this worktree's dirname
           WORKTREE_BASENAME=$(basename "$PWD")
           sed -i '' "s|export API_DIR=\"/vagrant/api\"|export API_DIR=\"/vagrant/${WORKTREE_BASENAME}\"|" .envrc
+        fi
+
+    setup-vagrant-db:
+      tags:
+        - worktree
+        - database
+      run: |
+        # Detect if this is a worktree checkout
+        if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
+          WORKTREE_BASENAME=$(basename "$PWD")
+          (vagrant ssh -- "cd /vagrant/${WORKTREE_BASENAME} && rails db:create db:schema:load") &
         fi
