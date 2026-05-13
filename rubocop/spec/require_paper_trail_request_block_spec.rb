@@ -40,4 +40,22 @@ RSpec.describe CustomCops::RequirePaperTrailRequestBlock do
       RUBY
     end
   end
+
+  context "when using kwargs without a block" do
+    it "registers an offense" do
+      expect_offense(<<~RUBY)
+        PaperTrail.request(whodunnit: "Worker")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use the block form of `PaperTrail.request` instead of the non-block form.
+      RUBY
+    end
+  end
+
+  context "when using kwargs with multiple options without a block" do
+    it "registers an offense" do
+      expect_offense(<<~RUBY)
+        PaperTrail.request(whodunnit: "Worker", enabled: false)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use the block form of `PaperTrail.request` instead of the non-block form.
+      RUBY
+    end
+  end
 end
