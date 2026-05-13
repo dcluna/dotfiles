@@ -157,6 +157,11 @@ pre-push:
         - types
       run: |
         output=$(npx tsc --noEmit 2>&1 | grep -v "^node_modules/")
+        if [ -n "$LEFTHOOK_TSC_IGNORE_PATTERNS" ]; then
+          while IFS= read -r pattern; do
+            [ -n "$pattern" ] && output=$(echo "$output" | grep -v -F "$pattern")
+          done <<< "$LEFTHOOK_TSC_IGNORE_PATTERNS"
+        fi
         if [ -n "$output" ]; then
           echo "$output"
           exit 1
