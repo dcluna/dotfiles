@@ -58,4 +58,38 @@ RSpec.describe CustomCops::RequirePaperTrailRequestBlock do
       RUBY
     end
   end
+
+  context "when using block form with do...end" do
+    it "does not register an offense" do
+      expect_no_offenses(<<~RUBY)
+        PaperTrail.request(whodunnit: "Worker") do
+          do_work
+        end
+      RUBY
+    end
+  end
+
+  context "when using block form with curly braces" do
+    it "does not register an offense" do
+      expect_no_offenses(<<~RUBY)
+        PaperTrail.request(whodunnit: "Worker") { do_work }
+      RUBY
+    end
+  end
+
+  context "when calling PaperTrail.request with no args and no block" do
+    it "does not register an offense" do
+      expect_no_offenses(<<~RUBY)
+        PaperTrail.request
+      RUBY
+    end
+  end
+
+  context "when reading a property from PaperTrail.request" do
+    it "does not register an offense" do
+      expect_no_offenses(<<~RUBY)
+        PaperTrail.request.whodunnit
+      RUBY
+    end
+  end
 end
