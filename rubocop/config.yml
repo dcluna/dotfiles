@@ -5,6 +5,7 @@ plugins:
   - rubocop-rails
 
 AllCops:
+  NewCops: enable
   DisabledByDefault: true
 
 Layout/DotPosition:
@@ -36,6 +37,12 @@ CustomCops/NoIvarOutsideEntryMethod:
     - perform
   Include:
     - "app/**/*.rb"
+
+CustomCops/RequirePaperTrailRequestBlock:
+  Enabled: true
+  Include:
+    - "app/**/*.rb"
+    - "lib/**/*.rb"
 
 CustomCops/RescueRequiresReraise:
   Enabled: true
