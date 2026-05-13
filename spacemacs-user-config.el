@@ -2738,6 +2738,16 @@ Returns the script output as a string."
         "\nCustom Scripts (@ prefix):\n  @ m  resolve schema_migrations\n"))
 
 (add-hook 'ediff-startup-hook #'dcl/ediff-setup-scripts-keymap)
+(use-package atomic-chrome
+  :straight (:host github :repo "KarimAziev/atomic-chrome")
+  :defer t
+  :commands (atomic-chrome-start-server)
+  :config
+  (setq-default atomic-chrome-buffer-open-style 'split)
+  (setq-default atomic-chrome-url-major-mode-alist
+                '(("github\\.com" . gfm-mode)
+                  ("reddit\\.com" . markdown-mode)))
+  (atomic-chrome-start-server))
 (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
 
 (autoload 'mixal-mode "mixal-mode" t)

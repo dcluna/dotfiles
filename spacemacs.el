@@ -76,7 +76,8 @@
                           ;; org
                           (vlf :type git :host github :repo "m00natic/vlfi")
                           evil-numbers
-                          auto-minor-mode))
+                          auto-minor-mode
+                          (atomic-chrome :host github :repo "KarimAziev/atomic-chrome")))
                           ;; (helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
                           ;;                   :branch "fix-helm-insert-on-region"
                           ;;                   :upstream (:host github

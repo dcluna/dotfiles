@@ -703,7 +703,8 @@
                               ;; org
                               (vlf :type git :host github :repo "m00natic/vlfi")
                               evil-numbers
-                              auto-minor-mode))
+                              auto-minor-mode
+                              (atomic-chrome :host github :repo "KarimAziev/atomic-chrome")))
                               ;; (helm-c-yasnippet :type git :host github :repo "dcluna/helm-c-yasnippet"
                               ;;                   :branch "fix-helm-insert-on-region"
                               ;;                   :upstream (:host github
@@ -4461,6 +4462,23 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
              "\nCustom Scripts (@ prefix):\n  @ m  resolve schema_migrations\n"))
 
      (add-hook 'ediff-startup-hook #'dcl/ediff-setup-scripts-keymap)
+   #+end_src
+
+** Atomic Chrome
+
+   Edit browser text areas in Emacs via [[https://github.com/nicknisi/ghosttext-for-chrome][GhostText]] or similar extensions.
+
+   #+begin_src emacs-lisp
+     (use-package atomic-chrome
+       :straight (:host github :repo "KarimAziev/atomic-chrome")
+       :defer t
+       :commands (atomic-chrome-start-server)
+       :config
+       (setq-default atomic-chrome-buffer-open-style 'split)
+       (setq-default atomic-chrome-url-major-mode-alist
+                     '(("github\\.com" . gfm-mode)
+                       ("reddit\\.com" . markdown-mode)))
+       (atomic-chrome-start-server))
    #+end_src
 
 ** MDK (Mix development kit)
