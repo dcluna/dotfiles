@@ -2748,6 +2748,10 @@ Returns the script output as a string."
                 '(("github\\.com" . gfm-mode)
                   ("reddit\\.com" . markdown-mode)))
   (atomic-chrome-start-server))
+(use-package helpful
+  :config
+  (setq-default counsel-describe-function-function #'helpful-callable)
+  (setq-default counsel-describe-variable-function #'helpful-variable))
 (add-to-list 'load-path "/usr/local/Cellar/mdk/1.3.0/share/mdk/")
 
 (autoload 'mixal-mode "mixal-mode" t)

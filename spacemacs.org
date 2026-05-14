@@ -4481,6 +4481,15 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
        (atomic-chrome-start-server))
    #+end_src
 
+** Helpful
+
+   #+begin_src emacs-lisp
+     (use-package helpful
+       :config
+       (setq-default counsel-describe-function-function #'helpful-callable)
+       (setq-default counsel-describe-variable-function #'helpful-variable))
+   #+end_src
+
 ** MDK (Mix development kit)
 
    #+begin_src emacs-lisp
