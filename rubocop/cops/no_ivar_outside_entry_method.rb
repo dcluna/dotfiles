@@ -38,6 +38,13 @@ module CustomCops
   #       @computed_result ||= expensive_calculation
   #     end
   #   end
+  #
+  # @example Good — writer method
+  #   class Foo
+  #     def no_record_means=(value)
+  #       @no_record_means = value
+  #     end
+  #   end
   class NoIvarOutsideEntryMethod < RuboCop::Cop::Base
     MSG = "Use reader/accessor methods instead of instance variables outside %<methods>s. " \
           "Memoization patterns (`def foo; @foo ||= ...; end`) are allowed."
@@ -75,8 +82,8 @@ module CustomCops
 
     def memoization_pattern?(ivar_node, method_name)
       ivar_name = ivar_name_for(ivar_node)
-      # Strip ? and ! from method name — these can't appear in ivar names
-      ivar_name == method_name.to_s.chomp("?").chomp("!").to_sym
+      # Strip ? ! = from method name — these can't appear in ivar names
+      ivar_name == method_name.to_s.chomp("?").chomp("!").chomp("=").to_sym
     end
 
     def ivar_name_for(node)
