@@ -125,6 +125,27 @@ pre-commit:
         fi
       on_fail: warn
 
+    duplicate_mutation_name:
+      tags:
+        - qa
+        - graphql
+      glob: "**/*.gql"
+      skip:
+        - merge
+        - rebase
+      run: |
+        dupes=$(rg --no-filename -N '^\s*mutation\s+(\w+)' -or '$1' -g '*.gql' src/ \
+          | sort | uniq -d)
+        if [ -n "$dupes" ]; then
+          echo "Duplicate mutation names found:"
+          echo "$dupes" | while read -r name; do
+            echo ""
+            echo "  $name defined in:"
+            rg --no-heading -l "^\s*mutation\s+$name\b" -g '*.gql' src/ | sed 's/^/    /'
+          done
+          exit 1
+        fi
+
     yaml_lint:
       tags:
         - linting
