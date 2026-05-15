@@ -79,7 +79,7 @@ pre-commit:
         - rebase
       env:
         NO_COLOR: "1"
-      run: mise exec node@latest -- npx eslint --no-warn-ignored --config $DOTFILES_DIR/homeroom/eslint-rules/mutation-shield.config.cjs {staged_files}
+      run: mise exec node@latest -- npx --yes eslint --no-warn-ignored --config $DOTFILES_DIR/homeroom/eslint-rules/mutation-shield.config.cjs {staged_files}
 
     trailing_whitespace:
       tags:
