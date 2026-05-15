@@ -215,3 +215,8 @@ post-checkout:
         if command -v direnv &>/dev/null; then
           direnv allow
         fi
+
+        # Generate Chrome DevTools discovery file for MCP inspector
+        mkdir -p static/.well-known
+        devtools_uuid="$(uuidgen | tr '[:upper:]' '[:lower:]')"
+        printf '{\n  "workspace": {\n    "root": "%s",\n    "uuid": "%s"\n  }\n}\n' "$PWD" "$devtools_uuid" > static/.well-known/com.chrome.devtools.json
