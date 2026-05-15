@@ -73,3 +73,9 @@ function git-branch-files() {
 function git-docs-added() {
     git-branch-files --filter A -- docs/
 }
+
+function convert_pg_dump_to_sql(){
+    dumpfile=$(ls ${DUMPDIR:-$PWD}/*.dump | fzf)
+    sqlfile=$(echo $dumpfile | sed -e 's/\.dump$/.sql/')
+    pg_restore --no-owner --no-acl "$@" -f $sqlfile $dumpfile
+}
