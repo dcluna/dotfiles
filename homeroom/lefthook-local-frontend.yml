@@ -146,6 +146,16 @@ pre-commit:
           exit 1
         fi
 
+    duplicate_operation_name:
+      tags:
+        - qa
+        - graphql
+      glob: "**/*.gql"
+      skip:
+        - merge
+        - rebase
+      run: mise exec -- duplicate-operation-name src/ --graphql
+
     yaml_lint:
       tags:
         - linting
