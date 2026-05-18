@@ -61,6 +61,11 @@ CustomCops/PreferWithVersioning:
   Include:
     - "spec/**/*_spec.rb"
 
+CustomCops/NoSetupInExample:
+  Enabled: true
+  Include:
+    - "spec/**/*_spec.rb"
+
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   EnforcedStyle: space
