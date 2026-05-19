@@ -194,6 +194,7 @@ call the original function `package-activate'."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     graphql
      vagrant
      ;; windows-scripts
      kubernetes
