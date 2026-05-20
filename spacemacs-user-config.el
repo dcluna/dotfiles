@@ -1192,8 +1192,8 @@ and added to `sql-connection-alist' with the given name."
     (if (file-exists-p sql-connection-file-name)
       (load-file sql-connection-file-name))))
 
-(if (fboundp 'sqlformat-on-save-mode)
-    (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
+;; (if (fboundp 'sqlformat-on-save-mode)
+;;     (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
 
 (dcl/load-sql-connections)
 ;;; Claude query log — org-babel SQL query logging
