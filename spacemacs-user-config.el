@@ -889,26 +889,23 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
           ("right join" . #x27d6)
           ("inner join" . #x2229)))
   (prettify-symbols-mode 1))
+(defun dcl/magit-toggle-sections (hooks label)
+  "Toggle HOOKS in `magit-status-sections-hook'. LABEL used in message."
+  (if (-any? (lambda (h) (-contains? magit-status-sections-hook h)) hooks)
+      (progn
+        (dolist (h hooks) (remove-hook 'magit-status-sections-hook h))
+        (message "%s sections off" label))
+    (progn
+      (dolist (h hooks) (magit-add-section-hook 'magit-status-sections-hook h nil t))
+      (message "%s sections on" label))))
+
 (defun dcl-toggle-forge-sections ()
   (interactive)
-  (if (or (-contains? magit-status-sections-hook 'forge-insert-pullreqs) (-contains? magit-status-sections-hook 'forge-insert-issues))
-      (progn
-        (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
-        (remove-hook 'magit-status-sections-hook 'forge-insert-issues)
-        (message "Forge sections off"))
-    (progn
-      (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-pullreqs nil t)
-      (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-issues   nil t)
-      (message "Forge sections on"))))
+  (dcl/magit-toggle-sections '(forge-insert-pullreqs forge-insert-issues) "Forge"))
+
 (defun dcl/magit-toggle-worktree-sections ()
   (interactive)
-  (if (-contains? magit-status-sections-hook 'magit-insert-worktrees)
-      (progn
-        (remove-hook 'magit-status-sections-hook 'magit-insert-worktrees)
-        (message "Worktree sections off"))
-    (progn
-      (magit-add-section-hook 'magit-status-sections-hook 'magit-insert-worktrees nil t)
-      (message "Worktree sections on"))))
+  (dcl/magit-toggle-sections '(magit-insert-worktrees) "Worktree"))
 (defun dcl/env-var-to-noweb (beg end)
   "Convert $ENV_VAR to <<env_var>> noweb reference in region or at point."
   (interactive
