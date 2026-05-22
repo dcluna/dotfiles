@@ -1859,6 +1859,20 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
            (message "Forge sections on"))))
    #+end_src
 
+   Add section for worktrees:
+
+   #+begin_src emacs-lisp
+     (defun dcl/magit-toggle-worktree-sections ()
+       (interactive)
+       (if (-contains? magit-status-sections-hook 'magit-insert-worktrees)
+           (progn
+             (remove-hook 'magit-status-sections-hook 'magit-insert-worktrees)
+             (message "Worktree sections off"))
+         (progn
+           (magit-add-section-hook 'magit-status-sections-hook 'magit-insert-worktrees nil t)
+           (message "Worktree sections on"))))
+   #+end_src
+
 ** Org-babel noweb/env-var conversion
    #+begin_src emacs-lisp
      (defun dcl/env-var-to-noweb (beg end)

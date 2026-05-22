@@ -900,6 +900,15 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
       (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-pullreqs nil t)
       (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-issues   nil t)
       (message "Forge sections on"))))
+(defun dcl/magit-toggle-worktree-sections ()
+  (interactive)
+  (if (-contains? magit-status-sections-hook 'magit-insert-worktrees)
+      (progn
+        (remove-hook 'magit-status-sections-hook 'magit-insert-worktrees)
+        (message "Worktree sections off"))
+    (progn
+      (magit-add-section-hook 'magit-status-sections-hook 'magit-insert-worktrees nil t)
+      (message "Worktree sections on"))))
 (defun dcl/env-var-to-noweb (beg end)
   "Convert $ENV_VAR to <<env_var>> noweb reference in region or at point."
   (interactive
