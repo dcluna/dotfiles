@@ -79,3 +79,16 @@ function convert_pg_dump_to_sql(){
     sqlfile=$(echo $dumpfile | sed -e 's/\.dump$/.sql/')
     pg_restore --no-owner --no-acl "$@" -f $sqlfile $dumpfile
 }
+
+function dump_local_db(){
+    dbname=$(psql -U vagrant -d postgres -t -A -c "SELECT datname FROM pg_database ORDER BY datname;" | fzf)
+    pg_dump -U vagrant -Fc "$dbname" -f "$dbname".dump
+}
+
+function pg_restore_local_db(){
+  pg_restore -U vagrant "$@" dashboard_development.dump
+}
+
+function vagrant_sync_functions(){
+  cat "$DOTFILES_DIR/.zsh-confs/functions.zsh" | vagrant ssh -- "cat > ~/shell_functions.sh && grep -q shell_functions.sh ~/.bashrc || echo 'source ~/shell_functions.sh' >> ~/.bashrc"
+}
