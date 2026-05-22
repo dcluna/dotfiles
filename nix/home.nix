@@ -157,6 +157,7 @@ in
     pkgs.pandoc
     pkgs.jujutsu
     pkgs.pi-coding-agent
+    pkgs.papertrail
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
