@@ -86,7 +86,10 @@ function dump_local_db(){
 }
 
 function pg_restore_local_db(){
-  pg_restore -U vagrant "$@" dashboard_development.dump
+  dbdump=$(ls ${DUMPDIR:-$PWD}/*.dump | fzf)
+  dbname=$(rails runner 'puts URI.parse(WorktreeDb.dev_db_name).path.sub(%r{^/}, "")')
+  echo "Restoring $dbdump to $dbname"
+  pg_restore -U vagrant -d "$dbname" "$@" "$dbdump"
 }
 
 function vagrant_sync_functions(){
