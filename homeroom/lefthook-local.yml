@@ -132,7 +132,7 @@ pre-commit:
       run: |
         rubocop --raise-cop-error --only Rails/EagerEvaluationLogMessage {staged_files}
 
-    rubocop-documentation:
+    rubocop-documentation-method:
       tags:
         - qa
         - documentation
@@ -142,7 +142,7 @@ pre-commit:
       glob: "*.rb"
       exclude: "spec/**/*.rb|db/**/*.rb|config/initializers/**/*.rb"
       run: |
-        rubocop --raise-cop-error --only Style/Documentation --force-default-config {staged_files}
+        rubocop --raise-cop-error --only Style/DocumentationMethod --force-default-config {staged_files}
 
 # prepare-commit-msg:
 #   commands:
