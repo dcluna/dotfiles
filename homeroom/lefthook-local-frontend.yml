@@ -63,7 +63,7 @@ pre-commit:
         PAGER: "/bin/cat"
         GIT_PAGER: "/bin/cat"
         NO_COLOR: "1"
-      run: yarn run eslint-baseline {staged_files}
+      run: mise exec -- yarn run eslint-baseline {staged_files}
 
     mutation-shield:
       tags:
