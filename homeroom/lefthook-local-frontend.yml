@@ -81,6 +81,22 @@ pre-commit:
         NO_COLOR: "1"
       run: mise exec node@latest -- npx --yes eslint --no-warn-ignored --config $DOTFILES_DIR/homeroom/eslint-rules/mutation-shield.config.cjs {staged_files}
 
+    react-sort-comp:
+      tags:
+        - linting
+        - code-quality
+      glob: "**/*.{ts,tsx,js,jsx}"
+      exclude:
+        - '**/generated/*.generated.tsx'
+        - '**/generated/*.generated.ts'
+        - '**/generated/index.ts'
+      skip:
+        - merge
+        - rebase
+      env:
+        NO_COLOR: "1"
+      run: mise exec -- npx --yes eslint --no-warn-ignored --config $DOTFILES_DIR/homeroom/eslint-rules/react-sort-comp.config.cjs {staged_files}
+
     trailing_whitespace:
       tags:
         - formatting
