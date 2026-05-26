@@ -97,6 +97,29 @@ pre-commit:
         NO_COLOR: "1"
       run: mise exec -- npx --yes eslint --no-warn-ignored --config $DOTFILES_DIR/homeroom/eslint-rules/react-sort-comp.config.cjs {staged_files}
 
+    prefer-function-declaration:
+      tags:
+        - linting
+        - code-quality
+      glob: "**/*.{ts,tsx,js,jsx}"
+      exclude:
+        - '**/generated/*.generated.tsx'
+        - '**/generated/*.generated.ts'
+        - '**/generated/index.ts'
+      skip:
+        - merge
+        - rebase
+      env:
+        NO_COLOR: "1"
+      run: |
+        mise exec -- npx --yes eslint --no-warn-ignored --config $DOTFILES_DIR/homeroom/eslint-rules/prefer-function-declaration.config.cjs {staged_files}
+        status=$?
+        if [ $status -ne 0 ]; then
+          echo ""
+          echo "Component style rules: prefer function declarations over arrow functions/useCallback. Order code by execution flow — rendering first, callbacks second."
+          exit $status
+        fi
+
     trailing_whitespace:
       tags:
         - formatting
