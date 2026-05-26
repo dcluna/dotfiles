@@ -1,11 +1,13 @@
-// Standalone ESLint flat config for react/sort-comp.
+// Standalone ESLint flat config for component method/function ordering.
 // Enforces: rendering first, callbacks second.
+// Covers both class components (react/sort-comp) and function components (custom rule).
 // Usage: npx eslint --no-warn-ignored --config <path-to-this-file> <files...>
 
 const { createRequire } = require("module");
 const projectRequire = createRequire(require("path").join(process.cwd(), "package.json"));
 
 const react = projectRequire("eslint-plugin-react");
+const reactFuncSortComp = require("./react-func-sort-comp.cjs");
 
 let parser;
 for (const name of ["@typescript-eslint/parser", "@babel/eslint-parser"]) {
@@ -21,6 +23,7 @@ const config = {
   files: ["**/*.{ts,tsx,js,jsx}"],
   plugins: {
     react,
+    "local": { rules: { "react-func-sort-comp": reactFuncSortComp } },
   },
   settings: {
     react: { version: "detect" },
@@ -45,6 +48,7 @@ const config = {
         ],
       },
     }],
+    "local/react-func-sort-comp": "error",
   },
   languageOptions: {
     ecmaVersion: "latest",
