@@ -4248,6 +4248,23 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
       (spacemacs/declare-prefix "o l m" "meta-agent")))
 #+end_src
 
+*** Agent-recall
+
+    #+begin_src emacs-lisp
+      (use-package agent-recall
+        :straight (:host github :repo "Marx-A00/agent-recall")
+        :after agent-shell
+        :config
+        (setq agent-recall-search-paths '("~/Projects/homeroom-transcripts"))
+        (setq agent-recall-search-function 'counsel-rg)
+        (add-hook 'agent-shell-mode-hook #'agent-recall-track-sessions)
+        (setq agent-recall-browse-sort 'modified-desc)
+        (setq agent-shell-prefer-session-resume nil) ;; this comes from agent-shell, not agent-recall
+        (setq agent-recall-index-file "~/Projects/homeroom-transcripts/agent-recall/index.el")
+        (global-agent-recall-transcript-mode 1))
+    #+end_src
+
+
 ** AI Code interface
 
     #+begin_src emacs-lisp

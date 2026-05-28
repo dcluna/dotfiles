@@ -2596,6 +2596,17 @@ _u_pdate
     (define-key llm-agent-keymap "!" #'meta-agent-shell-big-red-button)
     (evil-leader/set-key "o l m" llm-agent-keymap)
     (spacemacs/declare-prefix "o l m" "meta-agent")))
+(use-package agent-recall
+  :straight (:host github :repo "Marx-A00/agent-recall")
+  :after agent-shell
+  :config
+  (setq agent-recall-search-paths '("~/Projects/homeroom-transcripts"))
+  (setq agent-recall-search-function 'counsel-rg)
+  (add-hook 'agent-shell-mode-hook #'agent-recall-track-sessions)
+  (setq agent-recall-browse-sort 'modified-desc)
+  (setq agent-shell-prefer-session-resume nil) ;; this comes from agent-shell, not agent-recall
+  (setq agent-recall-index-file "~/Projects/homeroom-transcripts/agent-recall/index.el")
+  (global-agent-recall-transcript-mode 1))
 (use-package ai-code
   :ensure t
   :bind (("C-c m" . ai-code-menu))
