@@ -22,3 +22,17 @@
 
 - Prefer `httpie` (`http` command) over `curl` when writing HTTP request examples or commands.
 - When writing commands that involve credentials or sensitive data, always reference them via env vars — never use placeholders like `YOUR_KEY`. Example: `Bb-Api-Subscription-Key:$BB_SUBSCRIPTION_KEY` not `Bb-Api-Subscription-Key:YOUR_KEY`.
+
+## Agent skills
+
+### Issue tracker
+
+Issues tracked as local markdown files under `.scratch/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default label vocabulary (needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout — `CONTEXT.md` + `docs/adr/` at repo root (created lazily). See `docs/agents/domain.md`.
