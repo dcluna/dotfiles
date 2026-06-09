@@ -252,6 +252,7 @@ post-checkout:
           # Rewrite API_DIR in .envrc to match this worktree's dirname
           WORKTREE_BASENAME=$(basename "$PWD")
           sed -i '' "s|export API_DIR=\"/vagrant/api\"|export API_DIR=\"/vagrant/${WORKTREE_BASENAME}\"|" .envrc
+          ln -s $MAIN_GIT_DIR/../api_justfile/Justfile Justfile
         fi
 
     setup-vagrant-db:
