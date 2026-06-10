@@ -268,3 +268,17 @@ post-checkout:
           WORKTREE_BASENAME=$(basename "$PWD")
           (vagrant ssh -- "cd /vagrant/${WORKTREE_BASENAME} && rails db:create db:schema:load") &
         fi
+
+    setup-graphify:
+      tags:
+        - worktree
+        - graphify
+        - llm
+      run: |
+        if [ "{1}" -eq 0 ] && [ "{3}" -eq 1 ]; then
+          mkdir -p ./graphify-out
+          [ -d ./graphify-out/cache ] || cp -r "$MAIN_GIT_DIR/graphify-out/cache" ./graphify-out/cache
+          cp "$MAIN_GIT_DIR/graphify-out/graph.json" ./graphify-out/ 2>/dev/null || true
+          printf '%s\n' "$PWD" > ./graphify-out/.graphify_root
+          (graphify update app >/dev/null 2>&1) &
+        fi
