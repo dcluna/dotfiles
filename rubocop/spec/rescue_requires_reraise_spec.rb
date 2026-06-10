@@ -66,14 +66,62 @@ RSpec.describe CustomCops::RescueRequiresReraise do
     end
   end
 
-  context "when rescue has raise without condition" do
-    it "registers an offense (unconditional raise is not the guard)" do
+  context "when rescue has unconditional raise" do
+    it "does not register an offense" do
+      expect_no_offenses(<<~RUBY)
+        begin
+          do_work
+        rescue => e
+          raise
+        end
+      RUBY
+    end
+
+    it "does not register an offense when raise follows other statements" do
+      expect_no_offenses(<<~RUBY)
+        begin
+          do_work
+        rescue => e
+          job_status = "failed"
+          error_info = { class: e.class.name, message: e.message }
+          raise
+        end
+      RUBY
+    end
+
+    it "does not register an offense when raise precedes other statements" do
+      expect_no_offenses(<<~RUBY)
+        begin
+          do_work
+        rescue => e
+          raise
+          log(e)
+        end
+      RUBY
+    end
+  end
+
+  context "when rescue has raise with arguments (re-raise different exception)" do
+    it "registers an offense" do
       expect_offense(<<~RUBY)
         begin
           do_work
         rescue => e
         ^^^^^^^^^^^ Rescue blocks must include `raise if TestOnlyBehavior.raise_errors?`.
-          raise
+          raise CustomError, e.message
+        end
+      RUBY
+    end
+  end
+
+  context "when rescue has conditional raise (not the guard)" do
+    it "registers an offense" do
+      expect_offense(<<~RUBY)
+        begin
+          do_work
+        rescue => e
+        ^^^^^^^^^^^ Rescue blocks must include `raise if TestOnlyBehavior.raise_errors?`.
+          raise if some_condition?
         end
       RUBY
     end

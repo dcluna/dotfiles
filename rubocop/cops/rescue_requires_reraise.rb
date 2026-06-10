@@ -13,12 +13,20 @@ module CustomCops
   #     log(e)
   #   end
   #
-  # @example Good
+  # @example Good – conditional guard
   #   begin
   #     do_work
   #   rescue => e
   #     raise if TestOnlyBehavior.raise_errors?
   #     log(e)
+  #   end
+  #
+  # @example Good – unconditional re-raise
+  #   begin
+  #     do_work
+  #   rescue => e
+  #     log(e)
+  #     raise
   #   end
   class RescueRequiresReraise < RuboCop::Cop::Base
     MSG = "Rescue blocks must include `raise if %<guard>s`."
@@ -30,12 +38,20 @@ module CustomCops
 
       # Body can be a single node or a begin (compound) node
       statements = body.begin_type? ? body.children : [body]
+      return if statements.any? { |stmt| unconditional_raise?(stmt) }
       return unless statements.none? { |stmt| raise_if_guard?(stmt, guard) }
 
       add_guard_offense(node)
     end
 
     private
+
+    def unconditional_raise?(node)
+      node.type == :send &&
+        node.method_name == :raise &&
+        node.receiver.nil? &&
+        node.arguments.empty?
+    end
 
     def raise_if_guard?(node, guard)
       # Match: raise if <guard>
