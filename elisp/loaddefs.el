@@ -40,6 +40,21 @@ Opens all marked files in dired on one visidata session in a new tmux window, na
 
 ;;;***
 
+;;;### (autoloads nil "claude-forge-pr" "claude-forge-pr.el" (0 0 0 0))
+;;; Generated autoloads from claude-forge-pr.el
+
+(autoload 'claude-forge-pr "claude-forge-pr" "\
+Run Claude /forge-pr skill asynchronously.
+Prompts for SOURCE-BRANCH, BASE-BRANCH, and TARGET-BUFFER.
+Forge-post buffers are prioritized in buffer selection.
+Output goes to the *Claude PR Generator* buffer.
+
+\(fn SOURCE-BRANCH BASE-BRANCH TARGET-BUFFER)" t nil)
+
+(register-definition-prefixes "claude-forge-pr" '("claude-forge-pr"))
+
+;;;***
+
 (provide 'loaddefs)
 ;; Local Variables:
 ;; version-control: never
