@@ -60,7 +60,40 @@ git show "$LAST_COMMIT^:docs/plans/<filename>"
 
 If plan docs are found (live or deleted), read their contents — they contain the author's intent and should inform the PR description. Reference them in the description using permalink URLs so reviewers can find the full context even after the files are removed from the branch.
 
-### 3. Draft the PR description
+### 3. Search for Flipper flags
+
+**This step is mandatory.** Scan the diff for any Flipper feature flag references:
+
+```bash
+# Search the diff for Flipper usage patterns
+git diff <base-branch>...HEAD | rg -i 'Flipper(\[|\.enabled\?|\.enable|\.disable|\.add|\.remove|\.exist)'
+```
+
+Also search for flag symbols/strings referenced in the diff:
+
+```bash
+# Get changed Ruby files and search them for Flipper patterns
+git diff --name-only <base-branch>...HEAD -- '*.rb' | xargs rg 'Flipper' 2>/dev/null
+```
+
+If **any Flipper flags are found**, you MUST include a `## Flipper Flags` section in the PR description (see template below). For each flag, document:
+
+1. **Flag name** — the symbol/string (e.g., `:enable_new_billing`)
+2. **Purpose** — what problem it solves or what behavior it gates
+3. **Scope** — what resource(s) it's scoped to (e.g., `Actor(Site)`, `Actor(User)`, `Group(:beta_testers)`, percentage, or boolean/global)
+
+To determine scope, look at:
+- `Flipper.enabled?(:flag, resource)` — the second argument is the actor
+- `Flipper[:flag].enable_actor(resource)` — actor enablement
+- `Flipper[:flag].enable_group(:name)` — group enablement
+- `Flipper[:flag].enable_percentage_of_actors(n)` — percentage
+- `Flipper[:flag].enable` with no args — global/boolean
+
+If scope is unclear from the diff, check model methods that wrap the flag (e.g., `site.some_flag?`) and trace the `Flipper.enabled?` call.
+
+If **no Flipper flags are found**, omit the section entirely — do not add an empty one.
+
+### 4. Draft the PR description
 
 Write the PR content to a temp file. Use this structure:
 
@@ -132,12 +165,24 @@ with specifics. Example:
 For small PRs (1-2 logical groups), a flat list with bold leads is fine.
 For larger PRs, always use the header-then-bullets structure.>
 
+## Flipper Flags
+
+<MANDATORY if any Flipper flags are introduced or modified in this PR.
+Omit only if the PR contains zero Flipper flag references.>
+
+| Flag | Purpose | Scope |
+|------|---------|-------|
+| `:flag_name` | What behavior this gates and why | `Actor(Site)` / `Actor(User)` / `Group(:name)` / `Boolean` / `% of actors` |
+
+<Add a sentence per flag if the table row is too terse to explain the
+rollout plan or migration path.>
+
 ## Testing
 
 <How to test these changes, or note if tests are included>
 ```
 
-Omit the Plan section if no plan docs are found. Omit the Architecture / Flow section only for trivial PRs (single-file typo, config bump). Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
+Omit the Plan section if no plan docs are found. Omit the Architecture / Flow section only for trivial PRs (single-file typo, config bump). The Flipper Flags section is **mandatory** whenever the diff touches Flipper — never skip it. Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
 
 #### Writing style
 
@@ -147,7 +192,7 @@ Omit the Plan section if no plan docs are found. Omit the Architecture / Flow se
 - **Reference ticket numbers** — include ticket references like `[T10092]` when present in commit messages.
 - **Keep it scannable** — a reviewer should understand the PR's scope in 30 seconds. Use bold for feature names, one-line bullets for smaller fixes.
 
-### 4. Insert into the Emacs buffer
+### 5. Insert into the Emacs buffer
 
 Write the description to a temp file, then use `emacsclient` to insert it into the Forge buffer:
 
@@ -170,7 +215,7 @@ For **new PRs** (`new-pullreq` buffer): The buffer typically has a title line at
 
 For **existing PRs** (editing): The buffer contains the current description. Replace or append as appropriate based on user instructions.
 
-### 5. Do NOT submit
+### 6. Do NOT submit
 
 Never call `forge-post-submit` or any equivalent. The user reviews and submits manually.
 
