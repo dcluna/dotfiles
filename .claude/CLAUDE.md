@@ -10,6 +10,49 @@
 - Use `ast-grep` for Rails DSL and structural queries such as `belongs_to`, `has_many`, `has_one`, `scope`, `validates`, and callback declarations.
 - Use `rg` for broad text search across models, schema, migrations, configs, and docs.
 
+### ast-grep for React/TypeScript projects
+
+- Use `--lang tsx` for both `.tsx` and `.jsx` files (ast-grep's TSX parser handles JSX).
+- Use `--lang typescript` for plain `.ts` files.
+- Common React patterns:
+
+```bash
+# Find all useState calls
+ast-grep run --pattern 'useState($INIT)' --lang tsx path/to/src/
+
+# Find useEffect with dependencies
+ast-grep run --pattern 'useEffect($CALLBACK, [$$$DEPS])' --lang tsx path/to/src/
+
+# Find useEffect with NO dependency array (runs every render)
+ast-grep run --pattern 'useEffect($CALLBACK)' --lang tsx path/to/src/
+
+# Find specific hook usage
+ast-grep run --pattern 'useQuery($$$ARGS)' --lang tsx path/to/src/
+ast-grep run --pattern 'useMutation($$$ARGS)' --lang tsx path/to/src/
+
+# Find JSX self-closing elements
+ast-grep run --pattern '<$TAG $$$ATTRS />' --lang tsx path/to/src/
+
+# Find component definitions (function declarations)
+ast-grep run --pattern 'function $NAME($$$PARAMS): $RET { $$$BODY }' --lang tsx path/to/src/
+
+# Find arrow function components with React.FC
+ast-grep run --pattern 'const $NAME: React.FC<$PROPS> = $$$BODY' --lang tsx path/to/src/
+
+# Find imports from a specific package
+ast-grep run --pattern 'import $$$IMPORTS from "react-router"' --lang tsx path/to/src/
+
+# Find styled-components definitions
+ast-grep run --pattern 'styled.$TAG`$$$CSS`' --lang tsx path/to/src/
+
+# Find inline style objects (potential performance issue)
+ast-grep run --pattern '<$TAG style={{$$$STYLES}} $$$REST>' --lang tsx path/to/src/
+```
+
+- Use `$$$` (multi-matcher) for variable-length argument lists, children, or attributes.
+- Use `$NAME` (single-matcher) for a single node (identifier, expression, etc.).
+- Prefer ast-grep over `rg` when searching for structural patterns (component props, hook arguments, JSX nesting) where regex would be fragile.
+
 ## Commit Discipline
 
 - Commit your work proactively in logical chunks as you go — do not wait for the user to ask.
