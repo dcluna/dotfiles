@@ -4265,6 +4265,18 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
     #+end_src
 
 
+*** Agent-shell-macext
+
+    #+begin_src emacs-lisp
+      (use-package agent-shell-macext
+        :vc (:url "https://github.com/cxa/agent-shell-macext")
+        :hook (agent-shell-mode . agent-shell-macext-setup)
+        :custom
+        (agent-shell-macext-file-copy-policy 'auto)    ; auto, always-copy, always-original
+        (agent-shell-macext-notifications t)           ; enable native notifications
+        (agent-shell-macext-notify-current-buffer nil)) ; nil = suppress when shell/viewport is current and Emacs is focused
+    #+end_src
+
 ** AI Code interface
 
     #+begin_src emacs-lisp

@@ -2607,6 +2607,13 @@ _u_pdate
   (setq agent-shell-prefer-session-resume nil) ;; this comes from agent-shell, not agent-recall
   (setq agent-recall-index-file "~/Projects/homeroom-transcripts/agent-recall/index.el")
   (global-agent-recall-transcript-mode 1))
+(use-package agent-shell-macext
+  :vc (:url "https://github.com/cxa/agent-shell-macext")
+  :hook (agent-shell-mode . agent-shell-macext-setup)
+  :custom
+  (agent-shell-macext-file-copy-policy 'auto)    ; auto, always-copy, always-original
+  (agent-shell-macext-notifications t)           ; enable native notifications
+  (agent-shell-macext-notify-current-buffer nil)) ; nil = suppress when shell/viewport is current and Emacs is focused
 (use-package ai-code
   :ensure t
   :bind (("C-c m" . ai-code-menu))
