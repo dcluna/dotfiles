@@ -18,6 +18,7 @@
       straight-vc-git-upstream-remote "origin"
       straight-vc-git-primary-remote "my-version")
 
+(setq straight-current-profile 'spacemacs)
 
 (setq straight-packages '(
                           (majutsu :host github :repo "0WD0/majutsu")

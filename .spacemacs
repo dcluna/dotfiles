@@ -239,6 +239,8 @@ static char *gnus-pointer[] = {
    '(sml/inactive-background-color "#4fa8a8")
    '(sml/inactive-foreground-color "#424242")
    '(sqlformat-command 'pgformatter)
+   '(straight-profiles
+     '((spacemacs . "spacemacs-straight.el") (nil . "default.el")))
    '(tabbar-background-color "#ffffffffffff")
    '(term-default-bg-color "#fdf6e3")
    '(term-default-fg-color "#657b83")
