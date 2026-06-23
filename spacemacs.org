@@ -679,7 +679,7 @@
                               (homebrew :type git :host github :repo "jdormit/homebrew.el")
                               git-link
                               ;; (cyberpunk-2019 :type git :host github :repo "the-frey/cyberpunk-2019")
-                              ;; (forge :type git :host github :repo "magit/forge")
+                              (forge :type git :host github :repo "magit/forge" :commit "d4eb8d1be55398e350c8a68b0c355f5166418843")
                               minitest
                               helpful
                               (enh-ruby-mode :type git :host github :repo "zenspider/enhanced-ruby-mode")
