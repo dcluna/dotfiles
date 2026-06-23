@@ -702,8 +702,8 @@
                               ;; graphql-mode
                               ;; lsp-mode
                               jq-mode
-                              (rubocop :type git :host github :repo "dcluna/rubocop-emacs"
-                                       :upstream (:host github :repo "bbatsov/rubocop-emacs"))
+                              (rubocop :type git :host github :repo "bbatsov/rubocop-emacs"
+                                       :my-fork (:host github :repo "dcluna/rubocop-emacs"))
                               ;; org
                               (vlf :type git :host github :repo "m00natic/vlfi")
                               evil-numbers
