@@ -2346,6 +2346,7 @@ _u_pdate
     (setq codeium/document/text 'my-codeium/document/text)
     (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
 (use-package casual
+  :after calc
   :ensure t
   :bind (:map calc-mode-map ("C-o" . 'casual-main-menu)))
 (require 'session)
@@ -2614,6 +2615,7 @@ _u_pdate
   (agent-shell-macext-file-copy-policy 'auto)    ; auto, always-copy, always-original
   (agent-shell-macext-notifications t)           ; enable native notifications
   (agent-shell-macext-notify-current-buffer nil)) ; nil = suppress when shell/viewport is current and Emacs is focused
+
 (use-package ai-code
   :ensure t
   :bind (("C-c m" . ai-code-menu))

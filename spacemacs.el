@@ -633,4 +633,6 @@ user code."
   ;; (add-to-list 'package-pinned-packages '(async . "melpa-stable"))
 
 (defun dotspacemacs/user-config ()
-  (load-file (expand-file-name "~/spacemacs-user-config.el")))
+  (setq debug-on-error t)
+  (load-file (expand-file-name "~/spacemacs-user-config.el"))
+  (setq debug-on-error nil))

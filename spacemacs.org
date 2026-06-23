@@ -18,7 +18,9 @@
     <<spacemacs-user-init>>
 
     (defun dotspacemacs/user-config ()
-      (load-file (expand-file-name "~/spacemacs-user-config.el")))
+      (setq debug-on-error t)
+      (load-file (expand-file-name "~/spacemacs-user-config.el"))
+      (setq debug-on-error nil))
   #+END_SRC
 
   #+BEGIN_SRC emacs-lisp :tangle "spacemacs-user-config.el" :noweb yes
@@ -3903,9 +3905,10 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
    Taken from https://irreal.org/blog/?p=12065:
 
    #+begin_src emacs-lisp
-(use-package casual
-  :ensure t
-  :bind (:map calc-mode-map ("C-o" . 'casual-main-menu)))
+     (use-package casual
+       :after calc
+       :ensure t
+       :bind (:map calc-mode-map ("C-o" . 'casual-main-menu)))
    #+end_src
 
 ** Session
@@ -4275,6 +4278,7 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
         (agent-shell-macext-file-copy-policy 'auto)    ; auto, always-copy, always-original
         (agent-shell-macext-notifications t)           ; enable native notifications
         (agent-shell-macext-notify-current-buffer nil)) ; nil = suppress when shell/viewport is current and Emacs is focused
+
     #+end_src
 
 ** AI Code interface
