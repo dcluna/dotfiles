@@ -166,8 +166,8 @@ module CircleCIFetcher
     warn "Fetching artifacts list..."
     artifacts = fetch_artifacts(params, token)
 
-    dir_name = directory_name_from_tests(tests) || "job-#{params[:job_number]}"
-    dest_dir = Pathname.new(output_dir) / params[:repo] / dir_name
+    test_name = directory_name_from_tests(tests) || "job-#{params[:job_number]}"
+    dest_dir = Pathname.new(output_dir) / params[:repo] / params[:workflow] / test_name
     FileUtils.mkdir_p(dest_dir)
 
     # Download XML artifacts (results.xml, junit.xml, etc.)
