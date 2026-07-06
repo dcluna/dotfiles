@@ -20,6 +20,14 @@ fi
 # e.g. SPECS_IN_APP_IGNORE="app/models/legacy_spec.rb:app/services/old_spec.rb"
 IFS=':' read -ra ignore_list <<< "${SPECS_IN_APP_IGNORE:-}"
 
+# Auto-ignore spec files already present in develop branch
+develop_ref="${SPECS_IN_APP_BASE_BRANCH:-develop}"
+if git rev-parse --verify "$develop_ref" &>/dev/null; then
+  while IFS= read -r f; do
+    [[ "$f" == app/*_spec.rb ]] && ignore_list+=("$f")
+  done < <(git ls-tree -r --name-only "$develop_ref" -- app/ 2>/dev/null | grep '_spec\.rb$' || true)
+fi
+
 spec_files=$(find "$app_dir" -name '*_spec.rb' -type f 2>/dev/null || true)
 
 # Filter out ignored files
