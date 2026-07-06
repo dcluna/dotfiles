@@ -2516,7 +2516,15 @@ _u_pdate
   (agent-shell-mcp-servers       '(((name . "sentry")
                                     (type . "http")
                                     (headers . [])
-                                    (url . "https://mcp.sentry.dev/mcp"))))
+                                    (url . "https://mcp.sentry.dev/mcp"))
+                                   ((name . "circleci")
+                                    (command . "npx")
+                                    (args . ("-y" "@circleci/mcp-server-circleci@latest"))
+                                    (env . (((name . "CIRCLECI_TOKEN")
+                                             (value . (lambda ()
+                                                        (require 'auth-source)
+                                                        (auth-source-pick-first-password
+                                                         :host "circleci.com")))))))))
   :config
   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
   (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
