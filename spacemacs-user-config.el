@@ -2512,6 +2512,11 @@ _u_pdate
    (claude-agent-acp . "npm install -g @zed-industries/claude-agent-acp")
    (codex . "brew install codex")
    (codex-acp . "npm install -g @zed-industries/codex-acp"))
+  :custom
+  (agent-shell-mcp-servers       '(((name . "sentry")
+                                    (type . "http")
+                                    (headers . [])
+                                    (url . "https://mcp.sentry.dev/mcp"))))
   :config
   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
   (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
