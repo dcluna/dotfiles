@@ -2526,6 +2526,14 @@ _u_pdate
                                                         (require 'auth-source)
                                                         (auth-source-pick-first-password
                                                          :host "circleci.com")))))))
+                                   ((name . "airtable")
+                                    (type . "http")
+                                    (url . "https://mcp.airtable.com/mcp")
+                                    (headers . (((name . "Authorization")
+                                                 (value . (lambda ()
+                                                           (concat "Bearer "
+                                                                   (auth-source-pick-first-password
+                                                                     :host "airtable.com"))))))))
                                    ((name . "logrocket")
                                     (type . "http")
                                     (headers . [])
