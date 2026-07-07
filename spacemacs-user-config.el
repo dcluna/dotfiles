@@ -2513,6 +2513,7 @@ _u_pdate
    (codex . "brew install codex")
    (codex-acp . "npm install -g @zed-industries/codex-acp"))
   :custom
+  (agent-shell-prefer-viewport-interaction t)
   (agent-shell-mcp-servers       '(((name . "sentry")
                                     (type . "http")
                                     (headers . [])
@@ -2535,6 +2536,7 @@ _u_pdate
             (lambda ()
               (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
                 (evil-emacs-state))))
+  (evilified-state-evilify-map agent-shell-viewport-view-mode-map :mode agent-shell-viewport-view-mode)
 
   ;; Redirect .agent-shell/ data for projects under a configured
   ;; directory to a separate transcripts directory.
