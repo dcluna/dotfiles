@@ -23,7 +23,10 @@ pre-commit:
         - code-quality
         - duplication
       glob: "*.rb"
-      exclude: "Gemfile|db/schema.rb|db/data_schema.rb"
+      exclude:
+        - "Gemfile"
+        - "db/schema.rb"
+        - "db/data_schema.rb"
       skip:
         - merge
         - rebase
@@ -34,7 +37,9 @@ pre-commit:
         - formatting
         - style
       glob: "*"
-      exclude: "db/structure.sql|spec/vcr_cassettes/**/*"
+      exclude:
+        - "db/structure.sql"
+        - "spec/vcr_cassettes/**/*"
       skip:
         - merge
         - rebase
@@ -140,7 +145,10 @@ pre-commit:
         - merge
         - rebase
       glob: "*.rb"
-      exclude: "spec/**/*.rb|db/**/*.rb|config/initializers/**/*.rb"
+      exclude:
+        - "spec/**/*.rb"
+        - "db/**/*.rb"
+        - "config/initializers/**/*.rb"
       run: |
         rubocop --raise-cop-error --only Style/DocumentationMethod --force-default-config {staged_files}
 
