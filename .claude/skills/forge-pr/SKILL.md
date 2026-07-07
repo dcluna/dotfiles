@@ -93,6 +93,40 @@ If scope is unclear from the diff, check model methods that wrap the flag (e.g.,
 
 If **no Flipper flags are found**, omit the section entirely — do not add an empty one.
 
+### 3b. Search for Airtable tickets
+
+**This step is mandatory.** Use the `airtable-ticket-sync` skill's search flow (steps 1-4) to find matching tickets in the Homeroom Airtable base. Extract domain keywords from the branch name and commit messages, then search the Features table.
+
+If matches are found, include them in the `## Airtable` section of the PR description (see template below). Use the Airtable record URL format: `https://airtable.com/app28k8NqnFYDV9GY/tblLpjVgfZL3mJvSs/<record_id>`
+
+If **no Airtable tickets are found**, ask the user if they want one created automatically. If yes:
+
+1. **Derive title and description** from the PR summary and changes:
+   - Title: concise feature/fix name (e.g., "Blackbaud relationship type mapping")
+   - Description: 2-3 sentences from the PR summary explaining what and why
+
+2. **Show the user** the proposed title and description before creating. Let them adjust.
+
+3. **Create the ticket** via MCP:
+
+```
+ToolSearch: select:mcp__airtable__create_records_for_table
+```
+
+```
+mcp__airtable__create_records_for_table:
+  baseId: app28k8NqnFYDV9GY
+  tableId: tblLpjVgfZL3mJvSs
+  records: [{"fields": {"fld6xHHWjjxz8QECD": "<title>", "fld8J2OACjkyPSSZ8": "<description>", "fldK4bvhlliaw70lo": "In Process", "fldmpQDTC9zALnfQP": {"id": "usra599HQ9UTw5M1j"}}}]
+  fieldIds: ["fldhgRd5K80aIvxTw", "fld6xHHWjjxz8QECD", "fldK4bvhlliaw70lo"]
+```
+
+4. **Output the link** to the created ticket: `https://airtable.com/app28k8NqnFYDV9GY/tblLpjVgfZL3mJvSs/<record_id>`
+
+5. **Include the new ticket** in the `## Airtable` section of the PR description, just like any found ticket.
+
+If user declines creation, omit the Airtable section entirely.
+
 ### 4. Draft the PR description
 
 Write the PR content to a temp file. Use this structure:
@@ -177,12 +211,26 @@ Omit only if the PR contains zero Flipper flag references.>
 <Add a sentence per flag if the table row is too terse to explain the
 rollout plan or migration path.>
 
+## Airtable
+
+<Include if Airtable tickets were found or created in step 3b.
+Omit only if user declined ticket creation and no matches exist.>
+
+| Ticket | Title | State |
+|--------|-------|-------|
+| [T1234](https://airtable.com/app28k8NqnFYDV9GY/tblLpjVgfZL3mJvSs/<record_id>) | Ticket title | In Process |
+
+<Link each ticket ID to its Airtable record URL.
+The airtable-ticket-sync skill handles state updates
+and PR link comments separately — this section is
+just for cross-referencing in the PR description.>
+
 ## Testing
 
 <How to test these changes, or note if tests are included>
 ```
 
-Omit the Plan section if no plan docs are found. Omit the Architecture / Flow section only for trivial PRs (single-file typo, config bump). The Flipper Flags section is **mandatory** whenever the diff touches Flipper — never skip it. Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
+Omit the Plan section if no plan docs are found. Omit the Architecture / Flow section only for trivial PRs (single-file typo, config bump). The Flipper Flags section is **mandatory** whenever the diff touches Flipper — never skip it. The Airtable section is included whenever tickets are found or created (step 3b). Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
 
 #### Writing style
 
@@ -270,6 +318,10 @@ After ediff launches, tell the user **exactly this** (do NOT mention manual copy
 ### 6. Do NOT submit
 
 Never call `forge-post-submit` or any equivalent. The user reviews and submits manually.
+
+## Companion skills
+
+After completing the PR description, also invoke **airtable-ticket-sync** to find and update matching Airtable tickets with the PR link and current status.
 
 ## Key rules
 
