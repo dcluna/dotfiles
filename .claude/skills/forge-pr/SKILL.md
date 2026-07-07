@@ -194,26 +194,78 @@ Omit the Plan section if no plan docs are found. Omit the Architecture / Flow se
 
 ### 5. Insert into the Emacs buffer
 
-Write the description to a temp file, then use `emacsclient` to insert it into the Forge buffer:
+Write the description to a temp file first (avoids quoting issues):
 
 ```bash
-# Write PR body to temp file (avoids quoting issues)
 cat > /tmp/claude-forge-pr-body.md << 'PREOF'
 <PR description here>
 PREOF
+```
 
-# Insert into the Forge buffer
+#### New PRs (`new-pullreq` buffer)
+
+The buffer typically has a title line at the top followed by an empty area for the description. Insert directly:
+
+```bash
 emacsclient --eval '
-(with-current-buffer "<buffer-name>"
+(with-current-buffer "new-pullreq"
   (goto-char (point-max))
   (insert (with-temp-buffer
             (insert-file-contents "/tmp/claude-forge-pr-body.md")
             (buffer-string))))'
 ```
 
-For **new PRs** (`new-pullreq` buffer): The buffer typically has a title line at the top followed by an empty area for the description. Position the cursor after any existing content and insert.
+#### Existing PRs (any buffer that is NOT `new-pullreq`)
 
-For **existing PRs** (editing): The buffer contains the current description. Replace or append as appropriate based on user instructions.
+When editing an existing PR, the buffer already contains a description. **Show a merge diff** so the user can merge changes per-region. If the PR buffer is empty, fall back to direct insert.
+
+Uses `ediff-merge-buffers-writeback` from `ediff-merge-utils.el` — this function runs `ediff-merge-buffers-with-ancestor` and writes the merge result back to the ancestor buffer on quit, but only if all conflicts are resolved.
+
+```bash
+emacsclient --eval '
+(require (quote ediff-merge-utils))
+(let* ((pr-buf-name "<buffer-name>")
+       (pr-buf (get-buffer pr-buf-name))
+       (old-content (with-current-buffer pr-buf (buffer-string))))
+  (if (string-empty-p (string-trim old-content))
+      ;; PR buffer empty — insert directly, no diff needed
+      (with-current-buffer pr-buf
+        (goto-char (point-max))
+        (insert (with-temp-buffer
+                  (insert-file-contents "/tmp/claude-forge-pr-body.md")
+                  (buffer-string))))
+    ;; PR buffer has content — 3-way merge
+    ;; Kill stale temp buffers from previous runs
+    (when (get-buffer "*forge-pr-old*") (kill-buffer "*forge-pr-old*"))
+    (when (get-buffer "*forge-pr-new*") (kill-buffer "*forge-pr-new*"))
+    (let ((old-buf (generate-new-buffer "*forge-pr-old*"))
+          (new-buf (generate-new-buffer "*forge-pr-new*")))
+      ;; A = current PR description (snapshot)
+      (with-current-buffer old-buf
+        (insert old-content)
+        (markdown-mode))
+      ;; B = proposed new description
+      (with-current-buffer new-buf
+        (insert-file-contents "/tmp/claude-forge-pr-body.md")
+        (markdown-mode))
+      ;; Merge A+B with PR buffer as ancestor and writeback target
+      (ediff-merge-buffers-writeback old-buf new-buf pr-buf))))'
+```
+
+How this works:
+- `ediff-merge-buffers-with-ancestor` shows A (old) and B (new) with a merge buffer C
+- PR buffer is the ancestor — ediff uses it for 3-way diff context
+- User picks `a`/`b` per region, or edits C directly — fully reversible
+- **AUTOMATIC WRITEBACK**: on quit (`q`), `ediff-merge-buffers-writeback` automatically writes the merge result into the PR buffer if all conflicts are resolved. No manual copying needed.
+- If unresolved conflicts remain, PR buffer is left untouched and user is warned.
+
+After ediff launches, tell the user **exactly this** (do NOT mention manual copying — writeback is automatic):
+- **A** = current description, **B** = proposed new, **C** = merge result
+- Use `a`/`b` per region to pick old or new, or edit C directly
+- **Quit** (`q`) — merge result is **automatically written** to the PR buffer (no manual copy needed)
+- Unresolved conflicts → PR buffer unchanged, user warned
+
+**IMPORTANT**: Never tell the user to manually copy content from the merge buffer. The `ediff-merge-buffers-writeback` function handles this automatically on quit.
 
 ### 6. Do NOT submit
 
