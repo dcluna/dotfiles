@@ -2525,7 +2525,11 @@ _u_pdate
                                              (value . (lambda ()
                                                         (require 'auth-source)
                                                         (auth-source-pick-first-password
-                                                         :host "circleci.com")))))))))
+                                                         :host "circleci.com")))))))
+                                   ((name . "logrocket")
+                                    (type . "http")
+                                    (headers . [])
+                                    (url . "https://mcp.logrocket.com/mcp"))))
   :config
   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
   (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
