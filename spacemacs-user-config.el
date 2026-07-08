@@ -2531,9 +2531,17 @@ _u_pdate
                                     (url . "https://mcp.airtable.com/mcp")
                                     (headers . (((name . "Authorization")
                                                  (value . (lambda ()
-                                                           (concat "Bearer "
-                                                                   (auth-source-pick-first-password
-                                                                     :host "airtable.com"))))))))
+                                                            (concat "Bearer "
+                                                                    (auth-source-pick-first-password
+                                                                      :host "airtable.com"))))))))
+                                   ((name . "notion")
+                                    (type . "http")
+                                    (headers . [])
+                                    (url . "https://mcp.notion.com/mcp"))
+                                   ((name . "chrome-devtools")
+                                    (command . "npx")
+                                    (args . ("chrome-devtools-mcp@latest"))
+                                    (env . ()))
                                    ((name . "logrocket")
                                     (type . "http")
                                     (headers . [])
