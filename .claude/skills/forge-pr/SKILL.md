@@ -127,6 +127,35 @@ mcp__airtable__create_records_for_table:
 
 If user declines creation, omit the Airtable section entirely.
 
+### 3c. Search for Sentry issues
+
+Scan the diff, commit messages, and branch name for references to Sentry issues. Look for:
+
+- Sentry issue URLs (e.g., `https://sentry.io/organizations/.../issues/<id>/`)
+- Sentry issue IDs in commit messages (e.g., `SENTRY-123`, `Sentry#123`, or bare issue numbers mentioned alongside "sentry")
+- Error classes or messages that correspond to known Sentry issues
+
+If references are found, use the Sentry MCP tools to fetch issue details:
+
+```
+ToolSearch: select:mcp__sentry__search_issues,mcp__sentry__find_organizations,mcp__sentry__find_projects
+```
+
+1. **Find the organization and project** (use `find_organizations` and `find_projects` if not already known).
+
+2. **Search or fetch issues**:
+
+```
+mcp__sentry__search_issues:
+  organization_slug: <org>
+  project_slug: <project>
+  query: <error class, message, or issue ID>
+```
+
+3. **Include matching issues** in the `## Sentry` section of the PR description (see template below). Link each issue using its Sentry URL.
+
+If **no Sentry issues are referenced or found**, omit the section entirely.
+
 ### 4. Draft the PR description
 
 Write the PR content to a temp file. Use this structure:
@@ -225,12 +254,24 @@ The airtable-ticket-sync skill handles state updates
 and PR link comments separately — this section is
 just for cross-referencing in the PR description.>
 
+## Sentry
+
+<Include if Sentry issues were found in step 3c.
+Omit entirely if no Sentry references exist.>
+
+| Issue | Title | Level | Link |
+|-------|-------|-------|------|
+| PROJ-123 | NoMethodError in BillingController | error | [Sentry](https://sentry.io/organizations/<org>/issues/<id>/) |
+
+<Link each issue to its Sentry URL. Helps reviewers
+verify the PR actually addresses the reported error.>
+
 ## Testing
 
 <How to test these changes, or note if tests are included>
 ```
 
-Omit the Plan section if no plan docs are found. Omit the Architecture / Flow section only for trivial PRs (single-file typo, config bump). The Flipper Flags section is **mandatory** whenever the diff touches Flipper — never skip it. The Airtable section is included whenever tickets are found or created (step 3b). Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
+Omit the Plan section if no plan docs are found. Omit the Architecture / Flow section only for trivial PRs (single-file typo, config bump). The Flipper Flags section is **mandatory** whenever the diff touches Flipper — never skip it. The Airtable section is included whenever tickets are found or created (step 3b). The Sentry section is included whenever Sentry issues are referenced (step 3c) — omit if none found. Adapt the structure to the project's PR conventions if visible in git log or existing PRs.
 
 #### Writing style
 
