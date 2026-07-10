@@ -158,6 +158,7 @@ in
     pkgs.jujutsu
     pkgs.pi-coding-agent
     pkgs.papertrail
+    pkgs.sqlfluff
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
@@ -204,6 +205,7 @@ in
     ".bashrc.d/emacs.sh".source = ../emacs.bash;
     ".opencode.json".source = ../opencode/opencode.json;
     ".config/rubocop/config.yml".source = mkSymlink "rubocop/config.yml";
+    ".sqlfluff".source = mkSymlink ".sqlfluff";
     # ".claude-code-router/config.json".source = ./claudecode/router.json;
 
     # ".tmux/plugins/tpm" = {
