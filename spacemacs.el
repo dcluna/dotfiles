@@ -21,6 +21,8 @@
 (setq straight-current-profile 'spacemacs)
 
 (setq straight-packages '(
+                          (pi-coding-agent :host github :repo "dnouri/pi-coding-agent"
+                                           :my-fork (:host github :repo "dcluna/pi-coding-agent"))
                           (majutsu :host github :repo "0WD0/majutsu")
                           agent-shell
                           shell-maker

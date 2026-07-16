@@ -652,6 +652,8 @@
     (setq straight-current-profile 'spacemacs)
 
     (setq straight-packages '(
+                              (pi-coding-agent :host github :repo "dnouri/pi-coding-agent"
+                                               :my-fork (:host github :repo "dcluna/pi-coding-agent"))
                               (majutsu :host github :repo "0WD0/majutsu")
                               agent-shell
                               shell-maker
@@ -4316,6 +4318,13 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
         (agent-shell-macext-notifications t)           ; enable native notifications
         (agent-shell-macext-notify-current-buffer nil)) ; nil = suppress when shell/viewport is current and Emacs is focused
 
+    #+end_src
+** Pi coding agent
+
+    #+begin_src emacs-lisp
+      (use-package pi-coding-agent
+        :custom (pi-coding-agent-executable "omp")
+                (pi-coding-agent-project-trust-policy 'default))
     #+end_src
 
 ** AI Code interface

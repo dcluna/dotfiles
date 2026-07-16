@@ -2651,6 +2651,9 @@ _u_pdate
   (agent-shell-macext-notifications t)           ; enable native notifications
   (agent-shell-macext-notify-current-buffer nil)) ; nil = suppress when shell/viewport is current and Emacs is focused
 
+(use-package pi-coding-agent
+  :custom (pi-coding-agent-executable "omp")
+          (pi-coding-agent-project-trust-policy 'default))
 (use-package ai-code
   :ensure t
   :bind (("C-c m" . ai-code-menu))
