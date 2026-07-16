@@ -652,6 +652,7 @@
     (setq straight-current-profile 'spacemacs)
 
     (setq straight-packages '(
+                              (magit-auto-detach :host github :repo "dcluna/magit-auto-detach" :files ("*.el" "bin"))
                               (pi-coding-agent :host github :repo "dnouri/pi-coding-agent"
                                                :my-fork (:host github :repo "dcluna/pi-coding-agent"))
                               (majutsu :host github :repo "0WD0/majutsu")
@@ -4445,6 +4446,13 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
      (use-package majutsu
        :straight (:host github :repo "0WD0/majutsu"))
    #+end_src
+** Magit extensions
+*** Magit auto detach
+    #+begin_src emacs-lisp
+      (use-package magit-auto-detach
+        :after magit)
+    #+end_src
+
 ** Comment-dwim-2
 
     #+begin_src emacs-lisp

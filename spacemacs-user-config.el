@@ -2721,6 +2721,8 @@ _u_pdate
    :init (difftastic-bindings-mode))
 (use-package majutsu
   :straight (:host github :repo "0WD0/majutsu"))
+(use-package magit-auto-detach
+  :after magit)
 (use-package comment-dwim-2
   :ensure t
   :bind
