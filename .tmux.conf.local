@@ -299,16 +299,16 @@ set -g mode-keys vi
 
 set -g @fingers-key G
 set -g @floax-bind 'F'
+# set -g @logging-key "O"
 
-# TMUX plugin manager
-set -g @tpm_plugins '          \
-  tmux-plugins/tpm             \
-  Morantron/tmux-fingers       \
-  tmux-plugins/tmux-logging    \
-  schasse/tmux-jump            \
-  dracula/tmux                 \
-  omerxx/tmux-floax
-'
+# TMUX plugins (use @plugin syntax for gpakosz/.tmux discovery)
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'Morantron/tmux-fingers'
+set -g @plugin 'tmux-plugins/tmux-logging'
+set -g @plugin 'schasse/tmux-jump'
+# set -g @plugin 'dracula/tmux'
+# set -g @plugin 'omerxx/tmux-floax'
+# set -g @plugin 'whame/tmux-modal'
 
 set -g @dracula-show-powerline true
 set -g @dracula-show-fahrenheit false
