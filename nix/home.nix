@@ -1,4 +1,4 @@
-{ config, lib, pkgs, tmux35pkgs, ... }:
+{ config, lib, pkgs, tmux35pkgs, jscpdPkgs, ... }:
 
 let
   # extraNodePackages = import ./node/default.nix {};
@@ -159,6 +159,7 @@ in
     pkgs.pi-coding-agent
     pkgs.papertrail
     pkgs.sqlfluff
+    jscpdPkgs.default
   ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [
     pkgs.rufo
     pkgs.pgsync
