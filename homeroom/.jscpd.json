@@ -1,0 +1,27 @@
+{
+  "threshold": 0,
+  "reporters": ["json"],
+  "ignore": [
+    "node_modules/**",
+    "vendor/**",
+    "tmp/**",
+    "log/**",
+    "coverage/**",
+    "public/**",
+    "db/schema.rb",
+    "db/data_schema.rb",
+    "db/structure.sql",
+    "db/migrate/**",
+    "spec/vcr_cassettes/**",
+    "spec/cassettes/**",
+    "spec/reports/**",
+    "graphify-out/**",
+    "doc/**",
+    "backup/**",
+    "bin/**",
+    ".bundle/**",
+    "*.lock",
+    "*.generated.ts",
+    "*.generated.tsx"
+  ]
+}
