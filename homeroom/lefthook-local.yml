@@ -292,6 +292,7 @@ post-checkout:
           # copy project-local Claude files - mostly for graphify
           ln -s $MAIN_GIT_DIR/.claude/settings.local.json .claude/settings.local.json
           ln -s $MAIN_GIT_DIR/CLAUDE.local.md CLAUDE.local.md
+          ln -s $MAIN_GIT_DIR/.jscpd.json .jscpd.json
         fi
 
     setup-vagrant-db:
