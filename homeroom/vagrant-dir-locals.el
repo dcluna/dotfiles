@@ -7,7 +7,11 @@
                                (format "vagrant ssh -c \"cd %s && direnv exec . bundle exec rails c\""
                                        (shell-quote-argument rel-path)))))
                (robe-ruby-path . "/vagrant/.robe-lib")
-               (robe-port . "33315")
+               (eval . (setq-local robe-port (or
+                                              (progn
+                                                (envrc-mode 1)
+                                                (getenv "ROBE_PORT"))
+                                              "33315")))
                (eval . (setq inf-ruby-first-prompt-pattern
                              (concat "\\("
                                      "^\\([[0-9]+] \\)?"
