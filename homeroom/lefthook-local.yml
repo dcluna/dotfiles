@@ -137,6 +137,18 @@ pre-commit:
       run: |
         rubocop --raise-cop-error --only Rails/EagerEvaluationLogMessage {staged_files}
 
+    no-direct-factory-create:
+      tags:
+        - qa
+        - rspec
+        - test-quality
+      skip:
+        - merge
+        - rebase
+      glob: "spec/**/*_spec.rb"
+      run: |
+        rubocop $(ruby "$DOTFILES_DIR/rubocop/require_all.rb") --config ~/.config/rubocop/config.yml --only CustomCops/NoDirectFactoryCreate {staged_files}
+
     rubocop-documentation-method:
       tags:
         - qa

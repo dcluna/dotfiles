@@ -78,5 +78,12 @@ Layout/SpaceBeforeBlockBraces:
   Enabled: true
   EnforcedStyle: space
 
+CustomCops/NoDirectFactoryCreate:
+  Enabled: true
+  AllowedFactories:
+    - domain_auth
+  Include:
+    - "spec/**/*_spec.rb"
+
 Rails/Output:
   Enabled: true
