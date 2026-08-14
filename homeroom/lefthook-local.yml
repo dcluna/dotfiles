@@ -45,7 +45,27 @@ pre-commit:
       skip:
         - merge
         - rebase
-      run: flay {staged_files}
+      run: |
+        output=$(flay --mass 10 {staged_files} 2>&1)
+        score=$(echo "$output" | head -1 | grep -oE '[0-9]+')
+        if [ "${score:-0}" -gt 0 ]; then
+          echo "$output"
+          echo ""
+          echo "STRUCTURAL DUPLICATION DETECTED (flay score: $score)"
+          echo ""
+          echo "ACTION REQUIRED:"
+          echo "  - IDENTICAL = exact AST match (different variable names OK). Extract to shared method/concern."
+          echo "  - Similar = structurally close. Consider extracting or accept with justification."
+          echo ""
+          echo "LLM INSTRUCTIONS:"
+          echo "  If you are an AI agent reading this output:"
+          echo "  1. Show the user each duplicate pair with file:line references."
+          echo "  2. For IDENTICAL pairs: propose extracting to a shared concern, module, or base class."
+          echo "  3. For Similar pairs: show both fragments side-by-side and ask if unification makes sense."
+          echo "  4. Present options: extract to shared location, or justify why duplication is acceptable."
+          echo "  5. Do NOT silently suppress or ignore this warning."
+          exit 1
+        fi
 
     trailing_whitespace:
       tags:
