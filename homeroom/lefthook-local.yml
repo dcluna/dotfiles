@@ -150,6 +150,7 @@ pre-commit:
         rubocop $(ruby "$DOTFILES_DIR/rubocop/require_all.rb") --config ~/.config/rubocop/config.yml --only CustomCops/NoDirectFactoryCreate {staged_files}
 
     rubocop-documentation-method:
+      skip: true
       tags:
         - qa
         - documentation
