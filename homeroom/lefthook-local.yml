@@ -18,6 +18,21 @@ pre-commit:
       only: &only_master
         - ref: master
 
+    jscpd_duplication:
+      tags:
+        - code-quality
+        - duplication
+      skip:
+        - merge
+        - rebase
+      run: |
+        TMPDIR=$(mktemp -d)
+        jscpd . --reporters json --output "$TMPDIR" --silent 2>/dev/null
+        node "$DOTFILES_DIR/homeroom/jscpd-duplication-check.js" "$TMPDIR/jscpd-report.json" {staged_files}
+        STATUS=$?
+        rm -rf "$TMPDIR"
+        exit $STATUS
+
     flay:
       tags:
         - code-quality
