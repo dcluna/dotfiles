@@ -1136,6 +1136,11 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
   (if (equal record-mode "unset")
       (setenv vcr-record-mode-var nil)
     (setenv vcr-record-mode-var record-mode)))
+(defun dcl/set-local-robe-port ()
+  (envrc-mode 1)
+  (setq-local robe-port (or (getenv "ROBE_PORT") "33315")))
+
+(add-hook 'inf-ruby-mode-hook #'dcl/set-local-robe-port)
 (setq rust-format-on-save t)
 ;; (require 'indium)
 ;; (add-hook 'js2-mode-hook #'indium-interaction-mode)

@@ -2255,6 +2255,16 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
            (setenv vcr-record-mode-var record-mode)))
      #+end_src
 
+**** Inf-ruby
+
+#+begin_src emacs-lisp
+  (defun dcl/set-local-robe-port ()
+    (envrc-mode 1)
+    (setq-local robe-port (or (getenv "ROBE_PORT") "33315")))
+
+  (add-hook 'inf-ruby-mode-hook #'dcl/set-local-robe-port)
+#+end_src
+
 *** Rust
     #+BEGIN_SRC emacs-lisp
       (setq rust-format-on-save t)
