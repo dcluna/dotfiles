@@ -112,6 +112,15 @@ pre-commit:
         - rebase
       run: check-no-specs-in-app
 
+    no_mixed_spec_app:
+      tags:
+        - qa
+        - commit-hygiene
+      skip:
+        - merge
+        - rebase
+      run: "$DOTFILES_DIR/homeroom/scripts/no-mixed-spec-app.sh"
+
     flipper_outside_model:
       tags:
         - qa
