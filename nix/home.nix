@@ -196,6 +196,7 @@ in
     ".bin/check-no-plan-exists".source = mkSymlink "homeroom/scripts/check-no-plan-exists.sh";
     ".bin/plan-doc-mode".source = mkSymlink "homeroom/scripts/plan-doc-mode.sh";
     ".bin/ci-check-stack".source = mkSymlink "homeroom/scripts/ci-check-stack.sh";
+    ".bin/reproduce_failure.rb".source = mkSymlink "homeroom/scripts/reproduce_failure.rb";
     ".stCommitMsg".text = "";
     ".zsh-confs" = {
       source = ../.zsh-confs;
