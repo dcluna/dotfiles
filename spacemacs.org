@@ -4173,7 +4173,18 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
                                                       (value . (lambda ()
                                                                  (concat "Bearer "
                                                                          (auth-source-pick-first-password
-                                                                           :host "airtable.com"))))))))
+                                                                          :host "airtable.com"))))))))
+                                        ((name . "heroku")
+                                         (command . "heroku")
+                                         (args . ("mcp:start")))
+                                        ;; (command . "npx")
+                                        ;; (args . ("-y" "@heroku/mcp-server"))
+                                        ;; (env . (((name . "HEROKU_API_KEY")
+                                        ;;          (value . (lambda ()
+                                        ;;                     (require 'auth-source)
+                                        ;;                     (auth-source-pick-first-password :host "heroku.com" :user "mcpserver"))))))
+
+
                                         ((name . "notion")
                                          (command . "npx")
                                          (args . ("-y" "mcp-remote@latest" "https://mcp.notion.com/mcp")))
