@@ -2523,7 +2523,9 @@ _u_pdate
           (evil-leader/set-key "o l g" agent-shell-dcl-map)
           (spacemacs/declare-prefix "o l g" "agent-shell"))
   :custom
+  (agent-shell-omp-acp-command '("omp" "--auto-approve" "acp"))
   (agent-shell-prefer-viewport-interaction t)
+  (agent-shell-show-cost-indicator t)
   (agent-shell-mcp-servers       '(((name . "sentry")
                                     (command . "npx")
                                     (args . ("-y" "mcp-remote@latest" "https://mcp.sentry.dev/mcp")))
