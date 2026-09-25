@@ -4468,6 +4468,16 @@ Uses a single `git reflog` call instead of per-entry rev-parse."
         :ensure t
         :init (difftastic-bindings-mode))
    #+end_src
+*** Magit-difftastic
+
+#+begin_src emacs-lisp :tangle no
+  ;; (use-package magit-difftastic
+  ;;   :straight (:host github :repo "rschmukler/magit-difftastic")
+  ;;   :after magit
+  ;;   :config
+  ;;   (magit-difftastic-mode +1))
+#+end_src
+
 ** Majutsu (Magit for jujutsu/jj)
 
    #+begin_src emacs-lisp

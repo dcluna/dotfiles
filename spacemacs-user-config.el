@@ -2742,6 +2742,11 @@ _u_pdate
    :defer t
    :ensure t
    :init (difftastic-bindings-mode))
+;; (use-package magit-difftastic
+;;   :straight (:host github :repo "rschmukler/magit-difftastic")
+;;   :after magit
+;;   :config
+;;   (magit-difftastic-mode +1))
 (use-package majutsu
   :straight (:host github :repo "0WD0/majutsu"))
 (use-package magit-auto-detach
